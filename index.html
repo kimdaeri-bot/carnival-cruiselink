@@ -105,7 +105,8 @@
     </div>
   </div>
 
-  <!-- DESTINATIONS -->
+  <!-- DESTINATIONS (임시 비활성) -->
+  <!--
   <section class="section">
     <div class="container">
       <h2 class="section-title">인기 목적지</h2>
@@ -126,6 +127,48 @@
           </div>
         </div>
         <button class="dest-arrow dest-arrow-right" onclick="slideDest(1)">›</button>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- CRUISE TABS (인기목적지 위치) -->
+  <section class="section" style="padding-bottom:0">
+    <div class="container">
+      <style>
+        .cruise-tabs-nav { display:flex; gap:0; border-bottom:2px solid var(--gray-300); margin-bottom:24px; overflow-x:auto; scrollbar-width:none; }
+        .cruise-tabs-nav::-webkit-scrollbar { display:none; }
+        .cruise-tab-btn { padding:12px 22px; font-size:0.9rem; font-weight:600; color:var(--gray-700); border:none; background:none; cursor:pointer; white-space:nowrap; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.2s; font-family:inherit; }
+        .cruise-tab-btn.active { color:var(--navy); border-bottom-color:var(--navy); font-weight:700; }
+        .cruise-tab-btn:hover:not(.active) { color:var(--navy); }
+        .tab-cruise-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+        .tab-card { border:1px solid var(--gray-300); border-radius:10px; overflow:hidden; background:#fff; display:flex; flex-direction:column; transition:box-shadow 0.2s,transform 0.2s; cursor:pointer; text-decoration:none; color:inherit; }
+        .tab-card:hover { box-shadow:0 8px 24px rgba(0,0,0,0.12); transform:translateY(-2px); }
+        .tab-card-img { height:150px; overflow:hidden; }
+        .tab-card-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.3s; display:block; }
+        .tab-card:hover .tab-card-img img { transform:scale(1.05); }
+        .tab-card-body { padding:12px 14px; flex:1; display:flex; flex-direction:column; }
+        .tab-card-title { font-size:0.88rem; font-weight:700; color:var(--gray-900); line-height:1.4; margin-bottom:6px; }
+        .tab-card-from { font-size:0.68rem; color:var(--gray-500); letter-spacing:0.5px; }
+        .tab-card-price { font-size:1.15rem; font-weight:900; color:var(--gray-900); margin-bottom:2px; }
+        .tab-card-price-note { font-size:0.7rem; color:var(--gray-500); margin-bottom:10px; }
+        .tab-card-meta { margin-top:auto; border-top:1px solid var(--gray-200); padding-top:8px; }
+        .tab-card-dates { display:block; color:var(--navy); font-size:0.82rem; font-weight:700; margin-top:6px; }
+        .tab-card-dates:hover { text-decoration:underline; }
+        .tabs-loading { grid-column:1/-1; text-align:center; padding:40px; color:var(--gray-500); }
+        @media (max-width:1024px) { .tab-cruise-grid { grid-template-columns:repeat(3,1fr); } }
+        @media (max-width:640px) { .tab-cruise-grid { grid-template-columns:repeat(2,1fr); } }
+      </style>
+      <nav class="cruise-tabs-nav" id="cruiseTabsNav">
+        <button class="cruise-tab-btn active" onclick="switchTab(this,'mediterranean')">지중해</button>
+        <button class="cruise-tab-btn" onclick="switchTab(this,'alaska')">알래스카</button>
+        <button class="cruise-tab-btn" onclick="switchTab(this,'caribbean')">카리브해</button>
+        <button class="cruise-tab-btn" onclick="switchTab(this,'korea')">한국·일본</button>
+        <button class="cruise-tab-btn" onclick="switchTab(this,'northern-europe')">북유럽</button>
+        <button class="cruise-tab-btn" onclick="switchTab(this,'asia')">아시아·중동</button>
+      </nav>
+      <div class="tab-cruise-grid" id="tabCruiseGrid">
+        <div class="tabs-loading">불러오는 중...</div>
       </div>
     </div>
   </section>
@@ -153,68 +196,6 @@
         </div>
       </div>
       <div class="promo-dots" id="promoDots"></div>
-    </div>
-  </section>
-
-  <!-- CRUISE TABS -->
-  <section class="section" style="padding-bottom:0">
-    <div class="container">
-      <style>
-        .cruise-tabs-nav {
-          display: flex; gap: 0;
-          border-bottom: 2px solid var(--gray-300);
-          margin-bottom: 24px;
-          overflow-x: auto; scrollbar-width: none;
-        }
-        .cruise-tabs-nav::-webkit-scrollbar { display: none; }
-        .cruise-tab-btn {
-          padding: 12px 22px; font-size: 0.9rem; font-weight: 600;
-          color: var(--gray-700); border: none; background: none;
-          cursor: pointer; white-space: nowrap;
-          border-bottom: 3px solid transparent; margin-bottom: -2px;
-          transition: all 0.2s; font-family: inherit;
-        }
-        .cruise-tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); font-weight: 700; }
-        .cruise-tab-btn:hover:not(.active) { color: var(--navy); }
-        .tab-cruise-grid {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 16px;
-        }
-        .tab-card {
-          border: 1px solid var(--gray-300); border-radius: 10px;
-          overflow: hidden; background: #fff;
-          display: flex; flex-direction: column;
-          transition: box-shadow 0.2s, transform 0.2s;
-          cursor: pointer; text-decoration: none; color: inherit;
-        }
-        .tab-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.12); transform: translateY(-2px); }
-        .tab-card-img { height: 150px; overflow: hidden; }
-        .tab-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; display: block; }
-        .tab-card:hover .tab-card-img img { transform: scale(1.05); }
-        .tab-card-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; }
-        .tab-card-title { font-size: 0.88rem; font-weight: 700; color: var(--gray-900); line-height: 1.4; margin-bottom: 6px; }
-        .tab-card-from { font-size: 0.68rem; color: var(--gray-500); letter-spacing: 0.5px; }
-        .tab-card-price { font-size: 1.15rem; font-weight: 900; color: var(--gray-900); margin-bottom: 2px; }
-        .tab-card-price-note { font-size: 0.7rem; color: var(--gray-500); margin-bottom: 10px; }
-        .tab-card-meta { margin-top: auto; border-top: 1px solid var(--gray-200); padding-top: 8px; }
-        .tab-card-dates { display: block; color: var(--navy); font-size: 0.82rem; font-weight: 700; margin-top: 6px; }
-        .tab-card-dates:hover { text-decoration: underline; }
-        .tabs-loading { grid-column: 1/-1; text-align: center; padding: 40px; color: var(--gray-500); }
-        @media (max-width: 1024px) { .tab-cruise-grid { grid-template-columns: repeat(3,1fr); } }
-        @media (max-width: 640px) { .tab-cruise-grid { grid-template-columns: repeat(2,1fr); } }
-      </style>
-      <nav class="cruise-tabs-nav" id="cruiseTabsNav">
-        <button class="cruise-tab-btn active" onclick="switchTab(this,'mediterranean')">지중해</button>
-        <button class="cruise-tab-btn" onclick="switchTab(this,'alaska')">알래스카</button>
-        <button class="cruise-tab-btn" onclick="switchTab(this,'caribbean')">카리브해</button>
-        <button class="cruise-tab-btn" onclick="switchTab(this,'korea')">한국·일본</button>
-        <button class="cruise-tab-btn" onclick="switchTab(this,'northern-europe')">북유럽</button>
-        <button class="cruise-tab-btn" onclick="switchTab(this,'asia')">아시아·중동</button>
-      </nav>
-      <div class="tab-cruise-grid" id="tabCruiseGrid">
-        <div class="tabs-loading">불러오는 중...</div>
-      </div>
     </div>
   </section>
 
