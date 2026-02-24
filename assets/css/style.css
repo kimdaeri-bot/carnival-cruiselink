@@ -102,9 +102,9 @@ img { max-width: 100%; height: auto; }
 }
 
 /* ===== DESTINATION CARDS ===== */
-.dest-slider-wrap { position: relative; display: flex; align-items: center; gap: 8px; }
+.dest-slider-wrap { position: relative; padding: 0 28px; }
 .dest-slider {
-  overflow: hidden; flex: 1; cursor: grab; padding: 8px 0;
+  overflow: hidden; cursor: grab; padding: 8px 0;
 }
 .dest-slider:active { cursor: grabbing; }
 .dest-track {
@@ -132,11 +132,14 @@ img { max-width: 100%; height: auto; }
   padding: 28px 14px 12px; text-align: center;
 }
 .dest-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
   width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gray-300);
   background: var(--white); font-size: 1.4rem; cursor: pointer; display: flex;
-  align-items: center; justify-content: center; color: var(--navy); flex-shrink: 0;
-  transition: all 0.2s; box-shadow: var(--shadow);
+  align-items: center; justify-content: center; color: var(--navy);
+  transition: all 0.2s; box-shadow: var(--shadow); z-index: 10;
 }
+.dest-arrow-left { left: 0; }
+.dest-arrow-right { right: 0; }
 .dest-arrow:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
 
 /* ===== PROMO SLIDER ===== */
