@@ -13,7 +13,7 @@ body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background: #f
 
 /* =========== 왼쪽 폼 패널 =========== */
 .form-panel {
-  width: 380px; min-width: 340px; background: #fff;
+  width: 52%; min-width: 480px; background: #fff;
   border-right: 1px solid #ddd; overflow-y: auto;
   display: flex; flex-direction: column;
 }
@@ -23,35 +23,39 @@ body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background: #f
   position: sticky; top: 0; z-index: 10;
 }
 .form-header span { font-size: 11px; font-weight: 400; opacity: 0.8; display: block; margin-top: 2px; }
-.form-body { padding: 16px 20px; flex: 1; }
+.form-body { padding: 20px 28px; flex: 1; }
 
-.form-section { margin-bottom: 20px; }
+.form-section { margin-bottom: 24px; }
 .form-section-title {
-  font-size: 11px; font-weight: 700; color: #1a237e;
+  font-size: 11.5px; font-weight: 700; color: #1a237e;
   text-transform: uppercase; letter-spacing: 1px;
-  padding-bottom: 6px; border-bottom: 2px solid #e3f2fd;
-  margin-bottom: 10px;
+  padding-bottom: 7px; border-bottom: 2px solid #e3f2fd;
+  margin-bottom: 12px;
 }
-.form-row { margin-bottom: 8px; }
-.form-row label { display: block; font-size: 11px; color: #555; margin-bottom: 3px; font-weight: 600; }
+.form-row { margin-bottom: 10px; }
+.form-row label { display: block; font-size: 12px; color: #444; margin-bottom: 4px; font-weight: 600; }
 .form-row input, .form-row select {
-  width: 100%; padding: 7px 10px; border: 1px solid #ddd;
-  border-radius: 5px; font-size: 12px; font-family: inherit;
+  width: 100%; padding: 9px 12px; border: 1px solid #ddd;
+  border-radius: 6px; font-size: 13px; font-family: inherit;
   transition: border-color 0.2s;
 }
 .form-row input:focus, .form-row select:focus {
   border-color: #1a237e; outline: none; box-shadow: 0 0 0 2px rgba(26,35,126,0.1);
 }
-.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.form-row-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
 
 /* 승객 테이블 */
-.pax-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 8px; }
-.pax-table th { background: #e8eaf6; padding: 5px 6px; text-align: center; font-weight: 600; border: 1px solid #c5cae9; }
-.pax-table td { padding: 3px 4px; border: 1px solid #e0e0e0; }
+.pax-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 10px; }
+.pax-table th { background: #e8eaf6; padding: 7px 6px; text-align: center; font-weight: 700; border: 1px solid #c5cae9; font-size: 11.5px; }
+.pax-table td { padding: 4px 4px; border: 1px solid #e0e0e0; vertical-align: middle; }
 .pax-table td input, .pax-table td select {
-  width: 100%; padding: 4px 5px; border: 1px solid #e0e0e0;
-  border-radius: 3px; font-size: 11px; font-family: inherit;
+  width: 100%; padding: 6px 7px; border: 1px solid #ddd;
+  border-radius: 4px; font-size: 12px; font-family: inherit;
+}
+.pax-table td input:focus, .pax-table td select:focus {
+  border-color: #1a237e; outline: none;
 }
 .btn-add-pax {
   background: #e8eaf6; border: 1px solid #c5cae9; color: #1a237e;
@@ -66,19 +70,20 @@ body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background: #f
 
 /* 하단 버튼 */
 .form-footer {
-  padding: 16px 20px; border-top: 1px solid #eee;
+  padding: 16px 28px; border-top: 1px solid #eee;
   background: #fafafa; position: sticky; bottom: 0;
+  display: flex; gap: 10px;
 }
 .btn-print {
-  width: 100%; background: #ff6f00; color: #fff; border: none;
-  padding: 12px; border-radius: 6px; font-size: 13px; font-weight: 700;
+  flex: 3; background: #ff6f00; color: #fff; border: none;
+  padding: 13px; border-radius: 6px; font-size: 14px; font-weight: 700;
   cursor: pointer; letter-spacing: 0.3px;
 }
 .btn-print:hover { background: #e65100; }
 .btn-reset {
-  width: 100%; background: #f5f5f5; color: #555; border: 1px solid #ddd;
-  padding: 8px; border-radius: 6px; font-size: 12px; font-weight: 600;
-  cursor: pointer; margin-top: 6px;
+  flex: 1; background: #f5f5f5; color: #555; border: 1px solid #ddd;
+  padding: 13px; border-radius: 6px; font-size: 13px; font-weight: 600;
+  cursor: pointer;
 }
 
 /* =========== 오른쪽 프리뷰 =========== */
@@ -191,12 +196,12 @@ body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background: #f
 
       <!-- 기본 정보 -->
       <div class="form-section">
-        <div class="form-section-title">기본 정보</div>
-        <div class="form-row">
-          <label>고객명 (수신)</label>
-          <input type="text" id="f_customer" placeholder="예: 문성빈" oninput="render()">
-        </div>
-        <div class="form-row-2">
+        <div class="form-section-title">📋 기본 정보</div>
+        <div class="form-row-3">
+          <div class="form-row" style="margin:0">
+            <label>고객명 (수신)</label>
+            <input type="text" id="f_customer" placeholder="예: 문성빈" oninput="render()">
+          </div>
           <div class="form-row" style="margin:0">
             <label>발신일</label>
             <input type="date" id="f_issuedate" oninput="render()">
@@ -210,8 +215,8 @@ body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background: #f
 
       <!-- 크루즈 정보 -->
       <div class="form-section">
-        <div class="form-section-title">크루즈 정보</div>
-        <div class="form-row-2">
+        <div class="form-section-title">🚢 크루즈 정보</div>
+        <div class="form-row-4">
           <div class="form-row" style="margin:0">
             <label>선박명</label>
             <input type="text" id="f_ship" placeholder="MSC Grandiosa" oninput="render()">
@@ -220,14 +225,14 @@ body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background: #f
             <label>Booking No.</label>
             <input type="text" id="f_bookingno" placeholder="11238" oninput="render()">
           </div>
-        </div>
-        <div class="form-row">
-          <label>크루즈 일정</label>
-          <input type="text" id="f_itinerary" placeholder="Mediterranean" oninput="render()">
-        </div>
-        <div class="form-row">
-          <label>승선일</label>
-          <input type="date" id="f_embark" oninput="render()">
+          <div class="form-row" style="margin:0">
+            <label>크루즈 일정</label>
+            <input type="text" id="f_itinerary" placeholder="Mediterranean" oninput="render()">
+          </div>
+          <div class="form-row" style="margin:0">
+            <label>승선일</label>
+            <input type="date" id="f_embark" oninput="render()">
+          </div>
         </div>
         <div class="form-row-2">
           <div class="form-row" style="margin:0">
@@ -243,26 +248,31 @@ body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background: #f
 
       <!-- 승객 정보 -->
       <div class="form-section">
-        <div class="form-section-title">승객 정보</div>
-        <div style="overflow-x:auto">
-          <table class="pax-table" id="paxTable">
-            <thead>
-              <tr>
-                <th>No</th><th>성별</th><th>이름</th>
-                <th>선실 카테고리</th><th>선실 No.</th>
-                <th>Dining</th><th>요금($)</th><th>팁($)</th><th>Tax($)</th><th></th>
-              </tr>
-            </thead>
-            <tbody id="paxBody"></tbody>
-          </table>
-        </div>
+        <div class="form-section-title">👥 승객 정보</div>
+        <table class="pax-table" id="paxTable">
+          <thead>
+            <tr>
+              <th style="width:30px">No</th>
+              <th style="width:44px">성별</th>
+              <th>이름</th>
+              <th>선실 카테고리</th>
+              <th style="width:70px">선실 No.</th>
+              <th style="width:90px">Dining</th>
+              <th style="width:80px">요금($)</th>
+              <th style="width:70px">팁($)</th>
+              <th style="width:70px">Tax($)</th>
+              <th style="width:28px"></th>
+            </tr>
+          </thead>
+          <tbody id="paxBody"></tbody>
+        </table>
         <button class="btn-add-pax" onclick="addPax()">+ 승객 추가</button>
       </div>
 
       <!-- 요금 및 결제 -->
       <div class="form-section">
-        <div class="form-section-title">요금 및 결제</div>
-        <div class="form-row-2">
+        <div class="form-section-title">💳 요금 및 결제</div>
+        <div class="form-row-4">
           <div class="form-row" style="margin:0">
             <label>적용 환율 (원/달러)</label>
             <input type="number" id="f_rate" placeholder="1474.05" step="0.01" oninput="render()">
@@ -271,8 +281,6 @@ body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background: #f
             <label>신청금 ($)</label>
             <input type="number" id="f_deposit" placeholder="500" oninput="render()">
           </div>
-        </div>
-        <div class="form-row-2">
           <div class="form-row" style="margin:0">
             <label>신청금 결제 기한</label>
             <input type="date" id="f_deposit_dl" oninput="render()">
