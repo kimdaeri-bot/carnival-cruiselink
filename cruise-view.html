@@ -56,16 +56,22 @@
         initAllSliders();
       }
 
-      // 3) Fetch live itinerary from API
+      // 3) Fetch live data from API
       try {
         const holiday = await API.getHoliday(ref);
         if (holiday) {
+          // Extract ship slug from holiday.ship URL (e.g. ".../ships/adventure-of-the-seas.json")
+          const shipSlug = typeof holiday.ship === 'string'
+            ? holiday.ship.split('/ships/')[1]?.replace('.json', '')
+            : null;
+
           if (localCruise && localShip) {
             renderItinerary(holiday);
             renderPricing(holiday, shipDetail);
           } else {
-            // No local data - render from API only
-            renderFromAPI(holiday, shipDetail);
+            // No local data — fetch ship live in parallel then render
+            const shipLive = shipSlug ? await API.getShipLive(shipSlug) : null;
+            renderFromAPI(holiday, shipDetail, shipLive);
           }
         } else if (!localCruise) {
           content.innerHTML = '<div class="empty-state"><span class="emoji">⚠️</span><p>크루즈 정보를 찾을 수 없습니다</p></div>';
@@ -373,27 +379,40 @@
       section.innerHTML = html;
     }
 
-    function renderFromAPI(holiday, shipDetail) {
-      window._cruiseData = { title: holiday.title, operator: holiday.operator?.title, shipTitle: holiday.ship?.title, departureDate: holiday.departs, nights: holiday.cruise_nights || holiday.duration_days };
-      // Fallback: render entirely from API data (no local cruise found)
+    function renderFromAPI(holiday, shipDetail, shipLive) {
+      // Full page render from live API data (no local cruise in cruises.json)
       const nights = holiday.cruise_nights || holiday.duration_days || 0;
+      const opName = Translations.operatorName(holiday.operator_title || '');
+      const shipName = Translations.shipName(holiday.ship_title || '');
       const price = holiday.headline_prices?.cruise?.double;
-      const fromPrice = price?.from_balcony || price?.from_inside;
+      const fromPrice = price?.from_balcony || price?.from_outside || price?.from_inside;
       const priceStr = fromPrice ? API.formatPrice(fromPrice) : '문의';
       const countries = (holiday.countries || []).map(c => Translations.countryName(c)).join(', ');
       const route = API.routeString(holiday.itinerary);
+      const coverImg = shipLive?.cover_image_href || '';
+      const facts = shipLive?.ship_facts || {};
+      const cruiseTitle = holiday.name || `${Translations.portName(holiday.starts_at?.name||'')} 출발 ${nights}박 크루즈`;
 
-      document.title = `${Translations.portName(holiday.starts_at?.name||'')} 출발 ${nights}박 크루즈 - 크루즈링크`;
+      window._cruiseData = {
+        title: cruiseTitle,
+        operator: holiday.operator_title,
+        shipTitle: holiday.ship_title,
+        departureDate: holiday.date_from,
+        nights,
+        ref
+      };
+
+      document.title = `${cruiseTitle} - 크루즈링크`;
 
       let html = `
       <section class="detail-hero">
         <div class="container">
-          <div class="operator-name">${Translations.operatorName(holiday.operator_title||'')} · ${Translations.shipName(holiday.ship_title||'')}</div>
-          <h1>🚢 ${Translations.portName(holiday.starts_at?.name||'')} 출발 ${nights}박 크루즈</h1>
+          <div class="operator-name">${opName} · ${shipName}</div>
+          <h1>🚢 ${cruiseTitle}</h1>
           <div class="meta">
             <span>📅 ${API.formatDateKo(holiday.date_from)} ~ ${API.formatDateKo(holiday.date_to)}</span>
             <span>🌙 ${nights}박 ${parseInt(nights)+1}일</span>
-            <span>🚢 ${holiday.ship_title||''}</span>
+            <span>🚢 ${shipName}</span>
             <span>🌏 ${countries}</span>
           </div>
           <div class="price-big">${priceStr} <small>/1인 2인기준</small></div>
@@ -402,18 +421,121 @@
             <button class="btn btn-white-solid" onclick="openInquiry()">📋 온라인 문의</button>
           </div>
         </div>
-      </section>
+      </section>`;
 
-      <section class="section">
+      // Cover image
+      if (coverImg) {
+        html += `<div class="container"><div class="main-ship-image"><img src="${coverImg}" alt="${shipName}" loading="lazy"></div></div>`;
+      }
+
+      // Info bar
+      html += `
+      <div class="container">
+        <div class="info-bar">
+          <div class="info-bar-item"><div class="label">🚢 선박</div><div class="value">${shipName}</div></div>
+          <div class="info-bar-item"><div class="label">🌙 기간</div><div class="value">${nights}박 ${parseInt(nights)+1}일</div></div>
+          <div class="info-bar-item"><div class="label">🚪 출발/도착</div><div class="value">${Translations.portName(holiday.starts_at?.name||'')} → ${Translations.portName(holiday.ends_at?.name||'')}</div></div>
+          <div class="info-bar-item"><div class="label">💰 2인1실 기준</div><div class="value" style="color:var(--orange)">${priceStr}</div></div>
+        </div>
+      </div>`;
+
+      // Itinerary placeholder
+      html += `
+      <section class="section" id="itinerary-section">
         <div class="container">
           <h2 class="section-title">🗓️ 상세 일정</h2>
           <p class="section-subtitle">${route}</p>
-          <div id="day-cards-container"></div>
+          <div id="day-cards-container">
+            <div class="loading"><div class="loading-spinner"></div><p>일정 데이터를 불러오는 중...</p></div>
+          </div>
         </div>
-      </section>
+      </section>`;
 
-      <section class="section" id="pricing-section"></section>
+      // Ship section from live API
+      if (shipLive) {
+        const specs = [
+          ['취항연도', facts.launch_year || '-'],
+          ['총톤수', facts.gross_tonnage ? facts.gross_tonnage.toLocaleString() + 't' : '-'],
+          ['최대정원', facts.capacity ? facts.capacity.toLocaleString() + '명' : '-'],
+          ['승무원', facts.crew_count ? facts.crew_count.toLocaleString() + '명' : '-'],
+          ['전장', facts.length ? facts.length + 'm' : '-'],
+          ['전폭', facts.width ? facts.width + 'm' : '-'],
+          ['데크', facts.deck_count ? facts.deck_count + '개' : '-'],
+          ['객실', facts.cabin_count ? facts.cabin_count.toLocaleString() + '실' : '-'],
+        ];
 
+        html += `
+        <section class="section" style="background:var(--gray-50)">
+          <div class="container">
+            <h2 class="section-title">🚢 ${shipName} 소개</h2>
+            <div class="spec-grid">`;
+        specs.forEach(([label, value]) => {
+          html += `<div class="spec-item"><div class="spec-value">${value}</div><div class="spec-label">${label}</div></div>`;
+        });
+        html += `</div>`;
+
+        // Section intros (dining / entertainment / health / kids)
+        const sectionDefs = [
+          { key: 'dining', label: '🍽️ 다이닝' },
+          { key: 'entertainment', label: '🎭 엔터테인먼트' },
+          { key: 'health_and_fitness', label: '💆 스파 & 피트니스' },
+          { key: 'kids_and_teens', label: '👶 키즈 & 틴즈' },
+        ];
+        const intros = sectionDefs.filter(s => shipLive[s.key]?.intro);
+        if (intros.length) {
+          html += `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:32px">`;
+          intros.forEach(s => {
+            const text = shipLive[s.key].intro.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 180);
+            html += `
+            <div style="background:#fff;border-radius:12px;padding:18px;box-shadow:0 1px 4px rgba(0,0,0,0.08)">
+              <h4 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:8px">${s.label}</h4>
+              <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.5">${text}…</p>
+            </div>`;
+          });
+          html += `</div>`;
+        }
+        html += `</div></section>`;
+      }
+
+      // Pricing placeholder
+      html += `<section class="section" id="pricing-section"></section>`;
+
+      // Include / Exclude
+      html += `
+      <section class="section" style="background:var(--gray-50)">
+        <div class="container">
+          <h2 class="section-title">📋 포함 / 불포함 사항</h2>
+          <div class="checklist-grid" style="margin-top:24px;max-width:700px;margin-left:auto;margin-right:auto">
+            <div>
+              <h3 style="color:var(--navy);margin-bottom:16px">✅ 포함 사항</h3>
+              <ul class="checklist included">
+                <li>객실 숙박</li>
+                <li>메인 레스토랑 & 뷔페 식사 (조식·중식·석식)</li>
+                <li>선상 엔터테인먼트 (쇼, 공연, 수영장)</li>
+                <li>피트니스 센터</li>
+                <li>키즈 & 틴즈 클럽 프로그램</li>
+                <li>객실 룸서비스 (기본)</li>
+                <li>기항지 셔틀버스 (일부)</li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="color:var(--navy);margin-bottom:16px">❌ 불포함 사항</h3>
+              <ul class="checklist excluded">
+                <li>항공편</li>
+                <li>스페셜티 레스토랑</li>
+                <li>주류 및 음료 패키지</li>
+                <li>기항지 관광 (Shore Excursion)</li>
+                <li>스파 & 뷰티 트리트먼트</li>
+                <li>Wi-Fi 인터넷 패키지</li>
+                <li>여행자 보험</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>`;
+
+      // CTA
+      html += `
       <section class="cta-section">
         <div class="container">
           <h2>이 크루즈가 마음에 드셨나요?</h2>
