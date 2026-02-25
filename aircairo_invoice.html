@@ -67,7 +67,7 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
 /* 상단 헤더 */
 .inv-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
 .inv-logo-area { display: flex; align-items: center; gap: 12px; }
-.inv-logo-img { width: 80px; height: 50px; object-fit: contain; display: none; }
+.inv-logo-img { height: 44px; width: auto; max-width: 160px; object-fit: contain; display: block; }
 .inv-logo-text { font-size: 22px; font-weight: 900; color: #005baa; letter-spacing: 3px; }
 .inv-gsa-text { font-size: 9px; color: #888; letter-spacing: 1px; margin-top: 2px; }
 .inv-date-area { text-align: right; font-size: 11px; color: #666; }
@@ -126,6 +126,12 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
 .inv-stamp-area { display: flex; justify-content: flex-end; align-items: flex-end; gap: 16px; margin-bottom: 10px; }
 .inv-stamp-img { width: 80px; height: 80px; object-fit: contain; }
 
+/* 명판 */
+.inv-nameplate { border: 1.5px solid #005baa; border-radius: 4px; padding: 8px 14px; font-size: 10px; line-height: 1.75; color: #333; min-width: 180px; }
+.inv-nameplate-company { font-size: 12px; font-weight: 900; color: #005baa; letter-spacing: 0.5px; }
+.inv-nameplate-eng { font-size: 9px; color: #777; margin-bottom: 4px; letter-spacing: 0.5px; }
+.inv-nameplate-row { font-size: 10px; color: #444; }
+
 /* 푸터 */
 .inv-footer { text-align: center; border-top: 1px solid #005baa; padding-top: 8px; font-size: 10px; color: #888; line-height: 1.7; }
 
@@ -167,13 +173,13 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
       </div>
       <div class="form-row" style="margin:0">
         <label>담당자</label>
-        <input type="text" id="handler" value="이유진">
+        <input type="text" id="handler" value="정선미">
       </div>
     </div>
     <div class="form-row-2" style="margin-top:8px">
       <div class="form-row" style="margin:0">
         <label>담당자 연락처</label>
-        <input type="text" id="handlerTel" value="02-3788-9119">
+        <input type="text" id="handlerTel" value="02-3788-9140">
       </div>
       <div class="form-row" style="margin:0">
         <label>이메일</label>
@@ -354,10 +360,9 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
     <!-- 상단 헤더 -->
     <div class="inv-top">
       <div class="inv-logo-area">
-        <img class="inv-logo-img" id="logoImg" src="" alt="">
+        <img class="inv-logo-img" id="logoImg" src="assets/images/aircairo-logo.png" alt="Air Cairo" onerror="this.style.display='none'">
         <div>
-          <div class="inv-logo-text">AIR CAIRO</div>
-          <div class="inv-gsa-text">GSA KOREA — APG Korea (아남항공㈜)</div>
+          <div class="inv-gsa-text" style="margin-top:4px">GSA KOREA — APG Korea (아남항공㈜)</div>
         </div>
       </div>
       <div class="inv-date-area">
@@ -444,8 +449,16 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
       </div>
     </div>
 
-    <!-- 직인 -->
+    <!-- 직인 + 명판 -->
     <div class="inv-stamp-area">
+      <div class="inv-nameplate">
+        <div class="inv-nameplate-company">아남항공 주식회사</div>
+        <div class="inv-nameplate-eng">Air Cairo Korea GSA</div>
+        <div class="inv-nameplate-row">담당자: <strong id="pv-stamp-handler"></strong></div>
+        <div class="inv-nameplate-row">TEL: <strong id="pv-stamp-tel"></strong></div>
+        <div class="inv-nameplate-row">서울 강서구 마곡서로 152</div>
+        <div class="inv-nameplate-row">두산 더 랜드타워 5층</div>
+      </div>
       <img class="inv-stamp-img" id="stampImg" src="assets/images/company-stamp.png" alt="직인" onerror="this.style.display='none'">
     </div>
 
@@ -587,6 +600,11 @@ function updatePreview() {
   document.getElementById('pv-issue-date').textContent = str('issueDate');
   document.getElementById('pv-handler').textContent = str('handler') + ' / ' + str('handlerTel');
   document.getElementById('pv-footer-contact').textContent = str('handlerEmail') + ' / ' + str('handlerTel');
+  // 명판
+  const sh = document.getElementById('pv-stamp-handler');
+  const st = document.getElementById('pv-stamp-tel');
+  if (sh) sh.textContent = str('handler');
+  if (st) st.textContent = str('handlerTel');
 
   // ATTN
   document.getElementById('pv-attn-name').textContent = str('attnName');
