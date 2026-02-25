@@ -89,6 +89,23 @@
       }
     }
 
+    // 객실 카테고리 분류 (스위트→발코니→오션뷰→내측 순)
+    function categorizeCabins(accommodations) {
+      const CATS = [
+        { id: 'suite',     label: '👑 스위트',  test: n => /suite|penthouse|villa|loft|grand|sky suite|owner/i.test(n) },
+        { id: 'balcony',   label: '🌅 발코니',  test: n => /balcony|veranda|terrace/i.test(n) },
+        { id: 'oceanview', label: '🪟 오션뷰',  test: n => /ocean.?view|sea.?view|outside|window|ocean.?front/i.test(n) },
+        { id: 'inside',    label: '🚪 내측',   test: () => true }, // 기본값
+      ];
+      const buckets = Object.fromEntries(CATS.map(c => [c.id, []]));
+      for (const a of accommodations) {
+        const n = a.name || '';
+        const cat = CATS.find(c => c.test(n));
+        if (cat) buckets[cat.id].push(a);
+      }
+      return CATS.map(c => ({ ...c, items: buckets[c.id] })).filter(c => c.items.length > 0);
+    }
+
     // 라이브 API 데이터 → detail 포맷으로 정규화
     function normalizeShipLive(sl) {
       if (!sl) return null;
@@ -343,19 +360,33 @@
           html += `</div>`;
         }
 
-        // ── 객실 타입 그리드 ──
+        // ── 객실 타입 (카테고리별 행 슬라이더) ──
         if (facilityData.accommodations?.length) {
-          html += `<h3 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin:40px 0 16px">🛏️ 객실 타입</h3>`;
-          html += `<div class="cabin-grid">`;
-          facilityData.accommodations.slice(0, 12).forEach(a => {
-            const aName = Translations.accommodationName(a.name);
-            const aDesc = a.desc ? `<p style="font-size:0.78rem;color:var(--gray-600);margin:4px 0 0;line-height:1.4">${a.desc}</p>` : '';
-            html += `<div class="cabin-card">`;
-            if (a.image) html += `<img src="${a.image}" alt="${aName}" loading="lazy">`;
-            html += `<div class="cabin-card-body"><h4>${aName}</h4>${aDesc}</div>`;
-            html += `</div>`;
-          });
-          html += `</div>`;
+          const cabinCats = categorizeCabins(facilityData.accommodations);
+          if (cabinCats.length) {
+            html += `<h3 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin:40px 0 8px">🛏️ 객실 타입</h3>`;
+            cabinCats.forEach(cat => {
+              const rowId = 'cabin-row-' + cat.id;
+              html += `<div style="margin-bottom:4px;padding:8px 0 4px;border-top:1px solid var(--gray-200)">`;
+              html += `<div style="font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:8px">${cat.label} <span style="font-weight:400;color:var(--gray-500)">(${cat.items.length})</span></div>`;
+              html += `<div class="facility-slider" id="${rowId}">`;
+              html += `<div class="facility-slides">`;
+              cat.items.forEach(a => {
+                const aName = Translations.accommodationName(a.name);
+                const aDesc = a.desc ? `<div class="facility-slide-desc">${a.desc}</div>` : '';
+                html += `<div class="facility-slide">`;
+                if (a.image) html += `<img src="${a.image}" alt="${aName}" loading="lazy">`;
+                html += `<div class="facility-slide-body"><div class="facility-slide-name">${aName}</div>${aDesc}</div>`;
+                html += `</div>`;
+              });
+              html += `</div>`;
+              if (cat.items.length > 1) {
+                html += `<button class="slider-btn slider-prev">◀</button><button class="slider-btn slider-next">▶</button>`;
+                html += `<div class="slider-dots">${cat.items.map((_,i)=>`<button class="slider-dot${i===0?' active':''}" data-idx="${i}"></button>`).join('')}</div>`;
+              }
+              html += `</div></div>`;
+            });
+          }
         }
       }
 
