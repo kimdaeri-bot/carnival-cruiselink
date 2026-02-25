@@ -811,6 +811,200 @@
       </div>
     </div>
   </div>
+  <!-- Mobile Bottom Inquiry Bar -->
+  <div id="mib" class="mib">
+    <div class="mib-handle" id="mibHandle" onclick="toggleMIB()">
+      <div class="mib-peek">
+        <span class="mib-peek-icon">🚢</span>
+        <span class="mib-peek-title" id="mibPeekTitle">이 크루즈 문의하기</span>
+        <span class="mib-peek-arrow" id="mibArrow">▲</span>
+      </div>
+    </div>
+    <div class="mib-panel" id="mibPanel">
+      <div class="mib-cruise-name" id="mibCruiseName"></div>
+      <div class="mib-btns">
+        <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="mib-btn mib-kakao">
+          💬 카카오톡 상담
+        </a>
+        <button class="mib-btn mib-form" onclick="openInquiry(); closeMIB()">
+          📋 온라인 문의
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* ── Mobile Inquiry Bar (모바일 전용) ── */
+    .mib {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .mib {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 8000;
+        background: #fff;
+        box-shadow: 0 -3px 16px rgba(0,0,0,0.14);
+        border-radius: 14px 14px 0 0;
+        overflow: hidden;
+        /* iOS safe area */
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+
+      .mib-handle {
+        cursor: pointer;
+        padding: 0;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* 핸들 상단 드래그 인디케이터 */
+      .mib-handle::before {
+        content: '';
+        display: block;
+        width: 36px;
+        height: 4px;
+        background: #d1d5db;
+        border-radius: 2px;
+        margin: 8px auto 0;
+      }
+
+      .mib-peek {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 18px 12px;
+      }
+
+      .mib-peek-icon {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+
+      .mib-peek-title {
+        flex: 1;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--navy, #1a2d5a);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mib-peek-arrow {
+        font-size: 0.7rem;
+        color: #9ca3af;
+        flex-shrink: 0;
+        transition: transform 0.25s;
+      }
+
+      .mib.open .mib-peek-arrow {
+        transform: rotate(180deg);
+      }
+
+      /* 확장 패널 */
+      .mib-panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .mib.open .mib-panel {
+        max-height: 160px;
+      }
+
+      .mib-cruise-name {
+        font-size: 0.82rem;
+        color: #6b7280;
+        padding: 0 18px 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mib-btns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 6px 16px 14px;
+      }
+
+      .mib-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 13px 10px;
+        border-radius: 10px;
+        font-size: 0.92rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+        transition: opacity 0.15s;
+      }
+
+      .mib-btn:active { opacity: 0.8; }
+
+      .mib-kakao {
+        background: #FEE500;
+        color: #1a1a1a;
+      }
+
+      .mib-form {
+        background: var(--navy, #1a2d5a);
+        color: #fff;
+      }
+
+      /* 바 열렸을 때 뒤 콘텐츠 밀기 방지 — body padding */
+      body.mib-open {
+        padding-bottom: 170px;
+      }
+    }
+  </style>
+
+  <script>
+    // ── Mobile Inquiry Bar ──
+    function toggleMIB() {
+      const bar = document.getElementById('mib');
+      const isOpen = bar.classList.toggle('open');
+      document.body.classList.toggle('mib-open', isOpen);
+    }
+
+    function closeMIB() {
+      document.getElementById('mib').classList.remove('open');
+      document.body.classList.remove('mib-open');
+    }
+
+    // 크루즈 제목이 로드되면 바에 반영
+    function updateMIBTitle() {
+      const d = window._cruiseData;
+      if (!d) return;
+      const title = d.title || '이 크루즈 문의하기';
+      const peek = document.getElementById('mibPeekTitle');
+      const detail = document.getElementById('mibCruiseName');
+      if (peek) peek.textContent = title.length > 22 ? title.slice(0, 22) + '…' : title;
+      if (detail) {
+        const op = d.operator ? `${d.operator} · ` : '';
+        const nights = d.nights ? `${d.nights}박` : '';
+        detail.textContent = op + nights;
+      }
+    }
+
+    // renderPage / renderFromAPI 이후 호출되도록 MutationObserver 감시
+    const _mibObserver = new MutationObserver(() => {
+      if (window._cruiseData) {
+        updateMIBTitle();
+        _mibObserver.disconnect();
+      }
+    });
+    _mibObserver.observe(document.getElementById('content'), { childList: true, subtree: true });
+  </script>
+
   <!-- Lightbox -->
   <div id="lightbox" style="
     display:none; position:fixed; inset:0; z-index:9999;
