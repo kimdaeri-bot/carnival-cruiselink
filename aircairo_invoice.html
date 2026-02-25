@@ -3,18 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Air Cairo 인보이스 생성기</title>
+<title>Air Cairo 계약서 / 인보이스</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; background: #f0f2f5; font-size: 13px; }
 
-/* ===== 레이아웃 ===== */
+/* ===== 탭 네비게이션 ===== */
+.tab-outer { background: #0d0d1e; display: flex; align-items: center; gap: 0; padding: 0 20px; border-bottom: 3px solid #005baa; }
+.tab-btn { background: transparent; border: none; color: #aaa; padding: 14px 24px; font-size: 14px; font-weight: 700; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; letter-spacing: 0.5px; transition: all 0.15s; }
+.tab-btn:hover { color: #fff; }
+.tab-btn.active { color: #fff; border-bottom: 3px solid #f90; }
+.tab-btn .tag { font-size: 11px; background: #f90; color: #000; border-radius: 3px; padding: 1px 5px; margin-left: 6px; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ===== 공통 앱 레이아웃 ===== */
 .app { display: grid; grid-template-columns: 420px 1fr; min-height: 100vh; gap: 0; }
 .form-panel { background: #1a1a2e; color: #e0e0e0; padding: 20px; overflow-y: auto; }
 .preview-panel { background: #e8e8e8; padding: 24px; overflow-y: auto; }
 .preview-label { text-align: center; color: #888; font-size: 11px; margin-bottom: 12px; letter-spacing: 1px; }
 
-/* ===== 폼 ===== */
+/* ===== 폼 공통 ===== */
 .form-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #333; }
 .form-header-title { font-size: 14px; font-weight: 700; color: #fff; }
 .form-header-sub { font-size: 10px; color: #888; margin-top: 2px; }
@@ -27,8 +36,6 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
 .form-row input:focus, .form-row textarea:focus { outline: none; border-color: #f90; }
 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
 .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-
-/* 버튼 */
 .btn { padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 700; }
 .btn-orange { background: #f90; color: #000; }
 .btn-gray { background: #444; color: #fff; }
@@ -37,17 +44,11 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
 .btn-blue { background: #357; color: #fff; }
 .btn:hover { opacity: 0.85; }
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-
-/* 추가 항목 */
 .extra-row { display: grid; grid-template-columns: 1fr auto 1fr auto; gap: 6px; align-items: center; margin-bottom: 6px; }
 .extra-row input { background: #252540; border: 1px solid #444; color: #fff; padding: 6px 8px; border-radius: 4px; font-size: 12px; }
 .extra-row select { background: #252540; border: 1px solid #444; color: #fff; padding: 6px 4px; border-radius: 4px; font-size: 11px; }
 .extra-del { background: #c33; color: #fff; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 11px; }
-
-/* PNR 파싱 결과 */
 .parse-result { background: #1e2e1e; border: 1px solid #2a4; border-radius: 4px; padding: 8px 10px; font-size: 11px; color: #8f8; margin-top: 6px; display: none; }
-
-/* 배율 슬라이더 */
 .scale-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
 .scale-row label { font-size: 11px; color: #aaa; white-space: nowrap; }
 .scale-row input[type=range] { flex: 1; }
@@ -63,38 +64,25 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   transform-origin: top center;
 }
-
-/* 상단 헤더 */
 .inv-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
 .inv-logo-area { display: flex; align-items: center; gap: 12px; }
 .inv-logo-img { height: 44px; width: auto; max-width: 160px; object-fit: contain; display: block; }
-.inv-logo-text { font-size: 22px; font-weight: 900; color: #005baa; letter-spacing: 3px; }
-.inv-gsa-text { font-size: 9px; color: #888; letter-spacing: 1px; margin-top: 2px; }
+.inv-gsa-text { font-size: 9px; color: #888; letter-spacing: 1px; margin-top: 4px; }
 .inv-date-area { text-align: right; font-size: 11px; color: #666; }
 .inv-date-area strong { display: block; font-size: 13px; color: #333; }
-
-/* 타이틀 */
 .inv-title { text-align: center; font-size: 24px; font-weight: 900; color: #005baa; letter-spacing: 8px; margin: 10px 0 16px; border-top: 2px solid #005baa; border-bottom: 2px solid #005baa; padding: 6px 0; }
-
-/* ATTN 섹션 */
 .inv-attn { display: grid; grid-template-columns: 90px 1fr 90px 1fr; border: 1px solid #ccc; margin-bottom: 14px; }
 .inv-attn-cell { padding: 6px 10px; border-right: 1px solid #ccc; font-size: 12px; }
 .inv-attn-cell:nth-child(4n) { border-right: none; }
 .inv-attn-cell:nth-child(n+5) { border-top: 1px solid #ccc; }
 .inv-attn-label { background: #f5f5f5; font-weight: 700; color: #333; font-size: 11px; }
-
-/* 항공편 정보 */
 .inv-flight { background: #f0f4ff; border: 1px solid #c0d0ee; border-radius: 4px; padding: 10px 14px; margin-bottom: 12px; }
 .inv-flight-title { font-size: 10px; font-weight: 700; color: #005baa; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
 .inv-flight-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 .inv-flight-item { font-size: 11px; }
 .inv-flight-item span { display: block; font-size: 10px; color: #888; }
 .inv-flight-item strong { font-size: 12px; color: #222; }
-
-/* PNR 박스 */
 .inv-pnr { background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; padding: 10px 12px; margin-bottom: 14px; font-family: 'Courier New', monospace; font-size: 10.5px; white-space: pre-wrap; word-break: break-all; line-height: 1.5; color: #333; max-height: 200px; overflow-y: auto; display: none; }
-
-/* 요금 테이블 */
 .inv-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 12px; }
 .inv-table th { background: #005baa; color: #fff; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 11px; }
 .inv-table td { padding: 6px 10px; border-bottom: 1px solid #eee; }
@@ -105,14 +93,10 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
 .inv-table .extra-row-inv td { background: #f0fff0; color: #060; }
 .inv-table .req-row td { background: #005baa; color: #fff; font-size: 14px; font-weight: 900; }
 .inv-table .req-row td.num-col { font-size: 16px; color: #fff; }
-
-/* 승객 명단 */
 .inv-pax-section { margin-bottom: 14px; }
 .inv-pax-title { font-size: 10px; font-weight: 700; color: #555; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 4px; }
 .inv-pax-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px 8px; font-size: 10.5px; color: #444; }
 .inv-pax-item { padding: 1px 0; }
-
-/* 계좌 정보 */
 .inv-account { border: 1px solid #ccc; border-radius: 4px; overflow: hidden; margin-bottom: 14px; }
 .inv-account-header { background: #005baa; color: #fff; padding: 6px 12px; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
 .inv-account-body { padding: 10px 14px; }
@@ -121,27 +105,60 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
 .inv-account-row .acc-label { color: #666; font-size: 11px; }
 .inv-account-row .acc-val { font-weight: 700; color: #222; }
 .inv-account-note { font-size: 10px; color: #c00; margin-top: 6px; line-height: 1.5; }
-
-/* 직인/서명 */
 .inv-stamp-area { display: flex; justify-content: flex-end; align-items: flex-end; gap: 16px; margin-bottom: 10px; }
 .inv-stamp-img { width: 80px; height: 80px; object-fit: contain; }
-
-/* 명판 */
 .inv-nameplate { border: 1.5px solid #005baa; border-radius: 4px; padding: 8px 14px; font-size: 10px; line-height: 1.75; color: #333; min-width: 180px; }
 .inv-nameplate-company { font-size: 12px; font-weight: 900; color: #005baa; letter-spacing: 0.5px; }
 .inv-nameplate-eng { font-size: 9px; color: #777; margin-bottom: 4px; letter-spacing: 0.5px; }
 .inv-nameplate-row { font-size: 10px; color: #444; }
-
-/* 푸터 */
 .inv-footer { text-align: center; border-top: 1px solid #005baa; padding-top: 8px; font-size: 10px; color: #888; line-height: 1.7; }
 
-/* 인쇄 */
+/* ===== 계약서 문서 ===== */
+.contract-doc {
+  background: #fff;
+  width: 794px;
+  min-height: 1123px;
+  margin: 0 auto;
+  padding: 32px 40px 28px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transform-origin: top center;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #222;
+}
+.ct-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.ct-logo { height: 40px; width: auto; max-width: 150px; object-fit: contain; display: block; }
+.ct-top-right { text-align: right; font-size: 10px; color: #888; }
+.ct-title { text-align: center; font-size: 22px; font-weight: 900; color: #005baa; letter-spacing: 6px; border-top: 2.5px solid #005baa; border-bottom: 2.5px solid #005baa; padding: 8px 0; margin: 0 0 16px; }
+.ct-agency { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+.ct-intro { font-size: 11.5px; color: #333; line-height: 1.8; margin-bottom: 12px; border-left: 3px solid #005baa; padding-left: 12px; background: #f8f9ff; padding-top: 6px; padding-bottom: 6px; }
+.ct-section-title { font-size: 13px; font-weight: 900; color: #005baa; margin: 14px 0 8px; }
+.ct-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 12px; }
+.ct-table td { border: 1px solid #ccc; padding: 7px 12px; vertical-align: top; }
+.ct-table .ct-label { background: #f0f4ff; font-weight: 700; color: #333; width: 38%; font-size: 11px; white-space: nowrap; }
+.ct-table .ct-val { color: #111; font-weight: 600; }
+.ct-table .ct-pnr { font-family: 'Courier New', monospace; font-size: 10px; white-space: pre-wrap; word-break: break-all; background: #fafafa; color: #333; line-height: 1.5; }
+.ct-rules { margin-bottom: 14px; }
+.ct-rule { font-size: 11px; padding: 3px 0 3px 16px; text-indent: -16px; color: #333; line-height: 1.65; }
+.ct-rule strong { color: #005baa; }
+.ct-sign-section { margin-top: 18px; }
+.ct-sign-date { font-size: 13px; font-weight: 700; text-align: center; margin-bottom: 20px; color: #333; }
+.ct-sign-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.ct-sign-box { border: 1px solid #ccc; border-radius: 4px; padding: 16px 20px; }
+.ct-sign-title { font-size: 10px; color: #888; margin-bottom: 6px; letter-spacing: 1px; }
+.ct-sign-name { font-size: 14px; font-weight: 900; color: #005baa; margin-bottom: 4px; }
+.ct-sign-sub { font-size: 11px; color: #555; }
+.ct-sign-stamp { display: flex; justify-content: flex-end; margin-top: 10px; }
+.ct-sign-stamp img { width: 60px; height: 60px; object-fit: contain; }
+
+/* ===== 인쇄 ===== */
 @media print {
   body { background: #fff; }
+  .tab-outer { display: none !important; }
   .form-panel { display: none !important; }
   .preview-panel { background: #fff; padding: 0; display: block; }
   .preview-label { display: none; }
-  .invoice-doc { box-shadow: none; width: 100% !important; padding: 12px 16px !important; transform-origin: top left; }
+  .invoice-doc, .contract-doc { box-shadow: none; width: 100% !important; padding: 12px 18px !important; transform-origin: top left; }
   .inv-title { letter-spacing: 6px; }
   .inv-pnr { max-height: none; overflow-y: visible; }
   @page { size: A4 portrait; margin: 0; }
@@ -149,8 +166,225 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
 </style>
 </head>
 <body>
+
+<!-- ===== 탭 네비게이션 ===== -->
+<div class="tab-outer">
+  <button class="tab-btn active" id="tab-contract-btn" onclick="switchTab('contract')">📄 좌석사용계약서 <span class="tag">STEP 1</span></button>
+  <button class="tab-btn" id="tab-invoice-btn" onclick="switchTab('invoice')">📋 인보이스 <span class="tag">STEP 2</span></button>
+</div>
+
+<!-- ====================================================== -->
+<!-- ===== 계약서 탭 ===== -->
+<!-- ====================================================== -->
+<div class="tab-content active" id="contractTab">
 <div class="app">
-<!-- ====== 입력 폼 ====== -->
+
+<!-- 계약서 폼 -->
+<div class="form-panel">
+  <div class="form-header">
+    <div>
+      <div class="form-header-title">📄 그룹항공 좌석사용계약서</div>
+      <div class="form-header-sub">Air Cairo Korea GSA | 아남항공</div>
+    </div>
+    <div style="display:flex;gap:6px">
+      <button class="btn btn-orange" onclick="doPrintContract()">🖨 인쇄/PDF</button>
+      <button class="btn btn-gray" onclick="resetContract()">↺</button>
+    </div>
+  </div>
+
+  <!-- 기본 정보 -->
+  <div class="form-section">
+    <div class="form-section-title">기본 정보</div>
+    <div class="form-row">
+      <label>대리점명 (여행사명)</label>
+      <input type="text" id="c-agency" placeholder="예: 크루즈파" oninput="updateContract()">
+    </div>
+    <div class="form-row-2">
+      <div class="form-row" style="margin:0">
+        <label>계약일</label>
+        <input type="text" id="c-date" oninput="updateContract()">
+      </div>
+      <div class="form-row" style="margin:0">
+        <label>서명란 여행사명</label>
+        <input type="text" id="c-agency-sign" placeholder="서명란 우측 표기명" oninput="updateContract()">
+      </div>
+    </div>
+  </div>
+
+  <!-- 항공 정보 -->
+  <div class="form-section">
+    <div class="form-section-title">항공편 정보</div>
+    <div class="form-row">
+      <label>항공운임 (전체 텍스트)</label>
+      <input type="text" id="c-fare" placeholder="예: KRW369,000 + TAX 불포함(약35,000원)" oninput="updateContract()">
+    </div>
+    <div class="form-row">
+      <label>PNR 붙여넣기 (편명 자동 파싱)</label>
+      <textarea id="c-pnr" rows="4" placeholder="GDS PNR 전체 붙여넣기" oninput="cParsePNR()"></textarea>
+    </div>
+    <div class="parse-result" id="c-parse-result"></div>
+  </div>
+
+  <!-- 결제 조건 -->
+  <div class="form-section">
+    <div class="form-section-title">결제 조건</div>
+    <div class="form-row">
+      <label>결제 방식</label>
+      <select id="c-paymode" onchange="updatePaymodeUI(); updateContract()">
+        <option value="2step">2-Step: Deposit + 발권일(TKTL)</option>
+        <option value="3step">3-Step: 1차 Deposit + 2차 잔금 + Name TL</option>
+      </select>
+    </div>
+    <div class="form-row-2">
+      <div class="form-row" style="margin:0">
+        <label id="dep-date-label">Deposit 입금일</label>
+        <input type="text" id="c-dep-date" placeholder="예: 2026년 1월 29일 까지" oninput="updateContract()">
+      </div>
+      <div class="form-row" style="margin:0">
+        <label>발권일 / TKTL</label>
+        <input type="text" id="c-tktl" placeholder="예: 2026년 2월 19일 까지" oninput="updateContract()">
+      </div>
+    </div>
+    <!-- 3-step 추가 필드 -->
+    <div id="extra-step-fields" style="display:none">
+      <div class="form-row">
+        <label>Name TL (이름 마감일)</label>
+        <input type="text" id="c-nametl" placeholder="예: 2025년 10월 10일 까지" oninput="updateContract()">
+      </div>
+    </div>
+    <div class="form-row-3" style="margin-top:8px">
+      <div class="form-row" style="margin:0">
+        <label>Deposit 단가 (₩)</label>
+        <input type="number" id="c-dep-unit" value="0" oninput="updateContract()">
+      </div>
+      <div class="form-row" style="margin:0">
+        <label>좌석 수</label>
+        <input type="number" id="c-seats" value="0" oninput="updateContract()">
+      </div>
+      <div class="form-row" style="margin:0">
+        <label>Deposit 합계</label>
+        <input type="text" id="c-dep-total" value="0원" readonly style="background:#1a1a2e;color:#f90;border-color:#444">
+      </div>
+    </div>
+    <!-- 3-step 잔금 -->
+    <div id="balance2-fields" style="display:none">
+      <div class="form-row-3" style="margin-top:8px">
+        <div class="form-row" style="margin:0">
+          <label>잔금 단가 (₩)</label>
+          <input type="number" id="c-bal-unit" value="0" oninput="updateContract()">
+        </div>
+        <div class="form-row" style="margin:0">
+          <label>잔금 입금일</label>
+          <input type="text" id="c-bal-date" placeholder="예: 2025년 10월 12일 까지" oninput="updateContract()">
+        </div>
+        <div class="form-row" style="margin:0">
+          <label>잔금 합계</label>
+          <input type="text" id="c-bal-total" value="0원" readonly style="background:#1a1a2e;color:#f90;border-color:#444">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 담당자 -->
+  <div class="form-section">
+    <div class="form-section-title">담당자</div>
+    <div class="form-row-2">
+      <div class="form-row" style="margin:0">
+        <label>담당자</label>
+        <input type="text" id="c-handler" value="정선미" oninput="updateContract()">
+      </div>
+      <div class="form-row" style="margin:0">
+        <label>연락처</label>
+        <input type="text" id="c-tel" value="02-3788-9140" oninput="updateContract()">
+      </div>
+    </div>
+  </div>
+
+  <!-- 배율 -->
+  <div class="form-section">
+    <div class="form-section-title">인쇄 설정</div>
+    <div class="scale-row">
+      <label>배율</label>
+      <input type="range" id="c-scaleSlider" min="60" max="100" value="100" oninput="applyCScale(this.value/100)">
+      <span class="scale-val" id="c-scaleLabel">100%</span>
+    </div>
+    <div style="font-size:10px;color:#777;margin-top:4px">인쇄 시 자동 조정 / 수동으로 1페이지 맞춤</div>
+  </div>
+</div><!-- /form-panel -->
+
+<!-- 계약서 프리뷰 -->
+<div class="preview-panel">
+  <div class="preview-label">▼ 실시간 프리뷰 — 인쇄(PDF 저장)</div>
+  <div class="contract-doc" id="contractDoc">
+
+    <!-- 상단 -->
+    <div class="ct-top">
+      <img class="ct-logo" src="assets/images/aircairo-logo.png" alt="Air Cairo" onerror="this.style.display='none'">
+      <div class="ct-top-right">
+        에어카이로 항공 한국총대리점<br>
+        아남항공 주식회사
+      </div>
+    </div>
+
+    <!-- 제목 -->
+    <div class="ct-title">그룹항공 좌석사용계약서</div>
+
+    <!-- 대리점명 -->
+    <div class="ct-agency">대리점명: <span id="cv-agency"></span></div>
+
+    <!-- 서두 -->
+    <div class="ct-intro">
+      아남항공(에어카이로 한국총판)과 상기 여행사는 다음과 같은 조건에 따라 그룹 예약과 관련한 계약을 체결한다.<br>
+      <strong>계약 목적 :</strong> 본 계약은 항공사의 그룹 좌석 예약 및 사용과 관련된 조건을 규정함으로써 상호 간의 원활한 협력을 목적으로 한다.
+    </div>
+
+    <!-- 1. 계약 내용 -->
+    <div class="ct-section-title">1. 계약 내용</div>
+    <table class="ct-table" id="cv-contract-table">
+      <!-- JS로 생성 -->
+    </table>
+
+    <!-- 2. 그룹 규정 안내 -->
+    <div class="ct-section-title">2. 그룹 규정 안내</div>
+    <div class="ct-rules" id="cv-rules">
+      <!-- JS로 생성 -->
+    </div>
+
+    <!-- 서명 -->
+    <div class="ct-sign-section">
+      <div class="ct-sign-date" id="cv-sign-date"></div>
+      <div class="ct-sign-row">
+        <div class="ct-sign-box">
+          <div class="ct-sign-title">갑 (GSA)</div>
+          <div class="ct-sign-name">에어카이로 항공 한국총대리점</div>
+          <div class="ct-sign-sub">아남항공 주식회사</div>
+          <div class="ct-sign-sub" id="cv-handler-info"></div>
+          <div class="ct-sign-stamp">
+            <img src="assets/images/company-stamp.png" alt="직인" onerror="this.style.display='none'">
+          </div>
+        </div>
+        <div class="ct-sign-box">
+          <div class="ct-sign-title">을 (여행사)</div>
+          <div class="ct-sign-name" id="cv-agency-sign"></div>
+          <div class="ct-sign-sub">담당자 귀하</div>
+          <div style="height:70px"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /contract-doc -->
+</div><!-- /preview-panel -->
+</div><!-- /app -->
+</div><!-- /contractTab -->
+
+
+<!-- ====================================================== -->
+<!-- ===== 인보이스 탭 ===== -->
+<!-- ====================================================== -->
+<div class="tab-content" id="invoiceTab">
+<div class="app">
+
+<!-- 인보이스 폼 -->
 <div class="form-panel">
   <div class="form-header">
     <div>
@@ -286,42 +520,42 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
     </div>
     <div class="form-row-2">
       <div class="form-row" style="margin:0">
-        <label>1차 Deposit 날짜/메모</label>
-        <input type="text" id="dep1Note" placeholder="9/16 크리에이티브">
+        <label>비고 (날짜 등)</label>
+        <input type="text" id="dep1Note" placeholder="예: 2025-09-16">
       </div>
       <div class="form-row" style="margin:0">
         <label>EMD 번호</label>
-        <input type="text" id="dep1Emd" placeholder="381-4550586687">
+        <input type="text" id="dep1Emd" placeholder="예: 381-xxxxxxxx">
       </div>
     </div>
-    <div class="form-row" style="margin-top:6px">
-      <label>2차 Deposit 금액 (₩, 없으면 0)</label>
+    <div class="form-row" style="margin-top:8px">
+      <label>2차 Deposit 금액 (₩)</label>
       <input type="number" id="dep2Amt" value="0" oninput="calcTotal()">
     </div>
     <div class="form-row-2">
       <div class="form-row" style="margin:0">
-        <label>2차 Deposit 날짜/메모</label>
-        <input type="text" id="dep2Note" placeholder="">
+        <label>비고</label>
+        <input type="text" id="dep2Note" placeholder="예: 2025-10-12">
       </div>
       <div class="form-row" style="margin:0">
-        <label>2차 EMD 번호</label>
-        <input type="text" id="dep2Emd" placeholder="">
+        <label>EMD 번호</label>
+        <input type="text" id="dep2Emd" placeholder="예: 381-xxxxxxxx">
       </div>
     </div>
   </div>
 
   <!-- 추가 항목 -->
   <div class="form-section">
-    <div class="form-section-title">추가 항목 (취소패널티 등)</div>
+    <div class="form-section-title">추가/차감 항목</div>
     <div id="extraItems"></div>
-    <button class="btn btn-blue" onclick="addExtra()" style="margin-top:6px;font-size:11px">+ 항목 추가</button>
+    <button class="btn btn-blue" onclick="addExtra()">+ 항목 추가</button>
   </div>
 
   <!-- 비고 -->
   <div class="form-section">
-    <div class="form-section-title">비고</div>
+    <div class="form-section-title">비고 / 취소 규정</div>
     <div class="form-row">
-      <textarea id="remarks" rows="2" placeholder="특이사항 입력"></textarea>
+      <textarea id="remarks" rows="3" placeholder="비고 또는 취소 규정 (선택)"></textarea>
     </div>
   </div>
 
@@ -329,20 +563,21 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
   <div class="form-section">
     <div class="form-section-title">승객 명단</div>
     <div class="form-row">
-      <label>표시 여부</label>
+      <label>명단 표시</label>
       <select id="paxListShow">
         <option value="show">표시</option>
         <option value="hide">숨김</option>
       </select>
     </div>
     <div class="form-row">
-      <textarea id="paxListText" rows="4" placeholder="PNR 파싱 후 자동 입력됩니다&#10;또는 직접 입력 (줄바꿈으로 구분)"></textarea>
+      <label>승객 명단 (줄당 1명)</label>
+      <textarea id="paxListText" rows="4" placeholder="HONG/GILDONG MR&#10;KIM/CHULSOO MR"></textarea>
     </div>
   </div>
 
-  <!-- 배율 조정 -->
+  <!-- 배율 -->
   <div class="form-section">
-    <div class="form-section-title">인쇄 배율</div>
+    <div class="form-section-title">인쇄 설정</div>
     <div class="scale-row">
       <label>배율</label>
       <input type="range" id="scaleSlider" min="60" max="100" value="100" oninput="applyScale(this.value/100)">
@@ -350,9 +585,9 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
     </div>
     <div style="font-size:10px;color:#777;margin-top:4px">인쇄 시 자동 조정 / 수동으로 1페이지 맞춤</div>
   </div>
-</div>
+</div><!-- /form-panel -->
 
-<!-- ====== 프리뷰 ====== -->
+<!-- 인보이스 프리뷰 -->
 <div class="preview-panel">
   <div class="preview-label">▼ 실시간 프리뷰 — 인쇄(PDF 저장)</div>
   <div class="invoice-doc" id="invoiceDoc">
@@ -362,7 +597,7 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
       <div class="inv-logo-area">
         <img class="inv-logo-img" id="logoImg" src="assets/images/aircairo-logo.png" alt="Air Cairo" onerror="this.style.display='none'">
         <div>
-          <div class="inv-gsa-text" style="margin-top:4px">GSA KOREA — APG Korea (아남항공㈜)</div>
+          <div class="inv-gsa-text">GSA KOREA — APG Korea (아남항공㈜)</div>
         </div>
       </div>
       <div class="inv-date-area">
@@ -414,9 +649,7 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
           <th style="width:25%">금액 (₩)</th>
         </tr>
       </thead>
-      <tbody id="fareTableBody">
-        <!-- JS로 생성 -->
-      </tbody>
+      <tbody id="fareTableBody"></tbody>
     </table>
 
     <!-- 승객 명단 -->
@@ -470,24 +703,226 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
   </div><!-- /invoice-doc -->
 </div><!-- /preview-panel -->
 </div><!-- /app -->
+</div><!-- /invoiceTab -->
 
 <script>
-// ===== 상태 =====
-let extraItems = [];
-let parsedPaxList = [];
-let manualScale = null;
-let showPnrInDoc = false;
+// ===========================
+// ===== 탭 전환 =====
+// ===========================
+function switchTab(tab) {
+  document.getElementById('contractTab').classList.toggle('active', tab === 'contract');
+  document.getElementById('invoiceTab').classList.toggle('active', tab === 'invoice');
+  document.getElementById('tab-contract-btn').classList.toggle('active', tab === 'contract');
+  document.getElementById('tab-invoice-btn').classList.toggle('active', tab === 'invoice');
+}
 
-// ===== 초기화 =====
+// ===========================
+// ===== 계약서 JS =====
+// ===========================
+let cManualScale = null;
+
 window.onload = () => {
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth()+1).padStart(2,'0');
   const dd = String(today.getDate()).padStart(2,'0');
+  // 계약서 날짜
+  document.getElementById('c-date').value = `${yyyy}년  ${today.getMonth()+1}월  ${today.getDate()}일`;
+  // 인보이스 날짜
   document.getElementById('issueDate').value = `${yyyy}-${mm}-${dd}`;
   bindAll();
+  updateContract();
   updatePreview();
 };
+
+function updatePaymodeUI() {
+  const mode = document.getElementById('c-paymode').value;
+  const is3 = mode === '3step';
+  document.getElementById('extra-step-fields').style.display = is3 ? 'block' : 'none';
+  document.getElementById('balance2-fields').style.display = is3 ? 'block' : 'none';
+  document.getElementById('dep-date-label').textContent = is3 ? '1차 Deposit 입금일' : 'Deposit 입금일';
+  const tktlLabel = document.querySelector('label[for="c-tktl"]') || document.querySelector('#c-tktl').previousElementSibling;
+  // tktl 필드 라벨 변경
+  const tktlRow = document.getElementById('c-tktl').closest('.form-row') || document.getElementById('c-tktl').parentElement;
+  const labelEl = tktlRow ? tktlRow.querySelector('label') : null;
+  if (labelEl) labelEl.textContent = is3 ? '발권일 / TKTL' : '발권일 / TKTL';
+}
+
+function cStr(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function cVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+function cParsePNR() {
+  const raw = cStr('c-pnr');
+  if (!raw.trim()) return;
+  const msg = [];
+
+  // PNR 번호
+  const pnrM = raw.match(/\b([A-Z0-9]{6})\b/);
+  if (pnrM) msg.push('✓ PNR: ' + pnrM[1]);
+
+  // 좌석수
+  const nmM = raw.match(/(\d+)ANAM/);
+  if (nmM) {
+    document.getElementById('c-seats').value = parseInt(nmM[1]);
+    msg.push('✓ 좌석: ' + nmM[1] + '석');
+  }
+
+  // 편명
+  const fltM = [...raw.matchAll(/SM\s+(\d+)\s+([A-Z]+)\s+(\d+[A-Z]+\d*)\s+\d+\s+([A-Z]+)([A-Z]{3})/g)];
+  if (fltM.length > 0) msg.push(`✓ 편명: SM ${fltM[0][1]} ${fltM[0][2]} / ${fltM[0][4]}→${fltM[0][5]}`);
+
+  const res = document.getElementById('c-parse-result');
+  res.style.display = 'block';
+  res.innerHTML = msg.join('<br>') || '⚠ 파싱 가능한 데이터가 없습니다.';
+  updateContract();
+}
+
+const RULES = [
+  ['예약 보증금(Deposit Payment)', 'Deposit 이후 환불 불가. 예약 확정 시 총 금액의 50%를 당사 계좌로 송금해야 합니다.'],
+  ['잔금 결제(Full Payment)', null], // 동적
+  ['이름 변경(Name Change)', '출발 3주 전까지는 무료 변경 가능. 티켓 발권 후에는 항공요금의 50% 수수료 부과.'],
+  ['환불 규정(Refund Policy)', '출발 3주 전까지 요청 시 5% 환불 가능.'],
+  ['소아 운임(No Child Fare)', '그룹 예약에는 소아 요금이 적용되지 않습니다.'],
+  ['발권일 & 승객명단 제출(Submission of Names)', '출발 최소 3주 전까지 명단 제출 필수.'],
+  ['수하물 규정(Baggage Allowance)', '위탁 수하물 23kg + 기내 반입 7kg 허용.'],
+  ['환율 변동(Price Fluctuations)', '환율 변동에 따라 요금이 변경될 수 있습니다.'],
+  ['항공편 변경 불가(No Flight Changes)', '예약 후 항공편 변경 불가.'],
+  ['그룹 취소(Group Cancellation)', '정당한 사유 없는 단순 취소 시 이미 납부한 보증금 환불 불가.'],
+  ['출발 1~2개월 전 예약(Booking 1-2 months before departure)', '총 금액의 75%를 EMD(전자 수수료 문서)로 결제해야 합니다.'],
+  ['출발 1개월 이내 예약(Booking within 1 month)', '총 금액의 100%를 EMD로 결제해야 합니다.'],
+  ["항공사의 예약 취소 권리(Air Cairo's Right to Cancel)", '보증금 또는 EMD가 기한 내 미납 시 항공사는 예약을 취소할 수 있습니다.'],
+  ['출발일 변경(Date Change)', '일정 변경 시 재산정된 요금이 적용됩니다.'],
+  ['보증금 납부 후 요금 변동(Deposit & Price Changes)', '보증금을 예전 환율로 납부했더라도, 잔금은 변경된 환율에 따라 계산됩니다.'],
+  ['Admin fee', '최초 계약사항에서 수정사항 발생한 경우 요청항목 당 수수료 3만원 (Ex: 재발행, 환불, 인원변경, 발권 후 이름변경 등)'],
+];
+
+function fmtNum(n) { return Math.round(n).toLocaleString('ko-KR'); }
+
+function updateContract() {
+  const agency = cStr('c-agency');
+  const agencySign = cStr('c-agency-sign') || agency;
+  const dateStr = cStr('c-date');
+  const fare = cStr('c-fare');
+  const paymode = document.getElementById('c-paymode').value;
+  const is3step = paymode === '3step';
+  const depDate = cStr('c-dep-date');
+  const tktl = cStr('c-tktl');
+  const nametl = cStr('c-nametl');
+  const depUnit = cVal('c-dep-unit');
+  const seats = cVal('c-seats');
+  const depTotal = depUnit * seats;
+  const balUnit = cVal('c-bal-unit');
+  const balDate = cStr('c-bal-date');
+  const balTotal = balUnit * seats;
+  const pnrText = cStr('c-pnr');
+  const handler = cStr('c-handler');
+  const tel = cStr('c-tel');
+
+  // Deposit 합계 자동 계산
+  document.getElementById('c-dep-total').value = seats > 0 && depUnit > 0
+    ? `(₩${fmtNum(depUnit)} × ${seats}석) = ${fmtNum(depTotal)}원`
+    : '0원';
+  if (document.getElementById('c-bal-total')) {
+    document.getElementById('c-bal-total').value = seats > 0 && balUnit > 0
+      ? `(₩${fmtNum(balUnit)} × ${seats}석) = ${fmtNum(balTotal)}원`
+      : '0원';
+  }
+
+  // 대리점명
+  document.getElementById('cv-agency').textContent = agency;
+  document.getElementById('cv-agency-sign').textContent = agencySign;
+  document.getElementById('cv-sign-date').textContent = dateStr;
+  document.getElementById('cv-handler-info').textContent = handler + (tel ? ' / ' + tel : '');
+
+  // 계약 내용 테이블
+  const depTotalStr = seats > 0 && depUnit > 0
+    ? `(KRW${fmtNum(depUnit)} × ${seats}석)  = ${fmtNum(depTotal)}원`
+    : '';
+  const balTotalStr = seats > 0 && balUnit > 0
+    ? `(KRW${fmtNum(balUnit)} × ${seats}석)  = ${fmtNum(balTotal)}원`
+    : '';
+
+  let rows = `
+    <tr><td class="ct-label">항공운임</td><td class="ct-val">${fare || '—'}</td></tr>
+    <tr><td class="ct-label">${is3step ? '1차 Deposit 입금일' : 'Deposit 입금일'}</td><td class="ct-val">${depDate || '—'}</td></tr>
+    <tr><td class="ct-label">Deposit 금액 (환불불가)</td><td class="ct-val">${depTotalStr || '—'}</td></tr>`;
+
+  if (is3step) {
+    rows += `
+    <tr><td class="ct-label">2차 잔금 입금일</td><td class="ct-val">${balDate || '—'}</td></tr>
+    <tr><td class="ct-label">잔금 50% 금액</td><td class="ct-val">${balTotalStr || '—'}</td></tr>
+    <tr><td class="ct-label">Name TL</td><td class="ct-val">${nametl || '—'}</td></tr>`;
+  } else {
+    rows += `<tr><td class="ct-label">발권일 / TKTL</td><td class="ct-val">${tktl || '—'}</td></tr>`;
+  }
+
+  rows += `
+    <tr><td class="ct-label">입금계좌</td><td class="ct-val">KEB 하나은행 109-910017-21104 아남항공㈜</td></tr>`;
+
+  if (pnrText.trim()) {
+    rows += `<tr><td class="ct-label">PNR</td><td class="ct-pnr">${pnrText.trim()}</td></tr>`;
+  }
+
+  document.getElementById('cv-contract-table').innerHTML = rows;
+
+  // 규정 안내
+  const fullPayText = is3step
+    ? '출발 1개월 전까지 항공료 전액을 완납해야 합니다.'
+    : '발권일에 결제';
+  const rulesHtml = RULES.map((r, i) => {
+    const desc = r[1] === null ? fullPayText : r[1];
+    return `<div class="ct-rule">${i+1}.&nbsp;&nbsp;<strong>${r[0]}:</strong> ${desc}</div>`;
+  }).join('');
+  document.getElementById('cv-rules').innerHTML = rulesHtml;
+}
+
+function resetContract() {
+  if (!confirm('입력 내용을 초기화할까요?')) return;
+  ['c-agency','c-agency-sign','c-fare','c-pnr','c-dep-date','c-tktl','c-nametl','c-bal-date'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['c-dep-unit','c-seats','c-bal-unit'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '0';
+  });
+  document.getElementById('c-parse-result').style.display = 'none';
+  cManualScale = null;
+  document.getElementById('c-scaleSlider').value = 100;
+  document.getElementById('c-scaleLabel').textContent = '100%';
+  updateContract();
+}
+
+function applyCScale(val) {
+  cManualScale = val;
+  document.getElementById('c-scaleLabel').textContent = Math.round(val*100) + '%';
+  const doc = document.getElementById('contractDoc');
+  doc.style.transform = `scale(${val})`;
+  doc.parentElement.style.minHeight = (doc.offsetHeight * val) + 'px';
+}
+
+function doPrintContract() {
+  const doc = document.getElementById('contractDoc');
+  doc.style.transform = '';
+  const A4_H = 1100;
+  const docH = doc.scrollHeight;
+  if (docH > A4_H) {
+    const zoom = Math.max(0.55, A4_H / docH);
+    doc.style.zoom = zoom;
+    setTimeout(() => { window.print(); doc.style.zoom = ''; if (cManualScale) applyCScale(cManualScale); }, 100);
+  } else {
+    doc.style.zoom = '';
+    setTimeout(() => { window.print(); if (cManualScale) applyCScale(cManualScale); }, 50);
+  }
+}
+
+// ===========================
+// ===== 인보이스 JS =====
+// ===========================
+let extraItems = [];
+let parsedPaxList = [];
+let manualScale = null;
+let showPnrInDoc = false;
 
 function bindAll() {
   const ids = ['issueDate','handler','handlerTel','handlerEmail',
@@ -503,23 +938,16 @@ function bindAll() {
   });
 }
 
-// ===== PNR 파싱 =====
 function parsePNR() {
   const raw = document.getElementById('pnrText').value;
   if (!raw.trim()) return;
   let msg = [];
-
-  // PNR 번호
   const pnrM = raw.match(/\b([A-Z0-9]{6})\s*$/m);
   if (pnrM) { document.getElementById('pnrRef').value = pnrM[1]; msg.push('✓ PNR: '+pnrM[1]); }
-
-  // 그룹 인원 (NM:xx 또는 BKD:xx)
   const nmM = raw.match(/NM:(\d+)/);
   const bkdM = raw.match(/BKD:(\d+)/);
   const nm = nmM ? parseInt(nmM[1]) : (bkdM ? parseInt(bkdM[1]) : 0);
   if (nm > 0) { document.getElementById('paxCount').value = nm; msg.push('✓ 인원: '+nm+'명'); }
-
-  // 항공편 (SM xxx Y xxNOV xxX)
   const fltMatches = [...raw.matchAll(/SM\s+(\d+)\s+([A-Z]+)\s+(\d+[A-Z]+\d*)\s+\d+\s+([A-Z]+)([A-Z]{3})/g)];
   if (fltMatches.length >= 1) {
     const f1 = fltMatches[0];
@@ -535,16 +963,12 @@ function parsePNR() {
     document.getElementById('flt2seg').value = `${f2[4]}-${f2[5]}`;
     msg.push(`✓ 오는편: SM ${f2[1]} / ${f2[4]}→${f2[5]} / ${f2[3]}`);
   }
-
-  // 승객 목록 (1.LASTNAME/FIRSTNAME MS 패턴)
   const paxM = [...raw.matchAll(/\d+\.([A-Z]+\/[A-Z\s]+(?:MR|MS|MSTR|INF))/g)];
   if (paxM.length > 0) {
     parsedPaxList = paxM.map(m => m[1].trim());
     document.getElementById('paxListText').value = parsedPaxList.join('\n');
     msg.push(`✓ 승객: ${parsedPaxList.length}명 파싱 완료`);
   }
-
-  // 결과 표시
   const res = document.getElementById('parseResult');
   res.style.display = 'block';
   res.innerHTML = msg.join('<br>') || '⚠ 파싱 가능한 데이터가 없습니다.';
@@ -556,7 +980,6 @@ function togglePnrPreview() {
   updatePreview();
 }
 
-// ===== 추가 항목 =====
 function addExtra() {
   const id = Date.now();
   extraItems.push({id, label:'', type:'add', amount:0});
@@ -586,32 +1009,22 @@ function updateExtra(id, field, val) {
   if (item) { item[field] = val; updatePreview(); }
 }
 
-// ===== 숫자 포맷 =====
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function val(id) { return parseFloat(document.getElementById(id).value) || 0; }
 function str(id) { return document.getElementById(id).value.trim(); }
-
-// ===== 합계 계산 =====
 function calcTotal() { updatePreview(); }
 
-// ===== 프리뷰 업데이트 =====
 function updatePreview() {
-  // 발행 정보
   document.getElementById('pv-issue-date').textContent = str('issueDate');
   document.getElementById('pv-handler').textContent = str('handler') + ' / ' + str('handlerTel');
   document.getElementById('pv-footer-contact').textContent = str('handlerEmail') + ' / ' + str('handlerTel');
-  // 명판
   const sh = document.getElementById('pv-stamp-handler');
   const st = document.getElementById('pv-stamp-tel');
   if (sh) sh.textContent = str('handler');
   if (st) st.textContent = str('handlerTel');
-
-  // ATTN
   document.getElementById('pv-attn-name').textContent = str('attnName');
   document.getElementById('pv-attn-email').textContent = str('attnEmail');
   document.getElementById('pv-attn-tel').textContent = str('attnTel');
-
-  // 항공편
   document.getElementById('pv-flt1').textContent = str('flt1');
   document.getElementById('pv-flt1seg').textContent = str('flt1seg');
   document.getElementById('pv-flt1date').textContent = str('flt1date');
@@ -622,7 +1035,6 @@ function updatePreview() {
   const paxCnt = val('paxCount');
   document.getElementById('pv-pax-count').textContent = paxCnt + '명';
 
-  // PNR 원문
   const pnrBox = document.getElementById('pv-pnr-text');
   if (showPnrInDoc && str('pnrText')) {
     pnrBox.textContent = str('pnrText');
@@ -631,7 +1043,6 @@ function updatePreview() {
     pnrBox.style.display = 'none';
   }
 
-  // 요금 테이블
   const fare = val('farePerPax');
   const tax = val('taxPerPax');
   const fareTotal = fare * paxCnt;
@@ -644,52 +1055,20 @@ function updatePreview() {
   const reqAmt = subtotal - dep1 - dep2 + extraTotal;
 
   let rows = `
-    <tr>
-      <td class="label-col">항공요금</td>
-      <td class="num-col">${fmt(fare)}</td>
-      <td class="num-col">${paxCnt}명</td>
-      <td class="num-col">${fmt(fareTotal)}</td>
-    </tr>
-    <tr>
-      <td class="label-col">TAX (제세금)</td>
-      <td class="num-col">${fmt(tax)}</td>
-      <td class="num-col">${paxCnt}명</td>
-      <td class="num-col">${fmt(taxTotal)}</td>
-    </tr>
-    <tr class="total-row">
-      <td class="label-col" colspan="3">소계 SUBTOTAL</td>
-      <td class="num-col">${fmt(subtotal)}</td>
-    </tr>`;
+    <tr><td class="label-col">항공요금</td><td class="num-col">${fmt(fare)}</td><td class="num-col">${paxCnt}명</td><td class="num-col">${fmt(fareTotal)}</td></tr>
+    <tr><td class="label-col">TAX (제세금)</td><td class="num-col">${fmt(tax)}</td><td class="num-col">${paxCnt}명</td><td class="num-col">${fmt(taxTotal)}</td></tr>
+    <tr class="total-row"><td class="label-col" colspan="3">소계 SUBTOTAL</td><td class="num-col">${fmt(subtotal)}</td></tr>`;
 
-  if (dep1 > 0) {
-    rows += `<tr class="deposit-row">
-      <td class="label-col">(-) 1차 Deposit ${str('dep1Note') ? '— '+str('dep1Note') : ''}</td>
-      <td class="num-col" colspan="2" style="font-size:10px;color:#888">${str('dep1Emd') || ''}</td>
-      <td class="num-col" style="color:#c00">- ${fmt(dep1)}</td>
-    </tr>`;
-  }
-  if (dep2 > 0) {
-    rows += `<tr class="deposit-row">
-      <td class="label-col">(-) 2차 Deposit ${str('dep2Note') ? '— '+str('dep2Note') : ''}</td>
-      <td class="num-col" colspan="2" style="font-size:10px;color:#888">${str('dep2Emd') || ''}</td>
-      <td class="num-col" style="color:#c00">- ${fmt(dep2)}</td>
-    </tr>`;
-  }
+  if (dep1 > 0) rows += `<tr class="deposit-row"><td class="label-col">(-) 1차 Deposit ${str('dep1Note') ? '— '+str('dep1Note') : ''}</td><td class="num-col" colspan="2" style="font-size:10px;color:#888">${str('dep1Emd') || ''}</td><td class="num-col" style="color:#c00">- ${fmt(dep1)}</td></tr>`;
+  if (dep2 > 0) rows += `<tr class="deposit-row"><td class="label-col">(-) 2차 Deposit ${str('dep2Note') ? '— '+str('dep2Note') : ''}</td><td class="num-col" colspan="2" style="font-size:10px;color:#888">${str('dep2Emd') || ''}</td><td class="num-col" style="color:#c00">- ${fmt(dep2)}</td></tr>`;
   extraItems.forEach(e => {
     if (!e.label && !e.amount) return;
     const sign = e.type === 'add' ? '+' : '-';
-    rows += `<tr class="extra-row-inv">
-      <td class="label-col" colspan="3">(${sign}) ${e.label || '기타'}</td>
-      <td class="num-col" style="${e.type==='sub'?'color:#c00':'color:#060'}">${sign} ${fmt(Math.abs(e.amount))}</td>
-    </tr>`;
+    rows += `<tr class="extra-row-inv"><td class="label-col" colspan="3">(${sign}) ${e.label || '기타'}</td><td class="num-col" style="${e.type==='sub'?'color:#c00':'color:#060'}">${sign} ${fmt(Math.abs(e.amount))}</td></tr>`;
   });
-  rows += `<tr class="req-row">
-    <td class="label-col" colspan="3" style="color:#fff;font-size:13px;font-weight:900">★ 입금 요청액</td>
-    <td class="num-col" style="font-size:16px;color:#fff;font-weight:900">₩ ${fmt(reqAmt)}</td>
-  </tr>`;
+  rows += `<tr class="req-row"><td class="label-col" colspan="3" style="color:#fff;font-size:13px;font-weight:900">★ 입금 요청액</td><td class="num-col" style="font-size:16px;color:#fff;font-weight:900">₩ ${fmt(reqAmt)}</td></tr>`;
   document.getElementById('fareTableBody').innerHTML = rows;
 
-  // 승객 명단
   const paxSection = document.getElementById('paxSection');
   const paxShow = document.getElementById('paxListShow').value;
   const paxText = str('paxListText');
@@ -703,19 +1082,14 @@ function updatePreview() {
     ).join('');
   }
 
-  // 비고
   const rem = str('remarks');
   const remDiv = document.getElementById('pv-remarks');
   remDiv.textContent = rem ? '※ ' + rem : '';
   remDiv.style.display = rem ? 'block' : 'none';
 
-  // 배율
-  if (manualScale !== null) {
-    applyScaleUI(manualScale);
-  }
+  if (manualScale !== null) applyScaleUI(manualScale);
 }
 
-// ===== 배율 =====
 function applyScale(val) {
   manualScale = val;
   document.getElementById('scaleLabel').textContent = Math.round(val*100) + '%';
@@ -724,11 +1098,9 @@ function applyScale(val) {
 function applyScaleUI(scale) {
   const doc = document.getElementById('invoiceDoc');
   doc.style.transform = `scale(${scale})`;
-  const h = doc.offsetHeight * scale;
-  doc.parentElement.style.minHeight = h + 'px';
+  doc.parentElement.style.minHeight = (doc.offsetHeight * scale) + 'px';
 }
 
-// ===== 인쇄 =====
 function doPrint() {
   const doc = document.getElementById('invoiceDoc');
   doc.style.transform = '';
@@ -757,9 +1129,6 @@ function resetForm() {
   manualScale = null;
   document.getElementById('scaleSlider').value = 100;
   document.getElementById('scaleLabel').textContent = '100%';
-  const doc = document.getElementById('invoiceDoc');
-  doc.style.transform = '';
-  doc.style.zoom = '';
   updatePreview();
 }
 </script>
