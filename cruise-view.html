@@ -783,5 +783,125 @@
       </div>
     </div>
   </div>
+  <!-- Lightbox -->
+  <div id="lightbox" style="
+    display:none; position:fixed; inset:0; z-index:9999;
+    background:rgba(0,0,0,0.92); align-items:center; justify-content:center;
+    flex-direction:column; padding:16px; box-sizing:border-box;
+    cursor:zoom-out;
+  " onclick="if(event.target===this) closeLightbox()">
+    <button id="lbClose" style="
+      position:absolute; top:12px; right:16px; background:none; border:none;
+      color:#fff; font-size:2rem; line-height:1; cursor:pointer; z-index:1;
+      padding:4px 10px; opacity:0.85;
+    " onclick="closeLightbox()">&times;</button>
+    <button id="lbPrev" style="
+      position:absolute; left:12px; top:50%; transform:translateY(-50%);
+      background:rgba(255,255,255,0.15); border:none; color:#fff;
+      font-size:1.8rem; width:44px; height:44px; border-radius:50%;
+      cursor:pointer; display:none; align-items:center; justify-content:center;
+    " onclick="lbNav(-1);event.stopPropagation()">‹</button>
+    <button id="lbNext" style="
+      position:absolute; right:12px; top:50%; transform:translateY(-50%);
+      background:rgba(255,255,255,0.15); border:none; color:#fff;
+      font-size:1.8rem; width:44px; height:44px; border-radius:50%;
+      cursor:pointer; display:none; align-items:center; justify-content:center;
+    " onclick="lbNav(1);event.stopPropagation()">›</button>
+    <img id="lbImg" src="" alt="" style="
+      max-width:100%; max-height:calc(100vh - 80px); object-fit:contain;
+      border-radius:6px; box-shadow:0 8px 40px rgba(0,0,0,0.5);
+      touch-action:pinch-zoom;
+    " onclick="event.stopPropagation()">
+    <div id="lbCaption" style="
+      color:#fff; font-size:0.9rem; margin-top:12px; text-align:center;
+      opacity:0.85; max-width:600px;
+    "></div>
+    <div id="lbCounter" style="
+      color:#aaa; font-size:0.8rem; margin-top:4px;
+    "></div>
+  </div>
+
+  <style>
+    .facility-slide img, .cabin-card img { cursor: zoom-in; }
+    .facility-slide img:hover, .cabin-card img:hover { opacity: 0.9; }
+    #lightbox.open { display:flex !important; }
+  </style>
+
+  <script>
+    // ── Lightbox ──
+    let _lbImages = [];
+    let _lbIdx = 0;
+
+    function openLightbox(src, caption, allImgs, idx) {
+      _lbImages = allImgs || [{ src, caption }];
+      _lbIdx = idx ?? 0;
+      _renderLb();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // 키보드
+      document.addEventListener('keydown', _lbKey);
+    }
+
+    function _renderLb() {
+      const item = _lbImages[_lbIdx];
+      document.getElementById('lbImg').src = item.src;
+      document.getElementById('lbImg').alt = item.caption || '';
+      document.getElementById('lbCaption').textContent = item.caption || '';
+      const total = _lbImages.length;
+      document.getElementById('lbCounter').textContent = total > 1 ? `${_lbIdx + 1} / ${total}` : '';
+      const showNav = total > 1;
+      document.getElementById('lbPrev').style.display = showNav ? 'flex' : 'none';
+      document.getElementById('lbNext').style.display = showNav ? 'flex' : 'none';
+    }
+
+    function lbNav(dir) {
+      _lbIdx = (_lbIdx + dir + _lbImages.length) % _lbImages.length;
+      _renderLb();
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.getElementById('lbImg').src = '';
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', _lbKey);
+    }
+
+    function _lbKey(e) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') lbNav(1);
+      if (e.key === 'ArrowLeft') lbNav(-1);
+    }
+
+    // 이벤트 위임 — facility slides + cabin cards 이미지 클릭
+    document.addEventListener('click', function(e) {
+      const img = e.target.closest('.facility-slide img, .cabin-card img');
+      if (!img) return;
+      e.stopPropagation();
+
+      // 같은 슬라이더 내 모든 이미지 수집
+      const slide = img.closest('.facility-slide, .cabin-card');
+      const slider = img.closest('.facility-slider, .cabin-grid');
+      let allImgs, idx;
+
+      if (slider) {
+        const imgs = [...slider.querySelectorAll('img')].filter(i => i.src && !i.src.includes('data:'));
+        allImgs = imgs.map(i => ({ src: i.src, caption: i.alt || '' }));
+        idx = imgs.indexOf(img);
+      } else {
+        allImgs = [{ src: img.src, caption: img.alt || '' }];
+        idx = 0;
+      }
+
+      openLightbox(img.src, img.alt || '', allImgs, Math.max(0, idx));
+    });
+
+    // 스와이프 (모바일)
+    let _tsX = 0;
+    document.getElementById('lightbox').addEventListener('touchstart', e => { _tsX = e.touches[0].clientX; }, { passive: true });
+    document.getElementById('lightbox').addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - _tsX;
+      if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+    });
+  </script>
 </body>
 </html>
