@@ -137,7 +137,7 @@
         <img src="assets/images/logos/carnival.svg" alt="Carnival Cruise Line">
         <img src="assets/images/logos/disney.svg" alt="Disney Cruise Line">
         <img src="assets/images/logos/cunard.svg" alt="Cunard">
-        <img src="assets/images/logos/princess.png" alt="Princess Cruises">
+        <img src="assets/images/logos/princess.svg" alt="Princess Cruises">
         <img src="assets/images/logos/oceania.svg" alt="Oceania Cruises">
         <img src="assets/images/logos/regent.png" alt="Regent Seven Seas">
         <!-- Duplicate for infinite scroll -->
@@ -148,7 +148,7 @@
         <img src="assets/images/logos/carnival.svg" alt="Carnival Cruise Line">
         <img src="assets/images/logos/disney.svg" alt="Disney Cruise Line">
         <img src="assets/images/logos/cunard.svg" alt="Cunard">
-        <img src="assets/images/logos/princess.png" alt="Princess Cruises">
+        <img src="assets/images/logos/princess.svg" alt="Princess Cruises">
         <img src="assets/images/logos/oceania.svg" alt="Oceania Cruises">
         <img src="assets/images/logos/regent.png" alt="Regent Seven Seas">
       </div>
@@ -979,7 +979,7 @@
           return;
         }
         const html = cruises.slice(0, 5).map((c, i) => {
-          const img = c.image || imgs[i % imgs.length];
+          const img = c.portImage || c.image || imgs[i % imgs.length];
           const nights = c.nights || c.duration || '?';
           const dateRaw = c.dateFrom || c.departure_date || '';
           const dateStr = dateRaw ? dateRaw.substring(0, 10) : '';

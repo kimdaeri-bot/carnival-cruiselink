@@ -1,1 +1,2245 @@
-[{"ref": "MSCOR20260429GOAGOA", "shipSlug": "msc-orchestra-ship", "shipTitle": "MSC Orchestra", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-04-29", "dateTo": "2026-05-06", "nights": 7, "regions": ["Europe", "Southern Europe", "Mediterranean"], "countries": ["Italy", "France", "Spain"], "countriesKo": ["이탈리아", "프랑스", "스페인"], "destination": "mediterranean", "startsAt": {"name": "Genoa", "nameKo": "제노바", "country": "Italy", "countryKo": "이탈리아"}, "endsAt": {"name": "Genoa", "nameKo": "제노바", "country": "Italy", "countryKo": "이탈리아"}, "ports": [{"name": "Genoa", "nameKo": "제노바"}, {"name": "Marseille", "nameKo": "마르세유"}, {"name": "Tarragona", "nameKo": "Tarragona"}, {"name": "Valencia", "nameKo": "Valencia"}, {"name": "Livorno", "nameKo": "Livorno"}, {"name": "Civitavecchia", "nameKo": "치비타베키아"}], "portRoute": "제노바 → 마르세유 → Tarragona → Valencia → Livorno → 치비타베키아", "priceInside": 514, "priceOutside": 568, "priceBalcony": 654, "priceSuite": 0, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/09/26/10/45/07/ad264e77-d95a-40f2-9131-456fd1c2d6e4/MSC Cruises, MSC Orchestra, New York Exterior, MSC Rights.jpg", "title": "이탈리아·프랑스·스페인 7박 크루즈", "hashtags": ["#지중해크루즈", "#MSC크루즈", "#MSCOrchestra", "#제노바", "#마르세유"]}, {"ref": "MSCOR20260509VLCVLC", "shipSlug": "msc-orchestra-ship", "shipTitle": "MSC Orchestra", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-05-09", "dateTo": "2026-05-16", "nights": 7, "regions": ["Europe", "Southern Europe", "Mediterranean"], "countries": ["Spain", "Italy", "France"], "countriesKo": ["스페인", "이탈리아", "프랑스"], "destination": "mediterranean", "startsAt": {"name": "Valencia", "nameKo": "Valencia", "country": "Spain", "countryKo": "스페인"}, "endsAt": {"name": "Valencia", "nameKo": "Valencia", "country": "Spain", "countryKo": "스페인"}, "ports": [{"name": "Valencia", "nameKo": "Valencia"}, {"name": "Livorno", "nameKo": "Livorno"}, {"name": "Civitavecchia", "nameKo": "치비타베키아"}, {"name": "Genoa", "nameKo": "제노바"}, {"name": "Marseille", "nameKo": "마르세유"}, {"name": "Tarragona", "nameKo": "Tarragona"}], "portRoute": "Valencia → Livorno → 치비타베키아 → 제노바 → 마르세유 → Tarragona", "priceInside": 503, "priceOutside": 583, "priceBalcony": 643, "priceSuite": 1343, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/09/26/10/45/07/ad264e77-d95a-40f2-9131-456fd1c2d6e4/MSC Cruises, MSC Orchestra, New York Exterior, MSC Rights.jpg", "title": "스페인·이탈리아·프랑스 7박 크루즈", "hashtags": ["#지중해크루즈", "#MSC크루즈", "#MSCOrchestra", "#Valencia", "#Livorno"]}, {"ref": "MSCSP20260603CAGCAG", "shipSlug": "msc-splendida", "shipTitle": "MSC Splendida", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-06-03", "dateTo": "2026-06-10", "nights": 7, "regions": ["Europe", "Southern Europe", "Mediterranean"], "countries": ["Italy", "Malta", "Spain", "France"], "countriesKo": ["이탈리아", "몰타", "스페인", "프랑스"], "destination": "mediterranean", "startsAt": {"name": "Cagliari", "nameKo": "칼리아리", "country": "Italy", "countryKo": "이탈리아"}, "endsAt": {"name": "Cagliari", "nameKo": "칼리아리", "country": "Italy", "countryKo": "이탈리아"}, "ports": [{"name": "Cagliari", "nameKo": "칼리아리"}, {"name": "Palermo", "nameKo": "Palermo"}, {"name": "Valletta", "nameKo": "발레타"}, {"name": "Barcelona", "nameKo": "바르셀로나"}, {"name": "Marseille", "nameKo": "마르세유"}, {"name": "Livorno", "nameKo": "Livorno"}], "portRoute": "칼리아리 → Palermo → 발레타 → 바르셀로나 → 마르세유 → Livorno", "priceInside": 596, "priceOutside": 696, "priceBalcony": 756, "priceSuite": 0, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/06/24/07/16/00/90eeb5c8-83d5-4c1d-87c9-6ec4fc2398c7/MSC Cruises MSC Splendida Exterior.jpg", "title": "지중해 7박 크루즈", "hashtags": ["#지중해크루즈", "#MSC크루즈", "#MSCSplendida", "#칼리아리", "#Palermo"]}, {"ref": "NCLEPC-20260719-07-CIV-BCN", "shipSlug": "norwegian-epic", "shipTitle": "Norwegian Epic", "operator": "Norwegian Cruise Line", "operatorShort": "NCL", "dateFrom": "2026-07-19", "dateTo": "2026-07-26", "nights": 7, "regions": ["Southern Europe", "Mediterranean"], "countries": ["Italy", "France", "Spain"], "countriesKo": ["이탈리아", "프랑스", "스페인"], "destination": "mediterranean", "startsAt": {"name": "Civitavecchia", "nameKo": "치비타베키아", "country": "Italy", "countryKo": "이탈리아"}, "endsAt": {"name": "Barcelona", "nameKo": "바르셀로나", "country": "Spain", "countryKo": "스페인"}, "ports": [{"name": "Civitavecchia", "nameKo": "치비타베키아"}, {"name": "Salerno", "nameKo": "Salerno"}, {"name": "Catania", "nameKo": "카타니아"}, {"name": "Livorno", "nameKo": "Livorno"}, {"name": "Villefranche-sur-Mer", "nameKo": "Villefranche-sur-Mer"}, {"name": "Marseille", "nameKo": "마르세유"}, {"name": "Barcelona", "nameKo": "바르셀로나"}], "portRoute": "치비타베키아 → Salerno → 카타니아 → Livorno → Villefranche-sur-Mer → 마르세유 → 바르셀로나", "priceInside": 715, "priceOutside": 0, "priceBalcony": 1035, "priceSuite": 1415, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/12/10/11/16/54/576e66cb-8a6d-4da4-9b6b-32dca14838d4/NCL Norwegian Epic Exterior - Credit - Kikor.jpeg", "title": "이탈리아·프랑스·스페인 7박 크루즈", "hashtags": ["#지중해크루즈", "#노르웨이전크루즈", "#NorwegianEpic", "#치비타베키아", "#Salerno"]}, {"ref": "NCLEPC-20260830-07-CIV-BCN", "shipSlug": "norwegian-epic", "shipTitle": "Norwegian Epic", "operator": "Norwegian Cruise Line", "operatorShort": "NCL", "dateFrom": "2026-08-30", "dateTo": "2026-09-06", "nights": 7, "regions": ["Southern Europe", "Mediterranean"], "countries": ["Italy", "France", "Spain"], "countriesKo": ["이탈리아", "프랑스", "스페인"], "destination": "mediterranean", "startsAt": {"name": "Civitavecchia", "nameKo": "치비타베키아", "country": "Italy", "countryKo": "이탈리아"}, "endsAt": {"name": "Barcelona", "nameKo": "바르셀로나", "country": "Spain", "countryKo": "스페인"}, "ports": [{"name": "Civitavecchia", "nameKo": "치비타베키아"}, {"name": "Salerno", "nameKo": "Salerno"}, {"name": "Catania", "nameKo": "카타니아"}, {"name": "Livorno", "nameKo": "Livorno"}, {"name": "Villefranche-sur-Mer", "nameKo": "Villefranche-sur-Mer"}, {"name": "Marseille", "nameKo": "마르세유"}, {"name": "Barcelona", "nameKo": "바르셀로나"}], "portRoute": "치비타베키아 → Salerno → 카타니아 → Livorno → Villefranche-sur-Mer → 마르세유 → 바르셀로나", "priceInside": 665, "priceOutside": 0, "priceBalcony": 935, "priceSuite": 1060, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/12/10/11/16/54/576e66cb-8a6d-4da4-9b6b-32dca14838d4/NCL Norwegian Epic Exterior - Credit - Kikor.jpeg", "title": "이탈리아·프랑스·스페인 7박 크루즈", "hashtags": ["#지중해크루즈", "#노르웨이전크루즈", "#NorwegianEpic", "#치비타베키아", "#Salerno"]}, {"ref": "CARNIVALSP280420267", "shipSlug": "carnival-spirit-ship", "shipTitle": "Carnival Spirit", "operator": "Carnival Cruise Line", "operatorShort": "Carnival", "dateFrom": "2026-04-28", "dateTo": "2026-05-05", "nights": 7, "regions": ["Americas", "Alaska", "North America"], "countries": ["United States", "Canada"], "countriesKo": ["미국", "캐나다"], "destination": "alaska", "startsAt": {"name": "Seattle, Washington", "nameKo": "Seattle, Washington", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Seattle, Washington", "nameKo": "Seattle, Washington", "country": "United States", "countryKo": "미국"}, "ports": [{"name": "Seattle, Washington", "nameKo": "Seattle, Washington"}, {"name": "Tracy Arm, Alaska", "nameKo": "Tracy Arm, Alaska"}, {"name": "Skagway, Alaska", "nameKo": "Skagway, Alaska"}, {"name": "Juneau, Alaska", "nameKo": "Juneau, Alaska"}, {"name": "Ketchikan, Alaska", "nameKo": "Ketchikan, Alaska"}, {"name": "Victoria, British Columbia", "nameKo": "Victoria, British Columbia"}], "portRoute": "Seattle, Washington → Tracy Arm, Alaska → Skagway, Alaska → Juneau, Alaska → Ketchikan, Alaska → Victoria, British Columbia", "priceInside": 655, "priceOutside": 831, "priceBalcony": 948, "priceSuite": 2519, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2022/05/05/08/06/25/c430b214-bac8-4c7b-871a-afb30dc12f0a/Carnival Cruise Line Carnival Spirit Exterior.png", "title": "미국·캐나다 7박 크루즈", "hashtags": ["#알래스카크루즈", "#카니발크루즈", "#CarnivalSpirit", "#Seattle, Washington", "#Tracy Arm, Alaska"]}, {"ref": "MSCPO20260518SEASEA", "shipSlug": "msc-poesia-ship", "shipTitle": "MSC Poesia", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-05-18", "dateTo": "2026-05-25", "nights": 7, "regions": ["Americas", "Alaska", "North America"], "countries": ["United States", "Canada"], "countriesKo": ["미국", "캐나다"], "destination": "alaska", "startsAt": {"name": "Seattle, Washington", "nameKo": "Seattle, Washington", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Seattle, Washington", "nameKo": "Seattle, Washington", "country": "United States", "countryKo": "미국"}, "ports": [{"name": "Seattle, Washington", "nameKo": "Seattle, Washington"}, {"name": "Ketchikan, Alaska", "nameKo": "Ketchikan, Alaska"}, {"name": "Icy Strait Point", "nameKo": "Icy Strait Point"}, {"name": "Tracy Arm, Alaska", "nameKo": "Tracy Arm, Alaska"}, {"name": "Victoria, British Columbia", "nameKo": "Victoria, British Columbia"}], "portRoute": "Seattle, Washington → Ketchikan, Alaska → Icy Strait Point → Tracy Arm, Alaska → Victoria, British Columbia", "priceInside": 395, "priceOutside": 534, "priceBalcony": 612, "priceSuite": 3539, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/10/20/15/23/43/169ae78e-18ff-4366-ace9-91950c305b51/MSC Cruises MSC Poesia Exterior ©Moviebox & MSC Rights.jpg", "title": "미국·캐나다 7박 크루즈", "hashtags": ["#알래스카크루즈", "#MSC크루즈", "#MSCPoesia", "#Seattle, Washington", "#Ketchikan, Alaska"]}, {"ref": "MSCPO20260629SEASEA", "shipSlug": "msc-poesia-ship", "shipTitle": "MSC Poesia", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-06-29", "dateTo": "2026-07-06", "nights": 7, "regions": ["Americas", "Alaska", "North America"], "countries": ["United States", "Canada"], "countriesKo": ["미국", "캐나다"], "destination": "alaska", "startsAt": {"name": "Seattle, Washington", "nameKo": "Seattle, Washington", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Seattle, Washington", "nameKo": "Seattle, Washington", "country": "United States", "countryKo": "미국"}, "ports": [{"name": "Seattle, Washington", "nameKo": "Seattle, Washington"}, {"name": "Ketchikan, Alaska", "nameKo": "Ketchikan, Alaska"}, {"name": "Tracy Arm, Alaska", "nameKo": "Tracy Arm, Alaska"}, {"name": "Icy Strait Point", "nameKo": "Icy Strait Point"}, {"name": "Victoria, British Columbia", "nameKo": "Victoria, British Columbia"}], "portRoute": "Seattle, Washington → Ketchikan, Alaska → Tracy Arm, Alaska → Icy Strait Point → Victoria, British Columbia", "priceInside": 364, "priceOutside": 490, "priceBalcony": 718, "priceSuite": 3709, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/10/20/15/23/43/169ae78e-18ff-4366-ace9-91950c305b51/MSC Cruises MSC Poesia Exterior ©Moviebox & MSC Rights.jpg", "title": "미국·캐나다 7박 크루즈", "hashtags": ["#알래스카크루즈", "#MSC크루즈", "#MSCPoesia", "#Seattle, Washington", "#Ketchikan, Alaska"]}, {"ref": "NCLJAD-20260706-07-WQF-VAN", "shipSlug": "norwegian-jade-ship", "shipTitle": "Norwegian Jade", "operator": "Norwegian Cruise Line", "operatorShort": "NCL", "dateFrom": "2026-07-06", "dateTo": "2026-07-13", "nights": 7, "regions": ["Americas", "Alaska", "North America"], "countries": ["United States", "Canada"], "countriesKo": ["미국", "캐나다"], "destination": "alaska", "startsAt": {"name": "Whittier", "nameKo": "Whittier", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Vancouver, British Columbia", "nameKo": "Vancouver, British Columbia", "country": "Canada", "countryKo": "캐나다"}, "ports": [{"name": "Whittier", "nameKo": "Whittier"}, {"name": "Cruise Hubbard Glacier, Alaska", "nameKo": "Cruise Hubbard Glacier, Alaska"}, {"name": "Icy Strait Point", "nameKo": "Icy Strait Point"}, {"name": "Juneau, Alaska", "nameKo": "Juneau, Alaska"}, {"name": "Skagway, Alaska", "nameKo": "Skagway, Alaska"}, {"name": "Ketchikan, Alaska", "nameKo": "Ketchikan, Alaska"}, {"name": "Vancouver, British Columbia", "nameKo": "Vancouver, British Columbia"}], "portRoute": "Whittier → Cruise Hubbard Glacier, Alaska → Icy Strait Point → Juneau, Alaska → Skagway, Alaska → Ketchikan, Alaska → Vancouver, British Columbia", "priceInside": 563, "priceOutside": 638, "priceBalcony": 1843, "priceSuite": 1913, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/12/05/15/14/57/63c00f94-4bb5-4613-bb65-40346384484f/Norwegian Jade - Exterior 1, ©Danny Lehman.jpg", "title": "미국·캐나다 7박 크루즈", "hashtags": ["#알래스카크루즈", "#노르웨이전크루즈", "#NorwegianJade", "#Whittier", "#Cruise Hubbard Glacier, Alaska"]}, {"ref": "NCLJAD-20260831-07-WQF-VAN", "shipSlug": "norwegian-jade-ship", "shipTitle": "Norwegian Jade", "operator": "Norwegian Cruise Line", "operatorShort": "NCL", "dateFrom": "2026-08-31", "dateTo": "2026-09-07", "nights": 7, "regions": ["Americas", "Alaska", "North America"], "countries": ["United States", "Canada"], "countriesKo": ["미국", "캐나다"], "destination": "alaska", "startsAt": {"name": "Whittier", "nameKo": "Whittier", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Vancouver, British Columbia", "nameKo": "Vancouver, British Columbia", "country": "Canada", "countryKo": "캐나다"}, "ports": [{"name": "Whittier", "nameKo": "Whittier"}, {"name": "Cruise Hubbard Glacier, Alaska", "nameKo": "Cruise Hubbard Glacier, Alaska"}, {"name": "Icy Strait Point", "nameKo": "Icy Strait Point"}, {"name": "Juneau, Alaska", "nameKo": "Juneau, Alaska"}, {"name": "Skagway, Alaska", "nameKo": "Skagway, Alaska"}, {"name": "Ketchikan, Alaska", "nameKo": "Ketchikan, Alaska"}, {"name": "Vancouver, British Columbia", "nameKo": "Vancouver, British Columbia"}], "portRoute": "Whittier → Cruise Hubbard Glacier, Alaska → Icy Strait Point → Juneau, Alaska → Skagway, Alaska → Ketchikan, Alaska → Vancouver, British Columbia", "priceInside": 468, "priceOutside": 563, "priceBalcony": 1748, "priceSuite": 1928, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/12/05/15/14/57/63c00f94-4bb5-4613-bb65-40346384484f/Norwegian Jade - Exterior 1, ©Danny Lehman.jpg", "title": "미국·캐나다 7박 크루즈", "hashtags": ["#알래스카크루즈", "#노르웨이전크루즈", "#NorwegianJade", "#Whittier", "#Cruise Hubbard Glacier, Alaska"]}, {"ref": "NCLJWL-20260430-07-PHL-PHL", "shipSlug": "norwegian-jewel", "shipTitle": "Norwegian Jewel", "operator": "Norwegian Cruise Line", "operatorShort": "NCL", "dateFrom": "2026-04-30", "dateTo": "2026-05-07", "nights": 7, "regions": ["Caribbean", "Americas", "South America"], "countries": ["United States", "Bermuda"], "countriesKo": ["미국", "버뮤다"], "destination": "caribbean", "startsAt": {"name": "Philadelphia, Pennsylvania", "nameKo": "Philadelphia, Pennsylvania", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Philadelphia, Pennsylvania", "nameKo": "Philadelphia, Pennsylvania", "country": "United States", "countryKo": "미국"}, "ports": [{"name": "Philadelphia, Pennsylvania", "nameKo": "Philadelphia, Pennsylvania"}, {"name": "Kings Wharf", "nameKo": "Kings Wharf"}, {"name": "Charleston, South Carolina", "nameKo": "Charleston, South Carolina"}], "portRoute": "Philadelphia, Pennsylvania → Kings Wharf → Charleston, South Carolina", "priceInside": 530, "priceOutside": 655, "priceBalcony": 1015, "priceSuite": 1430, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/12/19/09/13/37/8b65d198-df6d-4c35-b3c7-d53e1a1c4347/NCL, Norwegian Jewel, Aerial at Sea Exterior 2 ©Michele Verdure.jpg", "title": "미국·버뮤다 7박 크루즈", "hashtags": ["#카리브해크루즈", "#노르웨이전크루즈", "#NorwegianJewel", "#Philadelphia, Pennsylvania", "#Kings Wharf"]}, {"ref": "MSCSC20260531GLSGLS", "shipSlug": "msc-seascape", "shipTitle": "MSC Seascape", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-05-31", "dateTo": "2026-06-07", "nights": 7, "regions": ["Caribbean", "Americas", "South America"], "countries": ["United States", "Mexico", "Honduras"], "countriesKo": ["미국", "멕시코", "온두라스"], "destination": "caribbean", "startsAt": {"name": "Galveston, Texas", "nameKo": "Galveston, Texas", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Galveston, Texas", "nameKo": "Galveston, Texas", "country": "United States", "countryKo": "미국"}, "ports": [{"name": "Galveston, Texas", "nameKo": "Galveston, Texas"}, {"name": "Costa Maya", "nameKo": "Costa Maya"}, {"name": "Roatán Island", "nameKo": "Roatán Island"}, {"name": "Cozumel", "nameKo": "코수멜"}], "portRoute": "Galveston, Texas → Costa Maya → Roatán Island → 코수멜", "priceInside": 333, "priceOutside": 433, "priceBalcony": 483, "priceSuite": 1219, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/09/19/11/38/30/6d47956b-d0ef-474d-8b59-069f6ca70109/MSC Seascape - Exterior 1.jpg", "title": "미국·멕시코·온두라스 7박 크루즈", "hashtags": ["#카리브해크루즈", "#MSC크루즈", "#MSCSeascape", "#Galveston, Texas", "#Costa Maya"]}, {"ref": "MSCSC20260607GLSGLS", "shipSlug": "msc-seascape", "shipTitle": "MSC Seascape", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-06-07", "dateTo": "2026-06-14", "nights": 7, "regions": ["Caribbean", "Americas", "South America"], "countries": ["United States", "Mexico", "Honduras"], "countriesKo": ["미국", "멕시코", "온두라스"], "destination": "caribbean", "startsAt": {"name": "Galveston, Texas", "nameKo": "Galveston, Texas", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Galveston, Texas", "nameKo": "Galveston, Texas", "country": "United States", "countryKo": "미국"}, "ports": [{"name": "Galveston, Texas", "nameKo": "Galveston, Texas"}, {"name": "Costa Maya", "nameKo": "Costa Maya"}, {"name": "Roatán Island", "nameKo": "Roatán Island"}, {"name": "Cozumel", "nameKo": "코수멜"}], "portRoute": "Galveston, Texas → Costa Maya → Roatán Island → 코수멜", "priceInside": 463, "priceOutside": 563, "priceBalcony": 613, "priceSuite": 1219, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/09/19/11/38/30/6d47956b-d0ef-474d-8b59-069f6ca70109/MSC Seascape - Exterior 1.jpg", "title": "미국·멕시코·온두라스 7박 크루즈", "hashtags": ["#카리브해크루즈", "#MSC크루즈", "#MSCSeascape", "#Galveston, Texas", "#Costa Maya"]}, {"ref": "MSCSC20260705GLSGLS", "shipSlug": "msc-seascape", "shipTitle": "MSC Seascape", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-07-05", "dateTo": "2026-07-12", "nights": 7, "regions": ["Caribbean", "Americas", "South America"], "countries": ["United States", "Mexico", "Honduras"], "countriesKo": ["미국", "멕시코", "온두라스"], "destination": "caribbean", "startsAt": {"name": "Galveston, Texas", "nameKo": "Galveston, Texas", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Galveston, Texas", "nameKo": "Galveston, Texas", "country": "United States", "countryKo": "미국"}, "ports": [{"name": "Galveston, Texas", "nameKo": "Galveston, Texas"}, {"name": "Costa Maya", "nameKo": "Costa Maya"}, {"name": "Roatán Island", "nameKo": "Roatán Island"}, {"name": "Cozumel", "nameKo": "코수멜"}], "portRoute": "Galveston, Texas → Costa Maya → Roatán Island → 코수멜", "priceInside": 542, "priceOutside": 642, "priceBalcony": 692, "priceSuite": 1179, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/09/19/11/38/30/6d47956b-d0ef-474d-8b59-069f6ca70109/MSC Seascape - Exterior 1.jpg", "title": "미국·멕시코·온두라스 7박 크루즈", "hashtags": ["#카리브해크루즈", "#MSC크루즈", "#MSCSeascape", "#Galveston, Texas", "#Costa Maya"]}, {"ref": "RCIEN07W689-290826", "shipSlug": "enchantment-of-the-seas", "shipTitle": "Enchantment of the Seas", "operator": "Royal Caribbean International", "operatorShort": "RCI", "dateFrom": "2026-08-29", "dateTo": "2026-09-05", "nights": 7, "regions": ["Caribbean", "Americas", "South America"], "countries": ["United States", "Mexico", "Belize", "Honduras"], "countriesKo": ["미국", "멕시코", "벨리즈", "온두라스"], "destination": "caribbean", "startsAt": {"name": "Tampa, Florida", "nameKo": "Tampa, Florida", "country": "United States", "countryKo": "미국"}, "endsAt": {"name": "Tampa, Florida", "nameKo": "Tampa, Florida", "country": "United States", "countryKo": "미국"}, "ports": [{"name": "Tampa, Florida", "nameKo": "Tampa, Florida"}, {"name": "Costa Maya", "nameKo": "Costa Maya"}, {"name": "Belize City", "nameKo": "Belize City"}, {"name": "Roatán Island", "nameKo": "Roatán Island"}, {"name": "Cozumel", "nameKo": "코수멜"}], "portRoute": "Tampa, Florida → Costa Maya → Belize City → Roatán Island → 코수멜", "priceInside": 380, "priceOutside": 483, "priceBalcony": 738, "priceSuite": 817, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/10/09/11/16/09/2295fbbd-f726-45a1-a6a9-32dabad328ec/RCI, Enchantment of the Seas, Exterior.jpg", "title": "카리브해 7박 크루즈", "hashtags": ["#카리브해크루즈", "#로얄캐리비안", "#EnchantmentoftheSeas", "#Tampa, Florida", "#Costa Maya"]}, {"ref": "MSCBE20260429TYOTYO", "shipSlug": "msc-bellissima", "shipTitle": "MSC Bellissima", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-04-29", "dateTo": "2026-05-04", "nights": 5, "regions": ["Asia"], "countries": ["Japan", "South Korea"], "countriesKo": ["일본", "한국"], "destination": "korea", "startsAt": {"name": "Tokyo", "nameKo": "도쿄", "country": "Japan", "countryKo": "일본"}, "endsAt": {"name": "Tokyo", "nameKo": "도쿄", "country": "Japan", "countryKo": "일본"}, "ports": [{"name": "Tokyo", "nameKo": "도쿄"}, {"name": "Jeju Island", "nameKo": "제주도"}, {"name": "Kagoshima", "nameKo": "가고시마"}], "portRoute": "도쿄 → 제주도 → 가고시마", "priceInside": 829, "priceOutside": 0, "priceBalcony": 0, "priceSuite": 0, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC Cruises, MSC Bellissima, Exterior, Copyrights - MSC Rights.jpg", "title": "일본·한국 5박 크루즈", "hashtags": ["#한국/일본크루즈", "#MSC크루즈", "#MSCBellissima", "#도쿄", "#제주도"]}, {"ref": "MSCBE20260510TYOTYO", "shipSlug": "msc-bellissima", "shipTitle": "MSC Bellissima", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-05-10", "dateTo": "2026-05-17", "nights": 7, "regions": ["Asia"], "countries": ["Japan", "South Korea"], "countriesKo": ["일본", "한국"], "destination": "korea", "startsAt": {"name": "Tokyo", "nameKo": "도쿄", "country": "Japan", "countryKo": "일본"}, "endsAt": {"name": "Tokyo", "nameKo": "도쿄", "country": "Japan", "countryKo": "일본"}, "ports": [{"name": "Tokyo", "nameKo": "도쿄"}, {"name": "Kobe", "nameKo": "고베"}, {"name": "Busan", "nameKo": "부산"}, {"name": "Kagoshima", "nameKo": "가고시마"}], "portRoute": "도쿄 → 고베 → 부산 → 가고시마", "priceInside": 859, "priceOutside": 1019, "priceBalcony": 1239, "priceSuite": 2029, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC Cruises, MSC Bellissima, Exterior, Copyrights - MSC Rights.jpg", "title": "일본·한국 7박 크루즈", "hashtags": ["#한국/일본크루즈", "#MSC크루즈", "#MSCBellissima", "#도쿄", "#고베"]}, {"ref": "MSCBE20260609TYOKEE", "shipSlug": "msc-bellissima", "shipTitle": "MSC Bellissima", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-06-09", "dateTo": "2026-06-13", "nights": 4, "regions": ["Asia"], "countries": ["Japan", "Taiwan"], "countriesKo": ["일본", "대만"], "destination": "korea", "startsAt": {"name": "Tokyo", "nameKo": "도쿄", "country": "Japan", "countryKo": "일본"}, "endsAt": {"name": "Keelung (Chilung)", "nameKo": "지룽", "country": "Taiwan", "countryKo": "대만"}, "ports": [{"name": "Tokyo", "nameKo": "도쿄"}, {"name": "Keelung (Chilung)", "nameKo": "지룽"}], "portRoute": "도쿄 → 지룽", "priceInside": 309, "priceOutside": 369, "priceBalcony": 469, "priceSuite": 979, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC Cruises, MSC Bellissima, Exterior, Copyrights - MSC Rights.jpg", "title": "일본·대만 4박 크루즈", "hashtags": ["#한국/일본크루즈", "#MSC크루즈", "#MSCBellissima", "#도쿄", "#지룽"]}, {"ref": "CELEBML12I177-010726", "shipSlug": "celebrity-millennium", "shipTitle": "Celebrity Millennium", "operator": "Celebrity Cruises", "operatorShort": "Celebrity", "dateFrom": "2026-07-01", "dateTo": "2026-07-13", "nights": 12, "regions": ["Asia"], "countries": ["Japan", "South Korea"], "countriesKo": ["일본", "한국"], "destination": "korea", "startsAt": {"name": "Tokyo", "nameKo": "도쿄", "country": "Japan", "countryKo": "일본"}, "endsAt": {"name": "Tokyo", "nameKo": "도쿄", "country": "Japan", "countryKo": "일본"}, "ports": [{"name": "Tokyo", "nameKo": "도쿄"}, {"name": "Osaka", "nameKo": "오사카"}, {"name": "Kochi", "nameKo": "고치"}, {"name": "Busan", "nameKo": "부산"}, {"name": "Nagasaki", "nameKo": "나가사키"}, {"name": "Kagoshima", "nameKo": "가고시마"}, {"name": "Shimizu", "nameKo": "시미즈"}], "portRoute": "도쿄 → 오사카 → 고치 → 부산 → 나가사키 → 가고시마 → 시미즈", "priceInside": 1418, "priceOutside": 0, "priceBalcony": 0, "priceSuite": 0, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/02/05/10/02/21/762e4e18-c89e-4ccd-ac4c-59d143cbb87b/Celebrity Cruises, Celebrity Millenium, Exterior.jpg", "title": "일본·한국 12박 크루즈", "hashtags": ["#한국/일본크루즈", "#셀러브리티크루즈", "#CelebrityMillennium", "#도쿄", "#오사카"]}, {"ref": "CELEBML12I180-060826", "shipSlug": "celebrity-millennium", "shipTitle": "Celebrity Millennium", "operator": "Celebrity Cruises", "operatorShort": "Celebrity", "dateFrom": "2026-08-06", "dateTo": "2026-08-18", "nights": 12, "regions": ["Asia"], "countries": ["Japan", "South Korea"], "countriesKo": ["일본", "한국"], "destination": "korea", "startsAt": {"name": "Tokyo", "nameKo": "도쿄", "country": "Japan", "countryKo": "일본"}, "endsAt": {"name": "Tokyo", "nameKo": "도쿄", "country": "Japan", "countryKo": "일본"}, "ports": [{"name": "Tokyo", "nameKo": "도쿄"}, {"name": "Osaka", "nameKo": "오사카"}, {"name": "Kochi", "nameKo": "고치"}, {"name": "Busan", "nameKo": "부산"}, {"name": "Nagasaki", "nameKo": "나가사키"}, {"name": "Kagoshima", "nameKo": "가고시마"}, {"name": "Shimizu", "nameKo": "시미즈"}], "portRoute": "도쿄 → 오사카 → 고치 → 부산 → 나가사키 → 가고시마 → 시미즈", "priceInside": 0, "priceOutside": 0, "priceBalcony": 0, "priceSuite": 0, "currency": "USD", "availability": "closed", "image": "https://assets.widgety.co.uk/2025/02/05/10/02/21/762e4e18-c89e-4ccd-ac4c-59d143cbb87b/Celebrity Cruises, Celebrity Millenium, Exterior.jpg", "title": "일본·한국 12박 크루즈", "hashtags": ["#한국/일본크루즈", "#셀러브리티크루즈", "#CelebrityMillennium", "#도쿄", "#오사카"]}, {"ref": "MSCVI20260509SOUSOU", "shipSlug": "msc-virtuosa", "shipTitle": "MSC Virtuosa", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-05-09", "dateTo": "2026-05-16", "nights": 7, "regions": ["Europe", "Northern Europe"], "countries": ["England", "Scotland", "Norway"], "countriesKo": ["England", "Scotland", "노르웨이"], "destination": "northern-europe", "startsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "endsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "ports": [{"name": "Southampton", "nameKo": "사우샘프턴"}, {"name": "Queensferry", "nameKo": "Queensferry"}, {"name": "Sandnes", "nameKo": "Sandnes"}, {"name": "Haugesund", "nameKo": "Haugesund"}, {"name": "Kristiansand", "nameKo": "Kristiansand"}], "portRoute": "사우샘프턴 → Queensferry → Sandnes → Haugesund → Kristiansand", "priceInside": 579, "priceOutside": 749, "priceBalcony": 899, "priceSuite": 1649, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg", "title": "England·Scotland·노르웨이 7박 크루즈", "hashtags": ["#북유럽크루즈", "#MSC크루즈", "#MSCVirtuosa", "#사우샘프턴", "#Queensferry"]}, {"ref": "MSCVI20260620SOUSOU", "shipSlug": "msc-virtuosa", "shipTitle": "MSC Virtuosa", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-06-20", "dateTo": "2026-06-27", "nights": 7, "regions": ["Europe", "Northern Europe"], "countries": ["England", "France", "Spain"], "countriesKo": ["England", "프랑스", "스페인"], "destination": "northern-europe", "startsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "endsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "ports": [{"name": "Southampton", "nameKo": "사우샘프턴"}, {"name": "La Rochelle", "nameKo": "La Rochelle"}, {"name": "Bilbao", "nameKo": "Bilbao"}, {"name": "La Coruña", "nameKo": "La Coruña"}, {"name": "Cherbourg", "nameKo": "Cherbourg"}], "portRoute": "사우샘프턴 → La Rochelle → Bilbao → La Coruña → Cherbourg", "priceInside": 649, "priceOutside": 769, "priceBalcony": 929, "priceSuite": 2529, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg", "title": "England·프랑스·스페인 7박 크루즈", "hashtags": ["#북유럽크루즈", "#MSC크루즈", "#MSCVirtuosa", "#사우샘프턴", "#La Rochelle"]}, {"ref": "MSCVI20260704SOUSOU", "shipSlug": "msc-virtuosa", "shipTitle": "MSC Virtuosa", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-07-04", "dateTo": "2026-07-11", "nights": 7, "regions": ["Europe", "Northern Europe"], "countries": ["England", "France", "Spain"], "countriesKo": ["England", "프랑스", "스페인"], "destination": "northern-europe", "startsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "endsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "ports": [{"name": "Southampton", "nameKo": "사우샘프턴"}, {"name": "La Rochelle", "nameKo": "La Rochelle"}, {"name": "Bilbao", "nameKo": "Bilbao"}, {"name": "La Coruña", "nameKo": "La Coruña"}, {"name": "Cherbourg", "nameKo": "Cherbourg"}], "portRoute": "사우샘프턴 → La Rochelle → Bilbao → La Coruña → Cherbourg", "priceInside": 699, "priceOutside": 879, "priceBalcony": 949, "priceSuite": 3129, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg", "title": "England·프랑스·스페인 7박 크루즈", "hashtags": ["#북유럽크루즈", "#MSC크루즈", "#MSCVirtuosa", "#사우샘프턴", "#La Rochelle"]}, {"ref": "MSCVI20260829SOUSOU", "shipSlug": "msc-virtuosa", "shipTitle": "MSC Virtuosa", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-08-29", "dateTo": "2026-09-05", "nights": 7, "regions": ["Europe", "Northern Europe"], "countries": ["England", "Norway"], "countriesKo": ["England", "노르웨이"], "destination": "northern-europe", "startsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "endsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "ports": [{"name": "Southampton", "nameKo": "사우샘프턴"}, {"name": "Haugesund", "nameKo": "Haugesund"}, {"name": "Olden", "nameKo": "Olden"}, {"name": "Ålesund", "nameKo": "Ålesund"}, {"name": "Kristiansand", "nameKo": "Kristiansand"}], "portRoute": "사우샘프턴 → Haugesund → Olden → Ålesund → Kristiansand", "priceInside": 729, "priceOutside": 939, "priceBalcony": 1149, "priceSuite": 2689, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg", "title": "England·노르웨이 7박 크루즈", "hashtags": ["#북유럽크루즈", "#MSC크루즈", "#MSCVirtuosa", "#사우샘프턴", "#Haugesund"]}, {"ref": "MSCVI20260905SOUSOU", "shipSlug": "msc-virtuosa", "shipTitle": "MSC Virtuosa", "operator": "MSC Cruises", "operatorShort": "MSC", "dateFrom": "2026-09-05", "dateTo": "2026-09-12", "nights": 7, "regions": ["Europe", "Northern Europe"], "countries": ["England", "France", "Spain"], "countriesKo": ["England", "프랑스", "스페인"], "destination": "northern-europe", "startsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "endsAt": {"name": "Southampton", "nameKo": "사우샘프턴", "country": "England", "countryKo": "England"}, "ports": [{"name": "Southampton", "nameKo": "사우샘프턴"}, {"name": "La Rochelle", "nameKo": "La Rochelle"}, {"name": "Bilbao", "nameKo": "Bilbao"}, {"name": "La Coruña", "nameKo": "La Coruña"}, {"name": "Cherbourg", "nameKo": "Cherbourg"}], "portRoute": "사우샘프턴 → La Rochelle → Bilbao → La Coruña → Cherbourg", "priceInside": 749, "priceOutside": 909, "priceBalcony": 989, "priceSuite": 2979, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg", "title": "England·프랑스·스페인 7박 크루즈", "hashtags": ["#북유럽크루즈", "#MSC크루즈", "#MSCVirtuosa", "#사우샘프턴", "#La Rochelle"]}, {"ref": "RCISC04I849-060526", "shipSlug": "spectrum-of-the-seas", "shipTitle": "Spectrum of the Seas", "operator": "Royal Caribbean International", "operatorShort": "RCI", "dateFrom": "2026-05-06", "dateTo": "2026-05-10", "nights": 4, "regions": ["Asia"], "countries": ["China", "South Korea"], "countriesKo": ["중국", "한국"], "destination": "asia", "startsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "endsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "ports": [{"name": "Baoshan Pt", "nameKo": "Baoshan Pt"}, {"name": "Busan", "nameKo": "부산"}], "portRoute": "Baoshan Pt → 부산", "priceInside": 438, "priceOutside": 503, "priceBalcony": 542, "priceSuite": 789, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg", "title": "중국·한국 4박 크루즈", "hashtags": ["#아시아크루즈", "#로얄캐리비안", "#SpectrumoftheSeas", "#Baoshan Pt", "#부산"]}, {"ref": "RCISC03I212-120626", "shipSlug": "spectrum-of-the-seas", "shipTitle": "Spectrum of the Seas", "operator": "Royal Caribbean International", "operatorShort": "RCI", "dateFrom": "2026-06-12", "dateTo": "2026-06-15", "nights": 3, "regions": ["Asia"], "countries": ["China", "South Korea"], "countriesKo": ["중국", "한국"], "destination": "asia", "startsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "endsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "ports": [{"name": "Baoshan Pt", "nameKo": "Baoshan Pt"}, {"name": "Seogwipo", "nameKo": "Seogwipo"}], "portRoute": "Baoshan Pt → Seogwipo", "priceInside": 321, "priceOutside": 382, "priceBalcony": 435, "priceSuite": 629, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg", "title": "중국·한국 3박 크루즈", "hashtags": ["#아시아크루즈", "#로얄캐리비안", "#SpectrumoftheSeas", "#Baoshan Pt", "#Seogwipo"]}, {"ref": "RCISC03I213-310726", "shipSlug": "spectrum-of-the-seas", "shipTitle": "Spectrum of the Seas", "operator": "Royal Caribbean International", "operatorShort": "RCI", "dateFrom": "2026-07-31", "dateTo": "2026-08-03", "nights": 3, "regions": ["Asia"], "countries": ["China", "South Korea"], "countriesKo": ["중국", "한국"], "destination": "asia", "startsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "endsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "ports": [{"name": "Baoshan Pt", "nameKo": "Baoshan Pt"}, {"name": "Seogwipo", "nameKo": "Seogwipo"}], "portRoute": "Baoshan Pt → Seogwipo", "priceInside": 465, "priceOutside": 530, "priceBalcony": 575, "priceSuite": 780, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg", "title": "중국·한국 3박 크루즈", "hashtags": ["#아시아크루즈", "#로얄캐리비안", "#SpectrumoftheSeas", "#Baoshan Pt", "#Seogwipo"]}, {"ref": "RCISC03I214-210826", "shipSlug": "spectrum-of-the-seas", "shipTitle": "Spectrum of the Seas", "operator": "Royal Caribbean International", "operatorShort": "RCI", "dateFrom": "2026-08-21", "dateTo": "2026-08-24", "nights": 3, "regions": ["Asia"], "countries": ["China", "South Korea"], "countriesKo": ["중국", "한국"], "destination": "asia", "startsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "endsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "ports": [{"name": "Baoshan Pt", "nameKo": "Baoshan Pt"}, {"name": "Seogwipo", "nameKo": "Seogwipo"}], "portRoute": "Baoshan Pt → Seogwipo", "priceInside": 439, "priceOutside": 524, "priceBalcony": 549, "priceSuite": 754, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg", "title": "중국·한국 3박 크루즈", "hashtags": ["#아시아크루즈", "#로얄캐리비안", "#SpectrumoftheSeas", "#Baoshan Pt", "#Seogwipo"]}, {"ref": "RCISC04I859-190926", "shipSlug": "spectrum-of-the-seas", "shipTitle": "Spectrum of the Seas", "operator": "Royal Caribbean International", "operatorShort": "RCI", "dateFrom": "2026-09-19", "dateTo": "2026-09-23", "nights": 4, "regions": ["Asia"], "countries": ["China", "South Korea"], "countriesKo": ["중국", "한국"], "destination": "asia", "startsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "endsAt": {"name": "Baoshan Pt", "nameKo": "Baoshan Pt", "country": "China", "countryKo": "중국"}, "ports": [{"name": "Baoshan Pt", "nameKo": "Baoshan Pt"}, {"name": "Seogwipo", "nameKo": "Seogwipo"}], "portRoute": "Baoshan Pt → Seogwipo", "priceInside": 497, "priceOutside": 566, "priceBalcony": 607, "priceSuite": 858, "currency": "USD", "availability": "available", "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg", "title": "중국·한국 4박 크루즈", "hashtags": ["#아시아크루즈", "#로얄캐리비안", "#SpectrumoftheSeas", "#Baoshan Pt", "#Seogwipo"]}]
+[
+  {
+    "ref": "MSCOR20260429GOAGOA",
+    "shipSlug": "msc-orchestra-ship",
+    "shipTitle": "MSC Orchestra",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-04-29",
+    "dateTo": "2026-05-06",
+    "nights": 7,
+    "regions": [
+      "Europe",
+      "Southern Europe",
+      "Mediterranean"
+    ],
+    "countries": [
+      "Italy",
+      "France",
+      "Spain"
+    ],
+    "countriesKo": [
+      "이탈리아",
+      "프랑스",
+      "스페인"
+    ],
+    "destination": "mediterranean",
+    "startsAt": {
+      "name": "Genoa",
+      "nameKo": "제노바",
+      "country": "Italy",
+      "countryKo": "이탈리아"
+    },
+    "endsAt": {
+      "name": "Genoa",
+      "nameKo": "제노바",
+      "country": "Italy",
+      "countryKo": "이탈리아"
+    },
+    "ports": [
+      {
+        "name": "Genoa",
+        "nameKo": "제노바"
+      },
+      {
+        "name": "Marseille",
+        "nameKo": "마르세유"
+      },
+      {
+        "name": "Tarragona",
+        "nameKo": "Tarragona"
+      },
+      {
+        "name": "Valencia",
+        "nameKo": "Valencia"
+      },
+      {
+        "name": "Livorno",
+        "nameKo": "Livorno"
+      },
+      {
+        "name": "Civitavecchia",
+        "nameKo": "치비타베키아"
+      }
+    ],
+    "portRoute": "제노바 → 마르세유 → Tarragona → Valencia → Livorno → 치비타베키아",
+    "priceInside": 514,
+    "priceOutside": 568,
+    "priceBalcony": 654,
+    "priceSuite": 0,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/09/26/10/45/07/ad264e77-d95a-40f2-9131-456fd1c2d6e4/MSC Cruises, MSC Orchestra, New York Exterior, MSC Rights.jpg",
+    "title": "이탈리아·프랑스·스페인 7박 크루즈",
+    "hashtags": [
+      "#지중해크루즈",
+      "#MSC크루즈",
+      "#MSCOrchestra",
+      "#제노바",
+      "#마르세유"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/02/11/13/29/40/34e0178a-eb93-4096-bc7c-1674f26b66fb/ITGOA%20-%20Genoa%20-%20Calata%20Cattaneo%20-%20Erin%20Doering.jpg",
+    "portImagePort": "Genoa"
+  },
+  {
+    "ref": "MSCOR20260509VLCVLC",
+    "shipSlug": "msc-orchestra-ship",
+    "shipTitle": "MSC Orchestra",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-05-09",
+    "dateTo": "2026-05-16",
+    "nights": 7,
+    "regions": [
+      "Europe",
+      "Southern Europe",
+      "Mediterranean"
+    ],
+    "countries": [
+      "Spain",
+      "Italy",
+      "France"
+    ],
+    "countriesKo": [
+      "스페인",
+      "이탈리아",
+      "프랑스"
+    ],
+    "destination": "mediterranean",
+    "startsAt": {
+      "name": "Valencia",
+      "nameKo": "Valencia",
+      "country": "Spain",
+      "countryKo": "스페인"
+    },
+    "endsAt": {
+      "name": "Valencia",
+      "nameKo": "Valencia",
+      "country": "Spain",
+      "countryKo": "스페인"
+    },
+    "ports": [
+      {
+        "name": "Valencia",
+        "nameKo": "Valencia"
+      },
+      {
+        "name": "Livorno",
+        "nameKo": "Livorno"
+      },
+      {
+        "name": "Civitavecchia",
+        "nameKo": "치비타베키아"
+      },
+      {
+        "name": "Genoa",
+        "nameKo": "제노바"
+      },
+      {
+        "name": "Marseille",
+        "nameKo": "마르세유"
+      },
+      {
+        "name": "Tarragona",
+        "nameKo": "Tarragona"
+      }
+    ],
+    "portRoute": "Valencia → Livorno → 치비타베키아 → 제노바 → 마르세유 → Tarragona",
+    "priceInside": 503,
+    "priceOutside": 583,
+    "priceBalcony": 643,
+    "priceSuite": 1343,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/09/26/10/45/07/ad264e77-d95a-40f2-9131-456fd1c2d6e4/MSC Cruises, MSC Orchestra, New York Exterior, MSC Rights.jpg",
+    "title": "스페인·이탈리아·프랑스 7박 크루즈",
+    "hashtags": [
+      "#지중해크루즈",
+      "#MSC크루즈",
+      "#MSCOrchestra",
+      "#Valencia",
+      "#Livorno"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/05/31/16/31/13/1394a347-544e-48fd-96db-0f7e6a8a1505/ESVLC%20Valencia%20City%20of%20the%20Arts%20and%20the%20Sciences%20Zebbache%20Djoubair.jpg",
+    "portImagePort": "Valencia"
+  },
+  {
+    "ref": "MSCSP20260603CAGCAG",
+    "shipSlug": "msc-splendida",
+    "shipTitle": "MSC Splendida",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-06-03",
+    "dateTo": "2026-06-10",
+    "nights": 7,
+    "regions": [
+      "Europe",
+      "Southern Europe",
+      "Mediterranean"
+    ],
+    "countries": [
+      "Italy",
+      "Malta",
+      "Spain",
+      "France"
+    ],
+    "countriesKo": [
+      "이탈리아",
+      "몰타",
+      "스페인",
+      "프랑스"
+    ],
+    "destination": "mediterranean",
+    "startsAt": {
+      "name": "Cagliari",
+      "nameKo": "칼리아리",
+      "country": "Italy",
+      "countryKo": "이탈리아"
+    },
+    "endsAt": {
+      "name": "Cagliari",
+      "nameKo": "칼리아리",
+      "country": "Italy",
+      "countryKo": "이탈리아"
+    },
+    "ports": [
+      {
+        "name": "Cagliari",
+        "nameKo": "칼리아리"
+      },
+      {
+        "name": "Palermo",
+        "nameKo": "Palermo"
+      },
+      {
+        "name": "Valletta",
+        "nameKo": "발레타"
+      },
+      {
+        "name": "Barcelona",
+        "nameKo": "바르셀로나"
+      },
+      {
+        "name": "Marseille",
+        "nameKo": "마르세유"
+      },
+      {
+        "name": "Livorno",
+        "nameKo": "Livorno"
+      }
+    ],
+    "portRoute": "칼리아리 → Palermo → 발레타 → 바르셀로나 → 마르세유 → Livorno",
+    "priceInside": 596,
+    "priceOutside": 696,
+    "priceBalcony": 756,
+    "priceSuite": 0,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/06/24/07/16/00/90eeb5c8-83d5-4c1d-87c9-6ec4fc2398c7/MSC Cruises MSC Splendida Exterior.jpg",
+    "title": "지중해 7박 크루즈",
+    "hashtags": [
+      "#지중해크루즈",
+      "#MSC크루즈",
+      "#MSCSplendida",
+      "#칼리아리",
+      "#Palermo"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/12/10/13/45/59/df6a12af-88d3-4fcd-9da9-818dc624a639/ITCAG%20-%20Cagliari,%20Italy%20-%20Roman%20Kraft.jpg",
+    "portImagePort": "Cagliari"
+  },
+  {
+    "ref": "NCLEPC-20260719-07-CIV-BCN",
+    "shipSlug": "norwegian-epic",
+    "shipTitle": "Norwegian Epic",
+    "operator": "Norwegian Cruise Line",
+    "operatorShort": "NCL",
+    "dateFrom": "2026-07-19",
+    "dateTo": "2026-07-26",
+    "nights": 7,
+    "regions": [
+      "Southern Europe",
+      "Mediterranean"
+    ],
+    "countries": [
+      "Italy",
+      "France",
+      "Spain"
+    ],
+    "countriesKo": [
+      "이탈리아",
+      "프랑스",
+      "스페인"
+    ],
+    "destination": "mediterranean",
+    "startsAt": {
+      "name": "Civitavecchia",
+      "nameKo": "치비타베키아",
+      "country": "Italy",
+      "countryKo": "이탈리아"
+    },
+    "endsAt": {
+      "name": "Barcelona",
+      "nameKo": "바르셀로나",
+      "country": "Spain",
+      "countryKo": "스페인"
+    },
+    "ports": [
+      {
+        "name": "Civitavecchia",
+        "nameKo": "치비타베키아"
+      },
+      {
+        "name": "Salerno",
+        "nameKo": "Salerno"
+      },
+      {
+        "name": "Catania",
+        "nameKo": "카타니아"
+      },
+      {
+        "name": "Livorno",
+        "nameKo": "Livorno"
+      },
+      {
+        "name": "Villefranche-sur-Mer",
+        "nameKo": "Villefranche-sur-Mer"
+      },
+      {
+        "name": "Marseille",
+        "nameKo": "마르세유"
+      },
+      {
+        "name": "Barcelona",
+        "nameKo": "바르셀로나"
+      }
+    ],
+    "portRoute": "치비타베키아 → Salerno → 카타니아 → Livorno → Villefranche-sur-Mer → 마르세유 → 바르셀로나",
+    "priceInside": 715,
+    "priceOutside": 0,
+    "priceBalcony": 1035,
+    "priceSuite": 1415,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/12/10/11/16/54/576e66cb-8a6d-4da4-9b6b-32dca14838d4/NCL Norwegian Epic Exterior - Credit - Kikor.jpeg",
+    "title": "이탈리아·프랑스·스페인 7박 크루즈",
+    "hashtags": [
+      "#지중해크루즈",
+      "#노르웨이전크루즈",
+      "#NorwegianEpic",
+      "#치비타베키아",
+      "#Salerno"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/02/08/12/38/53/6c396dad-0eb9-43fd-91e5-3a81d62014f1/ITROM%20-%20Rome%20-%20Colosseum%20-%20mathew%20schwartz.jpg",
+    "portImagePort": "Civitavecchia"
+  },
+  {
+    "ref": "NCLEPC-20260830-07-CIV-BCN",
+    "shipSlug": "norwegian-epic",
+    "shipTitle": "Norwegian Epic",
+    "operator": "Norwegian Cruise Line",
+    "operatorShort": "NCL",
+    "dateFrom": "2026-08-30",
+    "dateTo": "2026-09-06",
+    "nights": 7,
+    "regions": [
+      "Southern Europe",
+      "Mediterranean"
+    ],
+    "countries": [
+      "Italy",
+      "France",
+      "Spain"
+    ],
+    "countriesKo": [
+      "이탈리아",
+      "프랑스",
+      "스페인"
+    ],
+    "destination": "mediterranean",
+    "startsAt": {
+      "name": "Civitavecchia",
+      "nameKo": "치비타베키아",
+      "country": "Italy",
+      "countryKo": "이탈리아"
+    },
+    "endsAt": {
+      "name": "Barcelona",
+      "nameKo": "바르셀로나",
+      "country": "Spain",
+      "countryKo": "스페인"
+    },
+    "ports": [
+      {
+        "name": "Civitavecchia",
+        "nameKo": "치비타베키아"
+      },
+      {
+        "name": "Salerno",
+        "nameKo": "Salerno"
+      },
+      {
+        "name": "Catania",
+        "nameKo": "카타니아"
+      },
+      {
+        "name": "Livorno",
+        "nameKo": "Livorno"
+      },
+      {
+        "name": "Villefranche-sur-Mer",
+        "nameKo": "Villefranche-sur-Mer"
+      },
+      {
+        "name": "Marseille",
+        "nameKo": "마르세유"
+      },
+      {
+        "name": "Barcelona",
+        "nameKo": "바르셀로나"
+      }
+    ],
+    "portRoute": "치비타베키아 → Salerno → 카타니아 → Livorno → Villefranche-sur-Mer → 마르세유 → 바르셀로나",
+    "priceInside": 665,
+    "priceOutside": 0,
+    "priceBalcony": 935,
+    "priceSuite": 1060,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/12/10/11/16/54/576e66cb-8a6d-4da4-9b6b-32dca14838d4/NCL Norwegian Epic Exterior - Credit - Kikor.jpeg",
+    "title": "이탈리아·프랑스·스페인 7박 크루즈",
+    "hashtags": [
+      "#지중해크루즈",
+      "#노르웨이전크루즈",
+      "#NorwegianEpic",
+      "#치비타베키아",
+      "#Salerno"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/02/08/12/38/54/cdfaab5a-983d-424f-86b5-1e7e30dc9a72/ITROM%20-%20Rome%20-%20Navona%20Square%20-%20Fototeca%20ENIT.jpg",
+    "portImagePort": "Civitavecchia"
+  },
+  {
+    "ref": "CARNIVALSP280420267",
+    "shipSlug": "carnival-spirit-ship",
+    "shipTitle": "Carnival Spirit",
+    "operator": "Carnival Cruise Line",
+    "operatorShort": "Carnival",
+    "dateFrom": "2026-04-28",
+    "dateTo": "2026-05-05",
+    "nights": 7,
+    "regions": [
+      "Americas",
+      "Alaska",
+      "North America"
+    ],
+    "countries": [
+      "United States",
+      "Canada"
+    ],
+    "countriesKo": [
+      "미국",
+      "캐나다"
+    ],
+    "destination": "alaska",
+    "startsAt": {
+      "name": "Seattle, Washington",
+      "nameKo": "Seattle, Washington",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Seattle, Washington",
+      "nameKo": "Seattle, Washington",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Seattle, Washington",
+        "nameKo": "Seattle, Washington"
+      },
+      {
+        "name": "Tracy Arm, Alaska",
+        "nameKo": "Tracy Arm, Alaska"
+      },
+      {
+        "name": "Skagway, Alaska",
+        "nameKo": "Skagway, Alaska"
+      },
+      {
+        "name": "Juneau, Alaska",
+        "nameKo": "Juneau, Alaska"
+      },
+      {
+        "name": "Ketchikan, Alaska",
+        "nameKo": "Ketchikan, Alaska"
+      },
+      {
+        "name": "Victoria, British Columbia",
+        "nameKo": "Victoria, British Columbia"
+      }
+    ],
+    "portRoute": "Seattle, Washington → Tracy Arm, Alaska → Skagway, Alaska → Juneau, Alaska → Ketchikan, Alaska → Victoria, British Columbia",
+    "priceInside": 655,
+    "priceOutside": 831,
+    "priceBalcony": 948,
+    "priceSuite": 2519,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2022/05/05/08/06/25/c430b214-bac8-4c7b-871a-afb30dc12f0a/Carnival Cruise Line Carnival Spirit Exterior.png",
+    "title": "미국·캐나다 7박 크루즈",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#카니발크루즈",
+      "#CarnivalSpirit",
+      "#Seattle, Washington",
+      "#Tracy Arm, Alaska"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/12/10/07/25/22/a68cbebf-332e-440d-80fa-221d830265b2/USSEA%20-%20Seattle,%20Washington,%20United%20States%20-%20photo%20credit%20belongs%20to%20Nitish%20Meena%201.jpg",
+    "portImagePort": "Seattle, Washington"
+  },
+  {
+    "ref": "MSCPO20260518SEASEA",
+    "shipSlug": "msc-poesia-ship",
+    "shipTitle": "MSC Poesia",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-05-18",
+    "dateTo": "2026-05-25",
+    "nights": 7,
+    "regions": [
+      "Americas",
+      "Alaska",
+      "North America"
+    ],
+    "countries": [
+      "United States",
+      "Canada"
+    ],
+    "countriesKo": [
+      "미국",
+      "캐나다"
+    ],
+    "destination": "alaska",
+    "startsAt": {
+      "name": "Seattle, Washington",
+      "nameKo": "Seattle, Washington",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Seattle, Washington",
+      "nameKo": "Seattle, Washington",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Seattle, Washington",
+        "nameKo": "Seattle, Washington"
+      },
+      {
+        "name": "Ketchikan, Alaska",
+        "nameKo": "Ketchikan, Alaska"
+      },
+      {
+        "name": "Icy Strait Point",
+        "nameKo": "Icy Strait Point"
+      },
+      {
+        "name": "Tracy Arm, Alaska",
+        "nameKo": "Tracy Arm, Alaska"
+      },
+      {
+        "name": "Victoria, British Columbia",
+        "nameKo": "Victoria, British Columbia"
+      }
+    ],
+    "portRoute": "Seattle, Washington → Ketchikan, Alaska → Icy Strait Point → Tracy Arm, Alaska → Victoria, British Columbia",
+    "priceInside": 395,
+    "priceOutside": 534,
+    "priceBalcony": 612,
+    "priceSuite": 3539,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/10/20/15/23/43/169ae78e-18ff-4366-ace9-91950c305b51/MSC Cruises MSC Poesia Exterior ©Moviebox & MSC Rights.jpg",
+    "title": "미국·캐나다 7박 크루즈",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#MSC크루즈",
+      "#MSCPoesia",
+      "#Seattle, Washington",
+      "#Ketchikan, Alaska"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/12/10/07/25/22/22c6fbfc-f83e-463a-a6d4-19f57f3be399/USSEA%20-%20Seattle,%20Washington,%20United%20States%20-%20photo%20credit%20belongs%20to%20Nitish%20Meena.jpg",
+    "portImagePort": "Seattle, Washington"
+  },
+  {
+    "ref": "MSCPO20260629SEASEA",
+    "shipSlug": "msc-poesia-ship",
+    "shipTitle": "MSC Poesia",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-06-29",
+    "dateTo": "2026-07-06",
+    "nights": 7,
+    "regions": [
+      "Americas",
+      "Alaska",
+      "North America"
+    ],
+    "countries": [
+      "United States",
+      "Canada"
+    ],
+    "countriesKo": [
+      "미국",
+      "캐나다"
+    ],
+    "destination": "alaska",
+    "startsAt": {
+      "name": "Seattle, Washington",
+      "nameKo": "Seattle, Washington",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Seattle, Washington",
+      "nameKo": "Seattle, Washington",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Seattle, Washington",
+        "nameKo": "Seattle, Washington"
+      },
+      {
+        "name": "Ketchikan, Alaska",
+        "nameKo": "Ketchikan, Alaska"
+      },
+      {
+        "name": "Tracy Arm, Alaska",
+        "nameKo": "Tracy Arm, Alaska"
+      },
+      {
+        "name": "Icy Strait Point",
+        "nameKo": "Icy Strait Point"
+      },
+      {
+        "name": "Victoria, British Columbia",
+        "nameKo": "Victoria, British Columbia"
+      }
+    ],
+    "portRoute": "Seattle, Washington → Ketchikan, Alaska → Tracy Arm, Alaska → Icy Strait Point → Victoria, British Columbia",
+    "priceInside": 364,
+    "priceOutside": 490,
+    "priceBalcony": 718,
+    "priceSuite": 3709,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/10/20/15/23/43/169ae78e-18ff-4366-ace9-91950c305b51/MSC Cruises MSC Poesia Exterior ©Moviebox & MSC Rights.jpg",
+    "title": "미국·캐나다 7박 크루즈",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#MSC크루즈",
+      "#MSCPoesia",
+      "#Seattle, Washington",
+      "#Ketchikan, Alaska"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/12/10/07/25/22/80827320-ec4a-4409-9722-ee654ac2d542/USSEA%20-%20Seattle,%20Washington,%20United%20States%20-%20photo%20credit%20belongs%20to%20Oakie.jpg",
+    "portImagePort": "Seattle, Washington"
+  },
+  {
+    "ref": "NCLJAD-20260706-07-WQF-VAN",
+    "shipSlug": "norwegian-jade-ship",
+    "shipTitle": "Norwegian Jade",
+    "operator": "Norwegian Cruise Line",
+    "operatorShort": "NCL",
+    "dateFrom": "2026-07-06",
+    "dateTo": "2026-07-13",
+    "nights": 7,
+    "regions": [
+      "Americas",
+      "Alaska",
+      "North America"
+    ],
+    "countries": [
+      "United States",
+      "Canada"
+    ],
+    "countriesKo": [
+      "미국",
+      "캐나다"
+    ],
+    "destination": "alaska",
+    "startsAt": {
+      "name": "Whittier",
+      "nameKo": "Whittier",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Vancouver, British Columbia",
+      "nameKo": "Vancouver, British Columbia",
+      "country": "Canada",
+      "countryKo": "캐나다"
+    },
+    "ports": [
+      {
+        "name": "Whittier",
+        "nameKo": "Whittier"
+      },
+      {
+        "name": "Cruise Hubbard Glacier, Alaska",
+        "nameKo": "Cruise Hubbard Glacier, Alaska"
+      },
+      {
+        "name": "Icy Strait Point",
+        "nameKo": "Icy Strait Point"
+      },
+      {
+        "name": "Juneau, Alaska",
+        "nameKo": "Juneau, Alaska"
+      },
+      {
+        "name": "Skagway, Alaska",
+        "nameKo": "Skagway, Alaska"
+      },
+      {
+        "name": "Ketchikan, Alaska",
+        "nameKo": "Ketchikan, Alaska"
+      },
+      {
+        "name": "Vancouver, British Columbia",
+        "nameKo": "Vancouver, British Columbia"
+      }
+    ],
+    "portRoute": "Whittier → Cruise Hubbard Glacier, Alaska → Icy Strait Point → Juneau, Alaska → Skagway, Alaska → Ketchikan, Alaska → Vancouver, British Columbia",
+    "priceInside": 563,
+    "priceOutside": 638,
+    "priceBalcony": 1843,
+    "priceSuite": 1913,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/12/05/15/14/57/63c00f94-4bb5-4613-bb65-40346384484f/Norwegian Jade - Exterior 1, ©Danny Lehman.jpg",
+    "title": "미국·캐나다 7박 크루즈",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#노르웨이전크루즈",
+      "#NorwegianJade",
+      "#Whittier",
+      "#Cruise Hubbard Glacier, Alaska"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/09/23/13/14/48/577c6ad5-2c1b-4670-9a2f-4dada4bf3249/joseph-corl-mmzYPbne5Rc-unsplash.jpg",
+    "portImagePort": "Whittier"
+  },
+  {
+    "ref": "NCLJAD-20260831-07-WQF-VAN",
+    "shipSlug": "norwegian-jade-ship",
+    "shipTitle": "Norwegian Jade",
+    "operator": "Norwegian Cruise Line",
+    "operatorShort": "NCL",
+    "dateFrom": "2026-08-31",
+    "dateTo": "2026-09-07",
+    "nights": 7,
+    "regions": [
+      "Americas",
+      "Alaska",
+      "North America"
+    ],
+    "countries": [
+      "United States",
+      "Canada"
+    ],
+    "countriesKo": [
+      "미국",
+      "캐나다"
+    ],
+    "destination": "alaska",
+    "startsAt": {
+      "name": "Whittier",
+      "nameKo": "Whittier",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Vancouver, British Columbia",
+      "nameKo": "Vancouver, British Columbia",
+      "country": "Canada",
+      "countryKo": "캐나다"
+    },
+    "ports": [
+      {
+        "name": "Whittier",
+        "nameKo": "Whittier"
+      },
+      {
+        "name": "Cruise Hubbard Glacier, Alaska",
+        "nameKo": "Cruise Hubbard Glacier, Alaska"
+      },
+      {
+        "name": "Icy Strait Point",
+        "nameKo": "Icy Strait Point"
+      },
+      {
+        "name": "Juneau, Alaska",
+        "nameKo": "Juneau, Alaska"
+      },
+      {
+        "name": "Skagway, Alaska",
+        "nameKo": "Skagway, Alaska"
+      },
+      {
+        "name": "Ketchikan, Alaska",
+        "nameKo": "Ketchikan, Alaska"
+      },
+      {
+        "name": "Vancouver, British Columbia",
+        "nameKo": "Vancouver, British Columbia"
+      }
+    ],
+    "portRoute": "Whittier → Cruise Hubbard Glacier, Alaska → Icy Strait Point → Juneau, Alaska → Skagway, Alaska → Ketchikan, Alaska → Vancouver, British Columbia",
+    "priceInside": 468,
+    "priceOutside": 563,
+    "priceBalcony": 1748,
+    "priceSuite": 1928,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/12/05/15/14/57/63c00f94-4bb5-4613-bb65-40346384484f/Norwegian Jade - Exterior 1, ©Danny Lehman.jpg",
+    "title": "미국·캐나다 7박 크루즈",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#노르웨이전크루즈",
+      "#NorwegianJade",
+      "#Whittier",
+      "#Cruise Hubbard Glacier, Alaska"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/09/23/13/14/48/f403c9e6-5232-43b2-ba60-1948f11865af/joseph-corl-CW5pFIC7Gg8-unsplash.jpg",
+    "portImagePort": "Whittier"
+  },
+  {
+    "ref": "NCLJWL-20260430-07-PHL-PHL",
+    "shipSlug": "norwegian-jewel",
+    "shipTitle": "Norwegian Jewel",
+    "operator": "Norwegian Cruise Line",
+    "operatorShort": "NCL",
+    "dateFrom": "2026-04-30",
+    "dateTo": "2026-05-07",
+    "nights": 7,
+    "regions": [
+      "Caribbean",
+      "Americas",
+      "South America"
+    ],
+    "countries": [
+      "United States",
+      "Bermuda"
+    ],
+    "countriesKo": [
+      "미국",
+      "버뮤다"
+    ],
+    "destination": "caribbean",
+    "startsAt": {
+      "name": "Philadelphia, Pennsylvania",
+      "nameKo": "Philadelphia, Pennsylvania",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Philadelphia, Pennsylvania",
+      "nameKo": "Philadelphia, Pennsylvania",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Philadelphia, Pennsylvania",
+        "nameKo": "Philadelphia, Pennsylvania"
+      },
+      {
+        "name": "Kings Wharf",
+        "nameKo": "Kings Wharf"
+      },
+      {
+        "name": "Charleston, South Carolina",
+        "nameKo": "Charleston, South Carolina"
+      }
+    ],
+    "portRoute": "Philadelphia, Pennsylvania → Kings Wharf → Charleston, South Carolina",
+    "priceInside": 530,
+    "priceOutside": 655,
+    "priceBalcony": 1015,
+    "priceSuite": 1430,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/12/19/09/13/37/8b65d198-df6d-4c35-b3c7-d53e1a1c4347/NCL, Norwegian Jewel, Aerial at Sea Exterior 2 ©Michele Verdure.jpg",
+    "title": "미국·버뮤다 7박 크루즈",
+    "hashtags": [
+      "#카리브해크루즈",
+      "#노르웨이전크루즈",
+      "#NorwegianJewel",
+      "#Philadelphia, Pennsylvania",
+      "#Kings Wharf"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/10/23/17/21/33/6cbd9323-fddd-44e9-ba02-04ead857eabf/philadelphia-4643451.jpg",
+    "portImagePort": "Philadelphia, Pennsylvania"
+  },
+  {
+    "ref": "MSCSC20260531GLSGLS",
+    "shipSlug": "msc-seascape",
+    "shipTitle": "MSC Seascape",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-05-31",
+    "dateTo": "2026-06-07",
+    "nights": 7,
+    "regions": [
+      "Caribbean",
+      "Americas",
+      "South America"
+    ],
+    "countries": [
+      "United States",
+      "Mexico",
+      "Honduras"
+    ],
+    "countriesKo": [
+      "미국",
+      "멕시코",
+      "온두라스"
+    ],
+    "destination": "caribbean",
+    "startsAt": {
+      "name": "Galveston, Texas",
+      "nameKo": "Galveston, Texas",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Galveston, Texas",
+      "nameKo": "Galveston, Texas",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Galveston, Texas",
+        "nameKo": "Galveston, Texas"
+      },
+      {
+        "name": "Costa Maya",
+        "nameKo": "Costa Maya"
+      },
+      {
+        "name": "Roatán Island",
+        "nameKo": "Roatán Island"
+      },
+      {
+        "name": "Cozumel",
+        "nameKo": "코수멜"
+      }
+    ],
+    "portRoute": "Galveston, Texas → Costa Maya → Roatán Island → 코수멜",
+    "priceInside": 333,
+    "priceOutside": 433,
+    "priceBalcony": 483,
+    "priceSuite": 1219,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/09/19/11/38/30/6d47956b-d0ef-474d-8b59-069f6ca70109/MSC Seascape - Exterior 1.jpg",
+    "title": "미국·멕시코·온두라스 7박 크루즈",
+    "hashtags": [
+      "#카리브해크루즈",
+      "#MSC크루즈",
+      "#MSCSeascape",
+      "#Galveston, Texas",
+      "#Costa Maya"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/04/24/11/23/16/2fb31d02-c860-4eee-b1f0-19a2df3f89a3/USGLS%20-%20Galveston%20-%20Beach%20And%20Texas%20Flag%20Umbrellas%20-%20Galveston%20Convention%20&%20Visitors%20Bureau.jpg",
+    "portImagePort": "Galveston, Texas"
+  },
+  {
+    "ref": "MSCSC20260607GLSGLS",
+    "shipSlug": "msc-seascape",
+    "shipTitle": "MSC Seascape",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-06-07",
+    "dateTo": "2026-06-14",
+    "nights": 7,
+    "regions": [
+      "Caribbean",
+      "Americas",
+      "South America"
+    ],
+    "countries": [
+      "United States",
+      "Mexico",
+      "Honduras"
+    ],
+    "countriesKo": [
+      "미국",
+      "멕시코",
+      "온두라스"
+    ],
+    "destination": "caribbean",
+    "startsAt": {
+      "name": "Galveston, Texas",
+      "nameKo": "Galveston, Texas",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Galveston, Texas",
+      "nameKo": "Galveston, Texas",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Galveston, Texas",
+        "nameKo": "Galveston, Texas"
+      },
+      {
+        "name": "Costa Maya",
+        "nameKo": "Costa Maya"
+      },
+      {
+        "name": "Roatán Island",
+        "nameKo": "Roatán Island"
+      },
+      {
+        "name": "Cozumel",
+        "nameKo": "코수멜"
+      }
+    ],
+    "portRoute": "Galveston, Texas → Costa Maya → Roatán Island → 코수멜",
+    "priceInside": 463,
+    "priceOutside": 563,
+    "priceBalcony": 613,
+    "priceSuite": 1219,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/09/19/11/38/30/6d47956b-d0ef-474d-8b59-069f6ca70109/MSC Seascape - Exterior 1.jpg",
+    "title": "미국·멕시코·온두라스 7박 크루즈",
+    "hashtags": [
+      "#카리브해크루즈",
+      "#MSC크루즈",
+      "#MSCSeascape",
+      "#Galveston, Texas",
+      "#Costa Maya"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/04/24/11/23/16/98d8b385-58d1-4377-bda4-1d41aeb6f3ee/USGLS%20-%20Galveston%20-%20Galveston%20Island%20Historic%20Pleasure%20Pier,%20Pleasure%20Pier%20at%20Daytime%20-%20Galveston%20Convention%20&%20Visitors%20Bureau.jpg",
+    "portImagePort": "Galveston, Texas"
+  },
+  {
+    "ref": "MSCSC20260705GLSGLS",
+    "shipSlug": "msc-seascape",
+    "shipTitle": "MSC Seascape",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-07-05",
+    "dateTo": "2026-07-12",
+    "nights": 7,
+    "regions": [
+      "Caribbean",
+      "Americas",
+      "South America"
+    ],
+    "countries": [
+      "United States",
+      "Mexico",
+      "Honduras"
+    ],
+    "countriesKo": [
+      "미국",
+      "멕시코",
+      "온두라스"
+    ],
+    "destination": "caribbean",
+    "startsAt": {
+      "name": "Galveston, Texas",
+      "nameKo": "Galveston, Texas",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Galveston, Texas",
+      "nameKo": "Galveston, Texas",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Galveston, Texas",
+        "nameKo": "Galveston, Texas"
+      },
+      {
+        "name": "Costa Maya",
+        "nameKo": "Costa Maya"
+      },
+      {
+        "name": "Roatán Island",
+        "nameKo": "Roatán Island"
+      },
+      {
+        "name": "Cozumel",
+        "nameKo": "코수멜"
+      }
+    ],
+    "portRoute": "Galveston, Texas → Costa Maya → Roatán Island → 코수멜",
+    "priceInside": 542,
+    "priceOutside": 642,
+    "priceBalcony": 692,
+    "priceSuite": 1179,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/09/19/11/38/30/6d47956b-d0ef-474d-8b59-069f6ca70109/MSC Seascape - Exterior 1.jpg",
+    "title": "미국·멕시코·온두라스 7박 크루즈",
+    "hashtags": [
+      "#카리브해크루즈",
+      "#MSC크루즈",
+      "#MSCSeascape",
+      "#Galveston, Texas",
+      "#Costa Maya"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/04/24/11/23/16/a1343314-b1b0-42d8-bd5d-669227ae4c55/USGLS%20-%20Galveston%20-%20Moody%20Gardens%20-%20Galveston%20Convention%20&%20Visitors%20Bureau.jpg",
+    "portImagePort": "Galveston, Texas"
+  },
+  {
+    "ref": "RCIEN07W689-290826",
+    "shipSlug": "enchantment-of-the-seas",
+    "shipTitle": "Enchantment of the Seas",
+    "operator": "Royal Caribbean International",
+    "operatorShort": "RCI",
+    "dateFrom": "2026-08-29",
+    "dateTo": "2026-09-05",
+    "nights": 7,
+    "regions": [
+      "Caribbean",
+      "Americas",
+      "South America"
+    ],
+    "countries": [
+      "United States",
+      "Mexico",
+      "Belize",
+      "Honduras"
+    ],
+    "countriesKo": [
+      "미국",
+      "멕시코",
+      "벨리즈",
+      "온두라스"
+    ],
+    "destination": "caribbean",
+    "startsAt": {
+      "name": "Tampa, Florida",
+      "nameKo": "Tampa, Florida",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Tampa, Florida",
+      "nameKo": "Tampa, Florida",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Tampa, Florida",
+        "nameKo": "Tampa, Florida"
+      },
+      {
+        "name": "Costa Maya",
+        "nameKo": "Costa Maya"
+      },
+      {
+        "name": "Belize City",
+        "nameKo": "Belize City"
+      },
+      {
+        "name": "Roatán Island",
+        "nameKo": "Roatán Island"
+      },
+      {
+        "name": "Cozumel",
+        "nameKo": "코수멜"
+      }
+    ],
+    "portRoute": "Tampa, Florida → Costa Maya → Belize City → Roatán Island → 코수멜",
+    "priceInside": 380,
+    "priceOutside": 483,
+    "priceBalcony": 738,
+    "priceSuite": 817,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/10/09/11/16/09/2295fbbd-f726-45a1-a6a9-32dabad328ec/RCI, Enchantment of the Seas, Exterior.jpg",
+    "title": "카리브해 7박 크루즈",
+    "hashtags": [
+      "#카리브해크루즈",
+      "#로얄캐리비안",
+      "#EnchantmentoftheSeas",
+      "#Tampa, Florida",
+      "#Costa Maya"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2019/12/09/13/33/46/6fc969ae-8bb0-4248-9bf0-ab9f320edc95/USTPA%20-%20Tampa,%20Florida,%20United%20States%20Photo%20credit%20belongs%20Cody%20Cheyne.jpg",
+    "portImagePort": "Tampa, Florida"
+  },
+  {
+    "ref": "MSCBE20260429TYOTYO",
+    "shipSlug": "msc-bellissima",
+    "shipTitle": "MSC Bellissima",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-04-29",
+    "dateTo": "2026-05-04",
+    "nights": 5,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "Japan",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "일본",
+      "한국"
+    ],
+    "destination": "korea",
+    "startsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "endsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "ports": [
+      {
+        "name": "Tokyo",
+        "nameKo": "도쿄"
+      },
+      {
+        "name": "Jeju Island",
+        "nameKo": "제주도"
+      },
+      {
+        "name": "Kagoshima",
+        "nameKo": "가고시마"
+      }
+    ],
+    "portRoute": "도쿄 → 제주도 → 가고시마",
+    "priceInside": 829,
+    "priceOutside": 0,
+    "priceBalcony": 0,
+    "priceSuite": 0,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC Cruises, MSC Bellissima, Exterior, Copyrights - MSC Rights.jpg",
+    "title": "일본·한국 5박 크루즈",
+    "hashtags": [
+      "#한국/일본크루즈",
+      "#MSC크루즈",
+      "#MSCBellissima",
+      "#도쿄",
+      "#제주도"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/10/17/14/06/26/791fca64-e3ea-4efa-8cbe-fd3d2225224d/Tokyo%20at%20night%20Jezael%20Melgoza.jpg",
+    "portImagePort": "Tokyo"
+  },
+  {
+    "ref": "MSCBE20260510TYOTYO",
+    "shipSlug": "msc-bellissima",
+    "shipTitle": "MSC Bellissima",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-05-10",
+    "dateTo": "2026-05-17",
+    "nights": 7,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "Japan",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "일본",
+      "한국"
+    ],
+    "destination": "korea",
+    "startsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "endsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "ports": [
+      {
+        "name": "Tokyo",
+        "nameKo": "도쿄"
+      },
+      {
+        "name": "Kobe",
+        "nameKo": "고베"
+      },
+      {
+        "name": "Busan",
+        "nameKo": "부산"
+      },
+      {
+        "name": "Kagoshima",
+        "nameKo": "가고시마"
+      }
+    ],
+    "portRoute": "도쿄 → 고베 → 부산 → 가고시마",
+    "priceInside": 859,
+    "priceOutside": 1019,
+    "priceBalcony": 1239,
+    "priceSuite": 2029,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC Cruises, MSC Bellissima, Exterior, Copyrights - MSC Rights.jpg",
+    "title": "일본·한국 7박 크루즈",
+    "hashtags": [
+      "#한국/일본크루즈",
+      "#MSC크루즈",
+      "#MSCBellissima",
+      "#도쿄",
+      "#고베"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/10/17/14/06/26/9afe989d-529f-4a22-843b-9368b1b22128/Tokyo%20Shopping%20Jezael%20Melgoza.jpg",
+    "portImagePort": "Tokyo"
+  },
+  {
+    "ref": "MSCBE20260609TYOKEE",
+    "shipSlug": "msc-bellissima",
+    "shipTitle": "MSC Bellissima",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-06-09",
+    "dateTo": "2026-06-13",
+    "nights": 4,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "Japan",
+      "Taiwan"
+    ],
+    "countriesKo": [
+      "일본",
+      "대만"
+    ],
+    "destination": "korea",
+    "startsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "endsAt": {
+      "name": "Keelung (Chilung)",
+      "nameKo": "지룽",
+      "country": "Taiwan",
+      "countryKo": "대만"
+    },
+    "ports": [
+      {
+        "name": "Tokyo",
+        "nameKo": "도쿄"
+      },
+      {
+        "name": "Keelung (Chilung)",
+        "nameKo": "지룽"
+      }
+    ],
+    "portRoute": "도쿄 → 지룽",
+    "priceInside": 309,
+    "priceOutside": 369,
+    "priceBalcony": 469,
+    "priceSuite": 979,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC Cruises, MSC Bellissima, Exterior, Copyrights - MSC Rights.jpg",
+    "title": "일본·대만 4박 크루즈",
+    "hashtags": [
+      "#한국/일본크루즈",
+      "#MSC크루즈",
+      "#MSCBellissima",
+      "#도쿄",
+      "#지룽"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/10/17/14/12/12/9d5f5013-734b-4af1-8a66-f2799565802a/Tokyo%20Matt%20Ketchum.jpg",
+    "portImagePort": "Tokyo"
+  },
+  {
+    "ref": "CELEBML12I177-010726",
+    "shipSlug": "celebrity-millennium",
+    "shipTitle": "Celebrity Millennium",
+    "operator": "Celebrity Cruises",
+    "operatorShort": "Celebrity",
+    "dateFrom": "2026-07-01",
+    "dateTo": "2026-07-13",
+    "nights": 12,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "Japan",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "일본",
+      "한국"
+    ],
+    "destination": "korea",
+    "startsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "endsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "ports": [
+      {
+        "name": "Tokyo",
+        "nameKo": "도쿄"
+      },
+      {
+        "name": "Osaka",
+        "nameKo": "오사카"
+      },
+      {
+        "name": "Kochi",
+        "nameKo": "고치"
+      },
+      {
+        "name": "Busan",
+        "nameKo": "부산"
+      },
+      {
+        "name": "Nagasaki",
+        "nameKo": "나가사키"
+      },
+      {
+        "name": "Kagoshima",
+        "nameKo": "가고시마"
+      },
+      {
+        "name": "Shimizu",
+        "nameKo": "시미즈"
+      }
+    ],
+    "portRoute": "도쿄 → 오사카 → 고치 → 부산 → 나가사키 → 가고시마 → 시미즈",
+    "priceInside": 1418,
+    "priceOutside": 0,
+    "priceBalcony": 0,
+    "priceSuite": 0,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/02/05/10/02/21/762e4e18-c89e-4ccd-ac4c-59d143cbb87b/Celebrity Cruises, Celebrity Millenium, Exterior.jpg",
+    "title": "일본·한국 12박 크루즈",
+    "hashtags": [
+      "#한국/일본크루즈",
+      "#셀러브리티크루즈",
+      "#CelebrityMillennium",
+      "#도쿄",
+      "#오사카"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/09/23/13/14/50/c2e730cd-2d35-4bd1-b099-f9a8b0c8582b/castle-5476737.jpg",
+    "portImagePort": "Osaka"
+  },
+  {
+    "ref": "CELEBML12I180-060826",
+    "shipSlug": "celebrity-millennium",
+    "shipTitle": "Celebrity Millennium",
+    "operator": "Celebrity Cruises",
+    "operatorShort": "Celebrity",
+    "dateFrom": "2026-08-06",
+    "dateTo": "2026-08-18",
+    "nights": 12,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "Japan",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "일본",
+      "한국"
+    ],
+    "destination": "korea",
+    "startsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "endsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "ports": [
+      {
+        "name": "Tokyo",
+        "nameKo": "도쿄"
+      },
+      {
+        "name": "Osaka",
+        "nameKo": "오사카"
+      },
+      {
+        "name": "Kochi",
+        "nameKo": "고치"
+      },
+      {
+        "name": "Busan",
+        "nameKo": "부산"
+      },
+      {
+        "name": "Nagasaki",
+        "nameKo": "나가사키"
+      },
+      {
+        "name": "Kagoshima",
+        "nameKo": "가고시마"
+      },
+      {
+        "name": "Shimizu",
+        "nameKo": "시미즈"
+      }
+    ],
+    "portRoute": "도쿄 → 오사카 → 고치 → 부산 → 나가사키 → 가고시마 → 시미즈",
+    "priceInside": 0,
+    "priceOutside": 0,
+    "priceBalcony": 0,
+    "priceSuite": 0,
+    "currency": "USD",
+    "availability": "closed",
+    "image": "https://assets.widgety.co.uk/2025/02/05/10/02/21/762e4e18-c89e-4ccd-ac4c-59d143cbb87b/Celebrity Cruises, Celebrity Millenium, Exterior.jpg",
+    "title": "일본·한국 12박 크루즈",
+    "hashtags": [
+      "#한국/일본크루즈",
+      "#셀러브리티크루즈",
+      "#CelebrityMillennium",
+      "#도쿄",
+      "#오사카"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/09/23/13/14/51/80c7ef49-e46d-44b1-925b-59d3bad5a791/river-5572289.jpg",
+    "portImagePort": "Osaka"
+  },
+  {
+    "ref": "MSCVI20260509SOUSOU",
+    "shipSlug": "msc-virtuosa",
+    "shipTitle": "MSC Virtuosa",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-05-09",
+    "dateTo": "2026-05-16",
+    "nights": 7,
+    "regions": [
+      "Europe",
+      "Northern Europe"
+    ],
+    "countries": [
+      "England",
+      "Scotland",
+      "Norway"
+    ],
+    "countriesKo": [
+      "England",
+      "Scotland",
+      "노르웨이"
+    ],
+    "destination": "northern-europe",
+    "startsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "endsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "ports": [
+      {
+        "name": "Southampton",
+        "nameKo": "사우샘프턴"
+      },
+      {
+        "name": "Queensferry",
+        "nameKo": "Queensferry"
+      },
+      {
+        "name": "Sandnes",
+        "nameKo": "Sandnes"
+      },
+      {
+        "name": "Haugesund",
+        "nameKo": "Haugesund"
+      },
+      {
+        "name": "Kristiansand",
+        "nameKo": "Kristiansand"
+      }
+    ],
+    "portRoute": "사우샘프턴 → Queensferry → Sandnes → Haugesund → Kristiansand",
+    "priceInside": 579,
+    "priceOutside": 749,
+    "priceBalcony": 899,
+    "priceSuite": 1649,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg",
+    "title": "England·Scotland·노르웨이 7박 크루즈",
+    "hashtags": [
+      "#북유럽크루즈",
+      "#MSC크루즈",
+      "#MSCVirtuosa",
+      "#사우샘프턴",
+      "#Queensferry"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2022/03/17/10/12/43/c9c5d656-ac0d-4fda-b174-5f6fe4bc4576/Southampton%201.jpg",
+    "portImagePort": "Southampton"
+  },
+  {
+    "ref": "MSCVI20260620SOUSOU",
+    "shipSlug": "msc-virtuosa",
+    "shipTitle": "MSC Virtuosa",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-06-20",
+    "dateTo": "2026-06-27",
+    "nights": 7,
+    "regions": [
+      "Europe",
+      "Northern Europe"
+    ],
+    "countries": [
+      "England",
+      "France",
+      "Spain"
+    ],
+    "countriesKo": [
+      "England",
+      "프랑스",
+      "스페인"
+    ],
+    "destination": "northern-europe",
+    "startsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "endsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "ports": [
+      {
+        "name": "Southampton",
+        "nameKo": "사우샘프턴"
+      },
+      {
+        "name": "La Rochelle",
+        "nameKo": "La Rochelle"
+      },
+      {
+        "name": "Bilbao",
+        "nameKo": "Bilbao"
+      },
+      {
+        "name": "La Coruña",
+        "nameKo": "La Coruña"
+      },
+      {
+        "name": "Cherbourg",
+        "nameKo": "Cherbourg"
+      }
+    ],
+    "portRoute": "사우샘프턴 → La Rochelle → Bilbao → La Coruña → Cherbourg",
+    "priceInside": 649,
+    "priceOutside": 769,
+    "priceBalcony": 929,
+    "priceSuite": 2529,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg",
+    "title": "England·프랑스·스페인 7박 크루즈",
+    "hashtags": [
+      "#북유럽크루즈",
+      "#MSC크루즈",
+      "#MSCVirtuosa",
+      "#사우샘프턴",
+      "#La Rochelle"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2022/03/17/10/16/04/2ab436c4-e637-4198-967f-1fdac936f610/GBSOU%20Southampton%20Connor%20Holyday.jpg",
+    "portImagePort": "Southampton"
+  },
+  {
+    "ref": "MSCVI20260704SOUSOU",
+    "shipSlug": "msc-virtuosa",
+    "shipTitle": "MSC Virtuosa",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-07-04",
+    "dateTo": "2026-07-11",
+    "nights": 7,
+    "regions": [
+      "Europe",
+      "Northern Europe"
+    ],
+    "countries": [
+      "England",
+      "France",
+      "Spain"
+    ],
+    "countriesKo": [
+      "England",
+      "프랑스",
+      "스페인"
+    ],
+    "destination": "northern-europe",
+    "startsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "endsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "ports": [
+      {
+        "name": "Southampton",
+        "nameKo": "사우샘프턴"
+      },
+      {
+        "name": "La Rochelle",
+        "nameKo": "La Rochelle"
+      },
+      {
+        "name": "Bilbao",
+        "nameKo": "Bilbao"
+      },
+      {
+        "name": "La Coruña",
+        "nameKo": "La Coruña"
+      },
+      {
+        "name": "Cherbourg",
+        "nameKo": "Cherbourg"
+      }
+    ],
+    "portRoute": "사우샘프턴 → La Rochelle → Bilbao → La Coruña → Cherbourg",
+    "priceInside": 699,
+    "priceOutside": 879,
+    "priceBalcony": 949,
+    "priceSuite": 3129,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg",
+    "title": "England·프랑스·스페인 7박 크루즈",
+    "hashtags": [
+      "#북유럽크루즈",
+      "#MSC크루즈",
+      "#MSCVirtuosa",
+      "#사우샘프턴",
+      "#La Rochelle"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2022/03/17/10/38/01/f4ec125a-4b43-42ef-9a66-33391a09470c/GBSOU%20Southampton%20-%20England%20-%20Southampton%20Bargate.png",
+    "portImagePort": "Southampton"
+  },
+  {
+    "ref": "MSCVI20260829SOUSOU",
+    "shipSlug": "msc-virtuosa",
+    "shipTitle": "MSC Virtuosa",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-08-29",
+    "dateTo": "2026-09-05",
+    "nights": 7,
+    "regions": [
+      "Europe",
+      "Northern Europe"
+    ],
+    "countries": [
+      "England",
+      "Norway"
+    ],
+    "countriesKo": [
+      "England",
+      "노르웨이"
+    ],
+    "destination": "northern-europe",
+    "startsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "endsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "ports": [
+      {
+        "name": "Southampton",
+        "nameKo": "사우샘프턴"
+      },
+      {
+        "name": "Haugesund",
+        "nameKo": "Haugesund"
+      },
+      {
+        "name": "Olden",
+        "nameKo": "Olden"
+      },
+      {
+        "name": "Ålesund",
+        "nameKo": "Ålesund"
+      },
+      {
+        "name": "Kristiansand",
+        "nameKo": "Kristiansand"
+      }
+    ],
+    "portRoute": "사우샘프턴 → Haugesund → Olden → Ålesund → Kristiansand",
+    "priceInside": 729,
+    "priceOutside": 939,
+    "priceBalcony": 1149,
+    "priceSuite": 2689,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg",
+    "title": "England·노르웨이 7박 크루즈",
+    "hashtags": [
+      "#북유럽크루즈",
+      "#MSC크루즈",
+      "#MSCVirtuosa",
+      "#사우샘프턴",
+      "#Haugesund"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2022/03/17/10/42/15/00c1c3f3-0337-4318-8739-e8adf58c9257/GBSOU%20-%20Southampton,%20England.%20Houndwell%20Park%20Mangopear%20Creative.jpg",
+    "portImagePort": "Southampton"
+  },
+  {
+    "ref": "MSCVI20260905SOUSOU",
+    "shipSlug": "msc-virtuosa",
+    "shipTitle": "MSC Virtuosa",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-09-05",
+    "dateTo": "2026-09-12",
+    "nights": 7,
+    "regions": [
+      "Europe",
+      "Northern Europe"
+    ],
+    "countries": [
+      "England",
+      "France",
+      "Spain"
+    ],
+    "countriesKo": [
+      "England",
+      "프랑스",
+      "스페인"
+    ],
+    "destination": "northern-europe",
+    "startsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "endsAt": {
+      "name": "Southampton",
+      "nameKo": "사우샘프턴",
+      "country": "England",
+      "countryKo": "England"
+    },
+    "ports": [
+      {
+        "name": "Southampton",
+        "nameKo": "사우샘프턴"
+      },
+      {
+        "name": "La Rochelle",
+        "nameKo": "La Rochelle"
+      },
+      {
+        "name": "Bilbao",
+        "nameKo": "Bilbao"
+      },
+      {
+        "name": "La Coruña",
+        "nameKo": "La Coruña"
+      },
+      {
+        "name": "Cherbourg",
+        "nameKo": "Cherbourg"
+      }
+    ],
+    "portRoute": "사우샘프턴 → La Rochelle → Bilbao → La Coruña → Cherbourg",
+    "priceInside": 749,
+    "priceOutside": 909,
+    "priceBalcony": 989,
+    "priceSuite": 2979,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/09/15/09/50/55/962ef0f6-30dc-4704-8ba4-8baecba6e6cb/MSC Cruises MSC Virtuosa Exterior 1 ©MSC Cruises.jpg",
+    "title": "England·프랑스·스페인 7박 크루즈",
+    "hashtags": [
+      "#북유럽크루즈",
+      "#MSC크루즈",
+      "#MSCVirtuosa",
+      "#사우샘프턴",
+      "#La Rochelle"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/09/23/13/14/41/cab4fdeb-e2ac-48a6-8cf3-72a0f0fa0051/pexels-arthur-davion-273401079-12871833.jpg",
+    "portImagePort": "La Rochelle"
+  },
+  {
+    "ref": "RCISC04I849-060526",
+    "shipSlug": "spectrum-of-the-seas",
+    "shipTitle": "Spectrum of the Seas",
+    "operator": "Royal Caribbean International",
+    "operatorShort": "RCI",
+    "dateFrom": "2026-05-06",
+    "dateTo": "2026-05-10",
+    "nights": 4,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "China",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "중국",
+      "한국"
+    ],
+    "destination": "asia",
+    "startsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "endsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "ports": [
+      {
+        "name": "Baoshan Pt",
+        "nameKo": "Baoshan Pt"
+      },
+      {
+        "name": "Busan",
+        "nameKo": "부산"
+      }
+    ],
+    "portRoute": "Baoshan Pt → 부산",
+    "priceInside": 438,
+    "priceOutside": 503,
+    "priceBalcony": 542,
+    "priceSuite": 789,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg",
+    "title": "중국·한국 4박 크루즈",
+    "hashtags": [
+      "#아시아크루즈",
+      "#로얄캐리비안",
+      "#SpectrumoftheSeas",
+      "#Baoshan Pt",
+      "#부산"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/09/23/13/15/07/338af118-5c97-4991-a0b3-0936f668b621/songyang-kcJyqLM3sGA-unsplash.jpg",
+    "portImagePort": "Baoshan Pt"
+  },
+  {
+    "ref": "RCISC03I212-120626",
+    "shipSlug": "spectrum-of-the-seas",
+    "shipTitle": "Spectrum of the Seas",
+    "operator": "Royal Caribbean International",
+    "operatorShort": "RCI",
+    "dateFrom": "2026-06-12",
+    "dateTo": "2026-06-15",
+    "nights": 3,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "China",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "중국",
+      "한국"
+    ],
+    "destination": "asia",
+    "startsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "endsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "ports": [
+      {
+        "name": "Baoshan Pt",
+        "nameKo": "Baoshan Pt"
+      },
+      {
+        "name": "Seogwipo",
+        "nameKo": "Seogwipo"
+      }
+    ],
+    "portRoute": "Baoshan Pt → Seogwipo",
+    "priceInside": 321,
+    "priceOutside": 382,
+    "priceBalcony": 435,
+    "priceSuite": 629,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg",
+    "title": "중국·한국 3박 크루즈",
+    "hashtags": [
+      "#아시아크루즈",
+      "#로얄캐리비안",
+      "#SpectrumoftheSeas",
+      "#Baoshan Pt",
+      "#Seogwipo"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/09/23/13/15/08/4085bbec-2a47-49cd-9d8a-3427537f37c0/songyang-hcgECaTW-YU-unsplash.jpg",
+    "portImagePort": "Baoshan Pt"
+  },
+  {
+    "ref": "RCISC03I213-310726",
+    "shipSlug": "spectrum-of-the-seas",
+    "shipTitle": "Spectrum of the Seas",
+    "operator": "Royal Caribbean International",
+    "operatorShort": "RCI",
+    "dateFrom": "2026-07-31",
+    "dateTo": "2026-08-03",
+    "nights": 3,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "China",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "중국",
+      "한국"
+    ],
+    "destination": "asia",
+    "startsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "endsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "ports": [
+      {
+        "name": "Baoshan Pt",
+        "nameKo": "Baoshan Pt"
+      },
+      {
+        "name": "Seogwipo",
+        "nameKo": "Seogwipo"
+      }
+    ],
+    "portRoute": "Baoshan Pt → Seogwipo",
+    "priceInside": 465,
+    "priceOutside": 530,
+    "priceBalcony": 575,
+    "priceSuite": 780,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg",
+    "title": "중국·한국 3박 크루즈",
+    "hashtags": [
+      "#아시아크루즈",
+      "#로얄캐리비안",
+      "#SpectrumoftheSeas",
+      "#Baoshan Pt",
+      "#Seogwipo"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/10/23/18/21/29/91252f23-6450-425f-9cee-4517ab43e129/adnan-ami-5GgFSc-hm_I-unsplash.jpg",
+    "portImagePort": "Seogwipo"
+  },
+  {
+    "ref": "RCISC03I214-210826",
+    "shipSlug": "spectrum-of-the-seas",
+    "shipTitle": "Spectrum of the Seas",
+    "operator": "Royal Caribbean International",
+    "operatorShort": "RCI",
+    "dateFrom": "2026-08-21",
+    "dateTo": "2026-08-24",
+    "nights": 3,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "China",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "중국",
+      "한국"
+    ],
+    "destination": "asia",
+    "startsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "endsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "ports": [
+      {
+        "name": "Baoshan Pt",
+        "nameKo": "Baoshan Pt"
+      },
+      {
+        "name": "Seogwipo",
+        "nameKo": "Seogwipo"
+      }
+    ],
+    "portRoute": "Baoshan Pt → Seogwipo",
+    "priceInside": 439,
+    "priceOutside": 524,
+    "priceBalcony": 549,
+    "priceSuite": 754,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg",
+    "title": "중국·한국 3박 크루즈",
+    "hashtags": [
+      "#아시아크루즈",
+      "#로얄캐리비안",
+      "#SpectrumoftheSeas",
+      "#Baoshan Pt",
+      "#Seogwipo"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/10/23/18/21/29/e8eccfbe-0d58-4c98-b488-3183b81076f8/joongil-lee-LcFCp7EDFpk-unsplash.jpg",
+    "portImagePort": "Seogwipo"
+  },
+  {
+    "ref": "RCISC04I859-190926",
+    "shipSlug": "spectrum-of-the-seas",
+    "shipTitle": "Spectrum of the Seas",
+    "operator": "Royal Caribbean International",
+    "operatorShort": "RCI",
+    "dateFrom": "2026-09-19",
+    "dateTo": "2026-09-23",
+    "nights": 4,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "China",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "중국",
+      "한국"
+    ],
+    "destination": "asia",
+    "startsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "endsAt": {
+      "name": "Baoshan Pt",
+      "nameKo": "Baoshan Pt",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "ports": [
+      {
+        "name": "Baoshan Pt",
+        "nameKo": "Baoshan Pt"
+      },
+      {
+        "name": "Seogwipo",
+        "nameKo": "Seogwipo"
+      }
+    ],
+    "portRoute": "Baoshan Pt → Seogwipo",
+    "priceInside": 497,
+    "priceOutside": 566,
+    "priceBalcony": 607,
+    "priceSuite": 858,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI Spectrum of the Seas.jpg",
+    "title": "중국·한국 4박 크루즈",
+    "hashtags": [
+      "#아시아크루즈",
+      "#로얄캐리비안",
+      "#SpectrumoftheSeas",
+      "#Baoshan Pt",
+      "#Seogwipo"
+    ],
+    "portImage": "https://assets.widgety.co.uk/2024/10/23/18/21/29/818cc52a-35c3-4288-a750-f57d71c8c011/sung-jin-cho-yza5kpBVcUI-unsplash.jpg",
+    "portImagePort": "Seogwipo"
+  }
+]
