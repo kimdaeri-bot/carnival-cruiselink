@@ -74,6 +74,7 @@
           renderPage(localCruise, localShip, shipDetail, null);
           initAllSliders();
           renderItinerary(holiday);
+          initDaySliders();
           renderPricing(holiday, shipDetail);
           if (shipLive) {
             const liveDetail = normalizeShipLive(shipLive);
@@ -447,18 +448,20 @@
 
           // 이미지 슬라이더 (최대 3장)
           const imgHtml = portImages.length > 0 ? (() => {
-            const imgs = portImages.slice(0,3);
+            const imgs = portImages.slice(0, 3);
             if (imgs.length === 1) {
               return `<div class="day-card-img-wrap"><img src="${imgs[0].href}" alt="${portName}" class="day-card-main-img" loading="lazy"></div>`;
             }
             const dayId = 'day-img-' + day.day;
-            return `<div class="day-img-slider" id="${dayId}">
-              <div class="day-img-slides" style="display:flex;overflow:hidden">
-                ${imgs.map(i=>`<img src="${i.href}" alt="${portName}" class="day-card-main-img" style="min-width:100%;object-fit:cover;height:220px" loading="lazy">`).join('')}
+            return `<div class="day-img-slider" id="${dayId}" data-total="${imgs.length}">
+              <div class="day-img-wrap" style="overflow:hidden">
+                <div class="day-img-slides" style="display:flex;transition:transform 0.35s ease">
+                  ${imgs.map(i=>`<img src="${i.href}" alt="${portName}" class="day-card-main-img" style="min-width:100%;object-fit:cover;height:220px;flex-shrink:0" loading="lazy">`).join('')}
+                </div>
               </div>
-              ${imgs.length>1?`<div style="position:relative;display:flex;justify-content:center;gap:6px;padding:6px 0;background:#f5f5f5">
-                ${imgs.map((_,k)=>`<button style="width:8px;height:8px;border-radius:50%;border:none;background:${k===0?'var(--navy)':'#ccc'};cursor:pointer;padding:0" onclick="slideDayImg('${dayId}',${k},${imgs.length})"></button>`).join('')}
-              </div>`:''}
+              <div class="day-img-dots" style="display:flex;justify-content:center;gap:6px;padding:6px 0;background:#f5f5f5">
+                ${imgs.map((_,k)=>`<button class="day-dot${k===0?' day-dot-active':''}" data-idx="${k}" style="width:8px;height:8px;border-radius:50%;border:none;background:${k===0?'var(--navy)':'#ccc'};cursor:pointer;padding:0"></button>`).join('')}
+              </div>
             </div>`;
           })() : '';
 
@@ -480,14 +483,56 @@
       container.innerHTML = html;
     }
 
-    function slideDayImg(id, idx, total) {
-      const slider = document.getElementById(id);
+    function slideDayImg(slider, idx) {
+      if (typeof slider === 'string') slider = document.getElementById(slider);
       if (!slider) return;
+      const total = parseInt(slider.dataset.total) || 1;
+      idx = (idx + total) % total;
+      slider.dataset.current = idx;
       const slides = slider.querySelector('.day-img-slides');
-      if (slides) slides.scrollLeft = slides.offsetWidth * idx;
-      // 닷 업데이트
-      slider.querySelectorAll('button').forEach((b, i) => {
+      if (slides) slides.style.transform = `translateX(-${idx * 100}%)`;
+      slider.querySelectorAll('.day-dot').forEach((b, i) => {
         b.style.background = i === idx ? 'var(--navy)' : '#ccc';
+        b.classList.toggle('day-dot-active', i === idx);
+      });
+    }
+
+    function initDaySliders() {
+      document.querySelectorAll('.day-img-slider').forEach(slider => {
+        // 도트 클릭
+        slider.querySelectorAll('.day-dot').forEach((dot, i) => {
+          dot.addEventListener('click', () => slideDayImg(slider, i));
+        });
+        // 터치 스와이프
+        const wrap = slider.querySelector('.day-img-wrap');
+        if (!wrap) return;
+        let _tx = 0, _ty = 0, _sw = false;
+        wrap.addEventListener('touchstart', e => {
+          _tx = e.touches[0].clientX; _ty = e.touches[0].clientY; _sw = false;
+        }, { passive: true });
+        wrap.addEventListener('touchmove', e => {
+          const dx = e.touches[0].clientX - _tx;
+          const dy = e.touches[0].clientY - _ty;
+          if (!_sw && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) _sw = true;
+          if (_sw) e.preventDefault();
+        }, { passive: false });
+        wrap.addEventListener('touchend', e => {
+          const dx = e.changedTouches[0].clientX - _tx;
+          if (_sw && Math.abs(dx) > 40) {
+            slideDayImg(slider, parseInt(slider.dataset.current || 0) + (dx < 0 ? 1 : -1));
+          }
+          _sw = false;
+        });
+        // 마우스 드래그
+        let _mx = 0, _mdown = false, _mdist = 0;
+        wrap.addEventListener('mousedown', e => { _mdown = true; _mx = e.pageX; _mdist = 0; });
+        wrap.addEventListener('mousemove', e => { if (_mdown) _mdist = Math.abs(e.pageX - _mx); });
+        wrap.addEventListener('mouseup', e => {
+          if (!_mdown) return; _mdown = false;
+          const dx = e.pageX - _mx;
+          if (_mdist > 40) slideDayImg(slider, parseInt(slider.dataset.current || 0) + (dx < 0 ? 1 : -1));
+        });
+        wrap.addEventListener('mouseleave', () => { _mdown = false; });
       });
     }
 
@@ -711,6 +756,7 @@
 
     function initAllSliders() {
       document.querySelectorAll('.facility-slider').forEach(el => initSlider(el.id));
+      initDaySliders();
     }
 
     function switchShipTab(el, panelId) {
