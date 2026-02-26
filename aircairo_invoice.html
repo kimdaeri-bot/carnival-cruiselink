@@ -966,11 +966,20 @@ function parsePNR() {
     document.getElementById('flt2seg').value = `${f2[4]}-${f2[5]}`;
     msg.push(`✓ 오는편: SM ${f2[1]} / ${f2[4]}→${f2[5]} / ${f2[3]}`);
   }
-  const paxM = [...raw.matchAll(/\d+\.([A-Z]+\/[A-Z\s]+(?:MR|MS|MSTR|INF))/g)];
+  // PAX 이름 파싱 — 타이틀(MR/MS 등) 선택적, 하이픈 허용, 각 줄 기준 매칭
+  const paxM = [...raw.matchAll(/^\s*\d+\s*\.\s*([A-Z][A-Z\-]+\/[A-Z][A-Z\-\s]*(?:MR|MRS|MS|MSTR|MISS|CHD|INF|[A-Z])?)/gm)];
   if (paxM.length > 0) {
-    parsedPaxList = paxM.map(m => m[1].trim());
+    parsedPaxList = paxM.map(m => m[1].replace(/\s+/g,' ').trim());
     document.getElementById('paxListText').value = parsedPaxList.join('\n');
     msg.push(`✓ 승객: ${parsedPaxList.length}명 파싱 완료`);
+  } else {
+    // 폴백: 타이틀 없이도 LAST/FIRST 패턴이면 수집
+    const paxFallback = [...raw.matchAll(/^\s*\d+\s*\.\s*([A-Z]{2,}\/[A-Z][A-Z\s\-]{1,30})/gm)];
+    if (paxFallback.length > 0) {
+      parsedPaxList = paxFallback.map(m => m[1].replace(/\s+/g,' ').trim());
+      document.getElementById('paxListText').value = parsedPaxList.join('\n');
+      msg.push(`✓ 승객: ${parsedPaxList.length}명 파싱 완료 (폴백 패턴)`);
+    }
   }
   const res = document.getElementById('parseResult');
   res.style.display = 'block';
@@ -1043,6 +1052,7 @@ function filterPNR(raw) {
 }
 
 function updatePreview() {
+  try {
   document.getElementById('pv-issue-date').textContent = str('issueDate');
   document.getElementById('pv-handler').textContent = str('handler') + ' / ' + str('handlerTel');
   document.getElementById('pv-footer-contact').textContent = str('handlerEmail') + ' / ' + str('handlerTel');
@@ -1116,6 +1126,7 @@ function updatePreview() {
   remDiv.style.display = rem ? 'block' : 'none';
 
   if (manualScale !== null) applyScaleUI(manualScale);
+  } catch(e) { console.error('updatePreview error:', e); }
 }
 
 function applyScale(val) {
