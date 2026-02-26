@@ -89,12 +89,13 @@ const API = {
   },
 
   // Filter local cruises — dest 지정 시 분할 파일 로드
-  async filterCruises({ dest, operator, operators, ports, month, duration, limit, minDate } = {}) {
+  async filterCruises({ dest, operator, operators, ports, month, duration, limit, minDate, maxDate } = {}) {
     // dest 있으면 해당 목적지 파일만 로드
     const cruises = dest ? await this.loadCruisesByDest(dest) : await this.loadAllCruises();
     const now = minDate || new Date().toISOString().slice(0, 10);
     return cruises.filter(c => {
       if (c.dateFrom < now) return false;
+      if (maxDate && c.dateFrom > maxDate) return false;
       if (dest && c.destination !== dest) return false;
       // Multi-select operators
       if (operators?.length > 0 && !operators.some(op => c.operator?.includes(op))) return false;
@@ -144,20 +145,13 @@ const API = {
   },
 
   async getRecommendedCruises2(count = 12) {
-    const FEATURED_REFS_1 = new Set([
-      'MSCBE20260510TYOTYO','NCLENC-20260503-07-SEA-SEA','MSCEU20260417BCNBCN',
-      'MSCAM20260418MIAMIA','MSCER20260502KELKEL','MSCEU20261128DXBDXB',
-      'NCLAME-20260502-07-HNL-HNL','NCLJOY-20260425-18-MIA-SEA','NCLSPR-20261212-11-SYD-SYD',
-    ]);
-    // 지중해/카리브 분할 파일로 빠르게 로드 (대표 목적지)
-    const [med, car] = await Promise.all([
-      this.loadCruisesByDest('mediterranean'),
-      this.loadCruisesByDest('caribbean'),
-    ]);
-    const pool = [...med, ...car];
+    // mini 파일(58KB)에서 다양한 목적지 큐레이션
+    const mini = await this.getMiniCruises(null, 999);
     const now = new Date().toISOString().slice(0, 10);
-    return pool
-      .filter(c => c.dateFrom >= now && !FEATURED_REFS_1.has(c.ref))
+    const featured1 = await this.getRecommendedCruises(999);
+    const featuredRefs = new Set(featured1.map(c => c.ref));
+    return mini
+      .filter(c => c.dateFrom >= now && !featuredRefs.has(c.ref))
       .sort((a, b) => a.dateFrom.localeCompare(b.dateFrom))
       .slice(0, count);
   },

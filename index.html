@@ -43,31 +43,52 @@
         <label>출발도시</label>
         <div class="multi-select" id="msPort" onclick="toggleMulti(this)">
           <div class="multi-select-display">전체</div>
-          <div class="multi-select-dropdown" id="msPortDropdown"></div>
+          <div class="multi-select-dropdown" id="msPortDropdown" style="min-width:260px" onclick="event.stopPropagation()">
+            <div style="padding:8px 8px 4px">
+              <input id="portSearch" type="text" placeholder="도시 검색..." style="width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid #ddd;border-radius:6px;font-size:0.88rem" oninput="filterPortOptions(this.value)" onclick="event.stopPropagation()">
+            </div>
+            <div id="portPresets" style="display:flex;flex-wrap:wrap;gap:4px;padding:4px 8px 6px;border-bottom:1px solid #eee">
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="마이애미">마이애미</button>
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="포트 캐내버럴">포트 캐내버럴</button>
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="바르셀로나">바르셀로나</button>
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="포트 로더데일">포트 로더데일</button>
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="치비타베키아">치비타베키아</button>
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="갈베스턴">갈베스턴</button>
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="마르세유">마르세유</button>
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="피레우스">피레우스</button>
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="시애틀">시애틀</button>
+              <button class="port-preset" onclick="togglePortPreset(event,this)" data-value="사우샘프턴">사우샘프턴</button>
+            </div>
+            <div id="msPortOptions"></div>
+          </div>
         </div>
       </div>
       <div class="filter-group">
         <label>선사</label>
         <div class="multi-select" id="msOperator" onclick="toggleMulti(this)">
           <div class="multi-select-display">전체</div>
-          <div class="multi-select-dropdown">
-            <div class="ms-option" data-value="MSC" onclick="toggleOption(event, this)">MSC 크루즈</div>
-            <div class="ms-option" data-value="Norwegian" onclick="toggleOption(event, this)">노르웨이전 크루즈 라인</div>
-            <div class="ms-option" data-value="Royal Caribbean" onclick="toggleOption(event, this)">로얄 캐리비안</div>
-            <div class="ms-option" data-value="Celebrity" onclick="toggleOption(event, this)">셀러브리티 크루즈</div>
-            <div class="ms-option" data-value="Princess" onclick="toggleOption(event, this)">프린세스 크루즈</div>
-            <div class="ms-option" data-value="Carnival" onclick="toggleOption(event, this)">카니발 크루즈 라인</div>
-            <div class="ms-option" data-value="Oceania" onclick="toggleOption(event, this)">오세아니아 크루즈</div>
-            <div class="ms-option" data-value="Regent" onclick="toggleOption(event, this)">리젠트 세븐시즈</div>
-            <div class="ms-option" data-value="Explora" onclick="toggleOption(event, this)">엑스플로라 저니스</div>
+          <div class="multi-select-dropdown" style="min-width:300px;max-height:none;overflow:visible">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0">
+              <div class="ms-option" data-value="Royal Caribbean" onclick="toggleOption(event, this)">로얄 캐리비안</div>
+              <div class="ms-option" data-value="MSC" onclick="toggleOption(event, this)">MSC 크루즈</div>
+              <div class="ms-option" data-value="Carnival" onclick="toggleOption(event, this)">카니발</div>
+              <div class="ms-option" data-value="Norwegian" onclick="toggleOption(event, this)">노르웨이전</div>
+              <div class="ms-option" data-value="Celebrity" onclick="toggleOption(event, this)">셀러브리티</div>
+              <div class="ms-option" data-value="Princess" onclick="toggleOption(event, this)">프린세스</div>
+              <div class="ms-option" data-value="Oceania" onclick="toggleOption(event, this)">오세아니아</div>
+              <div class="ms-option" data-value="Regent" onclick="toggleOption(event, this)">리젠트</div>
+              <div class="ms-option" data-value="Explora" onclick="toggleOption(event, this)">엑스플로라</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="filter-group">
-        <label>출발월</label>
-        <select id="filterMonth">
-          <option value="">전체</option>
-        </select>
+      <div class="filter-group" style="flex:1.5;min-width:200px">
+        <label>출발 기간</label>
+        <div style="display:flex;gap:4px;align-items:center">
+          <input type="date" id="filterDateFrom" style="flex:1;padding:9px 6px;border:1px solid var(--gray-300);border-radius:var(--radius);font-size:0.88rem;min-width:0">
+          <span style="color:#999;font-size:0.8rem;flex-shrink:0">~</span>
+          <input type="date" id="filterDateTo" style="flex:1;padding:9px 6px;border:1px solid var(--gray-300);border-radius:var(--radius);font-size:0.88rem;min-width:0">
+        </div>
       </div>
       <div class="filter-group">
         <label>기간</label>
@@ -279,6 +300,13 @@
       display.textContent = selected.length === 0 ? '전체' : selected.map(o => o.textContent).join(', ');
     }
     function getMultiValues(msEl) {
+      if (msEl && msEl.id === 'msPort') {
+        const vals = new Set([
+          ...[...document.querySelectorAll('.port-preset.selected')].map(b => b.dataset.value),
+          ...[...document.querySelectorAll('#msPortOptions .ms-option.selected')].map(o => o.dataset.value),
+        ]);
+        return [...vals];
+      }
       return [...msEl.querySelectorAll('.ms-option.selected')].map(o => o.dataset.value);
     }
     // Close multi-select on outside click
@@ -290,26 +318,54 @@
 
     function updateDepartureOptions() {
       const dest = document.getElementById('filterDest').value;
-      const dropdown = document.getElementById('msPortDropdown');
       const msPort = document.getElementById('msPort');
-      // Reset
-      dropdown.innerHTML = '';
+      const optionsEl = document.getElementById('msPortOptions');
+      // 기존 목적지별 옵션 초기화
+      optionsEl.innerHTML = '';
+      // 프리셋 선택 해제
+      document.querySelectorAll('.port-preset.selected').forEach(b => b.classList.remove('selected'));
       msPort.querySelector('.multi-select-display').textContent = '전체';
       if (!dest || !DEST_PORTS[dest]) return;
       DEST_PORTS[dest].forEach(port => {
-        dropdown.innerHTML += `<div class="ms-option" data-value="${port}" onclick="toggleOption(event, this)">${port}</div>`;
+        optionsEl.innerHTML += `<div class="ms-option" data-value="${port}" onclick="toggleOption(event, this)">${port}</div>`;
       });
     }
 
-    // Populate month filter
-    const monthSelect = document.getElementById('filterMonth');
-    const now = new Date();
-    for (let i = 0; i < 24; i++) {
-      const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
-      const val = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-      const label = `${d.getFullYear()}년 ${d.getMonth() + 1}월`;
-      monthSelect.innerHTML += `<option value="${val}">${label}</option>`;
+    function togglePortPreset(e, btn) {
+      e.stopPropagation();
+      btn.classList.toggle('selected');
+      // 같은 값의 ms-option도 동기화
+      const val = btn.dataset.value;
+      document.querySelectorAll(`#msPortOptions .ms-option[data-value="${val}"]`).forEach(o => {
+        o.classList.toggle('selected', btn.classList.contains('selected'));
+      });
+      updatePortDisplay();
     }
+
+    function filterPortOptions(query) {
+      const q = query.trim().toLowerCase();
+      // 프리셋 버튼 필터
+      document.querySelectorAll('.port-preset').forEach(b => {
+        b.style.display = (!q || b.textContent.toLowerCase().includes(q)) ? '' : 'none';
+      });
+      // 목적지별 옵션 필터
+      document.querySelectorAll('#msPortOptions .ms-option').forEach(o => {
+        o.style.display = (!q || o.textContent.toLowerCase().includes(q)) ? '' : 'none';
+      });
+    }
+
+    function updatePortDisplay() {
+      const msPort = document.getElementById('msPort');
+      const selected = [...document.querySelectorAll('.port-preset.selected, #msPortOptions .ms-option.selected')];
+      const display = msPort.querySelector('.multi-select-display');
+      display.textContent = selected.length === 0 ? '전체' : selected.map(o => o.dataset.value || o.textContent).join(', ');
+    }
+
+
+
+    // 날짜 기본값 설정 (오늘~6개월 후)
+    const now = new Date();
+    document.getElementById('filterDateFrom').value = now.toISOString().slice(0,10);
 
     // Promo slider
     let promoIdx = 0;
@@ -406,13 +462,15 @@
       const dest = document.getElementById('filterDest').value;
       const operators = getMultiValues(document.getElementById('msOperator'));
       const ports = getMultiValues(document.getElementById('msPort'));
-      const month = document.getElementById('filterMonth').value;
+      const dateFrom = document.getElementById('filterDateFrom').value;
+      const dateTo = document.getElementById('filterDateTo').value;
       const dur = document.getElementById('filterDuration').value;
       const params = new URLSearchParams();
       if (dest) params.set('dest', dest);
       if (operators.length) params.set('operators', operators.join(','));
       if (ports.length) params.set('ports', ports.join(','));
-      if (month) params.set('month', month);
+      if (dateFrom) params.set('dateFrom', dateFrom);
+      if (dateTo) params.set('dateTo', dateTo);
       if (dur) params.set('duration', dur);
       location.href = `search.html?${params.toString()}`;
     }

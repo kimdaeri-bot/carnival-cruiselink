@@ -69,6 +69,8 @@
     const operators = params.get('operators') ? params.get('operators').split(',') : [];
     const ports = params.get('ports') ? params.get('ports').split(',') : [];
     const month = params.get('month') || '';
+    const dateFrom = params.get('dateFrom') || '';
+    const dateTo = params.get('dateTo') || '';
     const duration = params.get('duration') || '';
 
     // Show search tags
@@ -79,6 +81,7 @@
     ports.forEach(p => tagsEl.innerHTML += `<span class="search-tag">🚢 ${p}</span>`);
     operators.forEach(o => tagsEl.innerHTML += `<span class="search-tag">⚓ ${Translations.operatorName(o==='MSC'?'MSC Cruises':'Norwegian Cruise Line')}</span>`);
     if (month) tagsEl.innerHTML += `<span class="search-tag">📅 ${month.replace('-','년 ')}월</span>`;
+    if (dateFrom || dateTo) tagsEl.innerHTML += `<span class="search-tag">📅 ${dateFrom||'~'} ~ ${dateTo||'~'}</span>`;
     if (duration) tagsEl.innerHTML += `<span class="search-tag">⏱️ ${durNames[duration]||duration}</span>`;
 
     // Animated loading
@@ -103,7 +106,7 @@
         await new Promise(r => setTimeout(r, 400));
       }
 
-      const results = await API.filterCruises({ dest, operators, ports, month, duration, limit: 9999 });
+      const results = await API.filterCruises({ dest, operators, ports, month, duration, limit: 9999, minDate: dateFrom || undefined, maxDate: dateTo || undefined });
       allResults = results;
 
       bar.style.width = '100%';

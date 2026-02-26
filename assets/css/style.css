@@ -601,3 +601,12 @@ img { max-width: 100%; height: auto; }
 .ms-option:hover { background: var(--gray-100); }
 .ms-option.selected { background: var(--navy); color: var(--white); }
 .ms-option.selected:hover { background: var(--navy-light); }
+
+/* ── Port Preset Buttons ── */
+.port-preset {
+  padding: 4px 10px; font-size: 0.82rem; border: 1px solid var(--gray-300);
+  border-radius: 20px; background: var(--white); cursor: pointer;
+  transition: all 0.15s; white-space: nowrap;
+}
+.port-preset:hover { background: var(--gray-100); }
+.port-preset.selected { background: var(--navy); color: var(--white); border-color: var(--navy); }
