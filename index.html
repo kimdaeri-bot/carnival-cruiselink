@@ -70,8 +70,8 @@
         <label>선사</label>
         <div class="multi-select" id="msOperator" onclick="toggleMulti(this)">
           <div class="multi-select-display">전체</div>
-          <div class="multi-select-dropdown" style="min-width:300px;max-height:none;overflow:visible" onclick="event.stopPropagation()">
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0">
+          <div class="multi-select-dropdown" style="min-width:180px;max-height:none;overflow:visible" onclick="event.stopPropagation()">
+            <div style="display:flex;flex-direction:column">
               <div class="ms-option" data-value="Royal Caribbean" onclick="toggleOption(event, this)">로얄 캐리비안</div>
               <div class="ms-option" data-value="MSC" onclick="toggleOption(event, this)">MSC 크루즈</div>
               <div class="ms-option" data-value="Carnival" onclick="toggleOption(event, this)">카니발</div>
@@ -293,8 +293,8 @@
   <!-- RECOMMENDED CRUISES -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">추천 크루즈</h2>
-      <p class="section-subtitle">가까운 출발일 기준 엄선된 크루즈</p>
+      <h2 class="section-title">🔥 급 크루즈</h2>
+      <p class="section-subtitle">3~5월 출발 특가 — 지금 바로 예약 가능한 상품</p>
       <div class="featured-slider-wrap">
         <button class="featured-arrow featured-arrow-left" onclick="slideFeatured(-1)" aria-label="이전">&#8249;</button>
         <div class="featured-slider" id="featuredSlider">
@@ -307,9 +307,11 @@
     </div>
   </section>
 
-  <!-- RECOMMENDED CRUISES 2 -->
+  <!-- LUXURY CRUISES -->
   <section class="section" style="padding-top:0">
     <div class="container">
+      <h2 class="section-title">💎 럭셔리 크루즈</h2>
+      <p class="section-subtitle">Explora Journeys — 최고급 올인클루시브 크루즈</p>
       <div class="featured-slider-wrap">
         <button class="featured-arrow featured-arrow-left" onclick="slideFeatured2(-1)" aria-label="이전">&#8249;</button>
         <div class="featured-slider" id="featuredSlider2">

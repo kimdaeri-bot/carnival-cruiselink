@@ -151,16 +151,22 @@ const API = {
     return this._featuredCache.filter(c => c && c.dateFrom >= now).slice(0, count);
   },
 
+  _featured2Cache: null,
   async getRecommendedCruises2(count = 12) {
-    // mini 파일(58KB)에서 다양한 목적지 큐레이션
-    const mini = await this.getMiniCruises(null, 999);
+    if (!this._featured2Cache) {
+      try {
+        const res = await fetch('assets/data/featured2.json');
+        if (res.ok) {
+          this._featured2Cache = await res.json();
+        } else { throw new Error('no featured2.json'); }
+      } catch {
+        // 폴백: mini에서 Explora 필터
+        const mini = await this.getMiniCruises(null, 999);
+        this._featured2Cache = mini.filter(c => c.operatorShort === 'Explora');
+      }
+    }
     const now = new Date().toISOString().slice(0, 10);
-    const featured1 = await this.getRecommendedCruises(999);
-    const featuredRefs = new Set(featured1.map(c => c.ref));
-    return mini
-      .filter(c => c.dateFrom >= now && !featuredRefs.has(c.ref))
-      .sort((a, b) => a.dateFrom.localeCompare(b.dateFrom))
-      .slice(0, count);
+    return this._featured2Cache.filter(c => c && c.dateFrom >= now).slice(0, count);
   },
 
   // Get local ship by slug

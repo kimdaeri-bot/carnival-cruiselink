@@ -8,7 +8,7 @@ const Components = {
         <nav class="nav" id="mainNav">
           <a href="index.html" class="${active === 'home' ? 'active' : ''}">홈</a>
           <a href="destinations.html" class="${active === 'dest' ? 'active' : ''}">목적지</a>
-          <a href="ships.html" class="${active === 'ships' ? 'active' : ''}">선박</a>
+          <a href="ships.html" class="${active === 'ships' ? 'active' : ''}">선사소개</a>
           <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="${active === 'contact' ? 'active' : ''}">문의</a>
         </nav>
         <a href="tel:02-3788-9119" class="header-phone">
