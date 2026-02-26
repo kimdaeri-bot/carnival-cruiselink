@@ -551,7 +551,7 @@
       }
       document.getElementById('tabCruiseGrid').innerHTML = '<div class="tabs-loading">불러오는 중...</div>';
       try {
-        const cruises = await API.filterCruises({ dest, limit: 5 });
+        const cruises = await API.getMiniCruises(dest, 5);
         const imgs = TAB_DEST_IMAGES[dest] || TAB_DEST_IMAGES['mediterranean'];
         if (!cruises || cruises.length === 0) {
           document.getElementById('tabCruiseGrid').innerHTML = '<div class="tabs-loading">해당 목적지 크루즈가 없습니다</div>';
@@ -562,7 +562,7 @@
           const nights = c.nights || c.duration || '?';
           const dateRaw = c.dateFrom || c.departure_date || '';
           const dateStr = dateRaw ? dateRaw.substring(0, 10) : '';
-          const priceRaw = c.price || c.priceFrom || c.lowest_price;
+          const priceRaw = c.priceBalcony || c.priceOutside || c.priceInside || c.price || c.priceFrom;
           const currency = c.currency || 'USD';
           const priceStr = priceRaw
             ? (currency === 'EUR' ? '€' : '$') + Number(priceRaw).toLocaleString()
