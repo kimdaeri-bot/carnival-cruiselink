@@ -319,18 +319,11 @@
     document.getElementById('footer').innerHTML = Components.footer();
     document.getElementById('ctaSection').innerHTML = Components.ctaSection();
 
-    // === Departure port mapping per destination ===
-    const DEST_PORTS = {
-      'korea': ['도쿄','나하, 오키나와','부산','인천'],
-      'mediterranean': ['바르셀로나','마르세유','제노바','치비타베키아','나폴리','팔레르모','발레타','메시나','리보르노','트리에스테','피레우스','이스탄불','리스본','말라가','발렌시아'],
-      'alaska': ['시애틀','밴쿠버'],
-      'caribbean': ['마이애미','포트 카나베럴','갤버스턴','뉴욕','뉴올리언스','산후안','잭슨빌','보스턴','탬파'],
-      'northern-europe': ['사우샘프턴','코펜하겐','킬','헬싱키','레이캬비크','함부르크'],
-      'asia': ['아부다비','두바이','도하','싱가포르'],
-      'south-america': ['산투스','살바도르','부에노스아이레스','리우데자네이루','로스앤젤레스','마이애미'],
-      'oceania': ['시드니','오클랜드','멜버른','브리즈번'],
-      'hawaii': ['호놀룰루, 하와이'],
-    };
+    // === 전체 출발항 데이터 (ports.json 로드) ===
+    window._allPorts = [];
+    fetch('assets/data/ports.json').then(r=>r.json()).then(data=>{
+      window._allPorts = data; // [{ko, en, dests, count}]
+    }).catch(()=>{});
 
     // === Multi-select functions ===
     function toggleMulti(el) {
@@ -365,49 +358,86 @@
       }
     });
 
+    function _getPortPool(dest) {
+      // dest 있으면 해당 목적지 항구만, 없으면 전체
+      if (!dest) return window._allPorts;
+      return window._allPorts.filter(p => p.dests.includes(dest));
+    }
+
     function updateDepartureOptions() {
       const dest = document.getElementById('filterDest').value;
       const msPort = document.getElementById('msPort');
-      const optionsEl = document.getElementById('msPortOptions');
-      // 기존 목적지별 옵션 초기화
-      optionsEl.innerHTML = '';
-      // 프리셋 선택 해제
       document.querySelectorAll('.port-preset.selected').forEach(b => b.classList.remove('selected'));
       msPort.querySelector('.multi-select-display').textContent = '전체';
-      if (!dest || !DEST_PORTS[dest]) return;
-      DEST_PORTS[dest].forEach(port => {
-        optionsEl.innerHTML += `<div class="ms-option" data-value="${port}" onclick="toggleOption(event, this)">${port}</div>`;
+      // 검색창 초기화
+      const ps = document.getElementById('portSearch');
+      if (ps) ps.value = '';
+      // 목적지 지정 시 해당 항구 목록 표시
+      const optionsEl = document.getElementById('msPortOptions');
+      optionsEl.innerHTML = '';
+      if (!dest) return;
+      _getPortPool(dest).slice(0, 20).forEach(p => {
+        optionsEl.innerHTML += `<div class="ms-option" data-value="${p.ko}" onclick="togglePortOpt(event,this)">${p.ko}</div>`;
       });
     }
 
     function togglePortPreset(e, btn) {
       e.stopPropagation();
       btn.classList.toggle('selected');
-      // 같은 값의 ms-option도 동기화
-      const val = btn.dataset.value;
-      document.querySelectorAll(`#msPortOptions .ms-option[data-value="${val}"]`).forEach(o => {
+      // msPortOptions에 같은 값 있으면 동기화
+      document.querySelectorAll(`#msPortOptions .ms-option[data-value="${btn.dataset.value}"]`).forEach(o => {
         o.classList.toggle('selected', btn.classList.contains('selected'));
+      });
+      updatePortDisplay();
+    }
+
+    function togglePortOpt(e, el) {
+      e.stopPropagation();
+      el.classList.toggle('selected');
+      // 프리셋에 같은 값 있으면 동기화
+      document.querySelectorAll(`.port-preset[data-value="${el.dataset.value}"]`).forEach(b => {
+        b.classList.toggle('selected', el.classList.contains('selected'));
       });
       updatePortDisplay();
     }
 
     function filterPortOptions(query) {
       const q = query.trim().toLowerCase();
-      // 프리셋 버튼 필터
+      const dest = document.getElementById('filterDest').value;
+      const optionsEl = document.getElementById('msPortOptions');
+      // 프리셋 표시/숨김
       document.querySelectorAll('.port-preset').forEach(b => {
         b.style.display = (!q || b.textContent.toLowerCase().includes(q)) ? '' : 'none';
       });
-      // 목적지별 옵션 필터
-      document.querySelectorAll('#msPortOptions .ms-option').forEach(o => {
-        o.style.display = (!q || o.textContent.toLowerCase().includes(q)) ? '' : 'none';
+      if (!q) {
+        // 검색어 없으면 목적지 기본 목록 복원
+        optionsEl.innerHTML = '';
+        if (!dest) return;
+        _getPortPool(dest).slice(0, 20).forEach(p => {
+          optionsEl.innerHTML += `<div class="ms-option" data-value="${p.ko}" onclick="togglePortOpt(event,this)">${p.ko}</div>`;
+        });
+        return;
+      }
+      // 전체 148개 항구에서 한/영 모두 매칭
+      const matched = window._allPorts.filter(p =>
+        p.ko.toLowerCase().includes(q) || p.en.toLowerCase().includes(q)
+      ).slice(0, 30);
+      // dest 선택 시 해당 목적지 항구 우선 표시
+      const destMatched = dest ? matched.filter(p=>p.dests.includes(dest)) : matched;
+      const otherMatched = dest ? matched.filter(p=>!p.dests.includes(dest)) : [];
+      optionsEl.innerHTML = '';
+      [...destMatched, ...otherMatched].forEach(p => {
+        const selected = document.querySelectorAll(`.port-preset.selected[data-value="${p.ko}"]`).length > 0;
+        optionsEl.innerHTML += `<div class="ms-option${selected?' selected':''}" data-value="${p.ko}" onclick="togglePortOpt(event,this)">${p.ko}<span style="color:#aaa;font-size:.75rem;margin-left:6px">${p.en}</span></div>`;
       });
+      if (matched.length === 0) optionsEl.innerHTML = '<div style="padding:8px 12px;color:#aaa;font-size:.85rem">검색 결과 없음</div>';
     }
 
     function updatePortDisplay() {
       const msPort = document.getElementById('msPort');
       const selected = [...document.querySelectorAll('.port-preset.selected, #msPortOptions .ms-option.selected')];
-      const display = msPort.querySelector('.multi-select-display');
-      display.textContent = selected.length === 0 ? '전체' : selected.map(o => o.dataset.value || o.textContent).join(', ');
+      const vals = [...new Set(selected.map(o => o.dataset.value || o.textContent))];
+      msPort.querySelector('.multi-select-display').textContent = vals.length === 0 ? '전체' : vals.join(', ');
     }
 
 
