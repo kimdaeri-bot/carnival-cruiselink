@@ -131,7 +131,7 @@
         <img src="assets/images/logos/carnival.svg" alt="Carnival Cruise Line">
         <img src="assets/images/logos/disney.svg" alt="Disney Cruise Line">
         <img src="assets/images/logos/cunard.svg" alt="Cunard">
-        <img src="assets/images/logos/silversea.svg" alt="Silversea Cruises">
+        <img src="assets/images/logos/princess.png" alt="Princess Cruises">
         <img src="assets/images/logos/oceania.svg" alt="Oceania Cruises">
         <img src="assets/images/logos/regent.png" alt="Regent Seven Seas">
         <!-- Duplicate for infinite scroll -->
@@ -142,7 +142,7 @@
         <img src="assets/images/logos/carnival.svg" alt="Carnival Cruise Line">
         <img src="assets/images/logos/disney.svg" alt="Disney Cruise Line">
         <img src="assets/images/logos/cunard.svg" alt="Cunard">
-        <img src="assets/images/logos/silversea.svg" alt="Silversea Cruises">
+        <img src="assets/images/logos/princess.png" alt="Princess Cruises">
         <img src="assets/images/logos/oceania.svg" alt="Oceania Cruises">
         <img src="assets/images/logos/regent.png" alt="Regent Seven Seas">
       </div>
@@ -336,11 +336,12 @@
       const dd = document.getElementById('shipDropdown');
       const q = query.trim().toLowerCase();
       if (!q) { dd.style.display = 'none'; window._selectedShipSlug = ''; return; }
-      const matched = window._allShips.filter(s =>
-        s.title.toLowerCase().includes(q) ||
-        (s.operatorKo && s.operatorKo.toLowerCase().includes(q)) ||
-        (s.operatorShort && s.operatorShort.toLowerCase().includes(q))
-      ).slice(0, 20);
+      const matched = window._allShips.filter(s => {
+        const titleKo = (typeof Translations !== 'undefined' ? Translations.shipName(s.title) : '').toLowerCase();
+        return s.title.toLowerCase().includes(q) || titleKo.includes(q) ||
+          (s.operatorKo && s.operatorKo.toLowerCase().includes(q)) ||
+          (s.operatorShort && s.operatorShort.toLowerCase().includes(q));
+      }).slice(0, 20);
       if (!matched.length) {
         dd.innerHTML = '<div style="padding:8px 12px;color:#aaa;font-size:.85rem">검색 결과 없음</div>';
         dd.style.display = 'block'; return;

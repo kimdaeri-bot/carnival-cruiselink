@@ -101,10 +101,17 @@ const API = {
       if (operators?.length > 0 && !operators.some(op => c.operator?.includes(op))) return false;
       // Legacy single operator
       if (operator && !operators?.length && !c.operator?.includes(operator)) return false;
-      // Multi-select departure ports
+      // Multi-select departure ports (한/영 양방향 매칭)
       if (ports?.length > 0) {
-        const startKo = c.startsAt?.nameKo || c.startsAt?.name || '';
-        if (!ports.some(p => startKo.includes(p) || (c.startsAt?.name||'').includes(p))) return false;
+        const startEn = (c.startsAt?.name || '').toLowerCase();
+        const startKo = (c.startsAt?.nameKo || (typeof Translations !== 'undefined' ? Translations.portName(c.startsAt?.name||'') : '') || '');
+        const startEnBase = startEn.split(',')[0].trim(); // "miami, florida" → "miami"
+        if (!ports.some(p => {
+          const pL = p.toLowerCase();
+          const pEn = (typeof Translations !== 'undefined' ? Translations.portName(p) : p).toLowerCase();
+          return startKo.includes(p) || startEn.includes(pL) || startEnBase.includes(pL) ||
+                 (pEn !== pL && startEn.includes(pEn));
+        })) return false;
       }
       if (month) {
         const cm = c.dateFrom.slice(0, 7);

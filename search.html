@@ -46,6 +46,11 @@
       <div id="resultArea" style="display:none;">
         <div class="result-header">
           <div class="result-count" id="resultCount"></div>
+          <div style="margin-top:12px;position:relative;max-width:420px">
+            <input id="kwInput" type="text" placeholder="🔍 결과 내 검색 (한글·영문·선박명·항구명 모두 가능)" autocomplete="off"
+              style="width:100%;box-sizing:border-box;padding:10px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:.88rem;font-family:inherit;outline:none"
+              oninput="applyKeywordFilter()" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='#ddd'">
+          </div>
         </div>
         <div id="resultList" class="cruise-list"></div>
         <div id="pagination" class="pagination"></div>
@@ -97,8 +102,39 @@
     ];
 
     let allResults = [];
+    let filteredResults = [];
     const PER_PAGE = 20;
     let currentPage = 1;
+
+    function matchKeyword(c, q) {
+      if (!q) return true;
+      const lq = q.toLowerCase();
+      const T = typeof Translations !== 'undefined' ? Translations : null;
+      const fields = [
+        c.title || '',
+        c.portRoute || '',
+        T ? T.portRoute(c.portRoute || '') : '',
+        c.shipTitle || '',
+        T ? T.shipName(c.shipTitle || '') : '',
+        c.operator || '',
+        T ? T.operatorName(c.operator || '') : '',
+        c.startsAt?.name || '',
+        c.startsAt?.nameKo || '',
+        T ? T.portName(c.startsAt?.name || '') : '',
+        c.endsAt?.name || '',
+        c.endsAt?.nameKo || '',
+        c.destination || '',
+      ];
+      return fields.some(f => f.toLowerCase().includes(lq));
+    }
+
+    function applyKeywordFilter() {
+      const q = (document.getElementById('kwInput')?.value || '').trim();
+      filteredResults = q ? allResults.filter(c => matchKeyword(c, q)) : [...allResults];
+      currentPage = 1;
+      document.getElementById('resultCount').innerHTML = `총 <span>${filteredResults.length}</span>개의 크루즈를 찾았습니다`;
+      renderPage();
+    }
 
     async function doSearch() {
       // Animate progress
@@ -118,6 +154,7 @@
         );
       }
       allResults = results;
+      filteredResults = [...results];
 
       bar.style.width = '100%';
       statusText.textContent = '완료!';
@@ -126,7 +163,7 @@
       // Show results
       document.getElementById('loadingState').style.display = 'none';
       document.getElementById('resultArea').style.display = 'block';
-      document.getElementById('resultCount').innerHTML = `총 <span>${results.length}</span>개의 크루즈를 찾았습니다`;
+      document.getElementById('resultCount').innerHTML = `총 <span>${filteredResults.length}</span>개의 크루즈를 찾았습니다`;
       document.getElementById('searchSummary').textContent = `${results.length}개의 크루즈가 검색되었습니다`;
       document.title = `검색 결과 (${results.length}건) - 크루즈링크`;
 
@@ -137,15 +174,15 @@
       const container = document.getElementById('resultList');
       const pagination = document.getElementById('pagination');
 
-      if (allResults.length === 0) {
+      if (filteredResults.length === 0) {
         container.innerHTML = '<div class="empty-state"><span class="emoji">🔍</span><p>조건에 맞는 크루즈가 없습니다.<br>검색 조건을 변경해 보세요.</p></div>';
         pagination.innerHTML = '';
         return;
       }
 
-      const totalPages = Math.ceil(allResults.length / PER_PAGE);
+      const totalPages = Math.ceil(filteredResults.length / PER_PAGE);
       const start = (currentPage - 1) * PER_PAGE;
-      const pageItems = allResults.slice(start, start + PER_PAGE);
+      const pageItems = filteredResults.slice(start, start + PER_PAGE);
 
       container.innerHTML = pageItems.map(c => Components.localCruiseItem(c)).join('');
 
