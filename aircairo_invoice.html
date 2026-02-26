@@ -661,41 +661,46 @@ body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; backgrou
       <div class="inv-pax-grid" id="pv-pax-list"></div>
     </div>
 
-    <!-- 계좌 정보 -->
-    <div class="inv-account">
-      <div class="inv-account-header">💳 입금 계좌 정보</div>
-      <div class="inv-account-body">
-        <div class="inv-account-row">
-          <span class="acc-label">은행/계좌번호</span>
-          <span class="acc-val">하나은행 109-910017-21104</span>
-        </div>
-        <div class="inv-account-row">
-          <span class="acc-label">예금주</span>
-          <span class="acc-val">아남항공 주식회사</span>
-        </div>
-        <div class="inv-account-row">
-          <span class="acc-label">사업자등록번호</span>
-          <span class="acc-val">104-81-84918</span>
-        </div>
-        <div class="inv-account-row">
-          <span class="acc-label">대표자</span>
-          <span class="acc-val">김 영 성</span>
-        </div>
-        <div class="inv-account-note" id="pv-remarks"></div>
-      </div>
-    </div>
+    <!-- 명판+직인 (좌) + 계좌 정보 (우) -->
+    <div style="display:flex;gap:14px;align-items:stretch;margin-bottom:14px">
 
-    <!-- 명판 + 직인 (세로 배치) -->
-    <div class="inv-stamp-area">
-      <div class="inv-nameplate">
-        <div class="inv-nameplate-company">아남항공 주식회사</div>
-        <div class="inv-nameplate-eng">Air Cairo Korea GSA</div>
-        <div class="inv-nameplate-row">담당자: <strong id="pv-stamp-handler"></strong></div>
-        <div class="inv-nameplate-row">TEL: <strong id="pv-stamp-tel"></strong></div>
-        <div class="inv-nameplate-row">서울 강서구 마곡서로 152</div>
-        <div class="inv-nameplate-row">두산 더 랜드타워 5층</div>
+      <!-- 명판 + 직인 -->
+      <div class="inv-stamp-area" style="flex:0 0 auto;margin-bottom:0;border:1px solid #ccc;border-radius:4px;padding:10px 12px;min-width:180px">
+        <div class="inv-nameplate">
+          <div class="inv-nameplate-company">아남항공 주식회사</div>
+          <div class="inv-nameplate-eng">Air Cairo Korea GSA</div>
+          <div class="inv-nameplate-row">담당자: <strong id="pv-stamp-handler"></strong></div>
+          <div class="inv-nameplate-row">TEL: <strong id="pv-stamp-tel"></strong></div>
+          <div class="inv-nameplate-row">서울 강서구 마곡서로 152</div>
+          <div class="inv-nameplate-row">두산 더 랜드타워 5층</div>
+        </div>
+        <img class="inv-stamp-img" id="stampImg" src="assets/images/company-stamp.png" alt="직인" onerror="this.style.display='none'" style="width:90px;height:90px;margin-top:6px">
       </div>
-      <img class="inv-stamp-img" id="stampImg" src="assets/images/company-stamp.png" alt="직인" onerror="this.style.display='none'">
+
+      <!-- 계좌 정보 -->
+      <div class="inv-account" style="flex:1;margin-bottom:0">
+        <div class="inv-account-header">💳 입금 계좌 정보</div>
+        <div class="inv-account-body">
+          <div class="inv-account-row">
+            <span class="acc-label">은행/계좌번호</span>
+            <span class="acc-val">하나은행 109-910017-21104</span>
+          </div>
+          <div class="inv-account-row">
+            <span class="acc-label">예금주</span>
+            <span class="acc-val">아남항공 주식회사</span>
+          </div>
+          <div class="inv-account-row">
+            <span class="acc-label">사업자등록번호</span>
+            <span class="acc-val">104-81-84918</span>
+          </div>
+          <div class="inv-account-row">
+            <span class="acc-label">대표자</span>
+            <span class="acc-val">김 영 성</span>
+          </div>
+          <div class="inv-account-note" id="pv-remarks"></div>
+        </div>
+      </div>
+
     </div>
 
     <!-- 푸터 -->
