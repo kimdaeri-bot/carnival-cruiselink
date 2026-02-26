@@ -1,231 +1,447 @@
 [
   {
-    "ref": "NCLBLS-20260301-07-LAX-LAX",
-    "shipSlug": "norwegian-bliss",
-    "shipTitle": "Norwegian Bliss",
-    "operator": "Norwegian Cruise Line",
-    "operatorShort": "NCL",
-    "dateFrom": "2026-03-01",
+    "ref": "MSCSX20260428PIRPIR",
+    "shipSlug": "msc-sinfonia-ship",
+    "shipTitle": "MSC Sinfonia",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-04-28",
+    "dateTo": "2026-05-05",
     "nights": 7,
-    "destination": "south-america",
+    "regions": [
+      "Europe",
+      "Southern Europe",
+      "Mediterranean"
+    ],
+    "countries": [
+      "Greece",
+      "Italy"
+    ],
+    "countriesKo": [
+      "그리스",
+      "이탈리아"
+    ],
+    "destination": "mediterranean",
     "startsAt": {
-      "name": "Los Angeles, California",
-      "nameKo": "Los Angeles, California"
+      "name": "Piraeus",
+      "nameKo": "피레우스",
+      "country": "Greece",
+      "countryKo": "그리스"
     },
     "endsAt": {
-      "name": "Los Angeles, California",
-      "nameKo": "Los Angeles, California"
+      "name": "Piraeus",
+      "nameKo": "피레우스",
+      "country": "Greece",
+      "countryKo": "그리스"
     },
-    "portRoute": "Los Angeles, California → 푸에르토 바야르타 → Mazatlán → 카보산루카스",
-    "countriesKo": [
-      "미국",
-      "멕시코"
+    "ports": [
+      {
+        "name": "Piraeus",
+        "nameKo": "피레우스"
+      },
+      {
+        "name": "Katakolon",
+        "nameKo": "Katakolon"
+      },
+      {
+        "name": "Argostoli",
+        "nameKo": "Argostoli"
+      },
+      {
+        "name": "Corfu",
+        "nameKo": "코르푸"
+      },
+      {
+        "name": "Bari",
+        "nameKo": "바리"
+      },
+      {
+        "name": "Santorini",
+        "nameKo": "산토리니"
+      }
     ],
-    "priceInside": 365,
-    "priceOutside": 565,
-    "priceBalcony": 770,
-    "priceSuite": 0,
+    "portRoute": "피레우스 → Katakolon → Argostoli → 코르푸 → 바리 → 산토리니",
+    "priceInside": 802,
+    "priceOutside": 932,
+    "priceBalcony": 1142,
+    "priceSuite": 1412,
     "currency": "USD",
-    "image": "https://assets.widgety.co.uk/2025/12/04/09/00/56/b6d5a91f-0e8c-4bd8-a738-f468297baeb2/NCL Norwegian Bliss Aerial Ketchikan Alaska Exterior 1 ©Danny Lehman.jpg",
-    "title": "미국·멕시코 7박 크루즈",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/10/13/11/33/42/9984c738-b6fd-494d-842f-5cc4b190efa8/MSC Cruises MSC Sinfonia Arial Exterior.png",
+    "title": "그리스·이탈리아 7박 크루즈",
     "hashtags": [
-      "#남미크루즈",
-      "#노르웨이전크루즈",
-      "#NorwegianBliss",
-      "#Los Angeles, California",
-      "#푸에르토 바야르타"
+      "#지중해크루즈",
+      "#MSC크루즈",
+      "#MSCSinfonia",
+      "#피레우스",
+      "#Katakolon"
     ]
   },
   {
-    "ref": "MSCOR20260305CVVCVV",
+    "ref": "MSCOR20260428CVVCVV",
     "shipSlug": "msc-orchestra-ship",
     "shipTitle": "MSC Orchestra",
     "operator": "MSC Cruises",
     "operatorShort": "MSC",
-    "dateFrom": "2026-03-05",
+    "dateFrom": "2026-04-28",
+    "dateTo": "2026-05-05",
     "nights": 7,
+    "regions": [
+      "Europe",
+      "Southern Europe",
+      "Mediterranean"
+    ],
+    "countries": [
+      "Italy",
+      "France",
+      "Spain"
+    ],
+    "countriesKo": [
+      "이탈리아",
+      "프랑스",
+      "스페인"
+    ],
     "destination": "mediterranean",
     "startsAt": {
       "name": "Civitavecchia",
-      "nameKo": "치비타베키아"
+      "nameKo": "치비타베키아",
+      "country": "Italy",
+      "countryKo": "이탈리아"
     },
     "endsAt": {
       "name": "Civitavecchia",
-      "nameKo": "치비타베키아"
+      "nameKo": "치비타베키아",
+      "country": "Italy",
+      "countryKo": "이탈리아"
     },
-    "portRoute": "치비타베키아 → Valencia → 바르셀로나 → 마르세유 → 제노바 → Livorno",
-    "countriesKo": [
-      "이탈리아",
-      "스페인",
-      "프랑스"
+    "ports": [
+      {
+        "name": "Civitavecchia",
+        "nameKo": "치비타베키아"
+      },
+      {
+        "name": "Genoa",
+        "nameKo": "제노바"
+      },
+      {
+        "name": "Marseille",
+        "nameKo": "마르세유"
+      },
+      {
+        "name": "Tarragona",
+        "nameKo": "Tarragona"
+      },
+      {
+        "name": "Valencia",
+        "nameKo": "Valencia"
+      },
+      {
+        "name": "Livorno",
+        "nameKo": "Livorno"
+      }
     ],
-    "priceInside": 399,
-    "priceOutside": 472,
-    "priceBalcony": 554,
-    "priceSuite": 0,
+    "portRoute": "치비타베키아 → 제노바 → 마르세유 → Tarragona → Valencia → Livorno",
+    "priceInside": 577,
+    "priceOutside": 627,
+    "priceBalcony": 687,
+    "priceSuite": 1387,
     "currency": "USD",
+    "availability": "available",
     "image": "https://assets.widgety.co.uk/2024/09/26/10/45/07/ad264e77-d95a-40f2-9131-456fd1c2d6e4/MSC Cruises, MSC Orchestra, New York Exterior, MSC Rights.jpg",
-    "title": "이탈리아·스페인·프랑스 7박 크루즈",
+    "title": "이탈리아·프랑스·스페인 7박 크루즈",
     "hashtags": [
       "#지중해크루즈",
       "#MSC크루즈",
       "#MSCOrchestra",
       "#치비타베키아",
-      "#Valencia"
+      "#제노바"
     ]
   },
   {
-    "ref": "CARNIVALVX08032026",
-    "shipSlug": "costa-venezia",
-    "shipTitle": "Carnival Venezia",
-    "operator": "Carnival Cruise Line",
-    "operatorShort": "Carnival",
-    "dateFrom": "2026-03-08",
-    "nights": 7,
-    "destination": "caribbean",
-    "startsAt": {
-      "name": "Port Canaveral, Florida",
-      "nameKo": "Port Canaveral, Florida"
-    },
-    "endsAt": {
-      "name": "Port Canaveral, Florida",
-      "nameKo": "Port Canaveral, Florida"
-    },
-    "portRoute": "Port Canaveral, Florida → 나소 → Montego Bay → Grand Cayman",
-    "countriesKo": [
-      "미국",
-      "바하마",
-      "자메이카",
-      "Cayman Islands"
-    ],
-    "priceInside": 417,
-    "priceOutside": 538,
-    "priceBalcony": 736,
-    "priceSuite": 0,
-    "currency": "USD",
-    "image": "https://assets.widgety.co.uk/2023/02/09/10/29/44/2591a21e-1c15-4efa-8e35-0446bd58a1d5/Carnival Cruise Lines Carnival Venezia Exterior.jpg",
-    "title": "카리브해 7박 크루즈",
-    "hashtags": [
-      "#카리브해크루즈",
-      "#카니발크루즈",
-      "#CarnivalVenezia",
-      "#Port Canaveral, Florida",
-      "#나소"
-    ]
-  },
-  {
-    "ref": "NCLDWN-20260322-07-TPA-TPA",
-    "shipSlug": "norwegian-dawn",
-    "shipTitle": "Norwegian Dawn",
+    "ref": "NCLJWL-20260430-07-PHL-PHL",
+    "shipSlug": "norwegian-jewel",
+    "shipTitle": "Norwegian Jewel",
     "operator": "Norwegian Cruise Line",
     "operatorShort": "NCL",
-    "dateFrom": "2026-03-22",
+    "dateFrom": "2026-04-30",
+    "dateTo": "2026-05-07",
     "nights": 7,
-    "destination": "caribbean",
-    "startsAt": {
-      "name": "Tampa, Florida",
-      "nameKo": "Tampa, Florida"
-    },
-    "endsAt": {
-      "name": "Tampa, Florida",
-      "nameKo": "Tampa, Florida"
-    },
-    "portRoute": "Tampa, Florida → 하베스트 케이 → Roatán Island → 코수멜 → Costa Maya",
+    "regions": [
+      "Caribbean",
+      "Americas",
+      "South America"
+    ],
+    "countries": [
+      "United States",
+      "Bermuda"
+    ],
     "countriesKo": [
       "미국",
-      "벨리즈",
-      "온두라스",
-      "멕시코"
+      "버뮤다"
     ],
-    "priceInside": 395,
-    "priceOutside": 430,
-    "priceBalcony": 650,
-    "priceSuite": 780,
+    "destination": "caribbean",
+    "startsAt": {
+      "name": "Philadelphia, Pennsylvania",
+      "nameKo": "Philadelphia, Pennsylvania",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Philadelphia, Pennsylvania",
+      "nameKo": "Philadelphia, Pennsylvania",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Philadelphia, Pennsylvania",
+        "nameKo": "Philadelphia, Pennsylvania"
+      },
+      {
+        "name": "Kings Wharf",
+        "nameKo": "Kings Wharf"
+      },
+      {
+        "name": "Charleston, South Carolina",
+        "nameKo": "Charleston, South Carolina"
+      }
+    ],
+    "portRoute": "Philadelphia, Pennsylvania → Kings Wharf → Charleston, South Carolina",
+    "priceInside": 530,
+    "priceOutside": 655,
+    "priceBalcony": 1015,
+    "priceSuite": 1430,
     "currency": "USD",
-    "image": "https://assets.widgety.co.uk/2024/05/15/07/13/22/3807a0ef-38f9-4f13-9e78-2e479da3c89b/NCL Norwegian Dawn Exterior.jpg",
-    "title": "카리브해 7박 크루즈",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/12/19/09/13/37/8b65d198-df6d-4c35-b3c7-d53e1a1c4347/NCL, Norwegian Jewel, Aerial at Sea Exterior 2 ©Michele Verdure.jpg",
+    "title": "미국·버뮤다 7박 크루즈",
     "hashtags": [
       "#카리브해크루즈",
       "#노르웨이전크루즈",
-      "#NorwegianDawn",
-      "#Tampa, Florida",
-      "#하베스트 케이"
+      "#NorwegianJewel",
+      "#Philadelphia, Pennsylvania",
+      "#Kings Wharf"
     ]
   },
   {
-    "ref": "RCIGR07D501-020526",
-    "shipSlug": "grandeur-of-the-seas",
-    "shipTitle": "Grandeur of the Seas",
-    "operator": "Royal Caribbean International",
-    "operatorShort": "RCI",
-    "dateFrom": "2026-05-02",
+    "ref": "CARNIVALSP280420267",
+    "shipSlug": "carnival-spirit-ship",
+    "shipTitle": "Carnival Spirit",
+    "operator": "Carnival Cruise Line",
+    "operatorShort": "Carnival",
+    "dateFrom": "2026-04-28",
+    "dateTo": "2026-05-05",
     "nights": 7,
-    "destination": "other",
-    "startsAt": {
-      "name": "Tampa, Florida",
-      "nameKo": "Tampa, Florida"
-    },
-    "endsAt": {
-      "name": "Colón",
-      "nameKo": "Colón"
-    },
-    "portRoute": "Tampa, Florida → Georgetown, Grand Cayman → Oranjestad → Willemstad → Colón",
-    "countriesKo": [
-      "미국",
-      "Cayman Islands",
-      "아루바",
-      "Curaçao",
-      "Panama"
+    "regions": [
+      "Americas",
+      "Alaska",
+      "North America"
     ],
-    "priceInside": 254,
-    "priceOutside": 313,
-    "priceBalcony": 659,
-    "priceSuite": 956,
-    "currency": "USD",
-    "image": "https://assets.widgety.co.uk/2025/10/03/10/05/58/b87807f9-a697-47b3-a20e-ca43dc42c42b/RSSC Grandeur of the Seas Exterior ©Regent Seven Seas Cruises.jpg",
-    "title": "7박 크루즈",
-    "hashtags": [
-      "#로얄캐리비안",
-      "#GrandeuroftheSeas",
-      "#Tampa, Florida",
-      "#Georgetown, Grand Cayman"
-    ]
-  },
-  {
-    "ref": "MSCPO20260518SEASEA",
-    "shipSlug": "msc-poesia-ship",
-    "shipTitle": "MSC Poesia",
-    "operator": "MSC Cruises",
-    "operatorShort": "MSC",
-    "dateFrom": "2026-05-18",
-    "nights": 7,
-    "destination": "alaska",
-    "startsAt": {
-      "name": "Seattle, Washington",
-      "nameKo": "Seattle, Washington"
-    },
-    "endsAt": {
-      "name": "Seattle, Washington",
-      "nameKo": "Seattle, Washington"
-    },
-    "portRoute": "Seattle, Washington → Ketchikan, Alaska → Icy Strait Point → Tracy Arm, Alaska → Victoria, British Columbia",
+    "countries": [
+      "United States",
+      "Canada"
+    ],
     "countriesKo": [
       "미국",
       "캐나다"
     ],
-    "priceInside": 395,
-    "priceOutside": 534,
-    "priceBalcony": 612,
-    "priceSuite": 3539,
+    "destination": "alaska",
+    "startsAt": {
+      "name": "Seattle, Washington",
+      "nameKo": "Seattle, Washington",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "endsAt": {
+      "name": "Seattle, Washington",
+      "nameKo": "Seattle, Washington",
+      "country": "United States",
+      "countryKo": "미국"
+    },
+    "ports": [
+      {
+        "name": "Seattle, Washington",
+        "nameKo": "Seattle, Washington"
+      },
+      {
+        "name": "Tracy Arm, Alaska",
+        "nameKo": "Tracy Arm, Alaska"
+      },
+      {
+        "name": "Skagway, Alaska",
+        "nameKo": "Skagway, Alaska"
+      },
+      {
+        "name": "Juneau, Alaska",
+        "nameKo": "Juneau, Alaska"
+      },
+      {
+        "name": "Ketchikan, Alaska",
+        "nameKo": "Ketchikan, Alaska"
+      },
+      {
+        "name": "Victoria, British Columbia",
+        "nameKo": "Victoria, British Columbia"
+      }
+    ],
+    "portRoute": "Seattle, Washington → Tracy Arm, Alaska → Skagway, Alaska → Juneau, Alaska → Ketchikan, Alaska → Victoria, British Columbia",
+    "priceInside": 655,
+    "priceOutside": 831,
+    "priceBalcony": 948,
+    "priceSuite": 2519,
     "currency": "USD",
-    "image": "https://assets.widgety.co.uk/2025/10/20/15/23/43/169ae78e-18ff-4366-ace9-91950c305b51/MSC Cruises MSC Poesia Exterior ©Moviebox & MSC Rights.jpg",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2022/05/05/08/06/25/c430b214-bac8-4c7b-871a-afb30dc12f0a/Carnival Cruise Line Carnival Spirit Exterior.png",
     "title": "미국·캐나다 7박 크루즈",
     "hashtags": [
       "#알래스카크루즈",
-      "#MSC크루즈",
-      "#MSCPoesia",
+      "#카니발크루즈",
+      "#CarnivalSpirit",
       "#Seattle, Washington",
-      "#Ketchikan, Alaska"
+      "#Tracy Arm, Alaska"
+    ]
+  },
+  {
+    "ref": "MSCER20260502KELKEL",
+    "shipSlug": "msc-euribia",
+    "shipTitle": "MSC Euribia",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-05-02",
+    "dateTo": "2026-05-09",
+    "nights": 7,
+    "regions": [
+      "Europe",
+      "Northern Europe"
+    ],
+    "countries": [
+      "Germany",
+      "Denmark",
+      "Norway"
+    ],
+    "countriesKo": [
+      "독일",
+      "덴마크",
+      "노르웨이"
+    ],
+    "destination": "northern-europe",
+    "startsAt": {
+      "name": "Kiel",
+      "nameKo": "킬",
+      "country": "Germany",
+      "countryKo": "독일"
+    },
+    "endsAt": {
+      "name": "Kiel",
+      "nameKo": "킬",
+      "country": "Germany",
+      "countryKo": "독일"
+    },
+    "ports": [
+      {
+        "name": "Kiel",
+        "nameKo": "킬"
+      },
+      {
+        "name": "Copenhagen",
+        "nameKo": "코펜하겐"
+      },
+      {
+        "name": "Hellesylt",
+        "nameKo": "Hellesylt"
+      },
+      {
+        "name": "Ålesund",
+        "nameKo": "Ålesund"
+      },
+      {
+        "name": "Flåm",
+        "nameKo": "Flåm"
+      }
+    ],
+    "portRoute": "킬 → 코펜하겐 → Hellesylt → Ålesund → Flåm",
+    "priceInside": 940,
+    "priceOutside": 1189,
+    "priceBalcony": 1399,
+    "priceSuite": 1909,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2025/10/01/09/09/24/54ec9abe-1505-43e4-b761-b0251d1dc2ac/MSC Cruises MSC EURIBIA Exterior ©MSC Rights 1.jpg",
+    "title": "독일·덴마크·노르웨이 7박 크루즈",
+    "hashtags": [
+      "#북유럽크루즈",
+      "#MSC크루즈",
+      "#MSCEuribia",
+      "#킬",
+      "#코펜하겐"
+    ]
+  },
+  {
+    "ref": "MSCBE20260510TYOTYO",
+    "shipSlug": "msc-bellissima",
+    "shipTitle": "MSC Bellissima",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-05-10",
+    "dateTo": "2026-05-17",
+    "nights": 7,
+    "regions": [
+      "Asia"
+    ],
+    "countries": [
+      "Japan",
+      "South Korea"
+    ],
+    "countriesKo": [
+      "일본",
+      "한국"
+    ],
+    "destination": "korea",
+    "startsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "endsAt": {
+      "name": "Tokyo",
+      "nameKo": "도쿄",
+      "country": "Japan",
+      "countryKo": "일본"
+    },
+    "ports": [
+      {
+        "name": "Tokyo",
+        "nameKo": "도쿄"
+      },
+      {
+        "name": "Kobe",
+        "nameKo": "고베"
+      },
+      {
+        "name": "Busan",
+        "nameKo": "부산"
+      },
+      {
+        "name": "Kagoshima",
+        "nameKo": "가고시마"
+      }
+    ],
+    "portRoute": "도쿄 → 고베 → 부산 → 가고시마",
+    "priceInside": 859,
+    "priceOutside": 1019,
+    "priceBalcony": 1239,
+    "priceSuite": 2029,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC Cruises, MSC Bellissima, Exterior, Copyrights - MSC Rights.jpg",
+    "title": "일본·한국 7박 크루즈",
+    "hashtags": [
+      "#한국/일본크루즈",
+      "#MSC크루즈",
+      "#MSCBellissima",
+      "#도쿄",
+      "#고베"
     ]
   }
 ]

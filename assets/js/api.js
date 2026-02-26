@@ -49,9 +49,9 @@ const API = {
         this._miniCache = res.ok ? await res.json() : [];
       } catch { this._miniCache = []; }
     }
-    const now = new Date().toISOString().slice(0, 10);
+    const cutoff = (() => { const d = new Date(); d.setMonth(d.getMonth() + 2); return d.toISOString().slice(0, 10); })();
     return this._miniCache
-      .filter(c => (!dest || c.destination === dest) && c.dateFrom >= now)
+      .filter(c => (!dest || c.destination === dest) && c.dateFrom >= cutoff)
       .slice(0, limit);
   },
 
@@ -147,8 +147,8 @@ const API = {
         this._featuredCache = FEATURED_REFS.map(r => refMap[r]).filter(Boolean);
       }
     }
-    const now = new Date().toISOString().slice(0, 10);
-    return this._featuredCache.filter(c => c && c.dateFrom >= now).slice(0, count);
+    const cutoff = (() => { const d = new Date(); d.setMonth(d.getMonth() + 2); return d.toISOString().slice(0, 10); })();
+    return this._featuredCache.filter(c => c && c.dateFrom >= cutoff).slice(0, count);
   },
 
   _featured2Cache: null,
@@ -165,8 +165,8 @@ const API = {
         this._featured2Cache = mini.filter(c => c.operatorShort === 'Explora');
       }
     }
-    const now = new Date().toISOString().slice(0, 10);
-    return this._featured2Cache.filter(c => c && c.dateFrom >= now).slice(0, count);
+    const cutoff = (() => { const d = new Date(); d.setMonth(d.getMonth() + 2); return d.toISOString().slice(0, 10); })();
+    return this._featured2Cache.filter(c => c && c.dateFrom >= cutoff).slice(0, count);
   },
 
   // Get local ship by slug
