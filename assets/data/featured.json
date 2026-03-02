@@ -1,304 +1,100 @@
 [
   {
-    "ref": "MSCSX20260428PIRPIR",
-    "shipSlug": "msc-sinfonia-ship",
-    "shipTitle": "MSC Sinfonia",
+    "ref": "MSCMU20260503CAGCAG",
+    "shipSlug": "msc-musica",
+    "shipTitle": "MSC Musica",
     "operator": "MSC Cruises",
     "operatorShort": "MSC",
-    "dateFrom": "2026-04-28",
-    "dateTo": "2026-05-05",
+    "dateFrom": "2026-05-03",
+    "dateTo": "2026-05-10",
     "nights": 7,
-    "regions": [
-      "Europe",
-      "Southern Europe",
-      "Mediterranean"
-    ],
-    "countries": [
-      "Greece",
-      "Italy"
-    ],
-    "countriesKo": [
-      "그리스",
-      "이탈리아"
-    ],
     "destination": "mediterranean",
-    "startsAt": {
-      "name": "Piraeus",
-      "nameKo": "피레우스",
-      "country": "Greece",
-      "countryKo": "그리스"
-    },
-    "endsAt": {
-      "name": "Piraeus",
-      "nameKo": "피레우스",
-      "country": "Greece",
-      "countryKo": "그리스"
-    },
-    "ports": [
-      {
-        "name": "Piraeus",
-        "nameKo": "피레우스"
-      },
-      {
-        "name": "Katakolon",
-        "nameKo": "Katakolon"
-      },
-      {
-        "name": "Argostoli",
-        "nameKo": "Argostoli"
-      },
-      {
-        "name": "Corfu",
-        "nameKo": "코르푸"
-      },
-      {
-        "name": "Bari",
-        "nameKo": "바리"
-      },
-      {
-        "name": "Santorini",
-        "nameKo": "산토리니"
-      }
-    ],
-    "portRoute": "피레우스 → Katakolon → Argostoli → 코르푸 → 바리 → 산토리니",
-    "priceInside": 802,
-    "priceOutside": 932,
-    "priceBalcony": 1142,
-    "priceSuite": 1412,
+    "title": "지중해 7박 크루즈",
+    "portRoute": "칼리아리 → 치비타베키아 → 제노바 → 마르세유 → Valencia → 이비자",
+    "priceInside": 695,
+    "priceOutside": 765,
+    "priceBalcony": 825,
     "currency": "USD",
-    "availability": "available",
-    "image": "https://assets.widgety.co.uk/2025/10/13/11/33/42/9984c738-b6fd-494d-842f-5cc4b190efa8/MSC Cruises MSC Sinfonia Arial Exterior.png",
-    "title": "그리스·이탈리아 7박 크루즈",
+    "image": "https://assets.widgety.co.uk/2021/11/30/08/39/15/ab35a659-53a2-4da4-b933-d54575271524/MSC Cruises MSC Musica 1.jpg",
     "hashtags": [
       "#지중해크루즈",
       "#MSC크루즈",
-      "#MSCSinfonia",
-      "#피레우스",
-      "#Katakolon"
-    ]
-  },
-  {
-    "ref": "MSCOR20260428CVVCVV",
-    "shipSlug": "msc-orchestra-ship",
-    "shipTitle": "MSC Orchestra",
-    "operator": "MSC Cruises",
-    "operatorShort": "MSC",
-    "dateFrom": "2026-04-28",
-    "dateTo": "2026-05-05",
-    "nights": 7,
-    "regions": [
-      "Europe",
-      "Southern Europe",
-      "Mediterranean"
-    ],
-    "countries": [
-      "Italy",
-      "France",
-      "Spain"
-    ],
-    "countriesKo": [
-      "이탈리아",
-      "프랑스",
-      "스페인"
-    ],
-    "destination": "mediterranean",
-    "startsAt": {
-      "name": "Civitavecchia",
-      "nameKo": "치비타베키아",
-      "country": "Italy",
-      "countryKo": "이탈리아"
-    },
-    "endsAt": {
-      "name": "Civitavecchia",
-      "nameKo": "치비타베키아",
-      "country": "Italy",
-      "countryKo": "이탈리아"
-    },
-    "ports": [
-      {
-        "name": "Civitavecchia",
-        "nameKo": "치비타베키아"
-      },
-      {
-        "name": "Genoa",
-        "nameKo": "제노바"
-      },
-      {
-        "name": "Marseille",
-        "nameKo": "마르세유"
-      },
-      {
-        "name": "Tarragona",
-        "nameKo": "Tarragona"
-      },
-      {
-        "name": "Valencia",
-        "nameKo": "Valencia"
-      },
-      {
-        "name": "Livorno",
-        "nameKo": "Livorno"
-      }
-    ],
-    "portRoute": "치비타베키아 → 제노바 → 마르세유 → Tarragona → Valencia → Livorno",
-    "priceInside": 577,
-    "priceOutside": 627,
-    "priceBalcony": 687,
-    "priceSuite": 1387,
-    "currency": "USD",
-    "availability": "available",
-    "image": "https://assets.widgety.co.uk/2024/09/26/10/45/07/ad264e77-d95a-40f2-9131-456fd1c2d6e4/MSC Cruises, MSC Orchestra, New York Exterior, MSC Rights.jpg",
-    "title": "이탈리아·프랑스·스페인 7박 크루즈",
-    "hashtags": [
-      "#지중해크루즈",
-      "#MSC크루즈",
-      "#MSCOrchestra",
+      "#MSC무지카",
       "#치비타베키아",
       "#제노바"
     ]
   },
   {
-    "ref": "NCLJWL-20260430-07-PHL-PHL",
-    "shipSlug": "norwegian-jewel",
-    "shipTitle": "Norwegian Jewel",
+    "ref": "MSCMU20260601CVVCVV",
+    "shipSlug": "msc-musica",
+    "shipTitle": "MSC Musica",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-06-01",
+    "dateTo": "2026-06-08",
+    "nights": 7,
+    "destination": "mediterranean",
+    "title": "지중해 7박 크루즈",
+    "portRoute": "치비타베키아 → 제노바 → 마르세유 → Valencia → 이비자 → 칼리아리",
+    "priceInside": 755,
+    "priceOutside": 0,
+    "priceBalcony": 935,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2021/11/30/08/39/15/ab35a659-53a2-4da4-b933-d54575271524/MSC Cruises MSC Musica 1.jpg",
+    "hashtags": [
+      "#지중해크루즈",
+      "#MSC크루즈",
+      "#MSC무지카",
+      "#제노바",
+      "#마르세유"
+    ]
+  },
+  {
+    "ref": "NCLBWY-20260503-07-BOS-BOS",
+    "shipSlug": "norwegian-breakaway",
+    "shipTitle": "Norwegian Breakaway",
     "operator": "Norwegian Cruise Line",
     "operatorShort": "NCL",
-    "dateFrom": "2026-04-30",
-    "dateTo": "2026-05-07",
+    "dateFrom": "2026-05-03",
+    "dateTo": "2026-05-10",
     "nights": 7,
-    "regions": [
-      "Caribbean",
-      "Americas",
-      "South America"
-    ],
-    "countries": [
-      "United States",
-      "Bermuda"
-    ],
-    "countriesKo": [
-      "미국",
-      "버뮤다"
-    ],
     "destination": "caribbean",
-    "startsAt": {
-      "name": "Philadelphia, Pennsylvania",
-      "nameKo": "Philadelphia, Pennsylvania",
-      "country": "United States",
-      "countryKo": "미국"
-    },
-    "endsAt": {
-      "name": "Philadelphia, Pennsylvania",
-      "nameKo": "Philadelphia, Pennsylvania",
-      "country": "United States",
-      "countryKo": "미국"
-    },
-    "ports": [
-      {
-        "name": "Philadelphia, Pennsylvania",
-        "nameKo": "Philadelphia, Pennsylvania"
-      },
-      {
-        "name": "Kings Wharf",
-        "nameKo": "Kings Wharf"
-      },
-      {
-        "name": "Charleston, South Carolina",
-        "nameKo": "Charleston, South Carolina"
-      }
-    ],
-    "portRoute": "Philadelphia, Pennsylvania → Kings Wharf → Charleston, South Carolina",
-    "priceInside": 530,
-    "priceOutside": 655,
-    "priceBalcony": 1015,
-    "priceSuite": 1430,
+    "title": "카리브해 7박 크루즈",
+    "portRoute": "Boston, Massachusetts → Halifax, Nova Scotia → Kings Wharf",
+    "priceInside": 520,
+    "priceOutside": 575,
+    "priceBalcony": 710,
     "currency": "USD",
-    "availability": "available",
-    "image": "https://assets.widgety.co.uk/2024/12/19/09/13/37/8b65d198-df6d-4c35-b3c7-d53e1a1c4347/NCL, Norwegian Jewel, Aerial at Sea Exterior 2 ©Michele Verdure.jpg",
-    "title": "미국·버뮤다 7박 크루즈",
+    "image": "https://assets.widgety.co.uk/2024/11/18/17/03/56/0f123dcf-c5b3-4699-ba46-c84be720c0d1/NCL Breakaway - Exterior 4.jpg",
     "hashtags": [
       "#카리브해크루즈",
-      "#노르웨이전크루즈",
-      "#NorwegianJewel",
-      "#Philadelphia, Pennsylvania",
+      "#NCL크루즈",
+      "#노르웨이전브레이크어웨이",
+      "#Halifax, Nova Scotia",
       "#Kings Wharf"
     ]
   },
   {
-    "ref": "CARNIVALSP280420267",
-    "shipSlug": "carnival-spirit-ship",
-    "shipTitle": "Carnival Spirit",
-    "operator": "Carnival Cruise Line",
-    "operatorShort": "Carnival",
-    "dateFrom": "2026-04-28",
-    "dateTo": "2026-05-05",
-    "nights": 7,
-    "regions": [
-      "Americas",
-      "Alaska",
-      "North America"
-    ],
-    "countries": [
-      "United States",
-      "Canada"
-    ],
-    "countriesKo": [
-      "미국",
-      "캐나다"
-    ],
+    "ref": "PRINCESSR612",
+    "shipSlug": "ruby-princess",
+    "shipTitle": "Ruby Princess",
+    "operator": "Princess Cruises",
+    "operatorShort": "Princess",
+    "dateFrom": "2026-05-03",
+    "dateTo": "",
+    "nights": 10,
     "destination": "alaska",
-    "startsAt": {
-      "name": "Seattle, Washington",
-      "nameKo": "Seattle, Washington",
-      "country": "United States",
-      "countryKo": "미국"
-    },
-    "endsAt": {
-      "name": "Seattle, Washington",
-      "nameKo": "Seattle, Washington",
-      "country": "United States",
-      "countryKo": "미국"
-    },
-    "ports": [
-      {
-        "name": "Seattle, Washington",
-        "nameKo": "Seattle, Washington"
-      },
-      {
-        "name": "Tracy Arm, Alaska",
-        "nameKo": "Tracy Arm, Alaska"
-      },
-      {
-        "name": "Skagway, Alaska",
-        "nameKo": "Skagway, Alaska"
-      },
-      {
-        "name": "Juneau, Alaska",
-        "nameKo": "Juneau, Alaska"
-      },
-      {
-        "name": "Ketchikan, Alaska",
-        "nameKo": "Ketchikan, Alaska"
-      },
-      {
-        "name": "Victoria, British Columbia",
-        "nameKo": "Victoria, British Columbia"
-      }
-    ],
-    "portRoute": "Seattle, Washington → Tracy Arm, Alaska → Skagway, Alaska → Juneau, Alaska → Ketchikan, Alaska → Victoria, British Columbia",
-    "priceInside": 655,
-    "priceOutside": 831,
-    "priceBalcony": 948,
-    "priceSuite": 2519,
+    "title": "알래스카 10박 크루즈",
+    "portRoute": "",
+    "priceInside": 689,
+    "priceOutside": 803,
+    "priceBalcony": 1179,
     "currency": "USD",
-    "availability": "available",
-    "image": "https://assets.widgety.co.uk/2022/05/05/08/06/25/c430b214-bac8-4c7b-871a-afb30dc12f0a/Carnival Cruise Line Carnival Spirit Exterior.png",
-    "title": "미국·캐나다 7박 크루즈",
+    "image": "https://assets.widgety.co.uk/2021/01/25/14/50/37/08a70583-2437-4027-81e0-1034cb12dd87/Princess Cruises Ruby Princess.jpg",
     "hashtags": [
       "#알래스카크루즈",
-      "#카니발크루즈",
-      "#CarnivalSpirit",
-      "#Seattle, Washington",
-      "#Tracy Arm, Alaska"
+      "#프린세스크루즈",
+      "#루비프린세스"
     ]
   },
   {
