@@ -1,5 +1,53 @@
 [
   {
+    "ref": "MSCBE20260814SHASHA",
+    "shipSlug": "msc-bellissima",
+    "shipTitle": "MSC Bellissima",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-08-14",
+    "dateTo": "2026-08-18",
+    "nights": 4,
+    "regions": ["Asia"],
+    "countries": ["China", "South Korea"],
+    "countriesKo": ["중국", "한국"],
+    "destination": "korea",
+    "startsAt": {
+      "name": "Shanghai",
+      "nameKo": "상하이",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "endsAt": {
+      "name": "Shanghai",
+      "nameKo": "상하이",
+      "country": "China",
+      "countryKo": "중국"
+    },
+    "ports": [
+      { "name": "Shanghai", "nameKo": "상하이" },
+      { "name": "Jeju", "nameKo": "제주" },
+      { "name": "Busan", "nameKo": "부산" }
+    ],
+    "portRoute": "상하이 → 제주 → 부산 → 상하이",
+    "priceInside": 299,
+    "priceOutside": 379,
+    "priceBalcony": 449,
+    "priceSuite": 899,
+    "currency": "USD",
+    "availability": "available",
+    "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC Cruises, MSC Bellissima, Exterior, Copyrights - MSC Rights.jpg",
+    "title": "중국·한국 4박 크루즈",
+    "hashtags": [
+      "#한국크루즈",
+      "#MSC크루즈",
+      "#MSC벨리시마",
+      "#상하이출발",
+      "#제주",
+      "#부산"
+    ]
+  },
+  {
     "ref": "MSCMU20260503CAGCAG",
     "shipSlug": "msc-musica",
     "shipTitle": "MSC Musica",
