@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>크루즈 완벽 가이드 | 선사·선박·기항지 정보 총정리 - 크루즈링크</title>
+  <meta name="description" content="MSC, NCL, 로열 캐리비안 등 주요 크루즈 선사 소개, 선박별 시설 가이드, 기항지 정보까지 크루즈링크가 총정리합니다.">
+  <link rel="canonical" href="https://www.cruiselink.co.kr/guide/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚢</text></svg>">
+  <style>
+    .g-hero{position:relative;height:420px;overflow:hidden;display:flex;align-items:flex-end}
+    .g-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .g-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.1) 60%)}
+    .g-hero-content{position:relative;z-index:1;width:100%;padding:36px 0;color:#fff}
+    .breadcrumb{font-size:.82rem;color:rgba(255,255,255,.75);margin-bottom:10px}
+    .breadcrumb a{color:rgba(255,255,255,.75);text-decoration:none}
+    .g-hero h1{font-size:2rem;font-weight:900;margin:0 0 10px;line-height:1.2}
+    .g-hero-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:.85rem;opacity:.9}
+    .g-hero-meta span{background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px;backdrop-filter:blur(4px)}
+    .g-layout{display:grid;grid-template-columns:1fr 300px;gap:36px;max-width:var(--max-width);margin:44px auto;padding:0 20px;align-items:start}
+    @media(max-width:900px){.g-layout{grid-template-columns:1fr}.g-hero h1{font-size:1.5rem}}
+    .g-body h2{font-size:1.3rem;font-weight:900;color:var(--navy);margin:36px 0 14px;padding-bottom:8px;border-bottom:3px solid var(--orange);display:inline-block}
+    .g-body h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin:20px 0 8px}
+    .g-body p{color:var(--gray-700);line-height:1.9;margin-bottom:14px}
+    .g-body ul{padding-left:20px;color:var(--gray-700);line-height:2;margin-bottom:14px}
+    .spec-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.9rem}
+    .spec-table td{padding:9px 12px;border-bottom:1px solid var(--gray-200)}
+    .spec-table td:first-child{font-weight:700;color:var(--navy);width:35%;background:var(--gray-50)}
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+    @media(max-width:600px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+    .feat-card{background:var(--gray-50);border-radius:var(--radius);padding:14px;font-size:.85rem;color:var(--gray-700);border-left:3px solid var(--orange)}
+    .ship-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}
+    @media(max-width:600px){.ship-grid{grid-template-columns:1fr}}
+    .ship-card{border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;transition:box-shadow .2s;text-decoration:none;display:block;color:inherit}
+    .ship-card:hover{box-shadow:var(--shadow-lg)}
+    .ship-card img{width:100%;height:140px;object-fit:cover}
+    .ship-card-body{padding:12px}
+    .ship-card-body .name{font-weight:700;color:var(--navy);font-size:.92rem}
+    .ship-card-body .meta{font-size:.78rem;color:var(--gray-500);margin-top:3px}
+    .sidebar-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:20px;margin-bottom:18px;box-shadow:var(--shadow)}
+    .sidebar-card h3{font-size:.95rem;font-weight:700;color:var(--navy);margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid var(--gray-200)}
+    .sidebar-toc{list-style:none;padding:0;margin:0}
+    .sidebar-toc li{margin-bottom:2px}
+    .sidebar-toc a{font-size:.85rem;color:var(--gray-700);text-decoration:none;padding:4px 8px;border-radius:4px;display:block;transition:all .15s}
+    .sidebar-toc a:hover{background:var(--gray-100);color:var(--navy)}
+    .cta-btn{display:block;background:var(--orange);color:#fff;text-align:center;padding:13px;border-radius:var(--radius);font-weight:700;font-size:.92rem;text-decoration:none;margin-top:8px;transition:background .2s}
+    .cta-btn:hover{background:var(--orange-hover)}
+    .cta-btn.navy{background:var(--navy)}
+    .cta-btn.navy:hover{background:var(--navy-dark)}
+    h2[id],h3[id]{scroll-margin-top:80px}
+    .g-sidebar{position:sticky;top:80px}
+    .tag{display:inline-block;background:var(--gray-100);color:var(--gray-700);font-size:.78rem;padding:3px 8px;border-radius:10px;margin:2px}
+  </style>
+</head>
+<body>
+<div id="header"></div>
+
+<section style="background:linear-gradient(135deg,var(--navy) 0%,#283593 100%);color:#fff;padding:80px 0;text-align:center">
+  <div class="container">
+    <h1 style="font-size:2.2rem;font-weight:900;margin:0 0 12px">크루즈 완벽 가이드</h1>
+    <p style="font-size:1.05rem;opacity:.85;margin:0">선사·선박·기항지 정보를 한곳에서 확인하세요</p>
+  </div>
+</section>
+
+<div class="container" style="padding:48px 20px">
+
+  <section style="margin-bottom:56px">
+    <h2 style="font-size:1.4rem;font-weight:900;color:var(--navy);margin-bottom:8px">🏢 선사 소개</h2>
+    <p style="color:var(--gray-700);margin-bottom:24px">세계 주요 크루즈 선사들의 특징과 노선, 보유 선박을 소개합니다.</p>
+    <div class="ship-grid">
+        <a class="ship-card" href="cruise-lines/carnival-cruise-line.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">🎉</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">카니발 크루즈 라인</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">31척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">미국 최대 크루즈 선사, 즐거움과 가성비의 대명사</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/royal-caribbean.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">👑</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">로열 캐리비안</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">30척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">세계 최대 크루즈선 Icon of the Seas의 선사</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/msc-cruises.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">🇮🇹</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">MSC 크루즈</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">25척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">지중해에서 태어난 세계 최대 크루즈 선사</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/norwegian-cruise-line.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">🇺🇸</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">노르웨지안 크루즈 라인 (NCL)</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">22척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">자유로운 크루즈 여행의 선구자, Freestyle Cruising</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/princess-cruises.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">👸</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">프린세스 크루즈</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">17척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">TV 시리즈 &#x27;러브 보트&#x27;의 그 선사</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/celebrity-cruises.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">⭐</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">셀러브리티 크루즈</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">16척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">현대적 럭셔리 크루즈의 기준</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/oceania-cruises.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">🌊</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">오세아니아 크루즈</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">9척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">미식가를 위한 프리미엄 크루즈</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/disney-cruise-line.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">🏰</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">디즈니 크루즈 라인</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">8척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">온 가족이 함께하는 마법 같은 크루즈</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/regent-seven-seas.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">💎</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">리젠트 세븐 시즈 크루즈</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">7척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">세계 최고 All-Inclusive 럭셔리 크루즈</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/explora-journeys.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">✨</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">엑스플로라 저니스</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">5척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)">MSC 그룹의 울트라 럭셔리 크루즈 브랜드</div>
+          </div>
+        </a>
+        <a class="ship-card" href="cruise-lines/celebrity-river-cruises.html">
+          <div style="padding:20px;background:var(--navy);color:#fff;text-align:center">
+            <div style="font-size:2rem">🚢</div>
+            <div style="font-weight:900;font-size:1rem;margin-top:8px">Celebrity River Cruises</div>
+            <div style="font-size:.78rem;opacity:.8;margin-top:4px">5척 보유</div>
+          </div>
+          <div class="ship-card-body">
+            <div class="name" style="font-size:.82rem;font-weight:400;color:var(--gray-700)"></div>
+          </div>
+        </a></div>
+  </section>
+
+  <section style="margin-bottom:56px">
+    <h2 style="font-size:1.4rem;font-weight:900;color:var(--navy);margin-bottom:8px">🚢 선박 소개</h2>
+    <p style="color:var(--gray-700);margin-bottom:24px">각 선박의 시설, 객실, 운항 노선을 상세히 안내합니다. <a href="ships/" style="color:var(--orange);font-weight:700">전체 보기 →</a></p>
+  </section>
+
+  <section style="margin-bottom:56px">
+    <h2 style="font-size:1.4rem;font-weight:900;color:var(--navy);margin-bottom:8px">🌍 기항지 가이드</h2>
+    <p style="color:var(--gray-700);margin-bottom:24px">크루즈 기항지별 볼거리, 맛집, 투어 정보를 정리합니다. <a href="ports/" style="color:var(--orange);font-weight:700">전체 보기 →</a></p>
+  </section>
+
+</div>
+
+<div id="footer"></div>
+<script src="../assets/data/translations.js"></script>
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/components.js"></script>
+<script>
+  document.getElementById('header').innerHTML = Components.header('../');
+  document.getElementById('footer').innerHTML = Components.footer('../');
+</script>
+</body></html>
