@@ -44,10 +44,11 @@ const Components = {
           <div class="footer-col">
             <h4>크루즈 가이드</h4>
             <p><a href="${base}guide/">가이드 홈</a></p>
-            <p><a href="${base}guide/cruise-lines/msc-cruises.html">MSC 크루즈</a></p>
-            <p><a href="${base}guide/ports/barcelona.html">바르셀로나</a></p>
-            <p><a href="${base}guide/ports/tokyo.html">도쿄</a></p>
+            <p><a href="${base}guide/cruise-lines/">선사 소개</a></p>
+            <p><a href="${base}guide/ships/">선박 소개</a></p>
+            <p><a href="${base}guide/ports/">기항지 가이드</a></p>
             <p><a href="${base}guide/news/">크루즈 뉴스</a></p>
+            <p><a href="${base}guide/tips/">크루즈 실전 팁</a></p>
           </div>
           <div class="footer-col">
             <h4>목적지</h4>
