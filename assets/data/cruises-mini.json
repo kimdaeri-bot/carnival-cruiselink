@@ -2285,5 +2285,84 @@
       "#도쿄",
       "#오사카"
     ]
+  },
+  {
+    "ref": "RCIJW4BH423-110526",
+    "destination": "caribbean",
+    "shipSlug": "jewel-of-the-seas",
+    "operator": "Royal Caribbean International",
+    "dateFrom": "2026-05-11",
+    "nights": 4,
+    "title": "미국·바하마 4박 크루즈",
+    "countriesKo": [
+      "미국",
+      "바하마"
+    ],
+    "priceInside": 342,
+    "priceOutside": 386,
+    "priceBalcony": 493,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2024/11/11/11/20/12/fde5d422-3853-4995-a5fc-9a824c6ede53/RCI%2C%20Jewel%20of%20the%20Seas%2C%20Exterior.jpg",
+    "hashtags": [
+      "#카리브해크루즈",
+      "#로얄캐리비안",
+      "#JeweloftheSeas",
+      "#Fort Lauderdale, Florida",
+      "#나소"
+    ]
+  },
+  {
+    "ref": "MSCDI20260511KUSKUS",
+    "destination": "mediterranean",
+    "shipSlug": "msc-divina",
+    "operator": "MSC Cruises",
+    "dateFrom": "2026-05-11",
+    "nights": 7,
+    "title": "터키·이탈리아·그리스 7박 크루즈",
+    "countriesKo": [
+      "터키",
+      "이탈리아",
+      "그리스"
+    ],
+    "priceInside": 753,
+    "priceOutside": 873,
+    "priceBalcony": 973,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2024/09/11/13/43/58/223a6461-08c3-4a30-8f5f-7c192785f6de/MSC%20Cruises%2C%20MSC%20Divina%2C%20Exterior%202%2C%20Copyrights%20-%20MSC%20Rights%2C%20Ivan%20Sarfatti.jpg",
+    "hashtags": [
+      "#지중해크루즈",
+      "#MSC크루즈",
+      "#MSCDivina",
+      "#쿠사다시",
+      "#Marmaris"
+    ]
+  },
+  {
+    "ref": "OCEANIAINS260516",
+    "destination": "northern-europe",
+    "shipSlug": "insignia",
+    "operator": "Oceania Cruises",
+    "dateFrom": "2026-05-16",
+    "nights": 10,
+    "title": "북유럽 10박 크루즈",
+    "countriesKo": [
+      "포르투갈",
+      "스페인",
+      "프랑스",
+      "벨기에",
+      "England"
+    ],
+    "priceInside": 1981,
+    "priceOutside": 2058,
+    "priceBalcony": 3290,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2024/11/04/09/06/06/55e14a35-0565-4be8-925d-1101bad0f56f/Oceania%20Cruises%2C%20R-Class%2C%20Insignia%20Exterior.jpg",
+    "hashtags": [
+      "#북유럽크루즈",
+      "#오세아니아크루즈",
+      "#OceaniaInsignia",
+      "#리스본",
+      "#Porto"
+    ]
   }
 ]
