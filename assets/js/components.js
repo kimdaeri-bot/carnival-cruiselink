@@ -29,7 +29,7 @@ const Components = {
         <div class="footer-content">
           <div class="footer-col">
             <h4>크루즈링크는?</h4>
-            <p><a href="#">회사소개</a></p>
+            <p><a href="${base}about.html">회사소개</a></p>
             <p><a href="${base}privacy.html">개인정보 처리방침</a></p>
             <p><a href="${base}terms.html">이용약관</a></p>
           </div>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회사소개 | 크루즈링크 - 아남항공 주식회사</title>
+  <meta name="description" content="크루즈링크는 1987년 창립된 아남항공 주식회사(Anam Air Service)가 운영하는 크루즈 전문 서비스입니다. 38년 항공·여행업 전문성을 바탕으로 MSC, NCL 등 글로벌 크루즈 상품을 제공합니다.">
+  <link rel="canonical" href="https://www.cruiselink.co.kr/about.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="크루즈링크">
+  <meta property="og:title" content="회사소개 | 크루즈링크">
+  <meta property="og:description" content="1987년 창립, 38년 항공·여행업 전문 기업 아남항공 주식회사가 운영하는 크루즈 전문 서비스">
+  <meta property="og:url" content="https://www.cruiselink.co.kr/about.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚢</text></svg>">
+  <style>
+    /* 히어로 */
+    .about-hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, #1565c0 100%);
+      color: #fff;
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&q=60') center/cover no-repeat;
+      opacity: 0.15;
+    }
+    .about-hero .container { position: relative; z-index: 1; }
+    .about-hero h1 { font-size: 2.4rem; font-weight: 900; margin: 0 0 16px; }
+    .about-hero p { font-size: 1.1rem; opacity: .85; margin: 0 auto; max-width: 600px; line-height: 1.7; }
+
+    /* 섹션 공통 */
+    .section { padding: 72px 0; }
+    .section-alt { background: var(--gray-50); }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--navy);
+      margin: 0 0 8px;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--gray-500);
+      margin: 0 0 40px;
+    }
+    .section-title-line {
+      width: 48px;
+      height: 4px;
+      background: var(--orange);
+      border-radius: 2px;
+      margin: 12px 0 40px;
+    }
+
+    /* 숫자 카운터 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    .stat-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 32px 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--orange);
+    }
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label { font-size: .88rem; color: var(--gray-500); }
+
+    /* 비전/미션 */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) { .vision-grid { grid-template-columns: 1fr; } }
+    .vision-card {
+      background: var(--navy);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 36px 28px;
+    }
+    .vision-card .icon { font-size: 2rem; margin-bottom: 16px; }
+    .vision-card h3 { font-size: 1.1rem; font-weight: 900; margin: 0 0 12px; }
+    .vision-card p { font-size: .9rem; opacity: .85; line-height: 1.8; margin: 0; }
+
+    /* 서비스 */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 768px) { .service-grid { grid-template-columns: 1fr; } }
+    .service-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      background: #fff;
+      transition: box-shadow .2s;
+    }
+    .service-card:hover { box-shadow: var(--shadow-lg); }
+    .service-card .icon { font-size: 2rem; margin-bottom: 14px; }
+    .service-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin: 0 0 10px; }
+    .service-card p { font-size: .88rem; color: var(--gray-700); line-height: 1.8; margin: 0; }
+
+    /* 연혁 타임라인 */
+    .timeline { position: relative; padding-left: 40px; max-width: 700px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: var(--gray-200);
+    }
+    .tl-item { position: relative; margin-bottom: 32px; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -34px;
+      top: 6px;
+      width: 12px; height: 12px;
+      background: var(--orange);
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--orange);
+    }
+    .tl-year { font-size: .82rem; font-weight: 700; color: var(--orange); margin-bottom: 4px; }
+    .tl-title { font-size: 1rem; font-weight: 700; color: var(--navy); }
+    .tl-desc { font-size: .88rem; color: var(--gray-700); margin-top: 4px; line-height: 1.7; }
+
+    /* 파트너 로고 */
+    .partner-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+    }
+    .partner-logo {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 14px 24px;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--gray-700);
+      text-align: center;
+      min-width: 140px;
+    }
+
+    /* 정보 테이블 */
+    .info-table { width: 100%; border-collapse: collapse; }
+    .info-table tr { border-bottom: 1px solid var(--gray-200); }
+    .info-table tr:last-child { border-bottom: none; }
+    .info-table th {
+      text-align: left;
+      padding: 14px 16px;
+      width: 160px;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--gray-50);
+      font-size: .9rem;
+    }
+    .info-table td {
+      padding: 14px 16px;
+      color: var(--gray-700);
+      font-size: .9rem;
+      line-height: 1.7;
+    }
+    @media (max-width: 600px) {
+      .about-hero h1 { font-size: 1.7rem; }
+      .info-table th { width: 110px; font-size: .82rem; }
+      .info-table td { font-size: .82rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="header"></div>
+
+<!-- 히어로 -->
+<section class="about-hero">
+  <div class="container">
+    <h1>회사 소개</h1>
+    <p>38년 항공·여행업 전문 기업 아남항공 주식회사가<br>운영하는 크루즈 전문 서비스, 크루즈링크입니다.</p>
+  </div>
+</section>
+
+<!-- 숫자로 보는 크루즈링크 -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">숫자로 보는 크루즈링크</h2>
+    <div class="section-title-line"></div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">38<span style="font-size:1.4rem">년+</span></div>
+        <div class="stat-label">항공·여행업 업력</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">11</div>
+        <div class="stat-label">제휴 크루즈 선사</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">175</div>
+        <div class="stat-label">취급 크루즈 선박</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">270<span style="font-size:1.4rem">+</span></div>
+        <div class="stat-label">전 세계 기항지</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 회사 소개 본문 -->
+<section class="section section-alt">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+      <div>
+        <h2 class="section-title">아남항공 주식회사</h2>
+        <p style="font-size:1rem;font-weight:700;color:var(--orange);margin:0 0 16px">Anam Air Service Co., Ltd.</p>
+        <div class="section-title-line"></div>
+        <p style="color:var(--gray-700);line-height:1.95;margin-bottom:16px">
+          아남항공 주식회사(Anam Air Service Co., Ltd.)는 1987년 설립된 항공·여행 전문 기업입니다. 창립 이래 38년간 국내외 주요 항공사의 GSA(General Sales Agent) 업무를 수행하며 쌓아온 글로벌 네트워크와 전문 인력을 바탕으로, 한국 여행 시장에 최고 수준의 서비스를 제공하고 있습니다.
+        </p>
+        <p style="color:var(--gray-700);line-height:1.95;margin-bottom:16px">
+          크루즈링크(CruiseLink)는 아남항공 주식회사의 크루즈 전문 서비스 브랜드입니다. MSC Cruises, Norwegian Cruise Line(NCL), Explora Journeys 등 세계 유수의 크루즈 선사와의 긴밀한 파트너십을 기반으로, 한국 고객에게 최적화된 크루즈 예약·상담 서비스를 제공합니다.
+        </p>
+        <p style="color:var(--gray-700);line-height:1.95">
+          항공 GSA로 쌓은 글로벌 운항 노하우와 크루즈 전문 상담 역량을 결합해, 단순한 예약 대행을 넘어 여행자의 전체 여정을 함께 설계하는 토탈 트래블 솔루션을 지향합니다.
+        </p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80"
+             alt="아남항공 주식회사"
+             style="width:100%;border-radius:var(--radius);box-shadow:var(--shadow-lg)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 비전 & 미션 -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">비전 & 미션</h2>
+    <div class="section-title-line"></div>
+    <div class="vision-grid">
+      <div class="vision-card">
+        <div class="icon">🎯</div>
+        <h3>VISION</h3>
+        <p>항공·크루즈·여행 전반에 걸친 토탈 트래블 솔루션 기업으로 성장하여, 한국 여행자의 세계 어느 곳으로든 최고의 파트너가 된다.</p>
+      </div>
+      <div class="vision-card">
+        <div class="icon">🌊</div>
+        <h3>크루즈링크 미션</h3>
+        <p>크루즈 여행의 복잡한 선택을 단순하게. 전문 상담을 통해 각 고객에게 가장 적합한 크루즈 경험을 연결하고, 기억에 남는 여행을 만든다.</p>
+      </div>
+      <div class="vision-card">
+        <div class="icon">💡</div>
+        <h3>핵심 가치</h3>
+        <p>전문성(Expertise) · 신뢰(Trust) · 맞춤(Tailor-made). 38년 업력의 전문 지식으로 고객 한 분 한 분께 맞춤형 해결책을 제시한다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 주요 서비스 -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">주요 서비스</h2>
+    <div class="section-title-line"></div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="icon">🚢</div>
+        <h3>크루즈 예약 상담</h3>
+        <p>MSC, NCL, 로열 캐리비안, Explora Journeys 등 전 세계 11개 주요 선사 175척 선박의 크루즈 예약을 전문 상담원이 1:1로 도와드립니다.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">✈️</div>
+        <h3>항공사 GSA 서비스</h3>
+        <p>국내외 주요 항공사의 화물·여객 판매 대리점(GSA) 업무를 수행합니다. 인천공항 기반 항공 운영 서비스도 제공합니다.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🌍</div>
+        <h3>항공권 발권</h3>
+        <p>크루즈 출발지까지의 국제선 항공권 연계 발권 서비스. 바르셀로나, 로마, 도쿄 등 크루즈 출발 도시 항공편을 패키지로 안내합니다.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🏨</div>
+        <h3>승선 전·후 호텔</h3>
+        <p>크루즈 출발 전일 및 하선 후 체류 호텔 예약 서비스. 기항지별 추천 호텔과 관광지 정보를 함께 제공합니다.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🗺️</div>
+        <h3>기항지 투어 안내</h3>
+        <p>각 기항지의 추천 투어, 현지 이동 방법, 실전 팁을 크루즈링크 가이드에서 무료로 제공합니다. 220개 이상의 전문 가이드 페이지 운영.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">📋</div>
+        <h3>단체 크루즈 기획</h3>
+        <p>기업 인센티브, 가족 동반, 허니문, 시니어 그룹 등 단체 크루즈 맞춤 기획 서비스. 8명 이상 그룹 예약 시 특별 혜택 제공.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 회사 연혁 -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">회사 연혁</h2>
+    <div class="section-title-line"></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1987</div>
+        <div class="tl-title">아남항공 주식회사 창립</div>
+        <div class="tl-desc">국내 주요 항공사 GSA(General Sales Agent) 업무 시작. 화물·여객 판매 대리점 운영.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1990년대</div>
+        <div class="tl-title">항공 GSA 사업 확장</div>
+        <div class="tl-desc">다수의 외국 항공사와 GSA 계약 체결. 인천국제공항 운영 참여 및 화물 관리 시스템(CMS) 자체 개발.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2000년대</div>
+        <div class="tl-title">글로벌 파트너십 강화</div>
+        <div class="tl-desc">CASS 없이 독자 정산 계약 체결. AWB 배포·관리 시스템 고도화. 국제 항공화물 네트워크 확대.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2010년대</div>
+        <div class="tl-title">여행 서비스 다각화</div>
+        <div class="tl-desc">항공 GSA 중심에서 여객 서비스 확대. 크루즈 여행 시장 진출 준비. 글로벌 크루즈 선사와 파트너십 구축.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2020년대</div>
+        <div class="tl-title">크루즈링크 론칭</div>
+        <div class="tl-desc">MSC, NCL, Explora Journeys 등과 공식 파트너십. 크루즈 전문 브랜드 크루즈링크(cruiselink.co.kr) 운영 시작.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <div class="tl-title">크루즈링크 V2 오픈</div>
+        <div class="tl-desc">www.cruiselink.co.kr 리뉴얼. 11개 선사 175척 선박·220개 가이드 페이지 제공. 네이버·구글 SEO 최적화 완료.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 파트너 선사 -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">파트너 크루즈 선사</h2>
+    <div class="section-title-line"></div>
+    <div class="partner-logos">
+      <div class="partner-logo">🚢 MSC Cruises</div>
+      <div class="partner-logo">🚢 Norwegian Cruise Line</div>
+      <div class="partner-logo">✨ Explora Journeys</div>
+      <div class="partner-logo">👑 Royal Caribbean</div>
+      <div class="partner-logo">⭐ Celebrity Cruises</div>
+      <div class="partner-logo">👸 Princess Cruises</div>
+      <div class="partner-logo">🎉 Carnival Cruise Line</div>
+      <div class="partner-logo">🌊 Oceania Cruises</div>
+      <div class="partner-logo">💎 Regent Seven Seas</div>
+      <div class="partner-logo">🏰 Disney Cruise Line</div>
+    </div>
+  </div>
+</section>
+
+<!-- 회사 정보 -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">회사 정보</h2>
+    <div class="section-title-line"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+      <div>
+        <table class="info-table">
+          <tr><th>상호명</th><td>아남항공 주식회사 (Anam Air Service Co., Ltd.)</td></tr>
+          <tr><th>대표이사</th><td>김영성 (Young sung Kim)</td></tr>
+          <tr><th>설립일</th><td>1987년 8월 24일</td></tr>
+          <tr><th>사업자번호</th><td>104-81-84918</td></tr>
+          <tr><th>소재지</th><td>서울특별시 강서구 마곡서로 152<br>두산 더 랜드타워 A블록 5층 (우: 07788)</td></tr>
+          <tr><th>전화</th><td><a href="tel:02-3788-9119" style="color:var(--navy)">02-3788-9119</a></td></tr>
+          <tr><th>이메일</th><td><a href="mailto:info@cruiselink.co.kr" style="color:var(--navy)">info@cruiselink.co.kr</a></td></tr>
+          <tr><th>크루즈 웹사이트</th><td><a href="https://www.cruiselink.co.kr" style="color:var(--navy)">www.cruiselink.co.kr</a></td></tr>
+          <tr><th>항공 웹사이트</th><td><a href="https://www.aerolink.co.kr" target="_blank" style="color:var(--navy)">www.aerolink.co.kr</a></td></tr>
+        </table>
+      </div>
+      <div style="background:var(--gray-50);border-radius:var(--radius);padding:28px">
+        <h3 style="font-size:1rem;font-weight:700;color:var(--navy);margin:0 0 16px">📍 오시는 길</h3>
+        <p style="font-size:.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:16px">
+          서울특별시 강서구 마곡서로 152<br>
+          두산 더 랜드타워 A블록 5층
+        </p>
+        <p style="font-size:.88rem;color:var(--gray-500);line-height:1.9;margin:0">
+          🚇 <strong>지하철</strong><br>
+          9호선 마곡나루역 2번 출구 도보 5분<br>
+          5호선 마곡역 2번 출구 도보 10분<br><br>
+          🚌 <strong>버스</strong><br>
+          마곡나루역 정류장 하차
+        </p>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--gray-200)">
+          <h3 style="font-size:1rem;font-weight:700;color:var(--navy);margin:0 0 12px">💬 상담 문의</h3>
+          <a href="https://pf.kakao.com/_xgYbJG" target="_blank"
+             style="display:block;background:#FAE300;color:#3A1D1D;text-align:center;padding:12px;border-radius:var(--radius);font-weight:700;text-decoration:none;margin-bottom:8px">
+            💬 카카오톡 상담
+          </a>
+          <a href="tel:02-3788-9119"
+             style="display:block;background:var(--navy);color:#fff;text-align:center;padding:12px;border-radius:var(--radius);font-weight:700;text-decoration:none">
+            📞 02-3788-9119
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer"></div>
+
+<script src="assets/data/translations.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/components.js"></script>
+<script>
+  document.getElementById('header').innerHTML = Components.header('about');
+  document.getElementById('footer').innerHTML = Components.footer();
+</script>
+</body>
+</html>
