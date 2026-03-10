@@ -956,11 +956,11 @@
   </div>
   <!-- Mobile Bottom Inquiry Bar -->
   <div id="mib" class="mib">
-    <div class="mib-handle" id="mibHandle" onclick="toggleMIB()">
+    <div class="mib-handle" id="mibHandle">
       <div class="mib-peek">
         <span class="mib-peek-icon">🚢</span>
         <span class="mib-peek-title" id="mibPeekTitle">이 크루즈 상품 문의하기</span>
-        <span class="mib-peek-arrow" id="mibArrow">▲</span>
+        <span class="mib-peek-arrow" id="mibArrow" onclick="toggleMIB()" style="padding:8px 12px;cursor:pointer;font-size:18px;">▲</span>
       </div>
     </div>
     <div class="mib-panel" id="mibPanel">
@@ -997,11 +997,18 @@
       }
 
       .mib-handle {
-        cursor: pointer;
+        cursor: default;
         padding: 0;
         user-select: none;
         -webkit-tap-highlight-color: transparent;
       }
+
+      .mib-peek-arrow {
+        -webkit-tap-highlight-color: transparent;
+        border-radius: 50%;
+        transition: background .15s;
+      }
+      .mib-peek-arrow:active { background: rgba(0,0,0,.08); }
 
       /* 핸들 상단 드래그 인디케이터 */
       .mib-handle::before {
