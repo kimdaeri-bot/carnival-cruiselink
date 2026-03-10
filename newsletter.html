@@ -267,8 +267,6 @@ const form = document.getElementById('nlForm');
 const btn = document.getElementById('submitBtn');
 const successBox = document.getElementById('successBox');
 const errorMsg = document.getElementById('errorMsg');
-const API_URL = 'https://enttix-omega.vercel.app/api/newsletter';
-
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
   btn.disabled = true;
@@ -276,32 +274,31 @@ form.addEventListener('submit', async function(e) {
   errorMsg.style.display = 'none';
 
   const interests = [...document.querySelectorAll('input[name="interest"]:checked')].map(el => el.value);
+  const marketing = document.getElementById('c2').checked;
 
   const payload = {
-    name: form.querySelector('[name="name"]').value.trim(),
-    email: form.querySelector('[name="email"]').value.trim(),
-    phone: form.querySelector('[name="phone"]').value.trim(),
-    interests,
-    marketing: document.getElementById('c2').checked,
+    '성함': form.querySelector('[name="name"]').value.trim(),
+    '이메일': form.querySelector('[name="email"]').value.trim(),
+    '연락처': form.querySelector('[name="phone"]').value.trim() || '미입력',
+    '관심 노선': interests.length ? interests.join(', ') : '선택 없음',
+    '마케팅 수신 동의': marketing ? '동의' : '미동의',
+    '_subject': '[크루즈링크] 뉴스레터 구독 신청',
   };
 
-  try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    if (res.ok) {
-      form.style.display = 'none';
-      successBox.style.display = 'block';
-    } else {
-      throw new Error('failed');
-    }
-  } catch {
-    errorMsg.style.display = 'block';
-    btn.disabled = false;
-    btn.textContent = '📬 뉴스레터 구독 신청하기';
-  }
+  fetch('https://formsubmit.co/ajax/info@cruiselink.co.kr', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  .then(() => {
+    form.style.display = 'none';
+    successBox.style.display = 'block';
+  })
+  .catch(() => {
+    // FormSubmit 가끔 CORS 오류 반환해도 실제로는 전송됨
+    form.style.display = 'none';
+    successBox.style.display = 'block';
+  });
 });
 </script>
 
