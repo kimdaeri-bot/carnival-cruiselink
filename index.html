@@ -307,8 +307,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         .cruise-tab-btn { padding:12px 22px; font-size:0.9rem; font-weight:600; color:var(--gray-700); border:none; background:none; cursor:pointer; white-space:nowrap; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.2s; font-family:inherit; }
         .cruise-tab-btn.active { color:var(--navy); border-bottom-color:var(--navy); font-weight:700; }
         .cruise-tab-btn:hover:not(.active) { color:var(--navy); }
-        .tab-cruise-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
-        .tab-card { border:1px solid var(--gray-300); border-radius:10px; overflow:hidden; background:#fff; display:flex; flex-direction:column; transition:box-shadow 0.2s,transform 0.2s; cursor:pointer; text-decoration:none; color:inherit; }
+        /* ── 탭 슬라이더 ── */
+        .tab-slider-wrap { position:relative; }
+        .tab-slider-viewport { overflow:hidden; }
+        .tab-cruise-grid { display:flex; flex-wrap:nowrap; gap:16px; transition:transform 0.4s ease; will-change:transform; }
+        .tab-card { flex:0 0 calc((100% - 64px) / 5); min-width:180px; border:1px solid var(--gray-300); border-radius:10px; overflow:hidden; background:#fff; display:flex; flex-direction:column; transition:box-shadow 0.2s,transform 0.2s; cursor:pointer; text-decoration:none; color:inherit; }
         .tab-card:hover { box-shadow:0 8px 24px rgba(0,0,0,0.12); transform:translateY(-2px); }
         .tab-card-img { height:150px; overflow:hidden; }
         .tab-card-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.3s; display:block; }
@@ -321,15 +324,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         .tab-card-meta { margin-top:auto; border-top:1px solid var(--gray-200); padding-top:8px; }
         .tab-card-dates { display:block; color:var(--navy); font-size:0.82rem; font-weight:700; margin-top:6px; }
         .tab-card-dates:hover { text-decoration:underline; }
-        .tabs-loading { grid-column:1/-1; text-align:center; padding:40px; color:var(--gray-500); }
-        @media (max-width:1024px) { .tab-cruise-grid { grid-template-columns:repeat(3,1fr); } }
+        .tabs-loading { text-align:center; padding:40px; color:var(--gray-500); width:100%; }
+        /* PC 화살표 */
+        .tab-arrow { display:none; }
+        @media (min-width:641px) {
+          .tab-arrow { display:flex; align-items:center; justify-content:center; position:absolute; top:50%; transform:translateY(-50%); z-index:10; width:38px; height:38px; border-radius:50%; border:none; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.18); color:var(--navy); font-size:22px; cursor:pointer; transition:opacity 0.2s,box-shadow 0.2s; }
+          .tab-arrow:hover { box-shadow:0 4px 16px rgba(0,0,0,0.22); }
+          .tab-arrow.disabled { opacity:0.25; pointer-events:none; }
+          .tab-arrow-left { left:-18px; }
+          .tab-arrow-right { right:-18px; }
+        }
+        @media (max-width:1024px) { .tab-card { flex:0 0 calc((100% - 32px) / 3); } }
         @media (max-width:640px) {
-          .tab-cruise-grid {
-            display:flex; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
-            scroll-snap-type:x mandatory; gap:12px; padding-bottom:8px;
-            scrollbar-width:none;
-          }
-          .tab-cruise-grid::-webkit-scrollbar { display:none; }
+          .tab-slider-viewport { overflow-x:auto; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory; scrollbar-width:none; padding-bottom:8px; }
+          .tab-slider-viewport::-webkit-scrollbar { display:none; }
           .tab-card { flex:0 0 72vw; min-width:200px; scroll-snap-align:start; }
         }
         /* ── Date Range Picker ── */
@@ -374,8 +382,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button class="cruise-tab-btn" onclick="switchTab(this,'northern-europe')">북유럽</button>
         <button class="cruise-tab-btn" onclick="switchTab(this,'asia')">아시아·중동</button>
       </nav>
-      <div class="tab-cruise-grid" id="tabCruiseGrid">
-        <div class="tabs-loading">불러오는 중...</div>
+      <div class="tab-slider-wrap" id="tabSliderWrap">
+        <button class="tab-arrow tab-arrow-left disabled" id="tabArrowLeft" onclick="slideTab(-1)" aria-label="이전">&#8249;</button>
+        <div class="tab-slider-viewport" id="tabSliderViewport">
+          <div class="tab-cruise-grid" id="tabCruiseGrid">
+            <div class="tabs-loading">불러오는 중...</div>
+          </div>
+        </div>
+        <button class="tab-arrow tab-arrow-right" id="tabArrowRight" onclick="slideTab(1)" aria-label="다음">&#8250;</button>
       </div>
     </div>
   </section>
@@ -1079,22 +1093,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     };
 
     window.tabCacheV2 = {};
+    // ── 탭 슬라이더 ──
+    let tabSlidePos = 0;
+    function getTabSlideUnit() {
+      const viewport = document.getElementById('tabSliderViewport');
+      if (!viewport) return 0;
+      const card = viewport.querySelector('.tab-card');
+      return card ? card.offsetWidth + 16 : 0;
+    }
+    function updateTabArrows() {
+      const grid = document.getElementById('tabCruiseGrid');
+      const viewport = document.getElementById('tabSliderViewport');
+      if (!grid || !viewport) return;
+      const cardCount = grid.querySelectorAll('.tab-card').length;
+      const visibleCount = window.innerWidth <= 1024 ? 3 : 5;
+      const maxPos = Math.max(0, cardCount - visibleCount);
+      document.getElementById('tabArrowLeft').classList.toggle('disabled', tabSlidePos <= 0);
+      document.getElementById('tabArrowRight').classList.toggle('disabled', tabSlidePos >= maxPos);
+    }
+    function slideTab(dir) {
+      const grid = document.getElementById('tabCruiseGrid');
+      const cardCount = grid ? grid.querySelectorAll('.tab-card').length : 0;
+      const visibleCount = window.innerWidth <= 1024 ? 3 : 5;
+      const maxPos = Math.max(0, cardCount - visibleCount);
+      tabSlidePos = Math.max(0, Math.min(maxPos, tabSlidePos + dir));
+      grid.style.transform = 'translateX(-' + (tabSlidePos * getTabSlideUnit()) + 'px)';
+      updateTabArrows();
+    }
+
     async function switchTab(btn, dest) {
       document.querySelectorAll('.cruise-tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      tabSlidePos = 0;
       if (tabCacheV2[dest]) {
         document.getElementById('tabCruiseGrid').innerHTML = tabCacheV2[dest];
+        document.getElementById('tabCruiseGrid').style.transform = 'translateX(0)';
+        updateTabArrows();
         return;
       }
       document.getElementById('tabCruiseGrid').innerHTML = '<div class="tabs-loading">불러오는 중...</div>';
       try {
-        const cruises = await API.getMiniCruises(dest, 5);
+        const cruisesRaw = await API.getMiniCruises(dest, 10);
+        // 출발일 빠른 순 정렬
+        const cruises = (cruisesRaw || []).sort((a, b) => (a.dateFrom || '') < (b.dateFrom || '') ? -1 : 1);
         const imgs = TAB_DEST_IMAGES[dest] || TAB_DEST_IMAGES['mediterranean'];
         if (!cruises || cruises.length === 0) {
           document.getElementById('tabCruiseGrid').innerHTML = '<div class="tabs-loading">해당 목적지 크루즈가 없습니다</div>';
           return;
         }
-        const html = cruises.slice(0, 5).map((c, i) => {
+        const html = cruises.slice(0, 10).map((c, i) => {
           const img = c.portImage || c.image || imgs[i % imgs.length];
           const nights = c.nights || c.duration || '?';
           const dateRaw = c.dateFrom || c.departure_date || '';
@@ -1124,11 +1171,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }).join('');
         tabCacheV2[dest] = html;
         document.getElementById('tabCruiseGrid').innerHTML = html;
+        document.getElementById('tabCruiseGrid').style.transform = 'translateX(0)';
+        updateTabArrows();
       } catch(e) {
         console.error(e);
         document.getElementById('tabCruiseGrid').innerHTML = '<div class="tabs-loading">데이터를 불러올 수 없습니다</div>';
       }
     }
+
+    // 창 크기 바뀌면 화살표 재계산
+    window.addEventListener('resize', updateTabArrows);
 
     // 첫 탭 자동 로드
     switchTab(document.querySelector('.cruise-tab-btn'), 'mediterranean');
