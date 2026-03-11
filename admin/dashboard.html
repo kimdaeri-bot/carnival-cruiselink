@@ -861,15 +861,15 @@
         <h4>요금 입력</h4>
         <div class="fare-grid">
           <div class="fare-input-group">
-            <label>인사이드 (USD/1인)</label>
+            <label style="display:flex;align-items:center;gap:4px;"><input type="text" id="fareInsideLabel" value="인사이드" style="width:90px;border:none;border-bottom:1.5px dashed #1a237e;background:transparent;font-size:12px;font-weight:600;color:#1a237e;padding:0 2px;outline:none;" title="객실 이름 수정 가능"> (USD/1인)</label>
             <input type="number" id="fareInside" placeholder="0" min="0" step="1">
           </div>
           <div class="fare-input-group">
-            <label>오션뷰 (USD/1인)</label>
+            <label style="display:flex;align-items:center;gap:4px;"><input type="text" id="fareOutsideLabel" value="오션뷰" style="width:90px;border:none;border-bottom:1.5px dashed #1a237e;background:transparent;font-size:12px;font-weight:600;color:#1a237e;padding:0 2px;outline:none;" title="객실 이름 수정 가능"> (USD/1인)</label>
             <input type="number" id="fareOutside" placeholder="0" min="0" step="1">
           </div>
           <div class="fare-input-group">
-            <label>발코니 (USD/1인)</label>
+            <label style="display:flex;align-items:center;gap:4px;"><input type="text" id="fareBalconyLabel" value="발코니" style="width:90px;border:none;border-bottom:1.5px dashed #1a237e;background:transparent;font-size:12px;font-weight:600;color:#1a237e;padding:0 2px;outline:none;" title="객실 이름 수정 가능"> (USD/1인)</label>
             <input type="number" id="fareBalcony" placeholder="0" min="0" step="1">
           </div>
           <div class="fare-input-group">
@@ -949,9 +949,9 @@
 
     let fareRows = '';
     const types = [
-      { name: '인사이드', val: inside },
-      { name: '오션뷰', val: outside },
-      { name: '발코니', val: balcony },
+      { name: document.getElementById('fareInsideLabel').value || '인사이드', val: inside },
+      { name: document.getElementById('fareOutsideLabel').value || '오션뷰', val: outside },
+      { name: document.getElementById('fareBalconyLabel').value || '발코니', val: balcony },
       { name: document.getElementById('fareSuiteLabel').value || '스위트', val: suite },
     ];
     types.forEach(t => {
@@ -1035,9 +1035,9 @@ ${(() => {
   const minFare = [inside, outside, balcony, suite].filter(v => v > 0).sort((a,b)=>a-b);
   if (minFare.length === 0) return '';
   const totalRows = [
-    { name: '인사이드', val: inside },
-    { name: '오션뷰', val: outside },
-    { name: '발코니', val: balcony },
+    { name: document.getElementById('fareInsideLabel').value || '인사이드', val: inside },
+    { name: document.getElementById('fareOutsideLabel').value || '오션뷰', val: outside },
+    { name: document.getElementById('fareBalconyLabel').value || '발코니', val: balcony },
     { name: document.getElementById('fareSuiteLabel').value || '스위트', val: suite },
   ].filter(t => t.val > 0).map(t => {
     const total = (t.val + tax) * pax;
