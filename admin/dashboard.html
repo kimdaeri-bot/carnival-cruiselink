@@ -873,7 +873,9 @@
             <input type="number" id="fareBalcony" placeholder="0" min="0" step="1">
           </div>
           <div class="fare-input-group">
-            <label>스위트 (USD/1인)</label>
+            <label style="display:flex;align-items:center;gap:4px;">
+              <input type="text" id="fareSuiteLabel" value="스위트" style="width:90px;border:none;border-bottom:1.5px dashed #1a237e;background:transparent;font-size:12px;font-weight:600;color:#1a237e;padding:0 2px;outline:none;" title="객실 이름 수정 가능"> (USD/1인)
+            </label>
             <input type="number" id="fareSuite" placeholder="0" min="0" step="1">
           </div>
           <div class="fare-input-group">
@@ -950,7 +952,7 @@
       { name: '인사이드', val: inside },
       { name: '오션뷰', val: outside },
       { name: '발코니', val: balcony },
-      { name: '스위트', val: suite },
+      { name: document.getElementById('fareSuiteLabel').value || '스위트', val: suite },
     ];
     types.forEach(t => {
       if (t.val > 0) {
@@ -1034,7 +1036,7 @@ ${(() => {
     { name: '인사이드', val: inside },
     { name: '오션뷰', val: outside },
     { name: '발코니', val: balcony },
-    { name: '스위트', val: suite },
+    { name: document.getElementById('fareSuiteLabel').value || '스위트', val: suite },
   ].filter(t => t.val > 0).map(t => {
     const total = (t.val + tax) * pax;
     return `<tr class="total-row"><td>최종 합계 (${t.name}, ${pax}인)</td><td colspan="2" style="text-align:right;font-size:15px;color:#1a237e">$ ${total.toLocaleString()} USD</td></tr>`;
