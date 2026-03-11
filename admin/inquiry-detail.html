@@ -104,6 +104,10 @@ textarea.fare-textarea {
 .badge-new { background: #e3f2fd; color: #1565c0; }
 .badge-processing { background: #fff3e0; color: #e65100; }
 .badge-done { background: #e8f5e9; color: #2e7d32; }
+.badge-consult { background: #f3e5f5; color: #6a1b9a; }
+.badge-fare { background: #e0f7fa; color: #00838f; }
+.badge-invoice { background: #f1f8e9; color: #558b2f; }
+.badge-paid { background: #c8e6c9; color: #1b5e20; }
 
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #323232; color: #fff; padding: 10px 24px; border-radius: 8px; font-size: 13px; z-index: 9999; display: none; }
 .toast.show { display: block; }
@@ -149,6 +153,11 @@ if (!localStorage.getItem('cl_admin')) {
 }
 let inq = null;
 let allInquiries = [];
+
+function getBadgeClass(status) {
+  const map = { '신규':'badge-new','처리중':'badge-processing','상담완료':'badge-consult','요금안내 완료':'badge-fare','인보이스 전달 완료':'badge-invoice','결제완료':'badge-paid' };
+  return map[status] || 'badge-done';
+}
 
 function showToast(msg, duration = 2500) {
   const t = document.getElementById('toast');
@@ -356,7 +365,7 @@ async function changeStatus(status) {
   if (idx !== -1) allInquiries[idx] = inq;
   try {
     await saveToGitHub(allInquiries);
-    document.getElementById('statusBadge').className = 'badge ' + (status==='신규'?'badge-new':status==='처리중'?'badge-processing':'badge-done');
+    document.getElementById('statusBadge').className = 'badge ' + getBadgeClass(status);
     document.getElementById('statusBadge').textContent = status;
     showToast(`상태 변경: ${status}`);
   } catch(e) { showToast('저장 실패'); }
@@ -391,7 +400,7 @@ function renderFareHistory() {
 }
 
 function renderLeft() {
-  const badgeClass = inq.status==='신규'?'badge-new':inq.status==='처리중'?'badge-processing':'badge-done';
+  const badgeClass = getBadgeClass(inq.status||'신규');
   document.getElementById('leftBody').innerHTML = `
     <!-- 고객 정보 -->
     <div class="section">
@@ -476,11 +485,15 @@ function renderLeft() {
     <!-- 상태 변경 -->
     <div class="section">
       <div class="section-title">상태 변경</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn-primary" onclick="changeStatus('신규')" style="background:#1565c0;">신규</button>
-        <button class="btn-primary" onclick="changeStatus('처리중')" style="background:#e65100;">처리중</button>
-        <button class="btn-primary" onclick="changeStatus('완료')" style="background:#2e7d32;">완료</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="btn-primary" onclick="changeStatus('신규')"            style="background:#1565c0;font-size:12px;padding:7px 12px;">신규</button>
+        <button class="btn-primary" onclick="changeStatus('처리중')"           style="background:#e65100;font-size:12px;padding:7px 12px;">처리중</button>
+        <button class="btn-primary" onclick="changeStatus('상담완료')"         style="background:#6a1b9a;font-size:12px;padding:7px 12px;">상담완료</button>
+        <button class="btn-primary" onclick="changeStatus('요금안내 완료')"    style="background:#00838f;font-size:12px;padding:7px 12px;">요금안내 완료</button>
+        <button class="btn-primary" onclick="changeStatus('인보이스 전달 완료')" style="background:#558b2f;font-size:12px;padding:7px 12px;">인보이스 전달 완료</button>
+        <button class="btn-primary" onclick="changeStatus('결제완료')"         style="background:#2e7d32;font-size:12px;padding:7px 12px;">결제완료</button>
       </div>
+      <button onclick="window.open('../invoice.html','_blank')" style="background:#37474f;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:13px;cursor:pointer;font-weight:600;">📋 인보이스 작성기</button>
     </div>
   `;
 
