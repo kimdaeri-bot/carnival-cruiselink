@@ -811,7 +811,7 @@
     tbody.innerHTML = sorted.map((inq, i) => {
       const badgeClass = inq.status === '신규' ? 'badge-new' : inq.status === '처리중' ? 'badge-processing' : 'badge-done';
       const date = inq.timestamp ? new Date(inq.timestamp).toLocaleDateString('ko-KR') : '-';
-      return `<tr onclick="window.open('inquiry-detail.html?id=${inq.id}','_blank')" style="cursor:pointer;">
+      return `<tr onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')" style="cursor:pointer;">
         <td>${date}</td>
         <td>${esc(inq.name || '-')}</td>
         <td>${esc(inq.phone || '-')}</td>

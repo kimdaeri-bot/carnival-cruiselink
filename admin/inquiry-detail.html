@@ -138,6 +138,10 @@ const GH_TOKEN = ["ghp_vo8vnV0or7A4K", "hWh0sVgTcvVfDxCtw16GFb0"].join("");
 const GH_REPO = "kimdaeri-bot/cruiselink-v2";
 
 // 인증 확인
+// auth 파라미터로 넘어온 경우 localStorage에 저장
+if (params.get('auth')) {
+  localStorage.setItem('cl_admin', '1');
+}
 if (!localStorage.getItem('cl_admin')) {
   location.href = 'index.html';
 }
