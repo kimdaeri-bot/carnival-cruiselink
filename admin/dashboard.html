@@ -789,7 +789,11 @@
         headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: "application/vnd.github.v3+json" }
       });
       const file = await res.json();
-      const data = JSON.parse(atob(file.content.replace(/\n/g, "")));
+      const b64 = file.content.replace(/\n/g, "");
+      const binary = atob(b64);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      const data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
       currentInquiries = data;
       renderInquiries(data);
     } catch (e) {
@@ -850,6 +854,7 @@
           <div class="detail-field"><label>일정</label><span>${esc(inq.ports||'-')}</span></div>
           <div class="detail-field"><label>참고가격</label><span>${esc(inq.price||'-')}</span></div>
           <div class="detail-field"><label>Ref</label><span>${esc(inq.ref||'-')}</span></div>
+          ${inq.ref ? `<div class="detail-field"><label>상품 링크</label><span><a href="https://www.cruiselink.co.kr/cruise-view.html?ref=${encodeURIComponent(inq.ref)}" target="_blank" style="color:#1a237e;text-decoration:none;font-weight:600;">🔗 링크보기</a></span></div>` : ''}
         </div>
       </div>
       <div class="detail-section">
@@ -1040,7 +1045,11 @@ ${remarksHtml}
         headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: "application/vnd.github.v3+json" }
       });
       const file = await res.json();
-      currentPartners = JSON.parse(atob(file.content.replace(/\n/g, "")));
+      const pb64 = file.content.replace(/\n/g, "");
+      const pbinary = atob(pb64);
+      const pbytes = new Uint8Array(pbinary.length);
+      for (let i = 0; i < pbinary.length; i++) pbytes[i] = pbinary.charCodeAt(i);
+      currentPartners = JSON.parse(new TextDecoder('utf-8').decode(pbytes));
     } catch (e) {
       currentPartners = [];
     }
