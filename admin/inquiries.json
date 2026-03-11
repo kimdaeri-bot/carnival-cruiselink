@@ -59,5 +59,23 @@
         "remarks": ""
       }
     ]
+  },
+  {
+    "product": "지중해 7박 크루즈",
+    "cruiseline": "Explora Journeys",
+    "ship": "엑스플로라 I",
+    "dateFrom": "2026-06-08",
+    "ports": "",
+    "price": "문의",
+    "ref": "EXPLORAEX20260608MCMBCN",
+    "name": "test",
+    "email": "june.jeong@diplat.co.kr",
+    "phone": "12312312312",
+    "pax": "2",
+    "cabin": "내측",
+    "message": "test",
+    "id": "1773232940786",
+    "timestamp": "2026-03-11T12:42:20.786Z",
+    "status": "신규"
   }
 ]
