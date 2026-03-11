@@ -25,5 +25,23 @@
     "id": "1773212159424",
     "timestamp": "2026-03-11T06:55:59.424Z",
     "status": "신규"
+  },
+  {
+    "product": "지중해 7박 크루즈",
+    "cruiseline": "Explora Journeys",
+    "ship": "엑스플로라 II",
+    "dateFrom": "2026-06-01",
+    "ports": "",
+    "price": "문의",
+    "ref": "EXPLORAEP20260601PIRFSA",
+    "name": "Jeong June",
+    "email": "june.jeong@diplat.co.kr",
+    "phone": "12312312312",
+    "pax": "1",
+    "cabin": "내측",
+    "message": "test",
+    "id": "1773212989451",
+    "timestamp": "2026-03-11T07:09:49.451Z",
+    "status": "신규"
   }
 ]
