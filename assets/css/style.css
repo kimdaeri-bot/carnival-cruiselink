@@ -611,6 +611,8 @@ img { max-width: 100%; height: auto; }
 }
 .logo-slider-track img { height: 40px; width: auto; opacity: 0.7; transition: opacity .2s; flex-shrink: 0; }
 .logo-slider-track img:hover { opacity: 1; }
+/* 익스플로라 저니 — 검정 배경 제거 */
+.logo-slider-track img[alt="Explora Journeys"] { mix-blend-mode: multiply; height: 52px; }
 @keyframes logoScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
