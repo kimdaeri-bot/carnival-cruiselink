@@ -1,93 +1,75 @@
 [
   {
-    "ref": "MSCMU20260601CVVCVV",
-    "shipSlug": "msc-musica",
-    "shipTitle": "MSC Musica",
+    "ref": "MSCOR20260401LIVLIV",
+    "shipSlug": "msc-orchestra-ship",
+    "shipTitle": "MSC Orchestra",
     "operator": "MSC Cruises",
     "operatorShort": "MSC",
-    "dateFrom": "2026-06-01",
-    "dateTo": "2026-06-08",
+    "dateFrom": "2026-04-01",
+    "dateTo": "2026-04-08",
     "nights": 7,
     "destination": "mediterranean",
-    "title": "지중해 7박 크루즈",
-    "portRoute": "치비타베키아 → 제노바 → 마르세유 → Valencia → 이비자 → 칼리아리",
-    "priceInside": 755,
-    "priceOutside": 0,
-    "priceBalcony": 935,
+    "title": "이탈리아·스페인 봄 7박 크루즈",
+    "portRoute": "Livorno → 치비타베키아 → Valencia → 바르셀로나 → 마르세유 → 제노바",
+    "priceInside": 679,
+    "priceBalcony": 882,
     "currency": "USD",
-    "image": "https://assets.widgety.co.uk/2021/11/30/08/39/15/ab35a659-53a2-4da4-b933-d54575271524/MSC%20Cruises%20MSC%20Musica%201.jpg",
+    "image": "https://assets.widgety.co.uk/2024/09/26/10/45/07/ad264e77-d95a-40f2-9131-456fd1c2d6e4/MSC%20Cruises%2C%20MSC%20Orchestra%2C%20New%20York%20Exterior%2C%20MSC%20Rights.jpg",
     "hashtags": [
       "#지중해크루즈",
       "#MSC크루즈",
-      "#MSC무지카",
-      "#제노바",
-      "#마르세유"
+      "#봄크루즈",
+      "#피렌체",
+      "#바르셀로나"
     ]
   },
   {
-    "ref": "MSCMU20260701MRSMRS",
-    "shipSlug": "msc-musica",
-    "shipTitle": "MSC Musica",
-    "operator": "MSC Cruises",
-    "operatorShort": "MSC",
-    "dateFrom": "2026-07-01",
+    "ref": "NCLJOY-20260403-07-PCV-PCV",
+    "shipSlug": "norwegian-joy",
+    "shipTitle": "Norwegian Joy",
+    "operator": "Norwegian Cruise Line",
+    "operatorShort": "NCL",
+    "dateFrom": "2026-04-03",
+    "dateTo": "2026-04-10",
     "nights": 7,
-    "destination": "mediterranean",
-    "startsAt": {
-      "name": "Marseille",
-      "nameKo": "마르세유"
-    },
-    "endsAt": {
-      "name": "Marseille",
-      "nameKo": "마르세유"
-    },
-    "portRoute": "마르세유 → Valencia → 이비자 → 칼리아리 → 치비타베키아 → 제노바",
-    "countriesKo": [
-      "프랑스",
-      "스페인",
-      "이탈리아"
-    ],
-    "priceInside": 839,
-    "priceOutside": 889,
-    "priceBalcony": 959,
-    "priceSuite": 1699,
+    "destination": "caribbean",
+    "title": "카리브해 동부 아일랜드 7박 크루즈",
+    "portRoute": "포트 카나베랄 → 푸에르토 플라타 → 세인트 토머스 → 토르톨라",
+    "priceInside": 660,
+    "priceBalcony": 899,
     "currency": "USD",
-    "image": "https://assets.widgety.co.uk/2021/11/30/08/39/15/ab35a659-53a2-4da4-b933-d54575271524/MSC%20Cruises%20MSC%20Musica%201.jpg",
-    "title": "프랑스·스페인·이탈리아 7박 크루즈",
+    "image": "https://assets.widgety.co.uk/2024/12/12/09/16/21/8480e9f3-046a-41f2-bf77-73ecc5d5d67f/NCL%20Norwegian%20Joy%20Exterior.jpg",
     "hashtags": [
-      "#지중해크루즈",
-      "#MSC크루즈",
-      "#MSCMusica",
-      "#마르세유",
-      "#Valencia"
+      "#카리브해크루즈",
+      "#NCL크루즈",
+      "#봄크루즈",
+      "#세인트토머스",
+      "#열대크루즈"
     ]
   },
   {
-    "ref": "MSCBE20261202NAHNAH",
-    "title": "일본·대만 4박 크루즈",
-    "operator": "MSC Cruises",
-    "ship": "MSC Bellissima",
-    "dateFrom": "2026-12-02",
-    "dateTo": "2026-12-06",
-    "nights": 4,
-    "portRoute": "나하 → 이시가키 → 지룽 → 미야코지마",
-    "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC%20Cruises%2C%20MSC%20Bellissima%2C%20Exterior%2C%20Copyrights%20-%20MSC%20Rights.jpg",
-    "priceInside": 449,
-    "priceBalcony": 629,
-    "tags": [
-      "아시아"
-    ],
+    "ref": "NCLBLS-20260425-07-SEA-SEA",
+    "shipSlug": "norwegian-bliss",
+    "shipTitle": "Norwegian Bliss",
+    "operator": "Norwegian Cruise Line",
+    "operatorShort": "NCL",
+    "dateFrom": "2026-04-25",
+    "dateTo": "2026-05-02",
+    "nights": 7,
+    "destination": "alaska",
+    "title": "알래스카 빙하 7박 크루즈",
+    "portRoute": "시애틀 → 싯카 → 엔디콧암(빙하) → 아이시 스트레이트 포인트",
+    "priceInside": 603,
+    "priceBalcony": 899,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2025/12/04/09/00/56/b6d5a91f-0e8c-4bd8-a738-f468297baeb2/NCL%20Norwegian%20Bliss%20Exterior.jpg",
     "hashtags": [
-      "#일본",
-      "#대만",
-      "#오키나와",
-      "#MSC크루즈"
-    ],
-    "countries": [
-      "Japan",
-      "Taiwan"
-    ],
-    "tabs": null
+      "#알래스카크루즈",
+      "#NCL크루즈",
+      "#빙하크루즈",
+      "#시애틀",
+      "#봄크루즈"
+    ]
   },
   {
     "ref": "MSCMU20260503CAGCAG",
@@ -304,5 +286,95 @@
       "#도쿄",
       "#고베"
     ]
+  },
+  {
+    "ref": "MSCMU20260601CVVCVV",
+    "shipSlug": "msc-musica",
+    "shipTitle": "MSC Musica",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-06-01",
+    "dateTo": "2026-06-08",
+    "nights": 7,
+    "destination": "mediterranean",
+    "title": "지중해 7박 크루즈",
+    "portRoute": "치비타베키아 → 제노바 → 마르세유 → Valencia → 이비자 → 칼리아리",
+    "priceInside": 755,
+    "priceOutside": 0,
+    "priceBalcony": 935,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2021/11/30/08/39/15/ab35a659-53a2-4da4-b933-d54575271524/MSC%20Cruises%20MSC%20Musica%201.jpg",
+    "hashtags": [
+      "#지중해크루즈",
+      "#MSC크루즈",
+      "#MSC무지카",
+      "#제노바",
+      "#마르세유"
+    ]
+  },
+  {
+    "ref": "MSCMU20260701MRSMRS",
+    "shipSlug": "msc-musica",
+    "shipTitle": "MSC Musica",
+    "operator": "MSC Cruises",
+    "operatorShort": "MSC",
+    "dateFrom": "2026-07-01",
+    "nights": 7,
+    "destination": "mediterranean",
+    "startsAt": {
+      "name": "Marseille",
+      "nameKo": "마르세유"
+    },
+    "endsAt": {
+      "name": "Marseille",
+      "nameKo": "마르세유"
+    },
+    "portRoute": "마르세유 → Valencia → 이비자 → 칼리아리 → 치비타베키아 → 제노바",
+    "countriesKo": [
+      "프랑스",
+      "스페인",
+      "이탈리아"
+    ],
+    "priceInside": 839,
+    "priceOutside": 889,
+    "priceBalcony": 959,
+    "priceSuite": 1699,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2021/11/30/08/39/15/ab35a659-53a2-4da4-b933-d54575271524/MSC%20Cruises%20MSC%20Musica%201.jpg",
+    "title": "프랑스·스페인·이탈리아 7박 크루즈",
+    "hashtags": [
+      "#지중해크루즈",
+      "#MSC크루즈",
+      "#MSCMusica",
+      "#마르세유",
+      "#Valencia"
+    ]
+  },
+  {
+    "ref": "MSCBE20261202NAHNAH",
+    "title": "일본·대만 4박 크루즈",
+    "operator": "MSC Cruises",
+    "ship": "MSC Bellissima",
+    "dateFrom": "2026-12-02",
+    "dateTo": "2026-12-06",
+    "nights": 4,
+    "portRoute": "나하 → 이시가키 → 지룽 → 미야코지마",
+    "image": "https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC%20Cruises%2C%20MSC%20Bellissima%2C%20Exterior%2C%20Copyrights%20-%20MSC%20Rights.jpg",
+    "priceInside": 449,
+    "priceBalcony": 629,
+    "tags": [
+      "아시아"
+    ],
+    "hashtags": [
+      "#일본",
+      "#대만",
+      "#오키나와",
+      "#MSC크루즈"
+    ],
+    "countries": [
+      "Japan",
+      "Taiwan"
+    ],
+    "tabs": null
   }
 ]
