@@ -46,7 +46,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .nl-wrap {
       max-width: 640px;
-      margin: -30px auto 60px;
+      margin: -30px auto 80px;
       padding: 0 20px;
     }
     .nl-card {
@@ -315,7 +315,12 @@ form.addEventListener('submit', async function(e) {
 });
 </script>
 
-<script>document.getElementById('header').innerHTML = Components.header('', '');</script>
+<div id="footer"></div>
+
 <script src="assets/js/components.js"></script>
+<script>
+  document.getElementById('header').innerHTML = Components.header('', '');
+  document.getElementById('footer').innerHTML = Components.footer();
+</script>
 </body>
 </html>
