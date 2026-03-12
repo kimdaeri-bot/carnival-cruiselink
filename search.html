@@ -99,7 +99,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const durNames = {'short':'1~5박','medium':'6~10박','long':'11박 이상'};
     if (dest) tagsEl.innerHTML += `<span class="search-tag">📍 ${destNames[dest]||dest}</span>`;
     ports.forEach(p => tagsEl.innerHTML += `<span class="search-tag">🚢 ${p}</span>`);
-    operators.forEach(o => tagsEl.innerHTML += `<span class="search-tag">⚓ ${Translations.operatorName(o==='MSC'?'MSC Cruises':'Norwegian Cruise Line')}</span>`);
+    const _opFullName = {
+      'MSC': 'MSC Cruises', 'Norwegian': 'Norwegian Cruise Line',
+      'Royal Caribbean': 'Royal Caribbean International', 'Celebrity': 'Celebrity Cruises',
+      'Princess': 'Princess Cruises', 'Carnival': 'Carnival Cruise Line',
+      'Oceania': 'Oceania Cruises', 'Regent': 'Regent Seven Seas Cruises',
+      'Explora': 'Explora Journeys'
+    };
+    operators.forEach(o => tagsEl.innerHTML += `<span class="search-tag">⚓ ${Translations.operatorName(_opFullName[o] || o)}</span>`);
     if (month) tagsEl.innerHTML += `<span class="search-tag">📅 ${month.replace('-','년 ')}월</span>`;
     if (dateFrom || dateTo) tagsEl.innerHTML += `<span class="search-tag">📅 ${dateFrom||'~'} ~ ${dateTo||'~'}</span>`;
     if (ship) tagsEl.innerHTML += `<span class="search-tag">🛳️ ${ship}</span>`;
