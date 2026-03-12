@@ -3576,5 +3576,125 @@
       "#로마",
       "#바르셀로나"
     ]
+  },
+  {
+    "ref": "NCLBLS-20260502-07-SEA-SEA",
+    "shipSlug": "norwegian-bliss",
+    "shipTitle": "Norwegian Bliss",
+    "operator": "Norwegian Cruise Line",
+    "operatorShort": "NCL",
+    "dateFrom": "2026-05-02",
+    "dateTo": "2026-05-09",
+    "nights": 7,
+    "destination": "alaska",
+    "title": "알래스카 7박 크루즈",
+    "portRoute": "시애틀 → 싯카 → 엔디콧암(빙하) → 아이시 스트레이트 포인트",
+    "priceInside": 593,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2025/12/04/09/00/56/b6d5a91f-0e8c-4bd8-a738-f468297baeb2/NCL%20Norwegian%20Bliss%20Aerial%20Ketchikan%20Alaska%20Exterior%201%20%C2%A9Danny%20Lehman.jpg",
+    "portImage": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#빙하크루즈",
+      "#NCL크루즈",
+      "#미국크루즈",
+      "#시애틀"
+    ]
+  },
+  {
+    "ref": "CELEBSM07A393-080526",
+    "shipSlug": "celebrity-summit",
+    "shipTitle": "Celebrity Summit",
+    "operator": "Celebrity Cruises",
+    "operatorShort": "Celebrity",
+    "dateFrom": "2026-05-08",
+    "dateTo": "2026-05-15",
+    "nights": 7,
+    "destination": "alaska",
+    "title": "알래스카 인사이드 패시지 7박 크루즈",
+    "portRoute": "밴쿠버 → 인사이드 패시지 → 케치칸 → 주노",
+    "priceInside": 572,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2025/02/10/12/43/05/2cd6e90d-6ac0-4a36-9fcc-36b2498b96e9/Celebrity%20Cruises%2C%20Celebrity%20Summit%2C%20Exterior.jpeg",
+    "portImage": "https://images.unsplash.com/photo-1530841377377-3ff06c0ca713?w=600&q=80",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#빙하크루즈",
+      "#Celebrity크루즈",
+      "#미국크루즈",
+      "#시애틀"
+    ]
+  },
+  {
+    "ref": "RCIVY07A428-030726",
+    "shipSlug": "voyager-of-the-seas",
+    "shipTitle": "Voyager of the Seas",
+    "operator": "Royal Caribbean International",
+    "operatorShort": "RCI",
+    "dateFrom": "2026-07-03",
+    "dateTo": "2026-07-10",
+    "nights": 7,
+    "destination": "alaska",
+    "title": "알래스카 7박 크루즈",
+    "portRoute": "시애틀 → 주노 → 스카그웨이 → 엔디콧암(빙하)",
+    "priceInside": 741,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2024/10/10/15/24/46/e0b76e2a-9017-40b2-ad51-43dccd84c1dc/Royal%20Caribbean%20International%2C%20Voyager%20of%20the%20Seas%2C%20Exterior%202.jpg",
+    "portImage": "https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?w=600&q=80",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#빙하크루즈",
+      "#RCI크루즈",
+      "#미국크루즈",
+      "#시애틀"
+    ]
+  },
+  {
+    "ref": "NCLBLS-20260801-07-SEA-SEA",
+    "shipSlug": "norwegian-bliss",
+    "shipTitle": "Norwegian Bliss",
+    "operator": "Norwegian Cruise Line",
+    "operatorShort": "NCL",
+    "dateFrom": "2026-08-01",
+    "dateTo": "2026-08-08",
+    "nights": 7,
+    "destination": "alaska",
+    "title": "알래스카 7박 크루즈",
+    "portRoute": "시애틀 → 싯카 → 엔디콧암(빙하) → 아이시 스트레이트 포인트",
+    "priceInside": 878,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2025/12/04/09/00/56/b6d5a91f-0e8c-4bd8-a738-f468297baeb2/NCL%20Norwegian%20Bliss%20Aerial%20Ketchikan%20Alaska%20Exterior%201%20%C2%A9Danny%20Lehman.jpg",
+    "portImage": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#빙하크루즈",
+      "#NCL크루즈",
+      "#미국크루즈",
+      "#시애틀"
+    ]
+  },
+  {
+    "ref": "CELEBSM07A394-040926",
+    "shipSlug": "celebrity-summit",
+    "shipTitle": "Celebrity Summit",
+    "operator": "Celebrity Cruises",
+    "operatorShort": "Celebrity",
+    "dateFrom": "2026-09-04",
+    "dateTo": "2026-09-11",
+    "nights": 7,
+    "destination": "alaska",
+    "title": "알래스카 빙하 7박 크루즈",
+    "portRoute": "수워드 → 허바드 빙하 → 주노 → 스카그웨이",
+    "priceInside": 615,
+    "currency": "USD",
+    "image": "https://assets.widgety.co.uk/2025/02/10/12/43/05/2cd6e90d-6ac0-4a36-9fcc-36b2498b96e9/Celebrity%20Cruises%2C%20Celebrity%20Summit%2C%20Exterior.jpeg",
+    "portImage": "https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=600&q=80",
+    "hashtags": [
+      "#알래스카크루즈",
+      "#빙하크루즈",
+      "#Celebrity크루즈",
+      "#미국크루즈",
+      "#시애틀"
+    ]
   }
 ]
