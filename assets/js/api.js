@@ -147,8 +147,8 @@ const API = {
         this._featuredCache = FEATURED_REFS.map(r => refMap[r]).filter(Boolean);
       }
     }
-    const cutoff = (() => { const d = new Date(); d.setMonth(d.getMonth() + 2); return d.toISOString().slice(0, 10); })();
-    return this._featuredCache.filter(c => c && c.dateFrom >= cutoff).slice(0, count);
+    const today = new Date().toISOString().slice(0, 10);
+    return this._featuredCache.filter(c => c && c.dateFrom >= today).slice(0, count);
   },
 
   _featured2Cache: null,
