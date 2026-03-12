@@ -782,11 +782,11 @@ const Translations = {
     'Seven Seas Splendor': '세븐 시즈 스플렌더',
     'Seven Seas Voyager': '세븐 시즈 보이저',
     // Explora Journeys
-    'EXPLORA I': '엑스플로라 I',
-    'EXPLORA II': '엑스플로라 II',
-    'EXPLORA III': '엑스플로라 III',
-    'EXPLORA IV': '엑스플로라 IV',
-    'EXPLORA V': '엑스플로라 V',
+    'EXPLORA I': '익스플로라 I',
+    'EXPLORA II': '익스플로라 II',
+    'EXPLORA III': '익스플로라 III',
+    'EXPLORA IV': '익스플로라 IV',
+    'EXPLORA V': '익스플로라 V',
   },
 
   // 크루즈 라인 한글
