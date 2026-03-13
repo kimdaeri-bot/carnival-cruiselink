@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K4PPLZNG');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" id="canonicalTag" href="https://www.cruiselink.co.kr/cruise-view.html">
+  <meta property="og:site_name" content="크루즈링크">
+  <meta property="og:type" content="product">
+  <meta id="ogTitle" property="og:title" content="CruiseLink - Cruise Product Details">
+  <meta id="ogDesc" property="og:description" content="Find the perfect cruise with CruiseLink.">
+  <meta id="ogImage" property="og:image" content="https://www.cruiselink.co.kr/assets/images/og-image.jpg">
+  <meta id="ogUrl" property="og:url" content="https://www.cruiselink.co.kr/cruise-view.html">
+  <title>Cruise Details - CruiseLink</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4PPLZNG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager -->
+
+  <div id="header"></div>
+  <div id="content">
+    <div class="loading page-loading" style="padding:100px 20px">
+      <div class="loading-spinner"></div>
+      <p class="loading-main-text">Loading cruise details...</p>
+      <div class="loading-progress-wrap"><div class="loading-progress-bar"></div></div>
+      <p class="loading-done-text">Done!</p>
+    </div>
+  </div>
+  <div id="footer"></div>
+
+  <script src="assets/data/translations.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    document.getElementById('header').innerHTML = Components.header();
+    document.getElementById('footer').innerHTML = Components.footer();
+
+    const ref = new URLSearchParams(location.search).get('ref');
+    if (!ref) {
+      window.location.replace('search.html');
+    }
+
+    function stripHtml(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html || '';
+      return tmp.textContent || '';
+    }
+
+    function fmtPrice(v) {
+      if (!v) return '-';
+      return '$' + parseFloat(v).toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0});
+    }
+
+    // 찜하기 (localStorage)
+    function getWishlist() {
+      try { return JSON.parse(localStorage.getItem('cl_wishlist') || '[]'); } catch { return []; }
+    }
+    function toggleWish(ref) {
+      if (!ref) return;
+      const list = getWishlist();
+      const idx = list.indexOf(ref);
+      if (idx >= 0) { list.splice(idx, 1); } else { list.push(ref); }
+      localStorage.setItem('cl_wishlist', JSON.stringify(list));
+      updateWishBtn(ref);
+    }
+    function updateWishBtn(ref) {
+      const btn = document.getElementById('wishBtn');
+      const icon = document.getElementById('wishIcon');
+      if (!btn || !icon) return;
+      const inList = getWishlist().includes(ref);
+      icon.textContent = inList ? '♥' : '♡';
+      btn.style.background = inList ? 'rgba(255,80,80,0.35)' : 'rgba(255,255,255,0.15)';
+      btn.style.borderColor = inList ? '#ff5050' : 'rgba(255,255,255,0.5)';
+    }
+
+    // 로컬 JSON에서 ref로 크루즈 찾기 (cruises.json + featured.json + cruises-mini.json 순차 검색)
+    async function findLocalCruise(ref) {
+      try {
+        const all = await API.loadAllCruises();
+        const found = all.find(c => c.ref === ref);
+        if (found) return found;
+        // featured.json 에서도 검색
+        try {
+          const fr = await fetch('assets/data/featured.json');
+          const featured = await fr.json();
+          const ff = featured.find(c => c.ref === ref);
+          if (ff) return ff;
+        } catch {}
+        // cruises-mini.json 에서도 검색
+        try {
+          const mr = await fetch('assets/data/cruises-mini.json');
+          const mini = await mr.json();
+          const mf = mini.find(c => c.ref === ref);
+          if (mf) return mf;
+        } catch {}
+        return null;
+      } catch { return null; }
+    }
+
+    async function load() {
+      if (!ref) return;
+      const content = document.getElementById('content');
+
+      try {
+        // ① 로컬 JSON + Widgety API 병렬 로드
+        const urlShip = new URLSearchParams(location.search).get('ship');
+        const [localCruise, holidayRaw] = await Promise.all([
+          findLocalCruise(ref),
+          API.getHoliday(ref).catch(() => null),   // Widgety 404 → null (폴백)
+        ]);
+        const shipLivePromise = urlShip ? API.getShipLive(urlShip) : null;
+
+        // ② Widgety 실패 시 로컬 데이터로 최소 holiday 객체 생성
+        let holiday = holidayRaw;
+        if (!holiday && localCruise) {
+          const lc = localCruise;
+          const toPort = n => ({ name: n?.nameKo || n?.name || n || '' });
+          holiday = {
+            _fromLocal: true,
+            _koreanTitle: lc.title || lc.shipTitleKo || lc.shipTitle || '',
+            _portRouteKo: lc.portRoute || '',
+            ship_title: lc.shipTitle || '',
+            operator_title: lc.operator || '',
+            start_date: lc.dateFrom || '',
+            end_date: lc.dateTo || '',
+            duration: lc.nights || 7,
+            start_port: toPort(lc.startsAt),
+            end_port: toPort(lc.endsAt),
+            headline_prices: {
+              cruise: {
+                inside:  lc.priceInside  ? { amount: lc.priceInside  } : null,
+                outside: lc.priceOutside ? { amount: lc.priceOutside } : null,
+                balcony: lc.priceBalcony ? { amount: lc.priceBalcony } : null,
+                suite:   lc.priceSuite   ? { amount: lc.priceSuite   } : null,
+              }
+            },
+            itinerary: {
+              days: (lc.ports || []).map((p, i) => ({
+                day: i + 1,
+                day_name: p.nameKo || p.name || '',
+                locations: [{
+                  name: p.name || '',
+                  country: p.country || '',
+                  arrival_time: '',
+                  departure_time: '',
+                  widgety_data: { images: [], description: '' }
+                }]
+              }))
+            }
+          };
+        }
+
+        if (!holiday) {
+          content.innerHTML = '<div class="empty-state"><span class="emoji">⚠️</span><p>Cruise information not found</p></div>';
+          return;
+        }
+
+        const shipSlug = urlShip || (typeof holiday.ship === 'string'
+          ? holiday.ship.split('/ships/')[1]?.replace('.json', '')
+          : null);
+
+        // ③ 즉시 렌더 — 로컬 한국어 타이틀 우선 적용
+        if (localCruise?.title) holiday._koreanTitle = localCruise.title;
+        if (localCruise?.portRoute) holiday._portRouteKo = localCruise.portRoute;
+        renderFromAPI(holiday, null, null);
+        renderItinerary(holiday);
+        renderPricing(holiday, null);
+        initAllSliders();
+        initDaySliders();
+
+        // ④ shipLive 백그라운드 완료 후 선박 섹션만 업데이트
+        const livePromise = shipLivePromise || (shipSlug ? API.getShipLive(shipSlug) : null);
+        if (livePromise) {
+          livePromise.then(shipLive => {
+            if (!shipLive) return;
+            const cruiseProxy = {
+              shipTitle: holiday.ship_title || '',
+              shipTitleKo: (typeof Translations !== 'undefined' ? Translations.shipName?.(holiday.ship_title || '') : '') || holiday.ship_title || '',
+              operator: holiday.operator_title || '',
+            };
+            const liveDetail = normalizeShipLive(shipLive);
+            updateShipSection(cruiseProxy, {}, null, liveDetail);
+          }).catch(() => {});
+        }
+      } catch (e) {
+        console.error('API fetch failed:', e);
+        content.innerHTML = '<div class="empty-state"><span class="emoji">⚠️</span><p>Unable to load data</p></div>';
+      }
+    }
+
+    // 객실 카테고리 분류 (스위트→발코니→오션뷰→내측 순)
+    function categorizeCabins(accommodations) {
+      const CATS = [
+        { id: 'suite',     label: '👑 Suite',   test: n => /suite|penthouse|villa|loft|grand|sky suite|owner/i.test(n) },
+        { id: 'balcony',   label: '🌅 Balcony', test: n => /balcony|veranda|terrace/i.test(n) },
+        { id: 'oceanview', label: '🪟 Ocean View', test: n => /ocean.?view|sea.?view|outside|window|ocean.?front/i.test(n) },
+        { id: 'inside',    label: '🚪 Interior', test: () => true }, // default
+      ];
+      const buckets = Object.fromEntries(CATS.map(c => [c.id, []]));
+      for (const a of accommodations) {
+        const n = a.name || '';
+        const cat = CATS.find(c => c.test(n));
+        if (cat) buckets[cat.id].push(a);
+      }
+      return CATS.map(c => ({ ...c, items: buckets[c.id] })).filter(c => c.items.length > 0);
+    }
+
+    // 라이브 API 데이터 → detail 포맷으로 정규화
+    function normalizeShipLive(sl) {
+      if (!sl) return null;
+      const cleanText = t => (t||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+      const mapItems = (arr, limit = 30) => (arr || []).slice(0, limit).map(item => {
+        const rawName = item.name || '';
+        const koName = Translations.facilityNameSmart(rawName);
+        const rawDesc = cleanText(item.description || '').slice(0, 150);
+        const koDesc = Translations.facilityKo[rawName]?.desc || Translations.koOnly(rawDesc) || '';
+        return { name: koName, image: item.images?.[0]?.href || '', desc: koDesc };
+      });
+      const rawTeaser = cleanText(sl.teaser || '');
+      const koTeaser = Translations.koOnly(rawTeaser) || '';
+      return {
+        dining: mapItems(sl.dining_options, 20),
+        entertainment: mapItems(sl.entertainment_types, 30),
+        health: mapItems(sl.health_fitness_types, 20),
+        kids: mapItems(sl.kid_teen_types, 15),
+        deckplans: mapItems(sl.deckplans, 20),
+        accommodations: mapItems(sl.accomodation_types, 24),
+        facts: sl.ship_facts || {},
+        coverImage: sl.cover_image_href || sl.profile_image_href || '',
+        teaser: koTeaser,
+      };
+    }
+
+    // 선박 섹션 라이브 업데이트
+    function updateShipSection(c, ship, detail, liveDetail) {
+      const section = document.getElementById('ship-detail-section');
+      if (!section) return;
+      // 라이브 데이터가 더 풍부하면 교체
+      const data = liveDetail || detail;
+      if (!data) return;
+      // facts 우선순위: liveDetail.facts > localShip
+      const facts = liveDetail?.facts || {};
+      const mergedShip = {
+        ...ship,
+        launchYear: facts.launch_year || ship.launchYear,
+        grossTonnage: facts.gross_tonnage || ship.grossTonnage,
+        capacity: facts.capacity || ship.capacity,
+        crewCount: facts.crew_count || ship.crewCount,
+        length: facts.length || ship.length,
+        width: facts.width || ship.width,
+        deckCount: facts.deck_count || ship.deckCount,
+        cabinCount: facts.cabin_count || ship.cabinCount,
+      };
+      const newHtml = renderShipSection(c, mergedShip, detail, liveDetail);
+      section.outerHTML = newHtml;
+      initAllSliders();
+    }
+
+    function renderPage(c, ship, detail, holiday) {
+      window._cruiseData = c;
+      const nights = c.nights;
+      const fromPrice = c.priceBalcony || c.priceOutside || c.priceInside;
+      const priceStr = fromPrice ? API.formatPrice(fromPrice, c.currency) : 'Inquire';
+      const countries = (c.countriesKo || []).join(', ') || (c.countries || []).join(', ');
+
+      document.title = `${c.title} - CruiseLink`;
+      // Dynamic OG tags for SEO
+      const ref = new URLSearchParams(location.search).get('ref') || '';
+      document.getElementById('ogTitle')?.setAttribute('content', `${c.title} - 크루즈링크`);
+      document.getElementById('ogDesc')?.setAttribute('content', `${c.portRoute || ''} · ${c.nights || ''}박 · ${c.operator || ''} · $${c.priceInside || ''}~`);
+      document.getElementById('ogImage')?.setAttribute('content', c.image || '');
+      document.getElementById('ogUrl')?.setAttribute('content', `https://www.cruiselink.co.kr/cruise-view.html?ref=${ref}`);
+      document.getElementById('canonicalTag')?.setAttribute('href', `https://www.cruiselink.co.kr/cruise-view.html?ref=${ref}`);
+
+      let html = '';
+
+      // === HERO ===
+      html += `
+      <section class="detail-hero">
+        <div class="container">
+          <div class="operator-name">${Translations.operatorName(c.operator)} · ${c.shipTitleKo || Translations.shipName(c.shipTitle)}</div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <h1 style="margin:0;">🚢 ${c.title}</h1>
+            <button id="wishBtn" onclick="toggleWish('${c.ref||ref}')" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);color:#fff;border-radius:50px;padding:8px 18px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+              <span id="wishIcon">♡</span> Save
+            </button>
+          </div>
+          <div class="meta">
+            <span>📅 ${API.formatDateKo(c.dateFrom)} ~ ${API.formatDateKo(c.dateTo)}</span>
+            <span>🌙 ${nights} nights / ${nights+1} days</span>
+            <span>🚢 ${c.shipTitleKo || Translations.shipName(c.shipTitle)}</span>
+            <span>🌏 ${countries}</span>
+          </div>
+          <div class="detail-hero-tags">
+            ${(c.hashtags||[]).slice(0,6).map(t => {
+              if (!/[\uAC00-\uD7A3]/.test(t) && t.startsWith('#')) {
+                const raw = t.slice(1);
+                const ship = Translations.shipName(raw);
+                if (ship !== raw) return `<span class="hero-tag">#${ship}</span>`;
+                const port = Translations.portName(raw);
+                if (port !== raw) return `<span class="hero-tag">#${port}</span>`;
+                return '';
+              }
+              return `<span class="hero-tag">${t}</span>`;
+            }).filter(Boolean).join('')}
+          </div>
+          <div class="price-big">${priceStr} <small>/ person</small></div>
+          <div class="hero-ctas cta-two-center">
+            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 KakaoTalk Chat</a>
+            <button class="btn btn-white-solid" onclick="openInquiry()">📋 Online Inquiry</button>
+          </div>
+        </div>
+      </section>`;
+
+      // === MAIN SHIP IMAGE ===
+      if (ship.coverImage) {
+        html += `<div class="container"><div class="main-ship-image"><img src="${ship.coverImage}" alt="${c.shipTitle}" loading="lazy"></div></div>`;
+      }
+
+      // === INFO BAR ===
+      html += `
+      <div class="container">
+        <div class="info-bar">
+          <div class="info-bar-item"><div class="label">🚢 Ship</div><div class="value">${c.shipTitleKo || Translations.shipName(c.shipTitle)}</div></div>
+          <div class="info-bar-item"><div class="label">🌙 Duration</div><div class="value">${nights} nights / ${nights+1} days</div></div>
+          <div class="info-bar-item"><div class="label">🚪 Departure/Arrival</div><div class="value">${Translations.portName(c.startsAt?.nameKo || c.startsAt?.name || '')} → ${Translations.portName(c.endsAt?.nameKo || c.endsAt?.name || '')}</div></div>
+          <div class="info-bar-item"><div class="label">💰 Price</div><div class="value" style="color:var(--orange)">${priceStr} <small style="font-size:.75em;font-weight:400;color:#888">/ person</small></div></div>
+        </div>
+      </div>`;
+
+      // === ITINERARY PLACEHOLDER ===
+      html += `
+      <section class="section" id="itinerary-section">
+        <div class="container">
+          <h2 class="section-title">🗓️ Itinerary</h2>
+          <p class="section-subtitle">${Translations.portRoute(c.portRouteKo || c.portRoute || '')}</p>
+          <div id="day-cards-container">
+            <div class="loading"><div class="loading-spinner"></div><p>Loading itinerary data...</p></div>
+          </div>
+        </div>
+      </section>`;
+
+      // === SHIP INFO ===
+      html += renderShipSection(c, ship, detail);
+
+      // === PRICING PLACEHOLDER ===
+      html += `<section class="section" id="pricing-section"></section>`;
+
+      // === INCLUDE/EXCLUDE ===
+      html += `
+      <section class="section" style="background:var(--gray-50)">
+        <div class="container">
+          <h2 class="section-title">📋 Included / Not Included</h2>
+          <div class="checklist-grid" style="margin-top:24px;max-width:700px;margin-left:auto;margin-right:auto">
+            <div>
+              <h3 style="color:var(--navy);margin-bottom:16px">✅ Included</h3>
+              <ul class="checklist included">
+                <li>Cabin accommodation</li>
+                <li>Main dining &amp; buffet (breakfast, lunch, dinner)</li>
+                <li>Onboard entertainment (shows, performances, pool)</li>
+                <li>Fitness center</li>
+                <li>Kids &amp; teens club programs</li>
+                <li>Room service (basic)</li>
+                <li>Port shuttle bus (selected ports)</li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="color:var(--navy);margin-bottom:16px">❌ Not Included</h3>
+              <ul class="checklist excluded">
+                <li>Flights</li>
+                <li>Specialty restaurants</li>
+                <li>Alcoholic beverages &amp; drink packages</li>
+                <li>Shore excursions</li>
+                <li>Spa &amp; beauty treatments</li>
+                <li>Wi-Fi internet package</li>
+                <li>Laundry service</li>
+                <li>Travel insurance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>`;
+
+      // === CTA ===
+      html += `
+      <section class="cta-section">
+        <div class="container">
+          <h2>Interested in this cruise?</h2>
+          <p>Our cruise specialists will help you find the best cabin and price.</p>
+          <div class="cta-buttons cta-two">
+            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 KakaoTalk Chat</a>
+            <button class="btn btn-white-solid" onclick="openInquiry()">📋 Online Inquiry</button>
+          </div>
+        </div>
+      </section>`;
+
+      content.innerHTML = html;
+      // 찜하기 버튼 초기 상태
+      setTimeout(() => updateWishBtn(c.ref || new URLSearchParams(location.search).get('ref')), 50);
+    }
+
+    function renderShipSection(c, ship, detail, liveDetail = null) {
+      // 시설 데이터: detail(로컬) 우선, 없으면 liveDetail(라이브 API)
+      const facilityData = (detail?.dining?.length || detail?.entertainment?.length || detail?.deckplans?.length)
+        ? detail : liveDetail;
+      const shipName = c.shipTitleKo || c.shipTitle;
+      const facts = liveDetail?.facts || {};
+
+      // spec 값: liveDetail.facts 우선 → 로컬 ship 폴백
+      const launchYear = facts.launch_year || ship?.launchYear;
+      const grossTonnage = facts.gross_tonnage || ship?.grossTonnage;
+      const capacity = facts.capacity || ship?.capacity;
+      const crewCount = facts.crew_count || ship?.crewCount;
+      const length = facts.length || ship?.length;
+      const width = facts.width || ship?.width;
+      const deckCount = facts.deck_count || ship?.deckCount;
+      const cabinCount = facts.cabin_count || ship?.cabinCount;
+
+      // teaser: liveDetail.teaser 우선 → Translations 폴백
+      const teaser = liveDetail?.teaser
+        || Translations.shipTeaser(c.shipTitle, c.shipTitleKo, c.operator, ship?.shipClass, capacity, launchYear)
+        || '';
+
+      let html = `
+      <section class="section" id="ship-detail-section" style="background:var(--gray-50)">
+        <div class="container">
+          <h2 class="section-title">🚢 About ${shipName}</h2>
+          ${teaser ? `<p class="section-subtitle" style="max-width:800px;margin:0 auto 24px;text-align:center">${teaser}</p>` : ''}
+          <div class="spec-grid">`;
+
+      const specs = [
+        ['Launch Year', launchYear || '-'],
+        ['Gross Tonnage', grossTonnage ? Number(grossTonnage).toLocaleString() + 't' : '-'],
+        ['Capacity', capacity ? Number(capacity).toLocaleString() : '-'],
+        ['Crew', crewCount ? Number(crewCount).toLocaleString() : '-'],
+        ['Length', length ? length + 'm' : '-'],
+        ['Beam', width ? width + 'm' : '-'],
+        ['Decks', deckCount || '-'],
+        ['Cabins', cabinCount ? Number(cabinCount).toLocaleString() : '-'],
+      ];
+      specs.forEach(([label, value]) => {
+        html += `<div class="spec-item"><div class="spec-value">${value}</div><div class="spec-label">${label}</div></div>`;
+      });
+      html += `</div>`;
+
+      // ── 시설 탭 (다이닝 / 엔터테인먼트 / 스파 / 키즈 / 덱플랜) ──
+      if (facilityData) {
+        const tabs = [];
+        if (facilityData.dining?.length)        tabs.push({id:'dining', label:`🍽️ Dining (${facilityData.dining.length})`,       items: facilityData.dining});
+        if (facilityData.entertainment?.length)  tabs.push({id:'ent',    label:`🎭 Entertainment (${facilityData.entertainment.length})`, items: facilityData.entertainment});
+        if (facilityData.health?.length)         tabs.push({id:'health', label:`💆 Spa & Fitness (${facilityData.health.length})`,  items: facilityData.health});
+        if (facilityData.kids?.length)           tabs.push({id:'kids',   label:`👶 Kids (${facilityData.kids.length})`,            items: facilityData.kids});
+        if (facilityData.deckplans?.length)      tabs.push({id:'decks',  label:`📐 Deck Plans (${facilityData.deckplans.length})`,     items: facilityData.deckplans});
+
+        if (tabs.length) {
+          html += `<div class="ship-tabs" style="margin-top:40px">`;
+          html += `<div class="tabs" style="flex-wrap:wrap;gap:4px 0">`;
+          tabs.forEach((t, i) => {
+            html += `<button class="tab-btn ${i===0?'active':''}" onclick="switchShipTab(this,'ship-panel-${t.id}')">${t.label}</button>`;
+          });
+          html += `</div>`;
+
+          tabs.forEach((t, i) => {
+            const sliderId = 'slider-' + t.id;
+            const items = t.items.slice(0, t.id === 'decks' ? 30 : 20);
+            html += `<div class="tab-content ${i===0?'active':''}" id="ship-panel-${t.id}">`;
+            html += `<div class="facility-slider" id="${sliderId}">`;
+            html += `<div class="facility-slides">`;
+            items.forEach(item => {
+              // item.name은 normalizeShipLive에서 이미 한글화됨
+              const name = item.name;
+              const desc = item.desc || '';
+              html += `<div class="facility-slide">`;
+              if (item.image) html += `<img src="${item.image}" alt="${name}" loading="lazy">`;
+              html += `<div class="facility-slide-body"><div class="facility-slide-name">${name}</div>`;
+              if (desc) html += `<div class="facility-slide-desc">${desc}</div>`;
+              html += `</div></div>`;
+            });
+            html += `</div>`;
+            if (items.length > 1) {
+              html += `<button class="slider-btn slider-prev">◀</button><button class="slider-btn slider-next">▶</button>`;
+              html += `<div class="slider-dots">${items.map((_, idx) => `<button class="slider-dot${idx===0?' active':''}" data-idx="${idx}"></button>`).join('')}</div>`;
+            }
+            html += `</div></div>`;
+          });
+          html += `</div>`;
+        }
+
+        // ── 객실 타입 (카테고리별 행 슬라이더) ──
+        if (facilityData.accommodations?.length) {
+          const cabinCats = categorizeCabins(facilityData.accommodations);
+          if (cabinCats.length) {
+            html += `<h3 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin:40px 0 8px">🛏️ Cabin Types</h3>`;
+            cabinCats.forEach(cat => {
+              const rowId = 'cabin-row-' + cat.id;
+              html += `<div style="margin-bottom:4px;padding:8px 0 4px;border-top:1px solid var(--gray-200)">`;
+              html += `<div style="font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:8px">${cat.label} <span style="font-weight:400;color:var(--gray-500)">(${cat.items.length})</span></div>`;
+              html += `<div class="facility-slider" id="${rowId}">`;
+              html += `<div class="facility-slides">`;
+              cat.items.forEach(a => {
+                const aName = Translations.accommodationName(a.name);
+                const descText = a.desc || Translations.cabinDescKo(cat.id);
+                const aDesc = descText ? `<div class="facility-slide-desc">${descText}</div>` : '';
+                html += `<div class="facility-slide">`;
+                if (a.image) html += `<img src="${a.image}" alt="${aName}" loading="lazy">`;
+                html += `<div class="facility-slide-body"><div class="facility-slide-name">${aName}</div>${aDesc}</div>`;
+                html += `</div>`;
+              });
+              html += `</div>`;
+              if (cat.items.length > 1) {
+                html += `<button class="slider-btn slider-prev">◀</button><button class="slider-btn slider-next">▶</button>`;
+                html += `<div class="slider-dots">${cat.items.map((_,i)=>`<button class="slider-dot${i===0?' active':''}" data-idx="${i}"></button>`).join('')}</div>`;
+              }
+              html += `</div></div>`;
+            });
+          }
+        }
+      }
+
+      html += `</div></section>`;
+      return html;
+    }
+
+    function renderItinerary(holiday) {
+      const container = document.getElementById('day-cards-container');
+      if (!container || !holiday.itinerary?.days) {
+        if (container) container.innerHTML = '<p style="text-align:center;color:#999">No itinerary data available.</p>';
+        return;
+      }
+
+      let html = '<div class="day-cards">';
+      for (const day of holiday.itinerary.days) {
+        const loc = day.locations?.[0];
+        const isSeaDay = !loc || day.day_type?.includes('SEA') || day.day_name?.toLowerCase().includes('at sea');
+
+        if (isSeaDay) {
+          html += `
+          <div class="day-card sea-day">
+            <div class="day-card-header">
+              <span class="day-num">Day ${day.day}</span>
+              <span class="day-port">🌊 At Sea</span>
+              <span class="day-time"></span>
+            </div>
+            <div class="day-card-body" style="text-align:center;color:var(--gray-500)">
+              <p>A full day at sea. Enjoy the ship's facilities and entertainment — pools, spa, casino, restaurants, and more.</p>
+            </div>
+          </div>`;
+        } else {
+          const portName = Translations.portName(loc.name);
+          const countryName = Translations.countryName(loc.country);
+          const arrTime = loc.arrival_time || '';
+          const depTime = loc.departure_time || '';
+          const timeStr = arrTime && depTime ? `Arrive ${arrTime} ~ Depart ${depTime}` : depTime ? `Depart ${depTime}` : arrTime ? `Arrive ${arrTime}` : '';
+          // 기항지 이미지: widgety_data만 사용 (operator_data는 선박이미지일 수 있어 제외)
+          const portImages = (loc.widgety_data?.images || []).filter(i => i?.href);
+          const descKo = Translations.portDesc(loc.name);
+          // 영문 API 설명 정제 후 fallback
+          const rawApiDesc = (loc.widgety_data?.description || '').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,200);
+          const desc = descKo || `Explore the beautiful port of ${portName}.`;
+
+          // 이미지 슬라이더 (최대 3장)
+          const imgHtml = portImages.length > 0 ? (() => {
+            const imgs = portImages.slice(0, 3);
+            if (imgs.length === 1) {
+              return `<div class="day-card-img-wrap"><img src="${imgs[0].href}" alt="${portName}" class="day-card-main-img" loading="lazy"></div>`;
+            }
+            const dayId = 'day-img-' + day.day;
+            const total = imgs.length;
+            const pct = (100 / total).toFixed(4);
+            return `<div class="day-img-slider" id="${dayId}" data-total="${total}">
+              <div class="day-img-wrap" style="overflow:hidden;width:100%;position:relative;touch-action:pan-y">
+                <div class="day-img-slides" style="display:flex;width:${total * 100}%;transition:transform 0.35s ease;will-change:transform">
+                  ${imgs.map(i=>`<img src="${i.href}" alt="${portName}" loading="lazy" style="width:${pct}%;flex-shrink:0;object-fit:cover;height:220px;display:block">`).join('')}
+                </div>
+              </div>
+              <div class="day-img-dots" style="display:flex;justify-content:center;gap:6px;padding:6px 0;background:#f5f5f5">
+                ${imgs.map((_,k)=>`<button class="day-dot${k===0?' day-dot-active':''}" data-idx="${k}" style="width:8px;height:8px;border-radius:50%;border:none;background:${k===0?'var(--navy)':'#ccc'};cursor:pointer;padding:0"></button>`).join('')}
+              </div>
+            </div>`;
+          })() : '';
+
+          html += `
+          <div class="day-card">
+            <div class="day-card-header">
+              <span class="day-num">Day ${day.day}</span>
+              <span class="day-port">📍 ${portName}${countryName ? ', ' + countryName : ''}</span>
+              <span class="day-time">${timeStr ? '⏰ ' + timeStr : ''}</span>
+            </div>
+            ${imgHtml}
+            <div class="day-card-body">
+              ${desc ? `<p class="port-desc">${desc}</p>` : ''}
+            </div>
+          </div>`;
+        }
+      }
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function slideDayImg(slider, idx) {
+      if (typeof slider === 'string') slider = document.getElementById(slider);
+      if (!slider) return;
+      const total = parseInt(slider.dataset.total) || 1;
+      idx = (idx + total) % total;
+      slider.dataset.current = idx;
+      const slides = slider.querySelector('.day-img-slides');
+      const wrap   = slider.querySelector('.day-img-wrap');
+      if (slides && wrap) {
+        // 픽셀 기반 이동 — wrap 너비 × idx
+        slides.style.transform = `translateX(-${idx * wrap.offsetWidth}px)`;
+      }
+      slider.querySelectorAll('.day-dot').forEach((b, i) => {
+        b.style.background = i === idx ? 'var(--navy)' : '#ccc';
+        b.classList.toggle('day-dot-active', i === idx);
+      });
+    }
+
+    function initDaySliders() {
+      document.querySelectorAll('.day-img-slider').forEach(slider => {
+        // 도트 클릭
+        slider.querySelectorAll('.day-dot').forEach((dot, i) => {
+          dot.addEventListener('click', () => slideDayImg(slider, i));
+        });
+
+        const wrap = slider.querySelector('.day-img-wrap');
+        const slides = slider.querySelector('.day-img-slides');
+        if (!wrap || !slides) return;
+
+        // ── 터치 스와이프 (모바일) ──
+        let _tx = 0, _ty = 0, _isHoriz = false, _started = false;
+
+        wrap.addEventListener('touchstart', e => {
+          _tx = e.touches[0].clientX;
+          _ty = e.touches[0].clientY;
+          _isHoriz = false;
+          _started = true;
+          slides.style.transition = 'none'; // 드래그 중 애니메이션 끄기
+        }, { passive: true });
+
+        wrap.addEventListener('touchmove', e => {
+          if (!_started) return;
+          const dx = e.touches[0].clientX - _tx;
+          const dy = e.touches[0].clientY - _ty;
+          if (!_isHoriz) {
+            if (Math.abs(dx) > Math.abs(dy) + 3) {
+              _isHoriz = true;
+            } else if (Math.abs(dy) > Math.abs(dx) + 3) {
+              _started = false; // 세로 스크롤이면 포기
+              slides.style.transition = 'transform 0.35s ease';
+              return;
+            }
+          }
+          if (_isHoriz) {
+            e.preventDefault();
+            const cur = parseInt(slider.dataset.current || 0);
+            slides.style.transform = `translateX(${-(cur * wrap.offsetWidth) + dx}px)`;
+          }
+        }, { passive: false });
+
+        wrap.addEventListener('touchend', e => {
+          if (!_started) return;
+          _started = false;
+          slides.style.transition = 'transform 0.35s ease';
+          if (_isHoriz) {
+            const dx = e.changedTouches[0].clientX - _tx;
+            const cur = parseInt(slider.dataset.current || 0);
+            if (Math.abs(dx) > 40) {
+              slideDayImg(slider, cur + (dx < 0 ? 1 : -1));
+            } else {
+              // 제자리로
+              slides.style.transform = `translateX(-${cur * wrap.offsetWidth}px)`;
+            }
+          }
+          _isHoriz = false;
+        }, { passive: true });
+
+        // ── 마우스 드래그 (PC) ──
+        let _mx = 0, _mdown = false;
+        wrap.addEventListener('mousedown', e => {
+          _mdown = true; _mx = e.pageX;
+          slides.style.transition = 'none';
+        });
+        wrap.addEventListener('mousemove', e => {
+          if (!_mdown) return;
+          const dx = e.pageX - _mx;
+          const cur = parseInt(slider.dataset.current || 0);
+          slides.style.transform = `translateX(${-(cur * wrap.offsetWidth) + dx}px)`;
+        });
+        wrap.addEventListener('mouseup', e => {
+          if (!_mdown) return;
+          _mdown = false;
+          slides.style.transition = 'transform 0.35s ease';
+          const dx = e.pageX - _mx;
+          const cur = parseInt(slider.dataset.current || 0);
+          if (Math.abs(dx) > 40) {
+            slideDayImg(slider, cur + (dx < 0 ? 1 : -1));
+          } else {
+            slides.style.transform = `translateX(-${cur * wrap.offsetWidth}px)`;
+          }
+        });
+        wrap.addEventListener('mouseleave', () => {
+          if (!_mdown) return;
+          _mdown = false;
+          slides.style.transition = 'transform 0.35s ease';
+          const cur = parseInt(slider.dataset.current || 0);
+          slides.style.transform = `translateX(-${cur * wrap.offsetWidth}px)`;
+        });
+
+        // ── 이미지 드래그 방지 ──
+        wrap.querySelectorAll('img').forEach(img => {
+          img.addEventListener('dragstart', e => e.preventDefault());
+        });
+      });
+    }
+
+    function renderPricing(holiday, shipDetail) {
+      const section = document.getElementById('pricing-section');
+      if (!section) return;
+
+      const prices = holiday.headline_prices?.cruise;
+      if (!prices) return;
+
+      const double = prices.double;
+      const single = prices.single;
+      const triple = prices.triple;
+
+      let html = `
+      <div class="container">
+        <h2 class="section-title">💰 Cabins & Pricing</h2>
+        <p class="section-subtitle">Per person rate (double occupancy, excl. taxes &amp; port fees)</p>
+        <table class="price-table">
+          <thead><tr><th>Cabin Type</th><th>Price / person</th></tr></thead>
+          <tbody>`;
+
+      const types = [
+        {key:'inside', label:'🚪 Inside Cabin'},
+        {key:'outside', label:'🪟 Ocean View Cabin'},
+        {key:'balcony', label:'🌅 Balcony Cabin'},
+        {key:'suite', label:'👑 Suite'},
+      ];
+      types.forEach(t => {
+        const dp = double?.['from_' + t.key];
+        if (dp) {
+          html += `<tr><td class="room-type">${t.label}</td><td style="color:var(--orange);font-weight:700">${fmtPrice(dp)} <small style="font-weight:400;font-size:.85em;color:#888">/ person</small></td></tr>`;
+        }
+      });
+
+      html += `</tbody></table>
+        <p style="margin-top:12px;font-size:0.85rem;color:var(--gray-500)">※ Prices are subject to change without notice. Please contact us for exact pricing.</p>
+      </div>`;
+
+      section.innerHTML = html;
+    }
+
+    function renderFromAPI(holiday, shipDetail, shipLive) {
+      // Full page render from live API data (no local cruise in cruises.json)
+      const nights = holiday.cruise_nights || holiday.duration_days || 0;
+      const opName = Translations.operatorName(holiday.operator_title || '');
+      const shipName = Translations.shipName(holiday.ship_title || '');
+      const price = holiday.headline_prices?.cruise?.double;
+      const fromPrice = price?.from_balcony || price?.from_outside || price?.from_inside;
+      const priceStr = fromPrice ? API.formatPrice(fromPrice) : 'Inquire';
+      const countries = (holiday.countries || []).map(c => Translations.countryName(c)).join(', ');
+      const route = holiday._portRouteKo || API.routeString(holiday.itinerary);
+      const coverImg = shipLive?.cover_image_href || '';
+      const facts = shipLive?.ship_facts || {};
+      // 로컬 JSON 한국어 타이틀 우선, 없으면 국가명 기반 생성, 최후엔 API name
+      const cruiseTitle = holiday._koreanTitle
+        || (() => {
+             const ctries = (holiday.countries||[]).map(c => Translations.countryName(c)).filter(Boolean);
+             return ctries.length ? `${ctries.slice(0,2).join(' & ')} ${nights}-Night Cruise` : null;
+           })()
+        || `${Translations.portName(holiday.starts_at?.name||'')} ${nights}-Night Cruise`;
+
+      window._cruiseData = {
+        title: cruiseTitle,
+        operator: holiday.operator_title,
+        shipTitle: holiday.ship_title,
+        departureDate: holiday.date_from,
+        nights,
+        ref
+      };
+
+      document.title = `${cruiseTitle} - CruiseLink`;
+
+      let html = `
+      <section class="detail-hero">
+        <div class="container">
+          <div class="operator-name">${opName} · ${shipName}</div>
+          <h1>🚢 ${cruiseTitle}</h1>
+          <div class="meta">
+            <span>📅 ${API.formatDateKo(holiday.date_from)} ~ ${API.formatDateKo(holiday.date_to)}</span>
+            <span>🌙 ${nights} nights / ${parseInt(nights)+1} days</span>
+            <span>🚢 ${shipName}</span>
+            <span>🌏 ${countries}</span>
+          </div>
+          <div class="price-big">${priceStr} <small>/ person</small></div>
+          <div class="hero-ctas cta-two-center">
+            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 KakaoTalk Chat</a>
+            <button class="btn btn-white-solid" onclick="openInquiry()">📋 Online Inquiry</button>
+          </div>
+        </div>
+      </section>`;
+
+      // Cover image
+      if (coverImg) {
+        html += `<div class="container"><div class="main-ship-image"><img src="${coverImg}" alt="${shipName}" loading="lazy"></div></div>`;
+      }
+
+      // Info bar
+      html += `
+      <div class="container">
+        <div class="info-bar">
+          <div class="info-bar-item"><div class="label">🚢 Ship</div><div class="value">${shipName}</div></div>
+          <div class="info-bar-item"><div class="label">🌙 Duration</div><div class="value">${nights}박 ${parseInt(nights)+1}일</div></div>
+          <div class="info-bar-item"><div class="label">🚪 Departure/Arrival</div><div class="value">${Translations.portName(holiday.starts_at?.name||'')} → ${Translations.portName(holiday.ends_at?.name||'')}</div></div>
+          <div class="info-bar-item"><div class="label">💰 Price</div><div class="value" style="color:var(--orange)">${priceStr} <small style="font-size:.75em;font-weight:400;color:#888">/ person</small></div></div>
+        </div>
+      </div>`;
+
+      // Itinerary placeholder
+      html += `
+      <section class="section" id="itinerary-section">
+        <div class="container">
+          <h2 class="section-title">🗓️ Itinerary</h2>
+          <p class="section-subtitle">${route}</p>
+          <div id="day-cards-container">
+            <div class="loading"><div class="loading-spinner"></div><p>Loading itinerary data...</p></div>
+          </div>
+        </div>
+      </section>`;
+
+      // Ship section — renderShipSection()으로 통합 (모든 선사 동일 디자인)
+      const liveDetail = normalizeShipLive(shipLive);
+      const cruiseProxy = {
+        shipTitle: holiday.ship_title || '',
+        shipTitleKo: Translations.shipName?.(holiday.ship_title || '') || holiday.ship_title || '',
+        operator: holiday.operator_title || '',
+      };
+      html += renderShipSection(cruiseProxy, {}, null, liveDetail);
+
+      // Pricing placeholder
+      html += `<section class="section" id="pricing-section"></section>`;
+
+      // Include / Exclude
+      html += `
+      <section class="section" style="background:var(--gray-50)">
+        <div class="container">
+          <h2 class="section-title">📋 Included / Not Included</h2>
+          <div class="checklist-grid" style="margin-top:24px;max-width:700px;margin-left:auto;margin-right:auto">
+            <div>
+              <h3 style="color:var(--navy);margin-bottom:16px">✅ Included</h3>
+              <ul class="checklist included">
+                <li>Cabin accommodation</li>
+                <li>Main dining &amp; buffet (breakfast, lunch, dinner)</li>
+                <li>Onboard entertainment (shows, performances, pool)</li>
+                <li>Fitness center</li>
+                <li>Kids &amp; teens club programs</li>
+                <li>Room service (basic)</li>
+                <li>Port shuttle bus (selected ports)</li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="color:var(--navy);margin-bottom:16px">❌ Not Included</h3>
+              <ul class="checklist excluded">
+                <li>Flights</li>
+                <li>Specialty restaurants</li>
+                <li>Alcoholic beverages &amp; drink packages</li>
+                <li>Shore excursions</li>
+                <li>Spa &amp; beauty treatments</li>
+                <li>Wi-Fi internet package</li>
+                <li>Travel insurance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>`;
+
+      // CTA
+      html += `
+      <section class="cta-section">
+        <div class="container">
+          <h2>Interested in this cruise?</h2>
+          <p>Our cruise specialists will help you find the best cabin and price.</p>
+          <div class="cta-buttons cta-two">
+            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 KakaoTalk Chat</a>
+            <button class="btn btn-white-solid" onclick="openInquiry()">📋 Online Inquiry</button>
+          </div>
+        </div>
+      </section>`;
+
+      content.innerHTML = html;
+      renderItinerary(holiday);
+      renderPricing(holiday, shipDetail);
+      initAllSliders();
+    }
+
+    function initSlider(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const slides = container.querySelector('.facility-slides');
+      const dots = container.querySelectorAll('.slider-dot');
+      const total = dots.length;
+      if (total === 0) return;
+      let current = 0;
+
+      function goTo(i) {
+        current = (i + total) % total;
+        slides.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+      }
+
+      container.querySelector('.slider-prev')?.addEventListener('click', () => goTo(current - 1));
+      container.querySelector('.slider-next')?.addEventListener('click', () => goTo(current + 1));
+      dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+      // 터치 스와이프
+      let _tx = 0, _ty = 0, _swiping = false;
+      slides.addEventListener('touchstart', e => {
+        _tx = e.touches[0].clientX;
+        _ty = e.touches[0].clientY;
+        _swiping = false;
+      }, { passive: true });
+      slides.addEventListener('touchmove', e => {
+        const dx = e.touches[0].clientX - _tx;
+        const dy = e.touches[0].clientY - _ty;
+        // 수평 스와이프가 확실하면 세로 스크롤 막기
+        if (!_swiping && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
+          _swiping = true;
+        }
+        if (_swiping) e.preventDefault();
+      }, { passive: false });
+      slides.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - _tx;
+        if (_swiping && Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+        _swiping = false;
+      });
+    }
+
+    function initAllSliders() {
+      document.querySelectorAll('.facility-slider').forEach(el => initSlider(el.id));
+      initDaySliders();
+    }
+
+    function switchShipTab(el, panelId) {
+      el.parentElement.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      const parent = el.closest('.ship-tabs');
+      parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.getElementById(panelId)?.classList.add('active');
+    }
+
+    load();
+
+    /* ── Inquiry Modal ── */
+    function openInquiry() {
+      const c = window._cruiseData;
+      if (c) {
+        const title = c.title || c.titleKo || '';
+        const ship = c.shipTitleKo || Translations.shipName(c.shipTitle || '');
+        const op = Translations.operatorName(c.operator || '');
+        const price = c.priceBalcony || c.priceOutside || c.priceInside;
+        const route = Translations.portRoute(c.portRouteKo || c.portRoute || '');
+        document.getElementById('modalProductName').textContent = title;
+        document.getElementById('modalProductDetail').innerHTML =
+          `${op} · ${ship}<br>출발: ${(c.dateFrom || c.departureDate || '').substring(0,10)} / ${c.nights || ''}박${price ? ' / $'+price+'~' : ''}`;
+        document.getElementById('f_product').value = title;
+        document.getElementById('f_cruiseline').value = c.operator || '';
+        document.getElementById('f_ship').value = ship;
+        document.getElementById('f_date').value = (c.dateFrom || c.departureDate || '').substring(0,10);
+        document.getElementById('f_ports').value = route;
+        document.getElementById('f_price').value = price ? '$'+price+'~' : '문의';
+        document.getElementById('f_ref').value = c.ref || '';
+      }
+      document.getElementById('inquiryModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeInquiry() {
+      document.getElementById('inquiryModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('click', e => {
+      if (e.target.id === 'inquiryModal') closeInquiry();
+    });
+    function submitInquiry(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true; btn.textContent = '전송 중...';
+
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'https://formsubmit.co/ajax/info@cruiselink.co.kr';
+
+      const fd = {
+        _subject: `[크루즈링크] ${document.getElementById('f_product').value} - ${document.getElementById('f_name').value}님`,
+        '크루즈 상품': document.getElementById('f_product').value,
+        '선사': document.getElementById('f_cruiseline').value,
+        '선박': document.getElementById('f_ship').value,
+        '출발일': document.getElementById('f_date').value,
+        '일정': document.getElementById('f_ports').value,
+        '참고가격': document.getElementById('f_price').value,
+        'Ref': document.getElementById('f_ref').value,
+        '고객 이름': document.getElementById('f_name').value,
+        '고객 이메일': document.getElementById('f_email').value,
+        '고객 연락처': document.getElementById('f_phone').value,
+        '인원': document.getElementById('f_pax').value,
+        '희망 객실': document.getElementById('f_cabin').value,
+        '요청사항': document.getElementById('f_message').value || '없음',
+      };
+
+      fetch('https://formsubmit.co/ajax/info@cruiselink.co.kr', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        body: JSON.stringify(fd)
+      })
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('formStatus').innerHTML =
+          '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
+        document.getElementById('inquiryForm').style.display = 'none';
+        btn.style.display = 'none';
+      })
+      .catch(() => {
+        document.getElementById('formStatus').innerHTML =
+          '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
+        document.getElementById('inquiryForm').style.display = 'none';
+        btn.style.display = 'none';
+      });
+
+      // 백오피스 저장
+      const inquiryPayload = {
+        product: fd["크루즈 상품"],
+        cruiseline: fd["선사"],
+        ship: fd["선박"],
+        dateFrom: fd["출발일"],
+        ports: fd["일정"],
+        price: fd["참고가격"],
+        ref: fd["Ref"],
+        name: fd["고객 이름"],
+        email: fd["고객 이메일"],
+        phone: fd["고객 연락처"],
+        pax: fd["인원"],
+        cabin: fd["희망 객실"],
+        message: fd["요청사항"],
+      };
+      fetch("https://cruiselink-v2.vercel.app/api/inquiry", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(inquiryPayload)
+      }).catch(() => {});
+    }
+  </script>
+
+  <!-- Inquiry Modal -->
+  <div class="modal-overlay" id="inquiryModal">
+    <div class="modal" style="max-width:460px">
+      <div class="modal-header" style="padding:14px 20px">
+        <h2 style="font-size:1.05rem">🚢 크루즈 문의하기</h2>
+        <button class="modal-close" onclick="closeInquiry()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:16px 20px">
+        <div class="modal-product-info" style="padding:10px 12px;margin-bottom:12px;font-size:0.88rem">
+          <strong id="modalProductName"></strong><br>
+          <span id="modalProductDetail"></span>
+        </div>
+        <div class="form-status" id="formStatus"></div>
+        <form id="inquiryForm" onsubmit="submitInquiry(event)">
+          <input type="hidden" id="f_product" name="product_name">
+          <input type="hidden" id="f_cruiseline" name="cruise_line">
+          <input type="hidden" id="f_ship" name="ship">
+          <input type="hidden" id="f_date" name="departure_date">
+          <input type="hidden" id="f_ports" name="ports">
+          <input type="hidden" id="f_price" name="price">
+          <input type="hidden" id="f_ref" name="cruise_ref">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div class="form-group" style="margin-bottom:8px">
+              <label style="font-size:0.8rem;margin-bottom:3px">이름 <span class="req">*</span></label>
+              <input type="text" id="f_name" name="customer_name" required placeholder="홍길동" style="padding:8px 10px;font-size:0.9rem">
+            </div>
+            <div class="form-group" style="margin-bottom:8px">
+              <label style="font-size:0.8rem;margin-bottom:3px">연락처 <span class="req">*</span></label>
+              <input type="tel" id="f_phone" name="customer_phone" required placeholder="010-1234-5678" style="padding:8px 10px;font-size:0.9rem">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:8px">
+            <label style="font-size:0.8rem;margin-bottom:3px">이메일 <span class="req">*</span></label>
+            <input type="email" id="f_email" name="customer_email" required placeholder="example@email.com" style="padding:8px 10px;font-size:0.9rem">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div class="form-group" style="margin-bottom:8px">
+              <label style="font-size:0.8rem;margin-bottom:3px">인원 <span class="req">*</span></label>
+              <select id="f_pax" name="pax" required style="padding:8px 10px;font-size:0.9rem">
+                <option value="">선택</option>
+                <option value="1">1명</option><option value="2">2명</option><option value="3">3명</option>
+                <option value="4">4명</option><option value="5">5명</option><option value="6~10">6~10명</option>
+                <option value="11+">11명 이상</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:8px">
+              <label style="font-size:0.8rem;margin-bottom:3px">객실 타입 <span class="req">*</span></label>
+              <select id="f_cabin" name="cabin_type" required style="padding:8px 10px;font-size:0.9rem">
+                <option value="">선택</option>
+                <option value="내측">내측</option>
+                <option value="오션뷰">오션뷰</option>
+                <option value="발코니">발코니</option>
+                <option value="스위트">스위트</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:8px">
+            <label style="font-size:0.8rem;margin-bottom:3px">요청사항</label>
+            <textarea id="f_message" name="message" rows="2" placeholder="탑승자 영문 이름을 입력해주세요" style="padding:8px 10px;font-size:0.9rem"></textarea>
+          </div>
+          <div class="privacy-section" style="margin-top:8px;padding-top:8px">
+            <div class="privacy-check" style="margin-bottom:4px">
+              <input type="checkbox" id="privacyAgree" required style="width:16px;height:16px">
+              <label for="privacyAgree" style="font-size:0.8rem">개인정보 수집·이용에 동의합니다. (필수)</label>
+            </div>
+            <button type="button" class="privacy-toggle" style="font-size:0.78rem" onclick="document.getElementById('privacyDetail').classList.toggle('open')">약관 보기 ▼</button>
+            <div class="privacy-detail" id="privacyDetail">
+              <strong>수집항목:</strong> 이름, 이메일, 연락처<br>
+              <strong>수집목적:</strong> 크루즈 상담 및 예약 안내<br>
+              <strong>보유기간:</strong> 상담 완료 후 1년<br>
+              ※ 동의를 거부할 수 있으나, 거부 시 상담 서비스 이용이 제한됩니다.
+            </div>
+          </div>
+          <button type="submit" class="btn btn-orange" id="submitBtn" style="width:100%;margin-top:10px;padding:12px;font-size:1rem">문의하기 전송</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- PC Fixed Share Button -->
+  <button id="pcShareBtn" onclick="mibShareUrl()" title="공유하기">
+    🔗<span>공유하기</span>
+  </button>
+  <style>
+    #pcShareBtn {
+      display: none;
+    }
+    @media (min-width: 769px) {
+      #pcShareBtn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        position: fixed;
+        bottom: 32px;
+        right: 28px;
+        z-index: 7000;
+        background: #0077cc;
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(0,119,204,0.35);
+        transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+      }
+      #pcShareBtn:hover {
+        background: #005fa3;
+        box-shadow: 0 6px 20px rgba(0,119,204,0.45);
+        transform: translateY(-2px);
+      }
+      #pcShareBtn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(0,119,204,0.3);
+      }
+    }
+  </style>
+
+  <!-- Mobile Bottom Inquiry Bar -->
+  <div id="mib" class="mib">
+    <div class="mib-handle" id="mibHandle">
+      <div class="mib-peek">
+        <span class="mib-peek-icon">🚢</span>
+        <span class="mib-peek-title" id="mibPeekTitle">이 크루즈 상품 문의하기</span>
+        <button class="mib-share-mini" onclick="mibShareUrl()">공유하기</button>
+        <span class="mib-peek-arrow" id="mibArrow" onclick="toggleMIB()" style="padding:8px 12px;cursor:pointer;font-size:18px;">▲</span>
+      </div>
+    </div>
+    <div class="mib-panel" id="mibPanel">
+      <div class="mib-btns">
+        <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="mib-btn mib-kakao">
+          💬 카카오톡 상담
+        </a>
+        <button class="mib-btn mib-form" onclick="openInquiry(); closeMIB()">
+          📋 온라인 문의
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* ── Mobile Inquiry Bar (모바일 전용) ── */
+    .mib {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .mib {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 8000;
+        background: #fff;
+        box-shadow: 0 -3px 16px rgba(0,0,0,0.14);
+        border-radius: 14px 14px 0 0;
+        overflow: hidden;
+        /* iOS safe area */
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+
+      .mib-handle {
+        cursor: default;
+        padding: 0;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .mib-peek-arrow {
+        -webkit-tap-highlight-color: transparent;
+        border-radius: 50%;
+        transition: background .15s;
+      }
+      .mib-peek-arrow:active { background: rgba(0,0,0,.08); }
+
+      .mib-share-mini {
+        background: #e8f4ff;
+        color: #0077cc;
+        border: 1px solid #b3d9f5;
+        border-radius: 12px;
+        padding: 4px 10px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mib-share-mini:active { background: #cce5ff; }
+
+      /* 핸들 상단 드래그 인디케이터 */
+      .mib-handle::before {
+        content: '';
+        display: block;
+        width: 36px;
+        height: 4px;
+        background: #d1d5db;
+        border-radius: 2px;
+        margin: 8px auto 0;
+      }
+
+      .mib-peek {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 18px 12px;
+      }
+
+      .mib-peek-icon {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+
+      .mib-peek-title {
+        flex: 1;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--navy, #1a2d5a);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mib-peek-arrow {
+        font-size: 0.7rem;
+        color: #9ca3af;
+        flex-shrink: 0;
+        transition: transform 0.25s;
+      }
+
+      .mib.open .mib-peek-arrow {
+        transform: rotate(180deg);
+      }
+
+      /* 확장 패널 */
+      .mib-panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .mib.open .mib-panel {
+        max-height: 110px;
+      }
+
+      .mib-btns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 6px 16px 14px;
+      }
+
+      .mib-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 13px 10px;
+        border-radius: 10px;
+        font-size: 0.92rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+        transition: opacity 0.15s;
+      }
+
+      .mib-btn:active { opacity: 0.8; }
+
+      .mib-kakao {
+        background: #FEE500;
+        color: #1a1a1a;
+      }
+
+      .mib-form {
+        background: var(--navy, #1a2d5a);
+        color: #fff;
+      }
+
+      /* 바 열렸을 때 뒤 콘텐츠 밀기 방지 — body padding */
+      body.mib-open {
+        padding-bottom: 130px;
+      }
+    }
+  </style>
+
+  <script>
+    // ── Mobile Inquiry Bar ──
+    function toggleMIB() {
+      const bar = document.getElementById('mib');
+      const isOpen = bar.classList.toggle('open');
+      document.body.classList.toggle('mib-open', isOpen);
+    }
+
+    function closeMIB() {
+      document.getElementById('mib').classList.remove('open');
+      document.body.classList.remove('mib-open');
+    }
+
+    // 제목 고정값 — 동적 업데이트 불필요
+
+    // ── MIB 스와이프 제스처 ──
+    (function() {
+      let startY = 0;
+      const handle = document.getElementById('mibHandle');
+      if (!handle) return;
+
+      handle.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+
+      handle.addEventListener('touchend', function(e) {
+        const endY = e.changedTouches[0].clientY;
+        const diff = startY - endY; // 양수 = 위로 스와이프, 음수 = 아래로 스와이프
+        const mib = document.getElementById('mib');
+        if (diff > 30) {
+          // 위로 스와이프 → 열기
+          mib.classList.add('open');
+          document.body.classList.add('mib-open');
+        } else if (diff < -30) {
+          // 아래로 스와이프 → 닫기
+          mib.classList.remove('open');
+          document.body.classList.remove('mib-open');
+        }
+      }, { passive: true });
+    })();
+
+    // ── MIB 공유하기 ──
+    function mibShareUrl() {
+      // OG 태그가 있는 정적 파일 URL 생성 (카카오톡 프리뷰용)
+      const params = new URLSearchParams(location.search);
+      const ref = params.get('ref');
+      const url = ref
+        ? 'https://www.cruiselink.co.kr/c/' + ref + '.html'
+        : location.href;
+      const titleEl = document.querySelector('.detail-hero h1');
+      const title = titleEl ? titleEl.innerText.replace('🚢 ','') : document.title;
+
+      // Web Share API 지원 시 (모바일 네이티브 공유)
+      if (navigator.share) {
+        navigator.share({ title: '🚢 ' + title, url }).catch(() => {});
+        return;
+      }
+      // fallback: URL 복사
+      navigator.clipboard.writeText(url).then(() => {
+        showMibToast('🔗 링크가 복사됐습니다!');
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = url; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta);
+        showMibToast('🔗 링크가 복사됐습니다!');
+      });
+    }
+
+    function showMibToast(msg) {
+      let t = document.getElementById('mibToast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'mibToast';
+        t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1a2540;color:#fff;padding:10px 22px;border-radius:20px;font-size:14px;font-weight:600;z-index:9999;white-space:nowrap;display:none;';
+        document.body.appendChild(t);
+      }
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 2200);
+    }
+  </script>
+
+  <!-- Lightbox -->
+  <div id="lightbox" style="
+    display:none; position:fixed; inset:0; z-index:9999;
+    background:rgba(0,0,0,0.92); align-items:center; justify-content:center;
+    flex-direction:column; padding:16px; box-sizing:border-box;
+    cursor:zoom-out;
+  " onclick="if(event.target===this) closeLightbox()">
+    <button id="lbClose" style="
+      position:absolute; top:12px; right:16px; background:none; border:none;
+      color:#fff; font-size:2rem; line-height:1; cursor:pointer; z-index:1;
+      padding:4px 10px; opacity:0.85;
+    " onclick="closeLightbox()">&times;</button>
+    <button id="lbPrev" style="
+      position:absolute; left:12px; top:50%; transform:translateY(-50%);
+      background:rgba(255,255,255,0.15); border:none; color:#fff;
+      font-size:1.8rem; width:44px; height:44px; border-radius:50%;
+      cursor:pointer; display:none; align-items:center; justify-content:center;
+    " onclick="lbNav(-1);event.stopPropagation()">‹</button>
+    <button id="lbNext" style="
+      position:absolute; right:12px; top:50%; transform:translateY(-50%);
+      background:rgba(255,255,255,0.15); border:none; color:#fff;
+      font-size:1.8rem; width:44px; height:44px; border-radius:50%;
+      cursor:pointer; display:none; align-items:center; justify-content:center;
+    " onclick="lbNav(1);event.stopPropagation()">›</button>
+    <img id="lbImg" src="" alt="" style="
+      max-width:100%; max-height:calc(100vh - 80px); object-fit:contain;
+      border-radius:6px; box-shadow:0 8px 40px rgba(0,0,0,0.5);
+      touch-action:pinch-zoom;
+    " onclick="event.stopPropagation()">
+    <div id="lbCaption" style="
+      color:#fff; font-size:0.9rem; margin-top:12px; text-align:center;
+      opacity:0.85; max-width:600px;
+    "></div>
+    <div id="lbCounter" style="
+      color:#aaa; font-size:0.8rem; margin-top:4px;
+    "></div>
+  </div>
+
+  <style>
+    .facility-slide img, .cabin-card img { cursor: zoom-in; }
+    .facility-slide img:hover, .cabin-card img:hover { opacity: 0.9; }
+    .facility-slides { user-select: none; -webkit-user-select: none; }
+    #lightbox.open { display:flex !important; }
+  </style>
+
+  <script>
+    // ── Lightbox ──
+    let _lbImages = [];
+    let _lbIdx = 0;
+
+    function openLightbox(src, caption, allImgs, idx) {
+      _lbImages = allImgs || [{ src, caption }];
+      _lbIdx = idx ?? 0;
+      _renderLb();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // 키보드
+      document.addEventListener('keydown', _lbKey);
+    }
+
+    function _renderLb() {
+      const item = _lbImages[_lbIdx];
+      document.getElementById('lbImg').src = item.src;
+      document.getElementById('lbImg').alt = item.caption || '';
+      document.getElementById('lbCaption').textContent = item.caption || '';
+      const total = _lbImages.length;
+      document.getElementById('lbCounter').textContent = total > 1 ? `${_lbIdx + 1} / ${total}` : '';
+      const showNav = total > 1;
+      document.getElementById('lbPrev').style.display = showNav ? 'flex' : 'none';
+      document.getElementById('lbNext').style.display = showNav ? 'flex' : 'none';
+    }
+
+    function lbNav(dir) {
+      _lbIdx = (_lbIdx + dir + _lbImages.length) % _lbImages.length;
+      _renderLb();
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.getElementById('lbImg').src = '';
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', _lbKey);
+    }
+
+    function _lbKey(e) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') lbNav(1);
+      if (e.key === 'ArrowLeft') lbNav(-1);
+    }
+
+    // 이벤트 위임 — facility slides + cabin cards 이미지 클릭
+    document.addEventListener('click', function(e) {
+      const img = e.target.closest('.facility-slide img, .cabin-card img');
+      if (!img) return;
+      e.stopPropagation();
+
+      // 같은 슬라이더 내 모든 이미지 수집
+      const slide = img.closest('.facility-slide, .cabin-card');
+      const slider = img.closest('.facility-slider, .cabin-grid');
+      let allImgs, idx;
+
+      if (slider) {
+        const imgs = [...slider.querySelectorAll('img')].filter(i => i.src && !i.src.includes('data:'));
+        allImgs = imgs.map(i => ({ src: i.src, caption: i.alt || '' }));
+        idx = imgs.indexOf(img);
+      } else {
+        allImgs = [{ src: img.src, caption: img.alt || '' }];
+        idx = 0;
+      }
+
+      openLightbox(img.src, img.alt || '', allImgs, Math.max(0, idx));
+    });
+
+    // 스와이프 (모바일)
+    let _tsX = 0;
+    document.getElementById('lightbox').addEventListener('touchstart', e => { _tsX = e.touches[0].clientX; }, { passive: true });
+    document.getElementById('lightbox').addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - _tsX;
+      if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+    });
+  </script>
+
+
+</body>
+</html>
