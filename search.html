@@ -364,20 +364,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     function buildSideFilterOptions(results) {
       const T = typeof Translations !== 'undefined' ? Translations : null;
-      const mk = (list, containerId) => {
-        const el = document.getElementById(containerId);
-        if (!el) return;
-        el.innerHTML = list.map(v=>`<label><input type="checkbox" value="${v}" onchange="applySideFilters()"> ${v}</label>`).join('');
+      const DEST_KO = {
+        'korea':'한국/일본','mediterranean':'지중해','alaska':'알래스카',
+        'caribbean':'카리브해','northern-europe':'북유럽','asia':'아시아/중동',
+        'south-america':'남미','oceania':'오세아니아','hawaii':'하와이'
       };
-      mk([...new Set(results.map(c=>c.destination).filter(Boolean))].sort(), 'sfDestList');
-      mk([...new Set(results.map(c=>c.startsAt?.nameKo||(T?T.portName(c.startsAt?.name||''):'')||c.startsAt?.name).filter(Boolean))].sort(), 'sfDepartPortList');
+      const koPort = n => n ? (T ? T.portName(n) : n) : '';
+      const koShip = s => s ? (T ? T.shipName(s) : s) : '';
+
+      // 목적지
+      const dests = [...new Set(results.map(c=>c.destination).filter(Boolean))].sort();
+      const destEl = document.getElementById('sfDestList');
+      if (destEl) destEl.innerHTML = dests.map(d=>
+        `<label><input type="checkbox" value="${d}" onchange="applySideFilters()"> ${DEST_KO[d]||d}</label>`
+      ).join('');
+
+      // 출발항구 (한글)
+      const mkPortKo = (getPort, elId) => {
+        const ports = [...new Set(results.map(c=>{
+          const ko = getPort(c); return ko || '';
+        }).filter(Boolean))].sort();
+        const el = document.getElementById(elId);
+        if (el) el.innerHTML = ports.map(p=>`<label><input type="checkbox" value="${p}" onchange="applySideFilters()"> ${p}</label>`).join('');
+      };
+      mkPortKo(c => c.startsAt?.nameKo || koPort(c.startsAt?.name) || c.startsAt?.name || '', 'sfDepartPortList');
+
+      // 선사 (한글)
       const ops = [...new Set(results.map(c=>c.operator).filter(Boolean))].sort();
       const opEl = document.getElementById('sfOperatorList');
-      if (opEl) opEl.innerHTML = ops.map(o=>`<label><input type="checkbox" value="${o}" onchange="applySideFilters()"> ${T?T.operatorName(o):o}</label>`).join('');
-      const ships = [...new Set(results.map(c=>c.shipTitleKo||(T?T.shipName(c.shipTitle||''):'')||c.shipTitle).filter(Boolean))].sort();
+      if (opEl) opEl.innerHTML = ops.map(o=>
+        `<label><input type="checkbox" value="${o}" onchange="applySideFilters()"> ${T?T.operatorName(o):o}</label>`
+      ).join('');
+
+      // 크루즈선 (한글)
+      const ships = [...new Set(results.map(c=>
+        c.shipTitleKo || koShip(c.shipTitle) || c.shipTitle || ''
+      ).filter(Boolean))].sort();
       const shipEl = document.getElementById('sfShipList');
-      if (shipEl) shipEl.innerHTML = ships.map(s=>`<label><input type="checkbox" value="${s}" onchange="applySideFilters()"> ${s}</label>`).join('');
-      mk([...new Set(results.map(c=>c.endsAt?.nameKo||(T?T.portName(c.endsAt?.name||''):'')||c.endsAt?.name).filter(Boolean))].sort(), 'sfArrivePortList');
+      if (shipEl) shipEl.innerHTML = ships.map(s=>
+        `<label><input type="checkbox" value="${s}" onchange="applySideFilters()"> ${s}</label>`
+      ).join('');
+
+      // 도착항구 (한글)
+      mkPortKo(c => c.endsAt?.nameKo || koPort(c.endsAt?.name) || c.endsAt?.name || '', 'sfArrivePortList');
+
+      // 가격 슬라이더 범위 조정
       const prices = results.map(c=>c.priceInside||c.priceOutside||c.priceBalcony||0).filter(Boolean);
       if (prices.length) {
         const maxP = Math.min(Math.ceil(Math.max(...prices)/500)*500, 10000);
