@@ -130,7 +130,8 @@ const Components = {
     const today = new Date().toISOString().slice(0,10);
     const daysLeft = c.dateFrom ? Math.round((new Date(c.dateFrom)-new Date(today))/86400000) : 999;
     let badge='', badgeColor='';
-    if (c.operator==='Explora'||c.operator==='Regent'||(fromPrice&&fromPrice>=3000)){badge='럭셔리';badgeColor='#C9A84C';}
+    if (c.badge) { badge=c.badge; badgeColor=c.badgeColor||'#d32f2f'; }
+    else if (c.operator==='Explora'||c.operator==='Regent'||(fromPrice&&fromPrice>=3000)){badge='럭셔리';badgeColor='#C9A84C';}
     else if (daysLeft<=30){badge='출발 임박';badgeColor='#d32f2f';}
     else if (daysLeft<=60){badge='얼리버드';badgeColor='#2e7d32';}
     else if (fromPrice&&fromPrice<500){badge='특가';badgeColor='#c62828';}
