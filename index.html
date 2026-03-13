@@ -906,11 +906,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function getSlideUnit(sliderId) {
       const slider = document.getElementById(sliderId);
       if (!slider) return 0;
-      if (isMobile()) {
-        const card = slider.querySelector('.cruise-card, .czn-card');
-        return card ? card.offsetWidth + 24 : slider.offsetWidth;
-      }
-      return (slider.offsetWidth + 24) / 3;
+      const card = slider.querySelector('.cruise-card, .czn-card');
+      if (card) return card.offsetWidth + 20; // 실제 카드 너비 + gap(20px)
+      if (isMobile()) return slider.offsetWidth;
+      return (slider.offsetWidth - 40) / 3;
     }
     function getFeaturedMax() {
       const track = document.getElementById('featuredTrack');
