@@ -921,7 +921,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       featuredPos = Math.max(0, Math.min(getFeaturedMax(), featuredPos + dir));
       const track = document.getElementById('featuredTrack');
       track.style.transition = 'transform 0.4s ease';
-      track.style.transform = 'translateX(-' + (featuredPos * getSlideUnit('featuredSlider')) + 'px)';
+      track.style.transform = featuredPos === 0 ? 'translateX(0)' : 'translateX(-' + (featuredPos * getSlideUnit('featuredSlider')) + 'px)';
       updateFeaturedArrows();
     }
     function updateFeaturedArrows() {
@@ -942,7 +942,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       featuredPos2 = Math.max(0, Math.min(getFeaturedMax2(), featuredPos2 + dir));
       const track = document.getElementById('featuredTrack2');
       track.style.transition = 'transform 0.4s ease';
-      track.style.transform = 'translateX(-' + (featuredPos2 * getSlideUnit('featuredSlider2')) + 'px)';
+      track.style.transform = featuredPos2 === 0 ? 'translateX(0)' : 'translateX(-' + (featuredPos2 * getSlideUnit('featuredSlider2')) + 'px)';
       const wrap = document.getElementById('featuredSlider2').closest('.featured-slider-wrap');
       wrap.querySelector('.featured-arrow-left').style.opacity = featuredPos2 <= 0 ? '0.3' : '1';
       wrap.querySelector('.featured-arrow-right').style.opacity = featuredPos2 >= getFeaturedMax2() ? '0.3' : '1';
