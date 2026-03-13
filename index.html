@@ -823,6 +823,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
     });
 
+    // 찜하기 공통
+    function toggleTabWish(btn, ref) {
+      try {
+        const list = JSON.parse(localStorage.getItem('cl_wishlist')||'[]');
+        const idx = list.indexOf(ref);
+        if (idx >= 0) { list.splice(idx,1); btn.textContent='♡'; btn.style.color=''; }
+        else { list.push(ref); btn.textContent='♥'; btn.style.color='#e53935'; }
+        localStorage.setItem('cl_wishlist', JSON.stringify(list));
+      } catch {}
+    }
+
     // Promo slider
     let promoIdx = 0;
     const slides = document.getElementById('promoSlides');
@@ -1172,9 +1183,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           const shipSlug = c.shipSlug || '';
           const destUrl = ref ? `cruise-view.html?ref=${encodeURIComponent(ref)}${shipSlug ? '&ship=' + encodeURIComponent(shipSlug) : ''}` : '#';
           const departPort = c.startsAt?.nameKo || (typeof Translations !== 'undefined' ? Translations.portName(c.startsAt?.name || '') : '') || c.startsAt?.name || '';
+          const isWished = (() => { try { return JSON.parse(localStorage.getItem('cl_wishlist')||'[]').includes(ref); } catch { return false; } })();
           return `
             <a href="${destUrl}" class="tab-card" onclick="event.preventDefault();if('${ref}'){window.location.href='${destUrl}';}">
-              <div class="tab-card-img"><img src="${img}" alt="${title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80'"></div>
+              <div class="tab-card-img" style="position:relative">
+                <img src="${img}" alt="${title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80'">
+                <button class="tab-wish-btn" onclick="event.preventDefault();event.stopPropagation();toggleTabWish(this,'${ref}')" style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.85);border:none;border-radius:50%;width:30px;height:30px;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;">${isWished?'♥':'♡'}</button>
+              </div>
               <div class="tab-card-body">
                 <div class="tab-card-title">${title}</div>
                 ${departPort ? `<div class="tab-card-depart">📍 ${departPort} 출발</div>` : ''}
