@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K4PPLZNG');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>検索結果 - クルーズリンク</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <style>
+    .search-hero { background: var(--navy); color: #fff; padding: 32px 0; text-align: center; }
+    .search-hero h1 { font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; }
+    .search-hero p { opacity: 0.8; font-size: 0.95rem; }
+    .search-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+    .search-tag { background: rgba(255,255,255,0.15); padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; }
+    .search-loading { text-align: center; padding: 80px 20px; }
+    .search-loading .loading-spinner { width: 48px; height: 48px; border-width: 4px; margin: 0 auto 16px; }
+    .search-progress { width: 280px; height: 4px; background: var(--gray-200); border-radius: 2px; margin: 20px auto 0; overflow: hidden; }
+    .search-progress-bar { height: 100%; background: var(--orange); border-radius: 2px; width: 0%; transition: width 0.3s ease; }
+    .search-status { font-size: 0.9rem; color: var(--gray-500); margin-top: 12px; }
+    .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .result-count { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+    .result-count span { color: var(--orange); }
+/* ── 새 카드 디자인 ── */
+#resultList { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+@media(max-width:900px){#resultList{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){#resultList{grid-template-columns:1fr;}}
+.czn-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e8eaed;transition:box-shadow .2s,transform .2s;cursor:pointer;display:flex;flex-direction:column;}
+.czn-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.13);transform:translateY(-3px);}
+.czn-card-img-wrap{position:relative;height:200px;overflow:hidden;background:#e0e0e0;}
+.czn-card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s;display:block;}
+.czn-card:hover .czn-card-img-wrap img{transform:scale(1.05);}
+.czn-badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:800;color:#fff;}
+.czn-wish{position:absolute;top:10px;right:12px;background:rgba(255,255,255,.85);border:none;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.czn-body{padding:16px;flex:1;display:flex;flex-direction:column;}
+.czn-operator{font-size:11px;font-weight:700;color:#1565C0;letter-spacing:.5px;margin-bottom:6px;}
+.czn-title{font-size:15px;font-weight:800;color:#0a1628;line-height:1.4;margin-bottom:10px;}
+.czn-meta{font-size:13px;color:#555;line-height:1.9;margin-bottom:10px;}
+.czn-tags{margin-bottom:12px;}
+.czn-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid #f0f0f0;margin-top:auto;}
+.czn-price-wrap{display:flex;align-items:baseline;gap:2px;}
+.czn-from{font-size:11px;color:#888;margin-right:2px;}
+.czn-price{font-size:24px;font-weight:900;color:#0a1628;}
+.czn-unit{font-size:11px;color:#888;}
+.czn-btn{background:#00338D;color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .2s;}
+.czn-btn:hover{background:#001f6b;}
+/* ── 사이드바 레이아웃 ── */
+.search-layout{display:flex;gap:24px;align-items:flex-start;}
+.filter-sidebar{width:240px;flex-shrink:0;background:#fff;border-radius:12px;border:1px solid #e0e0e0;overflow:hidden;position:sticky;top:80px;}
+.filter-panel-header{background:#1565C0;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;}
+.filter-panel-header button{background:rgba(255,255,255,.2);border:none;color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;}
+.filter-accordion{border-bottom:1px solid #f0f0f0;}
+.filter-acc-head{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;cursor:pointer;font-size:13px;font-weight:600;color:#333;user-select:none;}
+.filter-acc-head:hover{background:#f8f9fa;}
+.filter-acc-body{padding:4px 16px 12px;}
+.filter-acc-body label{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13px;color:#444;cursor:pointer;}
+.filter-acc-body label:hover{color:#1565C0;}
+.filter-acc-body input[type=checkbox]{accent-color:#1565C0;width:15px;height:15px;}
+.price-range-labels{display:flex;justify-content:space-between;font-size:12px;color:#666;margin-bottom:8px;font-weight:600;}
+.filter-acc-body input[type=range]{width:100%;accent-color:#1565C0;margin:4px 0;}
+.results-area{flex:1;min-width:0;}
+@media(max-width:768px){.search-layout{flex-direction:column;}.filter-sidebar{width:100%;position:static;}}
+.page-arrow{font-size:18px;font-weight:900;color:#00338D;border-color:#00338D;min-width:36px;}
+  </style>
+
+<style>
+.lang-switcher { display:flex; gap:4px; align-items:center; }
+.lang-btn { padding:3px 8px; border:1px solid #ccc; border-radius:4px; font-size:12px; color:#555; text-decoration:none; }
+.lang-btn.active { background:#00338D; color:#fff; border-color:#00338D; }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4PPLZNG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager -->
+
+  <div id="header"></div>
+
+  <div class="search-hero">
+    <div class="container">
+      <h1>🔍 クルーズ検索結果</h1>
+      <p id="searchSummary">検索条件に合うクルーズを探しています...</p>
+      <div class="search-tags" id="searchTags"></div>
+    </div>
+  </div>
+
+  <section class="section" style="background: var(--gray-50); min-height: 400px;">
+    <div class="container">
+      <!-- Loading state -->
+      <div id="loadingState" class="search-loading">
+        <div class="loading-spinner"></div>
+        <p style="font-size:1.1rem; font-weight:700; color:var(--navy);">クルーズを検索中...</p>
+        <div class="search-progress"><div class="search-progress-bar" id="progressBar"></div></div>
+        <p class="search-status" id="statusText">데이터를 불러오고 있습니다</p>
+      </div>
+      <!-- Results -->
+      <div id="resultArea" style="display:none;">
+        <div class="result-header">
+          <div class="result-count" id="resultCount"></div>
+        </div>
+        <div class="search-layout">
+          <div class="filter-sidebar">
+            <div class="filter-panel-header">
+              <span>🔽 결과 내 필터</span>
+              <button onclick="resetSideFilters()">リセット</button>
+            </div>
+            <div class="filter-accordion open">
+              <div class="filter-acc-head" onclick="toggleAcc(this)"><span>💲 料金 (1名/USD)</span><span class="acc-arrow">▾</span></div>
+              <div class="filter-acc-body">
+                <div class="price-range-labels"><span id="priceMin">$0</span><span id="priceMax">$5,000+</span></div>
+                <input type="range" id="sfPriceMin" min="0" max="5000" step="100" value="0">
+                <input type="range" id="sfPriceMax" min="0" max="5000" step="100" value="5000">
+              </div>
+            </div>
+            <div class="filter-accordion">
+              <div class="filter-acc-head" onclick="toggleAcc(this)"><span>🌙 泊数</span><span class="acc-arrow">▾</span></div>
+              <div class="filter-acc-body" style="display:none">
+                <label><input type="checkbox" value="1-4"> 1〜4泊</label>
+                <label><input type="checkbox" value="5-8"> 5〜8泊</label>
+                <label><input type="checkbox" value="9-12"> 9〜12泊</label>
+                <label><input type="checkbox" value="13-"> 13泊以上</label>
+              </div>
+            </div>
+            <div class="filter-accordion">
+              <div class="filter-acc-head" onclick="toggleAcc(this)"><span>🌍 目的地</span><span class="acc-arrow">▾</span></div>
+              <div class="filter-acc-body" style="display:none" id="sfDestList"></div>
+            </div>
+            <div class="filter-accordion">
+              <div class="filter-acc-head" onclick="toggleAcc(this)"><span>🚢 出発港</span><span class="acc-arrow">▾</span></div>
+              <div class="filter-acc-body" style="display:none" id="sfDepartPortList"></div>
+            </div>
+            <div class="filter-accordion">
+              <div class="filter-acc-head" onclick="toggleAcc(this)"><span>⚓ クルーズライン</span><span class="acc-arrow">▾</span></div>
+              <div class="filter-acc-body" style="display:none" id="sfOperatorList"></div>
+            </div>
+            <div class="filter-accordion">
+              <div class="filter-acc-head" onclick="toggleAcc(this)"><span>🛳️ 船名</span><span class="acc-arrow">▾</span></div>
+              <div class="filter-acc-body" style="display:none" id="sfShipList"></div>
+            </div>
+            <div class="filter-accordion">
+              <div class="filter-acc-head" onclick="toggleAcc(this)"><span>🏁 到着港</span><span class="acc-arrow">▾</span></div>
+              <div class="filter-acc-body" style="display:none" id="sfArrivePortList"></div>
+            </div>
+            <div style="padding:12px 16px 16px;">
+              <div style="position:relative;">
+                <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;">🔍</span>
+                <input id="kwInput" type="text" placeholder="結果内検索 (キーワード / 船名)" autocomplete="off"
+                  style="width:100%;box-sizing:border-box;padding:9px 12px 9px 32px;border:1.5px solid #ddd;border-radius:8px;font-size:12px;font-family:inherit;outline:none;"
+                  oninput="applyKeywordFilter()" onfocus="this.style.borderColor='#1565C0'" onblur="this.style.borderColor='#ddd'">
+              </div>
+            </div>
+          </div>
+          <div class="results-area">
+            <div id="resultList" class="czn-grid"></div>
+            <div id="pagination" class="pagination"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="ctaSection"></div>
+  <div id="footer"></div>
+
+  <script src="../assets/data/translations.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/components.js"></script>
+  <script>
+    document.getElementById('header').innerHTML = Components.header('', '../');
+
+    // ── Lang Switcher ──
+    (function() {
+      var hr = document.querySelector('.header-right');
+      if (hr) {
+        var ls = document.createElement('div');
+        ls.className = 'lang-switcher';
+        ls.innerHTML = '<a href="/" class="lang-btn">KO</a><a href="/en/" class="lang-btn">EN</a><a href="/jp/" class="lang-btn active">JP</a>';
+        hr.insertBefore(ls, hr.firstChild);
+      }
+    })();
+
+    document.getElementById('footer').innerHTML = Components.footer('../');
+    document.getElementById('ctaSection').innerHTML = Components.ctaSection('../');
+
+    const params = new URLSearchParams(location.search);
+    const dest = params.get('dest') || '';
+    const operators = params.get('operators') ? params.get('operators').split(',') : [];
+    const ports = params.get('ports') ? params.get('ports').split(',') : [];
+    const month = params.get('month') || '';
+    const dateFrom = params.get('dateFrom') || '';
+    const dateTo = params.get('dateTo') || '';
+    const duration = params.get('duration') || '';
+    const nightsFilter = params.get('nights') || '';
+    const ship = params.get('ship') || '';
+
+    // Show search tags
+    const tagsEl = document.getElementById('searchTags');
+    const destNames = {'korea':'韓国・日本','mediterranean':'地中海','alaska':'アラスカ','caribbean':'カリブ海','northern-europe':'北欧','asia':'アジア・中東','south-america':'南米','oceania':'オセアニア','hawaii':'ハワイ'};
+    const durNames = {'short':'1〜5泊','medium':'6〜10泊','long':'11泊以上'};
+    if (dest) tagsEl.innerHTML += `<span class="search-tag">📍 ${destNames[dest]||dest}</span>`;
+    ports.forEach(p => tagsEl.innerHTML += `<span class="search-tag">🚢 ${p}</span>`);
+    const _opFullName = {
+      'MSC': 'MSC Cruises', 'Norwegian': 'Norwegian Cruise Line',
+      'Royal Caribbean': 'Royal Caribbean International', 'Celebrity': 'Celebrity Cruises',
+      'Princess': 'Princess Cruises', 'Carnival': 'Carnival Cruise Line',
+      'Oceania': 'Oceania Cruises', 'Regent': 'Regent Seven Seas Cruises',
+      'Explora': 'Explora Journeys'
+    };
+    operators.forEach(o => tagsEl.innerHTML += `<span class="search-tag">⚓ ${Translations.operatorName(_opFullName[o] || o)}</span>`);
+    if (month) tagsEl.innerHTML += `<span class="search-tag">📅 ${month.replace('-','년 ')}월</span>`;
+    if (dateFrom || dateTo) tagsEl.innerHTML += `<span class="search-tag">📅 ${dateFrom||'~'} ~ ${dateTo||'~'}</span>`;
+    if (ship) tagsEl.innerHTML += `<span class="search-tag">🛳️ ${ship}</span>`;
+    if (duration) tagsEl.innerHTML += `<span class="search-tag">⏱️ ${durNames[duration]||duration}</span>`;
+    const nightsNames = {'1-4':'1〜4泊','5-8':'5〜8泊','9-':'9泊以上'};
+    if (nightsFilter) tagsEl.innerHTML += `<span class="search-tag">🌙 ${nightsNames[nightsFilter]||nightsFilter}</span>`;
+
+    // Animated loading
+    const bar = document.getElementById('progressBar');
+    const statusText = document.getElementById('statusText');
+    const steps = [
+      [20, '6,000以上のクルーズデータを読み込み中...'],
+      [50, '条件に合うクルーズをフィルタリング中...'],
+      [80, '価格・日程情報を確認中...'],
+      [95, '結果を並べ替え中...'],
+    ];
+
+    let allResults = [];
+    let filteredResults = [];
+    const PER_PAGE = 9;
+    let currentPage = 1;
+
+    function matchKeyword(c, q) {
+      if (!q) return true;
+      const lq = q.toLowerCase();
+      const T = typeof Translations !== 'undefined' ? Translations : null;
+      const fields = [
+        c.title || '',
+        c.portRoute || '',
+        T ? T.portRoute(c.portRoute || '') : '',
+        c.shipTitle || '',
+        T ? T.shipName(c.shipTitle || '') : '',
+        c.operator || '',
+        T ? T.operatorName(c.operator || '') : '',
+        c.startsAt?.name || '',
+        c.startsAt?.nameKo || '',
+        T ? T.portName(c.startsAt?.name || '') : '',
+        c.endsAt?.name || '',
+        c.endsAt?.nameKo || '',
+        c.destination || '',
+      ];
+      return fields.some(f => f.toLowerCase().includes(lq));
+    }
+
+    function applyKeywordFilter() {
+      const q = (document.getElementById('kwInput')?.value || '').trim();
+      filteredResults = q ? allResults.filter(c => matchKeyword(c, q)) : [...allResults];
+      currentPage = 1;
+      document.getElementById('resultCount').innerHTML = `<span>${filteredResults.length}</span>件のクルーズが見つかりました`;
+      renderPage();
+    }
+
+    // ── 새 카드 렌더 함수 ──
+    function renderCruiseCard(c) {
+      const T = typeof Translations !== 'undefined' ? Translations : null;
+      const fromPrice = c.priceInside || c.priceOutside || c.priceBalcony;
+      const opName = ((T ? T.operatorName(c.operator) : c.operator) || c.operator || '').toUpperCase();
+      const destName = c.destination || '';
+      const dateStr = c.dateFrom ? c.dateFrom.substring(0,10).replace(/-/g,'. ') : '';
+      const nights = c.nights || c.duration || '';
+      const dateToStr = (() => {
+        if (c.dateTo) return c.dateTo.substring(0,10).replace(/-/g,'. ');
+        if (c.dateFrom && nights) {
+          const d = new Date(c.dateFrom); d.setDate(d.getDate() + Number(nights));
+          return d.toISOString().substring(0,10).replace(/-/g,'. ');
+        }
+        return '';
+      })();
+      const port = c.startsAt?.nameKo || (T ? T.portName(c.startsAt?.name||'') : '') || c.startsAt?.name || '';
+      const arrPort = c.endsAt?.nameKo || (T ? T.portName(c.endsAt?.name||'') : '') || c.endsAt?.name || '';
+      const routeStr = c.portRoute ? (T ? T.portRoute(c.portRoute) : c.portRoute) : '';
+      const today = new Date().toISOString().slice(0,10);
+      const daysLeft = c.dateFrom ? Math.round((new Date(c.dateFrom) - new Date(today)) / 86400000) : 999;
+      let badge = '', badgeColor = '';
+      if (c.operator === 'Explora' || c.operator === 'Regent' || (fromPrice && fromPrice >= 3000)) { badge = 'ラグジュアリー'; badgeColor = '#C9A84C'; }
+      else if (daysLeft <= 30) { badge = '出発迫る'; badgeColor = '#d32f2f'; }
+      else if (daysLeft <= 60) { badge = 'アーリーバード'; badgeColor = '#2e7d32'; }
+      else if (fromPrice && fromPrice < 500) { badge = '特価'; badgeColor = '#c62828'; }
+      else { badge = '人気'; badgeColor = '#1565C0'; }
+      const priceStr = fromPrice ? '$' + parseFloat(fromPrice).toLocaleString('en-US', {maximumFractionDigits:0}) : 'お問い合わせ';
+      const img = c.image || '';
+      const ref = c.ref || '';
+      return `<div class="czn-card" onclick="location.href='../cruise-view.html?ref=${ref}'">
+        <div class="czn-card-img-wrap">
+          <img src="${img}" alt="${c.title||''}" loading="lazy" onerror="this.parentElement.style.background='#cfe8fc'">
+          <span class="czn-badge" style="background:${badgeColor}">${badge}</span>
+          <button class="czn-wish" data-ref="${ref}" onclick="event.stopPropagation();cznToggleWish(this,'${ref}')"><svg viewBox="0 0 24 24" width="16" height="16" class="czn-heart-svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+        </div>
+        <div class="czn-body">
+          <div class="czn-operator">${opName}${destName?' · '+destName:''}</div>
+          <div class="czn-title">🚢 ${c.title||''}</div>
+          <div class="czn-meta">
+            ${port?`<div>📍 ${port}${arrPort&&arrPort!==port?' → '+arrPort:''}</div>`:''}
+            ${dateStr?`<div>🗓️ ${dateStr}${dateToStr?' ~ '+dateToStr:''}</div>`:''}
+            ${nights?`<div>🌙 ${nights}泊 ${Number(nights)+1}日</div>`:''}
+            ${routeStr?`<div style="font-size:11px;color:#777;line-height:1.6;margin-top:4px;">🗺️ ${routeStr}</div>`:''}
+          </div>
+          <div class="czn-footer">
+            <div class="czn-price-wrap">
+              <span class="czn-price" style="color:#E65100">${priceStr} ~</span>
+              <span class="czn-unit">/ 1인</span>
+            </div>
+            <a href="../cruise-view.html?ref=${ref}" class="czn-btn" onclick="event.stopPropagation()">詳しく見る</a>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    // ── 사이드바 필터 함수 ──
+    function toggleAcc(head) {
+      const body = head.nextElementSibling;
+      const arrow = head.querySelector('.acc-arrow');
+      const isOpen = body.style.display !== 'none';
+      body.style.display = isOpen ? 'none' : 'block';
+      if (arrow) arrow.textContent = isOpen ? '▾' : '▴';
+    }
+    function updatePriceLabel() {
+      const min = document.getElementById('sfPriceMin')?.value || 0;
+      const max = document.getElementById('sfPriceMax')?.value || 5000;
+      const el1 = document.getElementById('priceMin');
+      const el2 = document.getElementById('priceMax');
+      if (el1) el1.textContent = '$' + parseInt(min).toLocaleString();
+      if (el2) el2.textContent = parseInt(max) >= 5000 ? '$5,000+' : '$' + parseInt(max).toLocaleString();
+    }
+    function applySideFilters() {
+      const priceMin = parseInt(document.getElementById('sfPriceMin')?.value || 0);
+      const priceMax = parseInt(document.getElementById('sfPriceMax')?.value || 99999);
+      const checkedDuration = [...document.querySelectorAll('.filter-accordion .filter-acc-body input[type=checkbox]:checked')].map(e=>e.value).filter(v=>['1-4','5-8','9-12','13-'].includes(v));
+      const checkedDest = [...document.querySelectorAll('#sfDestList input:checked')].map(e=>e.value);
+      const checkedDepart = [...document.querySelectorAll('#sfDepartPortList input:checked')].map(e=>e.value);
+      const checkedOp = [...document.querySelectorAll('#sfOperatorList input:checked')].map(e=>e.value);
+      const checkedShip = [...document.querySelectorAll('#sfShipList input:checked')].map(e=>e.value);
+      const checkedArrive = [...document.querySelectorAll('#sfArrivePortList input:checked')].map(e=>e.value);
+      const T = typeof Translations !== 'undefined' ? Translations : null;
+      filteredResults = allResults.filter(c => {
+        const price = c.priceInside || c.priceOutside || c.priceBalcony || 0;
+        if (price && priceMax < 5000 && price > priceMax) return false;
+        if (price && price < priceMin) return false;
+        if (checkedDuration.length) {
+          const n = Number(c.nights||0);
+          if (!checkedDuration.some(d=>(d==='1-4'&&n>=1&&n<=4)||(d==='5-8'&&n>=5&&n<=8)||(d==='9-12'&&n>=9&&n<=12)||(d==='13-'&&n>=13))) return false;
+        }
+        if (checkedDest.length && !checkedDest.includes(c.destination)) return false;
+        const dp = c.startsAt?.nameKo||(T?T.portName(c.startsAt?.name||''):'')||c.startsAt?.name||'';
+        if (checkedDepart.length && !checkedDepart.some(p=>dp.includes(p))) return false;
+        if (checkedOp.length && !checkedOp.includes(c.operator)) return false;
+        const ship = c.shipTitleKo||(T?T.shipName(c.shipTitle||''):'')||c.shipTitle||'';
+        if (checkedShip.length && !checkedShip.some(s=>ship.includes(s))) return false;
+        const ap = c.endsAt?.nameKo||(T?T.portName(c.endsAt?.name||''):'')||c.endsAt?.name||'';
+        if (checkedArrive.length && !checkedArrive.some(p=>ap.includes(p))) return false;
+        return true;
+      });
+      currentPage = 1;
+      document.getElementById('resultCount').innerHTML = `<span>${filteredResults.length}</span>件のクルーズが見つかりました`;
+      renderPage();
+    }
+    function resetSideFilters() {
+      document.querySelectorAll('.filter-sidebar input[type=checkbox]').forEach(e=>e.checked=false);
+      const mn=document.getElementById('sfPriceMin'); if(mn) mn.value=0;
+      const mx=document.getElementById('sfPriceMax'); if(mx) mx.value=5000;
+      updatePriceLabel();
+      filteredResults=[...allResults];
+      currentPage=1;
+      document.getElementById('resultCount').innerHTML=`<span>${filteredResults.length}</span>件のクルーズが見つかりました`;
+      renderPage();
+    }
+    function buildSideFilterOptions(results) {
+      const T = typeof Translations !== 'undefined' ? Translations : null;
+      const DEST_KO = {
+        'korea':'韓国・日本','mediterranean':'地中海','alaska':'アラスカ',
+        'caribbean':'カリブ海','northern-europe':'北欧','asia':'アジア・中東',
+        'south-america':'南米','oceania':'オセアニア','hawaii':'ハワイ'
+      };
+      const koPort = n => n ? (T ? T.portName(n) : n) : '';
+      const koShip = s => s ? (T ? T.shipName(s) : s) : '';
+
+      // 목적지
+      const dests = [...new Set(results.map(c=>c.destination).filter(Boolean))].sort();
+      const destEl = document.getElementById('sfDestList');
+      if (destEl) destEl.innerHTML = dests.map(d=>
+        `<label><input type="checkbox" value="${d}" onchange="applySideFilters()"> ${DEST_KO[d]||d}</label>`
+      ).join('');
+
+      // 출발항구 (한글)
+      const mkPortKo = (getPort, elId) => {
+        const ports = [...new Set(results.map(c=>{
+          const ko = getPort(c); return ko || '';
+        }).filter(Boolean))].sort();
+        const el = document.getElementById(elId);
+        if (el) el.innerHTML = ports.map(p=>`<label><input type="checkbox" value="${p}" onchange="applySideFilters()"> ${p}</label>`).join('');
+      };
+      mkPortKo(c => c.startsAt?.nameKo || koPort(c.startsAt?.name) || c.startsAt?.name || '', 'sfDepartPortList');
+
+      // 선사 (한글)
+      const ops = [...new Set(results.map(c=>c.operator).filter(Boolean))].sort();
+      const opEl = document.getElementById('sfOperatorList');
+      if (opEl) opEl.innerHTML = ops.map(o=>
+        `<label><input type="checkbox" value="${o}" onchange="applySideFilters()"> ${T?T.operatorName(o):o}</label>`
+      ).join('');
+
+      // 크루즈선 (한글)
+      const ships = [...new Set(results.map(c=>
+        c.shipTitleKo || koShip(c.shipTitle) || c.shipTitle || ''
+      ).filter(Boolean))].sort();
+      const shipEl = document.getElementById('sfShipList');
+      if (shipEl) shipEl.innerHTML = ships.map(s=>
+        `<label><input type="checkbox" value="${s}" onchange="applySideFilters()"> ${s}</label>`
+      ).join('');
+
+      // 도착항구 (한글)
+      mkPortKo(c => c.endsAt?.nameKo || koPort(c.endsAt?.name) || c.endsAt?.name || '', 'sfArrivePortList');
+
+      // 가격 슬라이더 범위 조정
+      const prices = results.map(c=>c.priceInside||c.priceOutside||c.priceBalcony||0).filter(Boolean);
+      if (prices.length) {
+        const maxP = Math.min(Math.ceil(Math.max(...prices)/500)*500, 10000);
+        ['sfPriceMin','sfPriceMax'].forEach(id=>{const e=document.getElementById(id);if(e){e.max=maxP;if(id==='sfPriceMax')e.value=maxP;}});
+        updatePriceLabel();
+      }
+      ['sfPriceMin','sfPriceMax'].forEach(id=>{const e=document.getElementById(id);if(e)e.oninput=()=>{updatePriceLabel();applySideFilters();};});
+      document.querySelectorAll('.filter-accordion .filter-acc-body input[type=checkbox]').forEach(e=>{if(!e.onchange)e.onchange=()=>applySideFilters();});
+    }
+
+    async function doSearch() {
+      // Animate progress
+      for (const [pct, text] of steps) {
+        bar.style.width = pct + '%';
+        statusText.textContent = text;
+        await new Promise(r => setTimeout(r, 400));
+      }
+
+      let results = await API.filterCruises({ dest, operators, ports, month, duration, minDate: dateFrom || undefined, maxDate: dateTo || undefined });
+      if (ship) {
+        const sq = ship.toLowerCase();
+        results = results.filter(c =>
+          c.shipSlug === ship ||
+          (c.shipTitle && c.shipTitle.toLowerCase().includes(sq)) ||
+          (c.shipSlug && c.shipSlug.toLowerCase().includes(sq))
+        );
+      }
+      // 박수 필터
+      if (nightsFilter) {
+        results = results.filter(c => {
+          const n = Number(c.nights || c.duration || 0);
+          if (nightsFilter === '1-4') return n >= 1 && n <= 4;
+          if (nightsFilter === '5-8') return n >= 5 && n <= 8;
+          if (nightsFilter === '9-') return n >= 9;
+          return true;
+        });
+      }
+      allResults = results;
+      filteredResults = [...results];
+
+      bar.style.width = '100%';
+      statusText.textContent = '完了！';
+      await new Promise(r => setTimeout(r, 300));
+
+      // Show results
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('resultArea').style.display = 'block';
+      document.getElementById('resultCount').innerHTML = `<span>${filteredResults.length}</span>件のクルーズが見つかりました`;
+      document.getElementById('searchSummary').textContent = `${results.length}件のクルーズが検索されました`;
+      document.title = `検索結果 (${results.length}件) - クルーズリンク`;
+
+      renderPage();
+      buildSideFilterOptions(allResults);
+    }
+
+    function renderPage() {
+      const container = document.getElementById('resultList');
+      const pagination = document.getElementById('pagination');
+
+      if (filteredResults.length === 0) {
+        container.innerHTML = '<div class="empty-state"><span class="emoji">🔍</span><p>クルーズが見つかりません。<br>検索条件を変更してください。</p></div>';
+        pagination.innerHTML = '';
+        return;
+      }
+
+      const totalPages = Math.ceil(filteredResults.length / PER_PAGE);
+      const start = (currentPage - 1) * PER_PAGE;
+      const pageItems = filteredResults.slice(start, start + PER_PAGE);
+
+      container.innerHTML = pageItems.map(c => renderCruiseCard(c)).join('');
+      if (typeof cznInitWishBtns === 'function') cznInitWishBtns();
+
+      if (totalPages > 1) {
+        const winSize = 10;
+        const winIdx = Math.floor((currentPage - 1) / winSize);
+        const winStart = winIdx * winSize + 1;
+        const winEnd = Math.min(winStart + winSize - 1, totalPages);
+        let html = '';
+        // 이전 윈도우 화살표
+        if (winStart > 1) html += `<button class="page-btn page-arrow" onclick="goPageWindow(${winStart - winSize})">&#8249;</button>`;
+        // 현재 윈도우 페이지 버튼
+        for (let i = winStart; i <= winEnd; i++) {
+          html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
+        }
+        // 다음 윈도우 화살표
+        if (winEnd < totalPages) html += `<button class="page-btn page-arrow" onclick="goPageWindow(${winStart + winSize})">&#8250;</button>`;
+        pagination.innerHTML = html;
+      } else {
+        pagination.innerHTML = '';
+      }
+    }
+
+    function goPage(p) {
+      currentPage = p;
+      renderPage();
+      window.scrollTo({ top: 200, behavior: 'smooth' });
+    }
+
+    function goPageWindow(p) {
+      currentPage = Math.max(1, Math.min(p, Math.ceil(filteredResults.length / PER_PAGE)));
+      renderPage();
+      window.scrollTo({ top: 200, behavior: 'smooth' });
+    }
+
+    doSearch();
+  </script>
+  
+  <div class="modal-overlay" id="inquiryModal">
+    <div class="modal">
+      <div class="modal-header"><h2>🚢 クルーズお問い合わせ</h2><button class="modal-close" onclick="closeInquiry()">&times;</button></div>
+      <div class="modal-body">
+        <div class="form-status" id="formStatus"></div>
+        <form id="inquiryForm" onsubmit="submitInquiry(event)">
+          <input type="hidden" name="_subject" value="[크루즈링크] 새 문의가 접수되었습니다">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" style="display:none">
+          <div class="form-group"><label>お名前 (パスポート記載) <span class="req">*</span></label><input type="text" name="customer_name" required placeholder="YAMADA TARO"></div>
+          <div class="form-group"><label>メールアドレス <span class="req">*</span></label><input type="email" name="customer_email" required placeholder="example@email.com"></div>
+          <div class="form-group"><label>電話番号 <span class="req">*</span></label><input type="tel" name="customer_phone" required placeholder="010-1234-5678"></div>
+          <div class="form-group"><label>ご希望のクルーズ・ご要望 <span class="req">*</span></label><textarea name="message" rows="3" required placeholder="ご希望のクルーズや旅行日程をお知らせください。"></textarea></div>
+          <div class="privacy-section">
+            <div class="privacy-check"><input type="checkbox" id="privacyAgree3" required><label for="privacyAgree3">プライバシーポリシーに同意します。(必須)</label></div>
+            <button type="button" class="privacy-toggle" onclick="document.getElementById('privacyDetail').classList.toggle('open')">規約を見る ▼</button>
+            <div class="privacy-detail" id="privacyDetail"><strong>収集項目:</strong> 氏名、メール、電話番号<br><strong>収集目的:</strong> クルーズ相談・予約案内<br><strong>保有期間:</strong> 相談完了後1年</div>
+          </div>
+          <button type="submit" class="btn btn-orange" id="submitBtn" style="width:100%;margin-top:16px;padding:14px;font-size:1.05rem">送信</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    function openInquiryWith(title, operator, ship, dateFrom, nights, price, ref, currency) {
+      document.getElementById('modalProductName').textContent = title;
+      document.getElementById('modalProductDetail').innerHTML =
+        `${operator} · ${ship}<br>출발: ${dateFrom} / ${nights}박${price ? (currency==='EUR'?' / €':' / $')+price+'~' : ''}`;
+      document.getElementById('f_product').value = title;
+      document.getElementById('f_cruiseline').value = operator;
+      document.getElementById('f_ship').value = ship;
+      document.getElementById('f_date').value = dateFrom;
+      document.getElementById('f_ports').value = '';
+      document.getElementById('f_price').value = price ? (currency==='EUR'?'€':'$')+price+'~' : 'お問い合わせ';
+      document.getElementById('f_ref').value = ref;
+      document.getElementById('inquiryModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function openInquiry() {
+      document.getElementById('modalProductName').textContent = '';
+      document.getElementById('modalProductDetail').innerHTML = '';
+      document.getElementById('f_product').value = '';
+      document.getElementById('f_cruiseline').value = '';
+      document.getElementById('f_ship').value = '';
+      document.getElementById('f_date').value = '';
+      document.getElementById('f_ports').value = '';
+      document.getElementById('f_price').value = '';
+      document.getElementById('f_ref').value = '';
+      document.getElementById('inquiryModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeInquiry() {
+      document.getElementById('inquiryModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('click', e => { if (e.target.id === 'inquiryModal') closeInquiry(); });
+    function submitInquiry(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true; btn.textContent = '送信中...';
+      const fd = {
+        _subject: `[크루즈링크] ${document.getElementById('f_product').value} - ${document.getElementById('f_name').value}님`,
+        _template: 'table',
+        '크루즈 상품': document.getElementById('f_product').value,
+        '선사': document.getElementById('f_cruiseline').value,
+        '선박': document.getElementById('f_ship').value,
+        '출발일': document.getElementById('f_date').value,
+        '참고가격': document.getElementById('f_price').value,
+        'Ref': document.getElementById('f_ref').value,
+        '고객 이름': document.getElementById('f_name').value,
+        '고객 이메일': document.getElementById('f_email').value,
+        '고객 연락처': document.getElementById('f_phone').value,
+        '인원': document.getElementById('f_pax').value,
+        '희망 객실': document.getElementById('f_cabin').value,
+        '요청사항': document.getElementById('f_message').value || '없음',
+      };
+      const data = new FormData();
+      Object.entries(fd).forEach(([k,v]) => data.append(k,v));
+      fetch('https://formsubmit.co/ajax/info@cruiselink.co.kr', { method:'POST', body:data })
+      .then(() => {
+        document.getElementById('formStatus').innerHTML = '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
+        document.getElementById('inquiryForm').style.display = 'none'; btn.style.display = 'none';
+      }).catch(() => {
+        document.getElementById('formStatus').innerHTML = '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
+        document.getElementById('inquiryForm').style.display = 'none'; btn.style.display = 'none';
+      });
+    }
+  </script>
+  <div class="modal-overlay" id="inquiryModal">
+    <div class="modal" style="max-width:460px">
+      <div class="modal-header" style="padding:14px 20px">
+        <h2 style="font-size:1.05rem">🚢 クルーズお問い合わせ</h2>
+        <button class="modal-close" onclick="closeInquiry()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:16px 20px">
+        <div class="modal-product-info" style="padding:10px 12px;margin-bottom:12px;font-size:0.88rem;background:#f5f5f5;border-radius:8px">
+          <strong id="modalProductName"></strong><br>
+          <span id="modalProductDetail" style="color:#666"></span>
+        </div>
+        <div class="form-status" id="formStatus"></div>
+        <form id="inquiryForm" onsubmit="submitInquiry(event)">
+          <input type="hidden" id="f_product" name="product_name">
+          <input type="hidden" id="f_cruiseline" name="cruise_line">
+          <input type="hidden" id="f_ship" name="ship">
+          <input type="hidden" id="f_date" name="departure_date">
+          <input type="hidden" id="f_ports" name="ports">
+          <input type="hidden" id="f_price" name="price">
+          <input type="hidden" id="f_ref" name="cruise_ref">
+          <input type="text" name="_honey" style="display:none">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div class="form-group" style="margin-bottom:8px">
+              <label style="font-size:0.8rem;margin-bottom:3px">이름 <span class="req">*</span></label>
+              <input type="text" id="f_name" name="customer_name" required placeholder="홍길동" style="padding:8px 10px;font-size:0.9rem">
+            </div>
+            <div class="form-group" style="margin-bottom:8px">
+              <label style="font-size:0.8rem;margin-bottom:3px">연락처 <span class="req">*</span></label>
+              <input type="tel" id="f_phone" name="customer_phone" required placeholder="010-1234-5678" style="padding:8px 10px;font-size:0.9rem">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:8px">
+            <label style="font-size:0.8rem;margin-bottom:3px">이메일 <span class="req">*</span></label>
+            <input type="email" id="f_email" name="customer_email" required placeholder="example@email.com" style="padding:8px 10px;font-size:0.9rem">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div class="form-group" style="margin-bottom:8px">
+              <label style="font-size:0.8rem;margin-bottom:3px">인원 <span class="req">*</span></label>
+              <select id="f_pax" name="pax" required style="padding:8px 10px;font-size:0.9rem">
+                <option value="">선택</option>
+                <option value="1">1명</option><option value="2">2명</option><option value="3">3명</option>
+                <option value="4">4명</option><option value="5">5명</option><option value="6~10">6~10명</option>
+                <option value="11+">11명 이상</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:8px">
+              <label style="font-size:0.8rem;margin-bottom:3px">객실 타입 <span class="req">*</span></label>
+              <select id="f_cabin" name="cabin_type" required style="padding:8px 10px;font-size:0.9rem">
+                <option value="">선택</option>
+                <option value="내측">내측</option>
+                <option value="오션뷰">오션뷰</option>
+                <option value="발코니">발코니</option>
+                <option value="스위트">스위트</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:8px">
+            <label style="font-size:0.8rem;margin-bottom:3px">요청사항</label>
+            <textarea id="f_message" name="message" rows="2" placeholder="기타 요청사항" style="padding:8px 10px;font-size:0.9rem"></textarea>
+          </div>
+          <div class="privacy-section" style="margin-top:8px;padding-top:8px">
+            <div class="privacy-check" style="margin-bottom:4px">
+              <input type="checkbox" id="privacyAgree" required style="width:16px;height:16px">
+              <label for="privacyAgree" style="font-size:0.8rem">プライバシーポリシーに同意します。(必須)</label>
+            </div>
+            <button type="button" class="privacy-toggle" style="font-size:0.78rem" onclick="document.getElementById('privacyDetail').classList.toggle('open')">規約を見る ▼</button>
+            <div class="privacy-detail" id="privacyDetail">
+              <strong>収集項目:</strong> 氏名、メール、電話番号<br>
+              <strong>収集目的:</strong> クルーズ相談・予約案内<br>
+              <strong>保有期間:</strong> 相談完了後1年
+            </div>
+          </div>
+          <button type="submit" class="btn btn-orange" id="submitBtn" style="width:100%;margin-top:10px;padding:12px;font-size:1rem">送信</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
