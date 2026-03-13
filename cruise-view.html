@@ -62,6 +62,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       return '$' + parseFloat(v).toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0});
     }
 
+    // 찜하기 (localStorage)
+    function getWishlist() {
+      try { return JSON.parse(localStorage.getItem('cl_wishlist') || '[]'); } catch { return []; }
+    }
+    function toggleWish(ref) {
+      if (!ref) return;
+      const list = getWishlist();
+      const idx = list.indexOf(ref);
+      if (idx >= 0) { list.splice(idx, 1); } else { list.push(ref); }
+      localStorage.setItem('cl_wishlist', JSON.stringify(list));
+      updateWishBtn(ref);
+    }
+    function updateWishBtn(ref) {
+      const btn = document.getElementById('wishBtn');
+      const icon = document.getElementById('wishIcon');
+      if (!btn || !icon) return;
+      const inList = getWishlist().includes(ref);
+      icon.textContent = inList ? '♥' : '♡';
+      btn.style.background = inList ? 'rgba(255,80,80,0.35)' : 'rgba(255,255,255,0.15)';
+      btn.style.borderColor = inList ? '#ff5050' : 'rgba(255,255,255,0.5)';
+    }
+
     // 로컬 JSON에서 ref로 크루즈 찾기 (cruises.json + featured.json + cruises-mini.json 순차 검색)
     async function findLocalCruise(ref) {
       try {
@@ -268,7 +290,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <section class="detail-hero">
         <div class="container">
           <div class="operator-name">${Translations.operatorName(c.operator)} · ${c.shipTitleKo || Translations.shipName(c.shipTitle)}</div>
-          <h1>🚢 ${c.title}</h1>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <h1 style="margin:0;">🚢 ${c.title}</h1>
+            <button id="wishBtn" onclick="toggleWish('${c.ref||ref}')" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);color:#fff;border-radius:50px;padding:8px 18px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+              <span id="wishIcon">♡</span> 찜하기
+            </button>
+          </div>
           <div class="meta">
             <span>📅 ${API.formatDateKo(c.dateFrom)} ~ ${API.formatDateKo(c.dateTo)}</span>
             <span>🌙 ${nights}박 ${nights+1}일</span>
@@ -379,6 +406,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </section>`;
 
       content.innerHTML = html;
+      // 찜하기 버튼 초기 상태
+      setTimeout(() => updateWishBtn(c.ref || new URLSearchParams(location.search).get('ref')), 50);
     }
 
     function renderShipSection(c, ship, detail, liveDetail = null) {
