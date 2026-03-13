@@ -14,13 +14,35 @@ const Components = {
           <a href="${base}guide/" class="${active === 'guide' ? 'active' : ''}">크루즈 가이드</a>
           <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="${active === 'contact' ? 'active' : ''}">문의</a>
         </nav>
-        <a href="tel:02-3788-9119" class="header-phone">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          02-3788-9119
-        </a>
-        <button class="mobile-menu-btn" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+        <div class="header-right">
+          <button class="wish-header-btn" onclick="openWishlistPanel()" title="찜한 상품">
+            <span class="wish-header-icon">♡</span>
+            <span class="wish-header-label">찜목록</span>
+            <span class="wish-header-count" id="wishHeaderCount" style="display:none">0</span>
+          </button>
+          <a href="tel:02-3788-9119" class="header-phone">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            02-3788-9119
+          </a>
+        </div>
+        <div class="mobile-header-right">
+          <button class="wish-mobile-btn" onclick="openWishlistPanel()" title="찜목록">
+            <span class="wish-mobile-icon">♡</span>
+            <span class="wish-mobile-count" id="wishMobileCount" style="display:none">0</span>
+          </button>
+          <button class="mobile-menu-btn" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+        </div>
       </div>
-    </header>`;
+    </header>
+    <!-- 찜목록 패널 -->
+    <div id="wishlistOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9998;" onclick="closeWishlistPanel()"></div>
+    <div id="wishlistPanel" style="position:fixed;top:0;right:-420px;width:400px;max-width:96vw;height:100vh;background:#fff;z-index:9999;box-shadow:-4px 0 24px rgba(0,0,0,.18);transition:right .3s ease;display:flex;flex-direction:column;">
+      <div style="background:#00338D;color:#fff;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+        <div style="font-size:17px;font-weight:800;">♥ 찜한 상품</div>
+        <button onclick="closeWishlistPanel()" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;">×</button>
+      </div>
+      <div id="wishlistContent" style="flex:1;overflow-y:auto;padding:16px;"></div>
+    </div>`;
   },
 
   footer(base = '') {
@@ -329,3 +351,85 @@ const Components = {
     setTimeout(() => t.style.display = 'none', 2200);
   },
 };
+
+// ── 찜목록 전역 함수 ──
+function _getWishlist() {
+  try { return JSON.parse(localStorage.getItem('cl_wishlist') || '[]'); } catch { return []; }
+}
+function _updateWishCount() {
+  const n = _getWishlist().length;
+  ['wishHeaderCount','wishMobileCount'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = n;
+    el.style.display = n > 0 ? 'inline-flex' : 'none';
+    // 하트 아이콘도 채움
+    const icon = el.previousElementSibling;
+    if (icon) icon.textContent = n > 0 ? '♥' : '♡';
+  });
+}
+function openWishlistPanel() {
+  const panel = document.getElementById('wishlistPanel');
+  const overlay = document.getElementById('wishlistOverlay');
+  if (!panel) return;
+  overlay.style.display = 'block';
+  panel.style.right = '0';
+  _renderWishlistContent();
+}
+function closeWishlistPanel() {
+  const panel = document.getElementById('wishlistPanel');
+  const overlay = document.getElementById('wishlistOverlay');
+  if (!panel) return;
+  panel.style.right = '-420px';
+  overlay.style.display = 'none';
+}
+async function _renderWishlistContent() {
+  const content = document.getElementById('wishlistContent');
+  if (!content) return;
+  const refs = _getWishlist();
+  if (refs.length === 0) {
+    content.innerHTML = '<div style="text-align:center;padding:60px 20px;color:#999;"><div style="font-size:48px;margin-bottom:16px;">♡</div><p style="font-size:15px;font-weight:600;">찜한 상품이 없습니다</p><p style="font-size:13px;margin-top:8px;">마음에 드는 크루즈를 찜해보세요!</p></div>';
+    return;
+  }
+  content.innerHTML = '<div style="text-align:center;padding:40px;color:#999;">불러오는 중...</div>';
+  try {
+    const all = typeof API !== 'undefined' ? await API.loadAllCruises().catch(()=>[]) : [];
+    const mini = typeof API !== 'undefined' ? await fetch('assets/data/cruises-mini.json').then(r=>r.json()).catch(()=>[]) : [];
+    const pool = [...all, ...mini];
+    const items = refs.map(ref => pool.find(c => c.ref === ref)).filter(Boolean);
+    if (items.length === 0) {
+      content.innerHTML = '<div style="text-align:center;padding:40px;color:#999;font-size:13px;">상품 정보를 불러올 수 없습니다</div>';
+      return;
+    }
+    content.innerHTML = items.map(c => {
+      const price = c.priceBalcony || c.priceOutside || c.priceInside;
+      const priceStr = price ? '$' + parseFloat(price).toLocaleString('en-US',{maximumFractionDigits:0}) : '문의';
+      const port = c.startsAt?.nameKo || (typeof Translations!=='undefined'?Translations.portName(c.startsAt?.name||''):'')||'';
+      return `<div style="display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f0f0f0;align-items:flex-start;">
+        <a href="cruise-view.html?ref=${c.ref}" style="flex-shrink:0;">
+          <img src="${c.image||''}" style="width:90px;height:68px;object-fit:cover;border-radius:8px;" onerror="this.style.background='#e0e0e0'">
+        </a>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:11px;color:#1565C0;font-weight:700;margin-bottom:3px;">${(typeof Translations!=='undefined'?Translations.operatorName(c.operator):c.operator)||''}</div>
+          <a href="cruise-view.html?ref=${c.ref}" style="font-size:14px;font-weight:800;color:#0a1628;text-decoration:none;display:block;line-height:1.3;margin-bottom:6px;">${c.title||''}</a>
+          <div style="font-size:12px;color:#666;">${port?'📍 '+port+' 출발 · ':''} ${c.nights||''}박</div>
+          <div style="font-size:18px;font-weight:900;color:#E65100;margin-top:4px;">${priceStr} <span style="font-size:11px;color:#999;font-weight:400">/ 1인</span></div>
+        </div>
+        <button onclick="removeWish('${c.ref}',this.closest('div[style]'))" style="background:none;border:none;font-size:18px;color:#ccc;cursor:pointer;padding:4px;flex-shrink:0;" title="찜 해제">×</button>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    content.innerHTML = '<div style="text-align:center;padding:40px;color:#999;">데이터를 불러올 수 없습니다</div>';
+  }
+}
+function removeWish(ref, el) {
+  const list = _getWishlist();
+  const idx = list.indexOf(ref);
+  if (idx >= 0) { list.splice(idx,1); localStorage.setItem('cl_wishlist', JSON.stringify(list)); }
+  if (el) el.remove();
+  _updateWishCount();
+  if (_getWishlist().length === 0) _renderWishlistContent();
+}
+// 페이지 로드 시 카운트 초기화
+document.addEventListener('DOMContentLoaded', _updateWishCount);
+setTimeout(_updateWishCount, 300);
