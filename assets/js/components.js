@@ -16,7 +16,7 @@ const Components = {
         </nav>
         <div class="header-right">
           <button class="wish-header-btn" onclick="openWishlistPanel()" title="찜한 상품">
-            <span class="wish-header-icon" id="wishHeaderIcon">♡</span>
+            <svg id="wishHeaderIcon" viewBox="0 0 24 24" width="18" height="18" class="wish-header-svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             <span class="wish-header-count" id="wishHeaderCount" style="display:none">0</span>
           </button>
           <a href="tel:02-3788-9119" class="header-phone">
@@ -26,7 +26,7 @@ const Components = {
         </div>
         <div class="mobile-header-right">
           <button class="wish-mobile-btn" onclick="openWishlistPanel()" title="찜목록">
-            <span class="wish-mobile-icon">♡</span>
+            <svg id="wishMobileIcon" viewBox="0 0 24 24" width="17" height="17" class="wish-header-svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             <span class="wish-mobile-count" id="wishMobileCount" style="display:none">0</span>
           </button>
           <button class="mobile-menu-btn" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
@@ -385,9 +385,15 @@ function _updateWishCount() {
     if (!el) return;
     el.textContent = n;
     el.style.display = n > 0 ? 'inline-flex' : 'none';
-    // 하트 아이콘도 채움
-    const icon = el.previousElementSibling;
-    if (icon) icon.textContent = n > 0 ? '♥' : '♡';
+  });
+  // 헤더 SVG 하트 색상: 찜 있으면 핑크 채움, 없으면 회색 테두리
+  ['wishHeaderIcon','wishMobileIcon'].forEach(id => {
+    const svg = document.getElementById(id);
+    if (!svg) return;
+    const path = svg.querySelector('path');
+    if (!path) return;
+    if (n > 0) { path.setAttribute('fill','#FF4081'); path.setAttribute('stroke','#FF4081'); path.setAttribute('stroke-width','0'); }
+    else { path.setAttribute('fill','none'); path.setAttribute('stroke','#bbb'); path.setAttribute('stroke-width','2'); }
   });
 }
 function openWishlistPanel() {
