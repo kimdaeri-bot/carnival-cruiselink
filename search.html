@@ -106,13 +106,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     z-index:7998;
     line-height:1.3;
   }
-  .filter-sheet-handle{display:flex;justify-content:center;padding:10px 0 4px;}
-  .filter-sheet-handle::before{content:'';width:40px;height:4px;background:#d0d5dd;border-radius:4px;}
 }
 @media(min-width:769px){
   #filterFab{display:none!important;}
   #filterOverlay{display:none!important;}
-  .filter-sheet-handle{display:none;}
+
 }
 .page-arrow{font-size:18px;font-weight:900;color:#00338D;border-color:#00338D;min-width:36px;}
   </style>
@@ -153,7 +151,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <button id="filterFab" onclick="openFilter()"><span style="font-size:1.1rem">⚙️</span><span>필터</span></button>
 
           <div class="filter-sidebar">
-            <div class="filter-sheet-handle" onclick="closeFilter()"></div>
             <div class="filter-panel-header">
               <span>🔽 결과 내 필터</span>
               <button onclick="resetSideFilters()">초기화</button>
@@ -370,23 +367,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.body.style.overflow = '';
       document.body.style.overscrollBehavior = '';
     }
-    // 필터 핸들바: 클릭 닫기 + 아래 드래그 닫기
-    document.addEventListener('DOMContentLoaded', function() {
-      const handle = document.querySelector('.filter-sheet-handle');
-      const sidebar = document.querySelector('.filter-sidebar');
-      if (!handle || !sidebar) return;
 
-      handle.addEventListener('click', closeFilter);
-
-      let startY = 0;
-      handle.addEventListener('touchstart', function(e) {
-        startY = e.touches[0].clientY;
-      }, { passive: true });
-      handle.addEventListener('touchend', function(e) {
-        const dy = e.changedTouches[0].clientY - startY;
-        if (dy > 40) closeFilter();
-      });
-    });
     function toggleAcc(head) {
       const body = head.nextElementSibling;
       const arrow = head.querySelector('.acc-arrow');
