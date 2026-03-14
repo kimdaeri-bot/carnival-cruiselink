@@ -72,7 +72,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 @media(max-width:768px){
   .search-layout{flex-direction:column;}
   .filter-sidebar{
-    display:none; /* JS로 open 클래스 추가 시 표시 */
     position:fixed;
     bottom:0; left:0; right:0;
     width:100% !important;
@@ -81,13 +80,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius:14px 14px 0 0;
     box-shadow:0 -3px 20px rgba(0,0,0,0.18);
     z-index:8000;
-    transform:translateY(100%);
+    transform:translateY(calc(100% - 52px));
     transition:transform 0.32s cubic-bezier(.4,0,.2,1);
     padding-bottom:env(safe-area-inset-bottom,0px);
   }
   .filter-sidebar.open{
-    display:block;
     transform:translateY(0);
+  }
+  .filter-panel-header{
+    cursor:pointer;
+    user-select:none;
+    -webkit-tap-highlight-color:transparent;
   }
   #filterOverlay{
     display:none;
@@ -97,31 +100,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     z-index:7999;
   }
   #filterOverlay.show{display:block;}
-  #filterFab{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:7998;
-    background:var(--navy,#1a237e);
-    color:#fff;
-    border:none;
-    border-radius:50px;
-    padding:13px 28px;
-    font-size:0.95rem;
-    font-weight:700;
-    cursor:pointer;
-    box-shadow:0 4px 18px rgba(0,0,0,0.22);
-    white-space:nowrap;
-  }
+  #filterFab{display:none!important;}
   .filter-sheet-handle{
     display:flex;
     justify-content:center;
     padding:10px 0 4px;
     cursor:pointer;
+    background:#fff;
   }
   .filter-sheet-handle::before{
     content:'';
@@ -389,6 +374,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.getElementById('filterOverlay').classList.remove('show');
       document.body.style.overflow = '';
     }
+    // 헤더 클릭으로 토글
+    document.addEventListener('DOMContentLoaded', function() {
+      const header = document.querySelector('.filter-panel-header');
+      const sidebar = document.querySelector('.filter-sidebar');
+      const handle = document.querySelector('.filter-sheet-handle');
+      if (!header || !sidebar) return;
+      header.addEventListener('click', function() {
+        if (window.innerWidth > 768) return;
+        sidebar.classList.contains('open') ? closeFilter() : openFilter();
+      });
+      if (handle) handle.addEventListener('click', function() {
+        if (window.innerWidth > 768) return;
+        sidebar.classList.contains('open') ? closeFilter() : openFilter();
+      });
+      // 터치 드래그로 열고 닫기
+      let touchStartY = 0, touchStartOpen = false;
+      sidebar.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+        touchStartOpen = sidebar.classList.contains('open');
+        sidebar.style.transition = 'none';
+      }, { passive: true });
+      sidebar.addEventListener('touchmove', function(e) {
+        if (window.innerWidth > 768) return;
+        const dy = e.touches[0].clientY - touchStartY;
+        if (touchStartOpen && dy > 0) {
+          // 열린 상태에서 아래로 드래그
+          sidebar.style.transform = 'translateY(' + Math.max(0, dy) + 'px)';
+        } else if (!touchStartOpen && dy < 0) {
+          // 닫힌 상태에서 위로 드래그
+          const base = sidebar.offsetHeight - 52;
+          sidebar.style.transform = 'translateY(' + Math.max(0, base + dy) + 'px)';
+        }
+      }, { passive: true });
+      sidebar.addEventListener('touchend', function(e) {
+        if (window.innerWidth > 768) return;
+        sidebar.style.transition = '';
+        sidebar.style.transform = '';
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (touchStartOpen && dy > 60) closeFilter();
+        else if (!touchStartOpen && dy < -60) openFilter();
+        else sidebar.classList.contains('open') ? openFilter() : closeFilter();
+      });
+    });
     function toggleAcc(head) {
       const body = head.nextElementSibling;
       const arrow = head.querySelector('.acc-arrow');
