@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>인스타 초안 | MSC 오케스트라 지중해 7박 (2026.05.09)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: #f0f2f5; color: #333; }
+    .admin-bar { position: sticky; top: 0; z-index: 999; background: #1a1a2e; color: #fff; padding: 10px 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; }
+    .admin-bar strong { color: #ffd700; }
+    .copy-all-btn { margin-left: auto; background: #E1306C; color: #fff; border: none; padding: 7px 18px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .copy-all-btn:hover { background: #c1255a; }
+    .wrapper { max-width: 860px; margin: 30px auto; padding: 0 16px 60px; }
+    .block { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.07); position: relative; }
+    .block-label { font-size: 11px; font-weight: 800; color: #E1306C; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+    .block:hover .copy-btn { opacity: 1; }
+    .copy-btn { position: absolute; top: 14px; right: 16px; opacity: 0; transition: opacity .2s; background: #E1306C; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 700; }
+    .slides-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 8px; }
+    .slide { background: linear-gradient(145deg, #0a2540, #0077cc); color: #fff; border-radius: 10px; aspect-ratio: 1/1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; position: relative; cursor: pointer; transition: transform .15s; }
+    .slide:hover { transform: scale(1.02); }
+    .slide:hover .slide-copy { opacity: 1; }
+    .slide-copy { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,.2); border: none; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; opacity: 0; transition: opacity .2s; }
+    .slide-num { font-size: 11px; font-weight: 800; opacity: .5; margin-bottom: 10px; letter-spacing: 1px; }
+    .slide-title { font-size: 17px; font-weight: 900; line-height: 1.4; margin-bottom: 8px; }
+    .slide-sub { font-size: 12px; opacity: .8; line-height: 1.6; }
+    .slide-price { font-size: 22px; font-weight: 900; color: #FFD700; margin: 8px 0 4px; }
+    .caption-box { background: #fff8f0; border-left: 4px solid #E1306C; padding: 16px 20px; border-radius: 0 8px 8px 0; font-size: 15px; line-height: 2; white-space: pre-wrap; font-family: inherit; }
+    .hashtags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .ht { background: #f0f2ff; color: #3d5af1; font-size: 13px; padding: 4px 12px; border-radius: 20px; cursor: pointer; transition: background .15s; }
+    .ht:hover { background: #3d5af1; color: #fff; }
+    .story { background: linear-gradient(160deg, #0077cc, #0a2540, #003580); color: #fff; border-radius: 10px; aspect-ratio: 9/16; max-width: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px 14px; cursor: pointer; position: relative; }
+    .story:hover .slide-copy { opacity: 1; }
+    .story-title { font-size: 15px; font-weight: 900; line-height: 1.4; margin-bottom: 8px; }
+    .story-sub { font-size: 11px; opacity: .85; line-height: 1.6; }
+    .stories-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+    .reels-box { background: #0f0f0f; color: #fff; border-radius: 10px; padding: 20px 24px; font-size: 14px; line-height: 2.2; white-space: pre-wrap; }
+    #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #E1306C; color: #fff; padding: 10px 24px; border-radius: 20px; font-size: 14px; display: none; z-index: 9999; }
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4PPLZNG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div class="admin-bar">
+  <strong>📸 인스타그램 초안</strong>
+  <span>noindex — 외부 비공개</span>
+  <span>|</span>
+  <span>MSC 오케스트라 지중해 7박 · 2026.05.09</span>
+  <button class="copy-all-btn" onclick="copyAll()">📋 전체 캡션 복사</button>
+</div>
+
+<div class="wrapper" id="insta-content">
+
+  <!-- 캐러셀 슬라이드 -->
+  <div class="block">
+    <div class="block-label">📱 피드 캐러셀 — 슬라이드 텍스트 (6장)</div>
+    <p style="font-size:13px;color:#888;margin-bottom:16px">각 슬라이드 클릭 → 텍스트 복사. 미리캔버스·캔바에 붙여넣기하세요.</p>
+    <div class="slides-grid">
+
+      <div class="slide" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 01 — 훅라인</div>
+        <div class="slide-title">🇪🇸🇮🇹🇫🇷<br>3개국을<br>크루즈 한 번에?!</div>
+        <div class="slide-sub">스페인·이탈리아·프랑스<br>MSC 오케스트라 · 2026.05.09</div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#1a237e,#283593)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 02 — 항로</div>
+        <div class="slide-title">🗺️ 7박 8일 루트</div>
+        <div class="slide-sub">
+          📍 Valencia 출항 (5/9)<br>
+          🇮🇹 Livorno → 피렌체·피사<br>
+          🇮🇹 치비타베키아 → 로마<br>
+          🇮🇹 제노바<br>
+          🇫🇷 마르세유<br>
+          🇪🇸 Tarragona → 바르셀로나<br>
+          📍 Valencia 귀항 (5/16)
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#004d40,#00695c)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 03 — 선박 하이라이트</div>
+        <div class="slide-title">🚢 MSC 오케스트라<br>지중해의 베테랑</div>
+        <div class="slide-sub">
+          92,409톤 · 294m<br>
+          지중해 전문 베테랑 선박<br>
+          소규모 항구도 직접 접안<br>
+          한국어 서비스 지원
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#4a148c,#6a1b9a)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 04 — 기항지 하이라이트</div>
+        <div class="slide-title">🌟 신선 하이라이트</div>
+        <div class="slide-sub">
+          🎨 피렌체 우피치 미술관<br>
+          🏛️ 로마 콜로세움·바티칸<br>
+          ⛵ 마르세유 이프 섬 투어<br>
+          🍕 나폴리 정통 피자 맛집
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#b71c1c,#c62828)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 05 — 요금표</div>
+        <div class="slide-title">💰 요금 안내</div>
+        <div class="slide-sub">인사이드</div>
+        <div class="slide-price">$503~</div>
+        <div class="slide-sub">오션뷰 $583~ / 발코니 ⭐ $643~<br>스위트 $1,343~<br><small style="opacity:.7">1인 기준 · 세금 별도</small></div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#e65100,#f57c00)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 06 — CTA</div>
+        <div class="slide-title">📞 지금 상담하세요!</div>
+        <div class="slide-sub">
+          크루즈링크<br>
+          9개 글로벌 선사 공식 판매사<br><br>
+          💬 카카오톡 @크루즈링크<br>
+          🌐 www.cruiselink.co.kr
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 피드 캡션 -->
+  <div class="block">
+    <div class="block-label">✍️ 피드 캡션 (메인 포스팅용)</div>
+    <button class="copy-btn" onclick="copyBlock(this)">복사</button>
+    <div class="caption-box" id="caption-feed">📸 인스타그램 포스팅 — MSC 오케스트라 지중해 7박
+
+🚢 스페인·이탈리아·프랑스를 크루즈 한 번에?! 이게 되네요.
+
+Valencia 출발 → 피렌체·로마·마르세유·바르셀로나까지
+MSC 오케스트라로 즐기는 지중해 완전정복 7박 8일 ✨
+
+📅 2026.05.09 ~ 05.16 (7박 8일)
+🚢 MSC Orchestra | 스페인 Valencia 출발·귀항
+💰 인사이드 $503~ / 발코니 $643~ (1인 · 세금 별도)
+
+[ DAY by DAY ]
+DAY 1 🇪🇸 Valencia 탑승 & 지중해 출항
+DAY 2 🇮🇹 Livorno → 피렌체 우피치 + 피사의 사탑
+DAY 3 🇮🇹 치비타베키아 → 로마 콜로세움 + 바티칸
+DAY 4 🇮🇹 제노바 → 리구리아 구시가 탐방
+DAY 5 🇫🇷 마르세유 → 이프 섬 + 부야베스
+DAY 6 🇪🇸 Tarragona → 바르셀로나 가우디 당일치기
+DAY 7 🌊 항해의 날 (스파 & 선상 엔터테인먼트)
+DAY 8 🇪🇸 Valencia 하선
+
+[ 이 노선 추천 이유 ]
+✅ 유럽 버킷리스트 도시들을 한 번에
+✅ 솅겐 무비자 — 서류 부담 없음
+✅ 5월 꽃의 계절 — 성수기 전 완벽 날씨
+✅ MSC 오케스트라 — 소항구 직접 접안 베테랑 선박
+
+문의·예약: 크루즈링크 💬 카카오 @크루즈링크
+🌐 www.cruiselink.co.kr</div>
+  </div>
+
+  <!-- 릴스 자막 -->
+  <div class="block">
+    <div class="block-label">🎬 릴스 자막 스크립트</div>
+    <button class="copy-btn" onclick="copyBlock(this)">복사</button>
+    <div class="reels-box" id="caption-reels">[0:00] 스페인에서 출발해 이탈리아, 프랑스까지—
+[0:03] 크루즈 한 번으로 3개국 완전정복?
+[0:06] MSC 오케스트라, 지중해 7박의 현실👇
+[0:09] DAY 2: 피렌체 우피치 미술관 + 피사의 사탑
+[0:12] DAY 3: 로마 콜로세움 + 바티칸 시스티나 예배당
+[0:15] DAY 5: 마르세유 이프 섬 + 세계 3대 생선요리 부야베스
+[0:18] DAY 6: 바르셀로나 당일치기 가우디 투어도 가능!
+[0:21] 인사이드 $503~, 발코니 $643~
+[0:24] 비자? 필요 없어요 (솅겐 무비자 90일)
+[0:27] 5월 9일 출발 — 자리 빠릅니다
+[0:30] 크루즈링크 카카오 @크루즈링크 / cruiselink.co.kr</div>
+  </div>
+
+  <!-- 스토리 슬라이드 -->
+  <div class="block">
+    <div class="block-label">📱 스토리 슬라이드 (3장)</div>
+    <div class="stories-row">
+      <div class="story" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">🇪🇸🇮🇹🇫🇷<br>지중해 3개국<br>7박 크루즈</div>
+        <div class="story-sub">MSC 오케스트라<br>2026.05.09 출발<br>Valencia 출발·귀항</div>
+      </div>
+      <div class="story" onclick="copySlide(this)" style="background:linear-gradient(160deg,#1a237e,#283593,#1565c0)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">7개 항구<br>전부 들러요!</div>
+        <div class="story-sub">피렌체·로마·제노바<br>마르세유·바르셀로나<br>모두 포함 🌊</div>
+      </div>
+      <div class="story" onclick="copySlide(this)" style="background:linear-gradient(160deg,#e65100,#f57c00,#ffc107)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">인사이드<br>$503~부터!</div>
+        <div class="story-sub">크루즈링크 상담<br>💬 @크루즈링크<br>cruiselink.co.kr</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 해시태그 -->
+  <div class="block">
+    <div class="block-label">🏷️ 해시태그 세트</div>
+    <button class="copy-btn" onclick="copyHashtags()">복사</button>
+    <div class="hashtags" id="hashtag-set">
+      <span class="ht" onclick="copyHt(this)">#지중해크루즈</span>
+      <span class="ht" onclick="copyHt(this)">#MSC크루즈</span>
+      <span class="ht" onclick="copyHt(this)">#MSC오케스트라</span>
+      <span class="ht" onclick="copyHt(this)">#스페인여행</span>
+      <span class="ht" onclick="copyHt(this)">#이탈리아여행</span>
+      <span class="ht" onclick="copyHt(this)">#프랑스여행</span>
+      <span class="ht" onclick="copyHt(this)">#Valencia크루즈</span>
+      <span class="ht" onclick="copyHt(this)">#로마여행</span>
+      <span class="ht" onclick="copyHt(this)">#피렌체여행</span>
+      <span class="ht" onclick="copyHt(this)">#마르세유</span>
+      <span class="ht" onclick="copyHt(this)">#크루즈여행</span>
+      <span class="ht" onclick="copyHt(this)">#크루즈링크</span>
+      <span class="ht" onclick="copyHt(this)">#2026여행</span>
+      <span class="ht" onclick="copyHt(this)">#유럽크루즈</span>
+      <span class="ht" onclick="copyHt(this)">#허니문크루즈</span>
+      <span class="ht" onclick="copyHt(this)">#지중해여행</span>
+      <span class="ht" onclick="copyHt(this)">#크루즈추천</span>
+      <span class="ht" onclick="copyHt(this)">#유럽여행</span>
+      <span class="ht" onclick="copyHt(this)">#cruise</span>
+      <span class="ht" onclick="copyHt(this)">#mediterranean</span>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast">복사 완료!</div>
+<script>
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg||'복사 완료!'; t.style.display='block'; setTimeout(()=>t.style.display='none',2000); }
+function copySlide(el){ const texts=[...el.querySelectorAll('.slide-num,.slide-title,.slide-sub,.slide-price,.story-title,.story-sub')].map(e=>e.innerText).join('\n'); navigator.clipboard.writeText(texts).then(()=>showToast('슬라이드 복사!')); }
+function copyBlock(btn){ const box=btn.closest('.block').querySelector('.caption-box,.reels-box'); navigator.clipboard.writeText(box.innerText).then(()=>showToast('복사 완료!')); }
+function copyHashtags(){ const tags=[...document.querySelectorAll('.ht')].map(e=>e.innerText).join(' '); navigator.clipboard.writeText(tags).then(()=>showToast('해시태그 복사!')); }
+function copyHt(el){ navigator.clipboard.writeText(el.innerText).then(()=>showToast(el.innerText+' 복사!')); }
+function copyAll(){ const c=document.getElementById('insta-content'); navigator.clipboard.writeText(c.innerText).then(()=>showToast('전체 복사 완료!')); }
+</script>
+</body>
+</html>

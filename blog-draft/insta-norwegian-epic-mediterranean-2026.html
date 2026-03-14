@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>인스타 초안 | Norwegian Epic 지중해 7박 (2026.07.19)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: #f0f2f5; color: #333; }
+    .admin-bar { position: sticky; top: 0; z-index: 999; background: #1a1a2e; color: #fff; padding: 10px 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; }
+    .admin-bar strong { color: #ffd700; }
+    .copy-all-btn { margin-left: auto; background: #E1306C; color: #fff; border: none; padding: 7px 18px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .copy-all-btn:hover { background: #c1255a; }
+    .wrapper { max-width: 860px; margin: 30px auto; padding: 0 16px 60px; }
+    .block { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.07); position: relative; }
+    .block-label { font-size: 11px; font-weight: 800; color: #E1306C; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+    .block:hover .copy-btn { opacity: 1; }
+    .copy-btn { position: absolute; top: 14px; right: 16px; opacity: 0; transition: opacity .2s; background: #E1306C; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 700; }
+    .slides-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 8px; }
+    .slide { background: linear-gradient(145deg, #003580, #0a2540); color: #fff; border-radius: 10px; aspect-ratio: 1/1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; position: relative; cursor: pointer; transition: transform .15s; }
+    .slide:hover { transform: scale(1.02); }
+    .slide:hover .slide-copy { opacity: 1; }
+    .slide-copy { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,.2); border: none; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; opacity: 0; transition: opacity .2s; }
+    .slide-num { font-size: 11px; font-weight: 800; opacity: .5; margin-bottom: 10px; letter-spacing: 1px; }
+    .slide-title { font-size: 17px; font-weight: 900; line-height: 1.4; margin-bottom: 8px; }
+    .slide-sub { font-size: 12px; opacity: .8; line-height: 1.6; }
+    .slide-price { font-size: 22px; font-weight: 900; color: #FFD700; margin: 8px 0 4px; }
+    .caption-box { background: #fff8f0; border-left: 4px solid #E1306C; padding: 16px 20px; border-radius: 0 8px 8px 0; font-size: 15px; line-height: 2; white-space: pre-wrap; font-family: inherit; }
+    .hashtags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .ht { background: #f0f2ff; color: #3d5af1; font-size: 13px; padding: 4px 12px; border-radius: 20px; cursor: pointer; transition: background .15s; }
+    .ht:hover { background: #3d5af1; color: #fff; }
+    .story { background: linear-gradient(160deg, #003580, #0a2540, #1565c0); color: #fff; border-radius: 10px; aspect-ratio: 9/16; max-width: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px 14px; cursor: pointer; position: relative; }
+    .story:hover .slide-copy { opacity: 1; }
+    .story-title { font-size: 15px; font-weight: 900; line-height: 1.4; margin-bottom: 8px; }
+    .story-sub { font-size: 11px; opacity: .85; line-height: 1.6; }
+    .stories-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+    .reels-box { background: #0f0f0f; color: #fff; border-radius: 10px; padding: 20px 24px; font-size: 14px; line-height: 2.2; white-space: pre-wrap; }
+    #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #E1306C; color: #fff; padding: 10px 24px; border-radius: 20px; font-size: 14px; display: none; z-index: 9999; }
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4PPLZNG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div class="admin-bar">
+  <strong>📸 인스타그램 초안</strong>
+  <span>noindex — 외부 비공개</span>
+  <span>|</span>
+  <span>Norwegian Epic 지중해 7박 · 2026.07.19</span>
+  <button class="copy-all-btn" onclick="copyAll()">📋 전체 캡션 복사</button>
+</div>
+
+<div class="wrapper" id="insta-content">
+
+  <!-- 캐러셀 슬라이드 -->
+  <div class="block">
+    <div class="block-label">📱 피드 캐러셀 — 슬라이드 텍스트 (6장)</div>
+    <p style="font-size:13px;color:#888;margin-bottom:16px">각 슬라이드 클릭 → 텍스트 복사. 미리캔버스·캔바에 붙여넣기하세요.</p>
+    <div class="slides-grid">
+
+      <div class="slide" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 01 — 훅라인</div>
+        <div class="slide-title">⚡ 로마에서 타고<br>바르셀로나에서<br>내린다?!</div>
+        <div class="slide-sub">Norwegian Epic<br>지중해 7박 · 2026.07.19 출발</div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#1a237e,#283593)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 02 — 항로</div>
+        <div class="slide-title">🗺️ DAY by DAY</div>
+        <div class="slide-sub">
+          📍 치비타베키아(로마) 출발<br>
+          🇮🇹 Salerno → 나폴리·아말피<br>
+          🇮🇹 카타니아 → 시칠리아<br>
+          🇮🇹 Livorno → 피렌체<br>
+          🇫🇷 Villefranche → 니스·모나코<br>
+          🇫🇷 마르세유<br>
+          📍 바르셀로나 하선
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#004d40,#00695c)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 03 — 신선 하이라이트</div>
+        <div class="slide-title">🌋 이게 다 들어가?</div>
+        <div class="slide-sub">
+          🌋 에트나 화산 케이블카<br>
+          🎰 모나코 몬테카를로<br>
+          🎭 바르셀로나 사그라다 파밀리아<br>
+          🍝 아말피 코스트 드라이브
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#4a148c,#6a1b9a)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 04 — NCL 선박 정보</div>
+        <div class="slide-title">🚢 Norwegian Epic<br>이런 배입니다</div>
+        <div class="slide-sub">
+          155,873톤 · 329m 초대형<br>
+          Freestyle Cruising (드레스코드 없음!)<br>
+          20개+ 레스토랑·바<br>
+          수퍼 빌라 슬라이드 🎢
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#b71c1c,#c62828)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 05 — 요금표</div>
+        <div class="slide-title">💰 요금 안내</div>
+        <div class="slide-sub">인사이드</div>
+        <div class="slide-price">$715~</div>
+        <div class="slide-sub">발코니 ⭐ $1,035~ / 스위트 $1,415~<br>싱글 스튜디오 요금 문의<br><small style="opacity:.7">1인 기준 · 세금 별도</small></div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#e65100,#f57c00)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 06 — CTA</div>
+        <div class="slide-title">📞 지금 상담하세요!</div>
+        <div class="slide-sub">
+          크루즈링크<br>
+          9개 글로벌 선사 공식 판매사<br><br>
+          💬 카카오톡 @크루즈링크<br>
+          🌐 www.cruiselink.co.kr
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 피드 캡션 -->
+  <div class="block">
+    <div class="block-label">✍️ 피드 캡션 (메인 포스팅용)</div>
+    <button class="copy-btn" onclick="copyBlock(this)">복사</button>
+    <div class="caption-box" id="caption-feed">📸 인스타그램 포스팅 — Norwegian Epic 지중해 7박
+
+⚡ 로마에서 타고 바르셀로나에서 내린다 — 이게 바로 에픽(Epic)한 지중해 크루즈
+
+나폴리·아말피·시칠리아·피렌체·모나코·마르세유·바르셀로나까지
+Norwegian Epic과 함께하는 지중해 하이라이트 7박! 🌊
+
+📅 2026.07.19 ~ 07.26 (7박 8일)
+🚢 Norwegian Epic | 이탈리아 치비타베키아 출발 → 스페인 바르셀로나 하선
+💰 인사이드 $715~ / 발코니 $1,035~ (1인 · 세금 별도)
+
+[ DAY by DAY ]
+DAY 1 🇮🇹 치비타베키아(로마) 탑승 출항
+DAY 2 🇮🇹 Salerno → 나폴리 폼페이 + 아말피 코스트 드라이브
+DAY 3 🇮🇹 카타니아 → 시칠리아 에트나 화산 케이블카 🌋
+DAY 4 🇮🇹 Livorno → 피렌체 우피치 + 피사의 사탑
+DAY 5 🇫🇷 Villefranche-sur-Mer → 니스 + 모나코 몬테카를로
+DAY 6 🇫🇷 마르세유 → 이프 섬 + 부야베스
+DAY 7 🇪🇸 바르셀로나 → 사그라다 파밀리아 + 구엘 공원
+DAY 8 🇪🇸 바르셀로나 하선
+
+[ NCL 특징 — Freestyle Cruising ]
+✅ 정해진 식사 시간 없음 — 언제든 원하는 레스토랑에서
+✅ 드레스코드 없음 — 편한 대로
+✅ 싱글 여행자 전용 스튜디오 캐빈 (추가요금 없음!)
+✅ 에픽한 선내 — 서커스 쇼, 슬라이드, 카지노, 수영장
+
+문의·예약: 크루즈링크 💬 카카오 @크루즈링크
+🌐 www.cruiselink.co.kr</div>
+  </div>
+
+  <!-- 릴스 자막 -->
+  <div class="block">
+    <div class="block-label">🎬 릴스 자막 스크립트</div>
+    <button class="copy-btn" onclick="copyBlock(this)">복사</button>
+    <div class="reels-box" id="caption-reels">[0:00] 로마에서 배 타고 바르셀로나에서 내린다?
+[0:03] Norwegian Epic 지중해 7박, 현실 루트 공개👇
+[0:06] DAY 2: 나폴리 폼페이 + 아말피 코스트 드라이브
+[0:09] DAY 3: 시칠리아 에트나 화산 케이블카 (유럽 최대 활화산!)
+[0:12] DAY 4: 피렌체 우피치 미술관 + 피사의 사탑
+[0:15] DAY 5: 모나코 몬테카를로 + 니스 코트다쥐르
+[0:18] DAY 7: 바르셀로나 사그라다 파밀리아
+[0:21] 인사이드 $715~ / 발코니 $1,035~
+[0:24] Freestyle Cruising — 드레스코드·식사 시간 없는 자유로운 크루즈
+[0:27] 7월 19일 출발 — 여름 지중해 최성수기
+[0:30] 크루즈링크 카카오 @크루즈링크 / cruiselink.co.kr</div>
+  </div>
+
+  <!-- 스토리 슬라이드 -->
+  <div class="block">
+    <div class="block-label">📱 스토리 슬라이드 (3장)</div>
+    <div class="stories-row">
+      <div class="story" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">⚡ Epic 지중해<br>7박 크루즈</div>
+        <div class="story-sub">Norwegian Epic<br>2026.07.19 출발<br>로마 → 바르셀로나</div>
+      </div>
+      <div class="story" onclick="copySlide(this)" style="background:linear-gradient(160deg,#1a237e,#283593,#1565c0)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">에트나·모나코<br>피렌체·바르셀로나</div>
+        <div class="story-sub">7개 항구 전부<br>하이라이트만 모음<br>🌋🎰🎨🏖️</div>
+      </div>
+      <div class="story" onclick="copySlide(this)" style="background:linear-gradient(160deg,#e65100,#f57c00,#ffc107)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">발코니<br>$1,035~</div>
+        <div class="story-sub">크루즈링크 상담<br>💬 @크루즈링크<br>cruiselink.co.kr</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 해시태그 -->
+  <div class="block">
+    <div class="block-label">🏷️ 해시태그 세트</div>
+    <button class="copy-btn" onclick="copyHashtags()">복사</button>
+    <div class="hashtags" id="hashtag-set">
+      <span class="ht" onclick="copyHt(this)">#지중해크루즈</span>
+      <span class="ht" onclick="copyHt(this)">#NCL크루즈</span>
+      <span class="ht" onclick="copyHt(this)">#NorwegianEpic</span>
+      <span class="ht" onclick="copyHt(this)">#노르웨지안에픽</span>
+      <span class="ht" onclick="copyHt(this)">#이탈리아여행</span>
+      <span class="ht" onclick="copyHt(this)">#프랑스여행</span>
+      <span class="ht" onclick="copyHt(this)">#스페인여행</span>
+      <span class="ht" onclick="copyHt(this)">#바르셀로나</span>
+      <span class="ht" onclick="copyHt(this)">#시칠리아</span>
+      <span class="ht" onclick="copyHt(this)">#모나코여행</span>
+      <span class="ht" onclick="copyHt(this)">#아말피코스트</span>
+      <span class="ht" onclick="copyHt(this)">#에트나화산</span>
+      <span class="ht" onclick="copyHt(this)">#크루즈여행</span>
+      <span class="ht" onclick="copyHt(this)">#크루즈링크</span>
+      <span class="ht" onclick="copyHt(this)">#2026여름여행</span>
+      <span class="ht" onclick="copyHt(this)">#유럽크루즈</span>
+      <span class="ht" onclick="copyHt(this)">#FreestyleCruising</span>
+      <span class="ht" onclick="copyHt(this)">#싱글크루즈</span>
+      <span class="ht" onclick="copyHt(this)">#cruise</span>
+      <span class="ht" onclick="copyHt(this)">#mediterranean</span>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast">복사 완료!</div>
+<script>
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg||'복사 완료!'; t.style.display='block'; setTimeout(()=>t.style.display='none',2000); }
+function copySlide(el){ const texts=[...el.querySelectorAll('.slide-num,.slide-title,.slide-sub,.slide-price,.story-title,.story-sub')].map(e=>e.innerText).join('\n'); navigator.clipboard.writeText(texts).then(()=>showToast('슬라이드 복사!')); }
+function copyBlock(btn){ const box=btn.closest('.block').querySelector('.caption-box,.reels-box'); navigator.clipboard.writeText(box.innerText).then(()=>showToast('복사 완료!')); }
+function copyHashtags(){ const tags=[...document.querySelectorAll('.ht')].map(e=>e.innerText).join(' '); navigator.clipboard.writeText(tags).then(()=>showToast('해시태그 복사!')); }
+function copyHt(el){ navigator.clipboard.writeText(el.innerText).then(()=>showToast(el.innerText+' 복사!')); }
+function copyAll(){ const c=document.getElementById('insta-content'); navigator.clipboard.writeText(c.innerText).then(()=>showToast('전체 복사 완료!')); }
+</script>
+</body>
+</html>
