@@ -25,7 +25,9 @@
       "#카리브해크루즈",
       "#올인클루시브",
       "#산후안"
-    ]
+    ],
+    "titleEn": "Caribbean Islands 7-Night Luxury Cruise",
+    "titleJp": "カリブ海アイランド7泊ラグジュアリークルーズ"
   },
   {
     "ref": "EXPLORAEX20260527BCNMCM",
@@ -61,7 +63,9 @@
       "#Explora크루즈",
       "#EXPLORAI",
       "#바르셀로나"
-    ]
+    ],
+    "titleEn": "Mediterranean 7-Night Cruise",
+    "titleJp": "地中海7泊クルーズ"
   },
   {
     "ref": "EXPLORAEP20260528ISTFSA",
@@ -97,7 +101,9 @@
       "#Explora크루즈",
       "#EXPLORAII",
       "#이스탄불"
-    ]
+    ],
+    "titleEn": "Mediterranean 11-Night Cruise",
+    "titleJp": "地中海11泊クルーズ"
   },
   {
     "ref": "EXPLORAEP20260601PIRFSA",
@@ -132,7 +138,9 @@
       "#Explora크루즈",
       "#EXPLORAII",
       "#피레우스"
-    ]
+    ],
+    "titleEn": "Greece·Croatia·Italy 7-Night Cruise",
+    "titleJp": "ギリシャ・クロアチア・イタリア7泊クルーズ"
   },
   {
     "ref": "EXPLORAEP20260601PIRPIR",
@@ -167,7 +175,9 @@
       "#Explora크루즈",
       "#EXPLORAII",
       "#피레우스"
-    ]
+    ],
+    "titleEn": "Greece·Croatia·Italy 14-Night Cruise",
+    "titleJp": "ギリシャ・クロアチア・イタリア14泊クルーズ"
   },
   {
     "ref": "EXPLORAEX20260602CVVCVV",
@@ -201,7 +211,9 @@
       "#Explora크루즈",
       "#EXPLORAI",
       "#치비타베키아"
-    ]
+    ],
+    "titleEn": "Italy·Monaco 7-Night Cruise",
+    "titleJp": "イタリア・モナコ7泊クルーズ"
   },
   {
     "ref": "EXPLORAEX20260608MCMBCN",
@@ -237,7 +249,9 @@
       "#Explora크루즈",
       "#EXPLORAI",
       "#Monte-Carlo"
-    ]
+    ],
+    "titleEn": "Mediterranean 7-Night Cruise",
+    "titleJp": "地中海7泊クルーズ"
   },
   {
     "ref": "EXPLORAEL20260817SOUCPH",
@@ -265,7 +279,9 @@
       "#노르웨이피요르드",
       "#북유럽크루즈",
       "#올인클루시브"
-    ]
+    ],
+    "titleEn": "Norway Fjords·Copenhagen 8-Night Luxury Cruise",
+    "titleJp": "ノルウェーフィヨルド・コペンハーゲン8泊ラグジュアリークルーズ"
   },
   {
     "ref": "EXPLORAEL20270510VANVAN",
@@ -293,6 +309,8 @@
       "#알래스카크루즈",
       "#빙하크루즈",
       "#올인클루시브"
-    ]
+    ],
+    "titleEn": "Alaska Glacier·Fjord 11-Night Luxury Cruise",
+    "titleJp": "アラスカ氷河・フィヨルド11泊ラグジュアリークルーズ"
   }
 ]
