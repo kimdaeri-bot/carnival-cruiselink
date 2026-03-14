@@ -298,15 +298,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const priceStr = fromPrice ? '$' + parseFloat(fromPrice).toLocaleString('en-US', {maximumFractionDigits:0}) : 'お問い合わせ';
       const img = c.image || '';
       const ref = c.ref || '';
-      return `<div class="czn-card" onclick="location.href='cruise-view.html?ref=${ref}'">
+      const titleStr = c.titleJp || c.title || '';
+      return `<div class="czn-card" onclick="location.href='jp/cruise-view.html?ref=${ref}'">
         <div class="czn-card-img-wrap">
-          <img src="${img}" alt="${c.title||''}" loading="lazy" onerror="this.parentElement.style.background='#cfe8fc'">
+          <img src="${img}" alt="${titleStr}" loading="lazy" onerror="this.parentElement.style.background='#cfe8fc'">
           <span class="czn-badge" style="background:${badgeColor}">${badge}</span>
           <button class="czn-wish" data-ref="${ref}" onclick="event.stopPropagation();cznToggleWish(this,'${ref}')"><svg viewBox="0 0 24 24" width="16" height="16" class="czn-heart-svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
         </div>
         <div class="czn-body">
           <div class="czn-operator">${opName}${destName?' · '+destName:''}</div>
-          <div class="czn-title">🚢 ${c.title||''}</div>
+          <div class="czn-title">🚢 ${titleStr}</div>
           <div class="czn-meta">
             ${port?`<div>📍 ${port}${arrPort&&arrPort!==port?' → '+arrPort:''}</div>`:''}
             ${dateStr?`<div>🗓️ ${dateStr}${dateToStr?' ~ '+dateToStr:''}</div>`:''}
@@ -318,7 +319,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="czn-price" style="color:#E65100">${priceStr} ~</span>
               <span class="czn-unit">/ お一人様</span>
             </div>
-            <a href="cruise-view.html?ref=${ref}" class="czn-btn" onclick="event.stopPropagation()">詳細を見る</a>
+            <a href="jp/cruise-view.html?ref=${ref}" class="czn-btn" onclick="event.stopPropagation()">詳細を見る</a>
           </div>
         </div>
       </div>`;
