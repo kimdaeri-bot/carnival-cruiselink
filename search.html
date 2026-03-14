@@ -368,61 +368,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.getElementById('filterOverlay').classList.remove('show');
       document.body.style.overflow = '';
     }
-    // 헤더 클릭으로 토글
+    // 필터 핸들바 클릭으로 닫기
     document.addEventListener('DOMContentLoaded', function() {
-      const header = document.querySelector('.filter-panel-header');
-      const sidebar = document.querySelector('.filter-sidebar');
       const handle = document.querySelector('.filter-sheet-handle');
-      if (!header || !sidebar) return;
-      header.addEventListener('click', function() {
-        if (window.innerWidth > 768) return;
-        sidebar.classList.contains('open') ? closeFilter() : openFilter();
-      });
-      if (handle) handle.addEventListener('click', function() {
-        if (window.innerWidth > 768) return;
-        sidebar.classList.contains('open') ? closeFilter() : openFilter();
-      });
-      // 터치 드래그 — 헤더/handle 영역에서만 반응
-      let touchStartY = 0, touchStartOpen = false, isDragging = false;
-      function onTouchStart(e) {
-        if (window.innerWidth > 768) return;
-        touchStartY = e.touches[0].clientY;
-        touchStartOpen = sidebar.classList.contains('open');
-        isDragging = false;
-      }
-      function onTouchMove(e) {
-        if (window.innerWidth > 768) return;
-        const dy = e.touches[0].clientY - touchStartY;
-        if (Math.abs(dy) > 10) isDragging = true;
-        if (!isDragging) return;
-        if (touchStartOpen && dy > 0) {
-          sidebar.style.transition = 'none';
-          sidebar.style.transform = 'translateY(' + dy + 'px)';
-        } else if (!touchStartOpen && dy < 0) {
-          sidebar.style.transition = 'none';
-          const base = sidebar.offsetHeight - 52;
-          sidebar.style.transform = 'translateY(' + Math.max(0, base + dy) + 'px)';
-        }
-      }
-      function onTouchEnd(e) {
-        if (window.innerWidth > 768) return;
-        sidebar.style.transition = '';
-        sidebar.style.transform = '';
-        const dy = e.changedTouches[0].clientY - touchStartY;
-        if (isDragging) {
-          if (touchStartOpen && dy > 80) closeFilter();
-          else if (!touchStartOpen && dy < -80) openFilter();
-          else touchStartOpen ? openFilter() : closeFilter();
-        }
-      }
-      header.addEventListener('touchstart', onTouchStart, { passive: true });
-      header.addEventListener('touchmove', onTouchMove, { passive: true });
-      header.addEventListener('touchend', onTouchEnd);
-      if (handle) {
-        handle.addEventListener('touchstart', onTouchStart, { passive: true });
-        handle.addEventListener('touchmove', onTouchMove, { passive: true });
-        handle.addEventListener('touchend', onTouchEnd);
-      }
+      if (handle) handle.addEventListener('click', closeFilter);
     });
     function toggleAcc(head) {
       const body = head.nextElementSibling;
