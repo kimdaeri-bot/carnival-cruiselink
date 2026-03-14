@@ -1387,11 +1387,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
 <script>
-// CruiseLink EN - Card string patch
+// CruiseLink EN - Full Card & Link Patch v2
 (function patchForEN() {
   var KO_EN = {
-    '럭셔리': 'Luxury',
+    '출발임박': 'Departing Soon',
     '출발 임박': 'Departing Soon',
+    '럭셔리': 'Luxury',
     '얼리버드': 'Early Bird',
     '특가': 'Special Deal',
     '인기': 'Popular',
@@ -1409,6 +1410,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     '찜한 상품이 없습니다.': 'No saved cruises.',
     '아직 찜한 크루즈가 없어요': 'No saved cruises yet',
     '크루즈를 검색해보세요': 'Search for cruises',
+    '출발 ·': 'Dep. ·',
     '문의': 'Inquire',
     '상세보기': 'Details',
     '문의하기': 'Contact Us',
@@ -1418,27 +1420,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     html = html.replace(/(\d+)박\s*(\d+)일/g, '$1 nights / $2 days');
     html = html.replace(/(\d+)박 출발/g, '$1 nights · Dep.');
     html = html.replace(/(\d+)박/g, '$1 nights');
+    html = html.replace(/href="cruise-view\.html\?/g, 'href="en/cruise-view.html?');
+    html = html.replace(/location\.href='cruise-view\.html\?/g, "location.href='en/cruise-view.html?");
     return html;
+  }
+  function withTitleEn(c) {
+    var cc = Object.assign({}, c);
+    if (cc.titleEn) cc.title = cc.titleEn;
+    return cc;
   }
   if (typeof Components !== 'undefined') {
     var _local = Components.localCruiseCard;
-    if (_local) Components.localCruiseCard = function(c) { return patchHTML(_local.call(Components, c)); };
+    if (_local) Components.localCruiseCard = function(c) { return patchHTML(_local.call(Components, withTitleEn(c))); };
     var _item = Components.localCruiseItem;
-    if (_item) Components.localCruiseItem = function(c) { return patchHTML(_item.call(Components, c)); };
+    if (_item) Components.localCruiseItem = function(c) { return patchHTML(_item.call(Components, withTitleEn(c))); };
   }
   if (typeof renderCruiseCard === 'function') {
     var _rc = renderCruiseCard;
-    window.renderCruiseCard = function(c) { return patchHTML(_rc(c)); };
+    window.renderCruiseCard = function(c) { return patchHTML(_rc(withTitleEn(c))); };
+  }
+  if (typeof switchTab === 'function') {
+    var _st = switchTab;
+    window.switchTab = function(btn, dest) {
+      _st(btn, dest);
+      setTimeout(function() {
+        document.querySelectorAll('.czn-card,.cruise-card,.tab-card').forEach(function(card) {
+          card.innerHTML = patchHTML(card.innerHTML);
+        });
+        document.querySelectorAll('a[href*="cruise-view.html"]').forEach(function(a) {
+          if (a.href.indexOf('/en/cruise-view.html') === -1) {
+            a.href = a.href.replace('/cruise-view.html', '/en/cruise-view.html');
+          }
+        });
+      }, 500);
+    };
   }
   var _obs = new MutationObserver(function(muts) {
     muts.forEach(function(m) {
       m.addedNodes.forEach(function(n) {
-        if (n.nodeType === 1 && (n.classList.contains('czn-card') || n.classList.contains('cruise-card') || n.classList.contains('czn-footer'))) {
+        if (n.nodeType === 1 && (n.classList.contains('czn-card') || n.classList.contains('cruise-card') || n.classList.contains('czn-footer') || n.classList.contains('tab-card'))) {
           n.innerHTML = patchHTML(n.innerHTML);
         }
         if (n.nodeType === 1 && n.querySelectorAll) {
-          n.querySelectorAll('.czn-card,.cruise-card').forEach(function(card) {
+          n.querySelectorAll('.czn-card,.cruise-card,.tab-card').forEach(function(card) {
             card.innerHTML = patchHTML(card.innerHTML);
+          });
+          n.querySelectorAll('a[href*="cruise-view.html"]').forEach(function(a) {
+            if (a.href.indexOf('/en/cruise-view.html') === -1) {
+              a.href = a.href.replace('/cruise-view.html', '/en/cruise-view.html');
+            }
           });
         }
       });
@@ -1446,9 +1476,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
   document.addEventListener('DOMContentLoaded', function() {
     _obs.observe(document.body, { childList: true, subtree: true });
-    // patch already-rendered cards
-    document.querySelectorAll('.czn-card,.cruise-card').forEach(function(card) {
+    document.querySelectorAll('.czn-card,.cruise-card,.tab-card').forEach(function(card) {
       card.innerHTML = patchHTML(card.innerHTML);
+    });
+    document.querySelectorAll('a[href*="cruise-view.html"]').forEach(function(a) {
+      if (a.href.indexOf('/en/cruise-view.html') === -1) {
+        a.href = a.href.replace('/cruise-view.html', '/en/cruise-view.html');
+      }
     });
   });
 })();
