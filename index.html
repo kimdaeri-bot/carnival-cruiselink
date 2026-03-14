@@ -916,7 +916,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const slider = document.getElementById(sliderId);
       if (!slider) return 0;
       const card = slider.querySelector('.cruise-card, .czn-card');
-      if (card) return card.offsetWidth + 20; // 실제 카드 너비 + gap(20px)
+      if (card) {
+        const gap = isMobile() ? 12 : 20;
+        return card.offsetWidth + gap;
+      }
       if (isMobile()) return slider.offsetWidth;
       return (slider.offsetWidth - 40) / 3;
     }
