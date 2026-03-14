@@ -84,7 +84,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     transition:transform 0.32s cubic-bezier(.4,0,.2,1);
     will-change:transform;
   }
-  .filter-sidebar.open{transform:translateY(0);}
+  .filter-sidebar.open{transform:translateY(0);overscroll-behavior:contain;}
   #filterOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:7999;}
   #filterOverlay.show{display:block;}
   #filterFab{
@@ -362,16 +362,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.querySelector('.filter-sidebar').classList.add('open');
       document.getElementById('filterOverlay').classList.add('show');
       document.body.style.overflow = 'hidden';
+      document.body.style.overscrollBehavior = 'none';
     }
     function closeFilter() {
       document.querySelector('.filter-sidebar').classList.remove('open');
       document.getElementById('filterOverlay').classList.remove('show');
       document.body.style.overflow = '';
+      document.body.style.overscrollBehavior = '';
     }
-    // 필터 핸들바 클릭으로 닫기
+    // 필터 핸들바: 클릭 닫기 + 아래 드래그 닫기
     document.addEventListener('DOMContentLoaded', function() {
       const handle = document.querySelector('.filter-sheet-handle');
-      if (handle) handle.addEventListener('click', closeFilter);
+      const sidebar = document.querySelector('.filter-sidebar');
+      if (!handle || !sidebar) return;
+
+      handle.addEventListener('click', closeFilter);
+
+      let startY = 0;
+      handle.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+      handle.addEventListener('touchend', function(e) {
+        const dy = e.changedTouches[0].clientY - startY;
+        if (dy > 40) closeFilter();
+      });
     });
     function toggleAcc(head) {
       const body = head.nextElementSibling;
