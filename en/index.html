@@ -1464,16 +1464,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     html = html.replace(/location\.href='cruise-view\.html\?/g, "location.href='en/cruise-view.html?");
     return html;
   }
-  function withTitleEn(c) {
+  var OP_EN = {'MSC크루즈':'MSC Cruises','노르웨이전 크루즈 라인':'Norwegian Cruise Line','로얄 캐리비안 인터내셔널':'Royal Caribbean','셀레브리티 크루즈':'Celebrity Cruises','카니발 크루즈 라인':'Carnival Cruise Line','오세아니아 크루즈':'Oceania Cruises','리젠트 세븐 시즈':'Regent Seven Seas','익스플로라 저니':'Explora Journeys','프린세스 크루즈':'Princess Cruises','문의':'Inquire'};
+  function withEnglishFields(c) {
     var cc = Object.assign({}, c);
     if (cc.titleEn) cc.title = cc.titleEn;
+    // Force English port names: set nameKo = English name so localCruiseCard uses English
+    if (cc.startsAt) cc.startsAt = Object.assign({}, cc.startsAt, { nameKo: cc.startsAt.name || cc.startsAt.nameKo });
+    if (cc.endsAt) cc.endsAt = Object.assign({}, cc.endsAt, { nameKo: cc.endsAt.name || cc.endsAt.nameKo });
+    // Use English route
+    if (cc.portRoute) cc.portRouteKo = cc.portRoute;
     return cc;
   }
   if (typeof Components !== 'undefined') {
     var _local = Components.localCruiseCard;
-    if (_local) Components.localCruiseCard = function(c) { return patchHTML(_local.call(Components, withTitleEn(c))); };
+    if (_local) Components.localCruiseCard = function(c) { return patchHTML(_local.call(Components, withEnglishFields(c))); };
     var _item = Components.localCruiseItem;
-    if (_item) Components.localCruiseItem = function(c) { return patchHTML(_item.call(Components, withTitleEn(c))); };
+    if (_item) Components.localCruiseItem = function(c) { return patchHTML(_item.call(Components, withEnglishFields(c))); };
   }
   if (typeof renderCruiseCard === 'function') {
     var _rc = renderCruiseCard;
