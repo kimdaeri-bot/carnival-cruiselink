@@ -272,7 +272,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function renderCruiseCard(c) {
       const T = typeof Translations !== 'undefined' ? Translations : null;
       const fromPrice = c.priceInside || c.priceOutside || c.priceBalcony;
-      const opName = ((T ? T.operatorName(c.operator) : c.operator) || c.operator || '').toUpperCase();
+      // JP: use Japanese fields
+      const OP_JP = {'MSC크루즈':'MSCクルーズ','MSC':'MSCクルーズ','노르웨이전 크루즈 라인':'ノルウェージャン・クルーズ・ライン','Norwegian':'ノルウェージャン・クルーズ・ライン','로얄 캐리비안 인터내셔널':'ロイヤル・カリビアン','Royal Caribbean':'ロイヤル・カリビアン','셀레브리티 크루즈':'セレブリティ・クルーズ','Celebrity':'セレブリティ・クルーズ','카니발 크루즈 라인':'カーニバル・クルーズ','Carnival':'カーニバル・クルーズ','오세아니아 크루즈':'オセアニア・クルーズ','Oceania':'オセアニア・クルーズ','리젠트 세븐 시즈':'リージェント・セブンシーズ','Regent':'リージェント・セブンシーズ','익스플로라 저니':'エクスプローラ・ジャーニーズ','Explora':'エクスプローラ・ジャーニーズ','프린세스 크루즈':'プリンセス・クルーズ','Princess':'プリンセス・クルーズ'};
+      const JP_PORT = {'Miami':'マイアミ','Barcelona':'バルセロナ','Southampton':'サウサンプトン','Civitavecchia':'チビタベッキア','Rome (Civitavecchia)':'チビタベッキア(ローマ)','Piraeus':'ピレウス','Athens (Piraeus)':'ピレウス(アテネ)','Marseille':'マルセイユ','Fort Lauderdale':'フォート・ローダーデール','Port Canaveral':'ポート・カナベラル','Seattle':'シアトル','Vancouver':'バンクーバー','Galveston':'ガルベストン','Hamburg':'ハンブルク','Buenos Aires':'ブエノスアイレス','Singapore':'シンガポール','Dubai':'ドバイ','Abu Dhabi':'アブダビ','Lisbon':'リスボン','Valletta':'バレッタ','Naples':'ナポリ','Genoa':'ジェノア','Venice':'ヴェネツィア','Istanbul':'イスタンブール','Copenhagen':'コペンハーゲン','Amsterdam':'アムステルダム','Oslo':'オスロ','Stockholm':'ストックホルム','Osaka':'大阪','Tokyo':'東京','Yokohama':'横浜','Nagasaki':'長崎','Okinawa':'沖縄','Busan':'釜山','Incheon':'仁川','Keelung':'基隆','Taipei (Keelung)':'基隆(台北)','Hong Kong':'香港','Shanghai':'上海','Tianjin':'天津','Sydney':'シドニー','Auckland':'オークランド','Honolulu':'ホノルル','San Juan':'サンフアン','Cozumel':'コスメル','Nassau':'ナッソー','Belize City':'ベリーズシティ','Roatan':'ロアタン','Santorini':'サントリーニ','Rhodes':'ロードス','Mykonos':'ミコノス','Dubrovnik':'ドゥブロヴニク','Kotor':'コトル','Corfu':'コルフ','Malta':'マルタ','Palma de Mallorca':'パルマ・デ・マヨルカ','Cannes':'カンヌ','Monte Carlo':'モンテカルロ','Livorno':'リヴォルノ','Florence (Livorno)':'リヴォルノ(フィレンツェ)','Portofino':'ポルトフィーノ','Ajaccio':'アジャクシオ','Cagliari':'カリャリ','Messina':'メッシーナ','Palermo':'パレルモ','Catania':'カターニア','Bari':'バーリ','Split':'スプリット','Bruges (Zeebrugge)':'ブルージュ','Edinburgh (Newhaven)':'エジンバラ','Reykjavik':'レイキャビク'};
+      function jpPort(n) { return JP_PORT[n] || n || ''; }
+      const opName = (OP_JP[c.operator] || c.operator || '').toUpperCase();
       const destName = c.destination || '';
       const dateStr = c.dateFrom ? c.dateFrom.substring(0,10).replace(/-/g,'. ') : '';
       const nights = c.nights || c.duration || '';
@@ -284,9 +288,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
         return '';
       })();
-      const port = c.startsAt?.nameKo || (T ? T.portName(c.startsAt?.name||'') : '') || c.startsAt?.name || '';
-      const arrPort = c.endsAt?.nameKo || (T ? T.portName(c.endsAt?.name||'') : '') || c.endsAt?.name || '';
-      const routeStr = c.portRoute ? (T ? T.portRoute(c.portRoute) : c.portRoute) : '';
+      // Use JP port names
+      const port = jpPort(c.startsAt?.name) || c.startsAt?.nameKo || '';
+      const arrPort = jpPort(c.endsAt?.name) || c.endsAt?.nameKo || '';
+      // Translate route string port by port
+      const routeStr = c.portRoute ? c.portRoute.split(/\s*[-→·,]\s*/).map(p=>JP_PORT[p.trim()]||p.trim()).join(' → ') : '';
       const today = new Date().toISOString().slice(0,10);
       const daysLeft = c.dateFrom ? Math.round((new Date(c.dateFrom) - new Date(today)) / 86400000) : 999;
       let badge = '', badgeColor = '';
