@@ -1384,8 +1384,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           document.getElementById('tabCruiseGrid').innerHTML = '<div class="tabs-loading">해당 목적지 크루즈가 없습니다</div>';
           return;
         }
+        // 인천 탭 전용 여행지 이미지 풀 (겹침 방지)
+        const _incheonImgPool = {
+          taiwan: [
+            'https://images.unsplash.com/photo-1470004914212-05527e49370b?w=600&q=80', // 타이페이 야경
+            'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&q=80',   // 지우펀
+            'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',   // 태루거협곡
+          ],
+          japan: [
+            'https://images.unsplash.com/photo-1480796927426-f609979314bd?w=600&q=80', // 도쿄+후지산
+            'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&q=80', // 일본 벚꽃
+            'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80', // 교토 도리이
+            'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=600&q=80', // 도쿄 야경
+            'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80', // 도쿄 타워
+          ],
+          korea: [
+            'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=600&q=80', // 서울 남산
+            'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80', // 제주도
+            'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=600&q=80', // 한국 사찰
+          ],
+        };
+        const _usedImgs = new Set();
+        const _pickImg = (pool) => {
+          for (const u of pool) { if (!_usedImgs.has(u)) { _usedImgs.add(u); return u; } }
+          return pool[0];
+        };
+
         const html = cruises.slice(0, 10).map((c, i) => {
-          const img = c.portImage || c.image || imgs[i % imgs.length];
+          let img;
+          if (dest === 'incheon') {
+            const t = c.title || '';
+            const pool = t.includes('대만') ? _incheonImgPool.taiwan
+                       : t.includes('일본') ? _incheonImgPool.japan
+                       : _incheonImgPool.korea;
+            img = _pickImg(pool);
+          } else {
+            img = c.portImage || c.image || imgs[i % imgs.length];
+          }
           const nights = c.nights || c.duration || '?';
           const dateRaw = c.dateFrom || c.departure_date || '';
           const dateStr = dateRaw ? dateRaw.substring(0, 10) : '';
