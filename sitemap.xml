@@ -505,4 +505,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url><loc>https://www.cruiselink.co.kr/guide/tips/cruise-cancellation-policy.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.cruiselink.co.kr/guide/tips/cruise-oceanview-vs-balcony.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.cruiselink.co.kr/guide/tips/cruise-shore-excursion-tips.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.cruiselink.co.kr/guide/tips/cruise-repositioning.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.cruiselink.co.kr/guide/tips/cruise-specialty-dining.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.cruiselink.co.kr/guide/tips/cruise-private-island.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.cruiselink.co.kr/guide/tips/cruise-packing-checklist.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.cruiselink.co.kr/guide/tips/cruise-upgrade-tips.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
