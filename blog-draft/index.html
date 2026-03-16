@@ -14,213 +14,249 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <title>크루즈링크 블로그 초안 목록 (내부용)</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Noto Sans KR',sans-serif;background:#0f1623;color:#e0e6f0;min-height:100vh}
-    header{background:linear-gradient(135deg,#0a2540,#0077cc);padding:36px 40px 28px;border-bottom:2px solid #1a4a7a}
-    header h1{font-size:24px;font-weight:900;color:#fff;margin-bottom:6px}
-    header p{font-size:13px;color:rgba(255,255,255,.6)}
-    .lock-badge{display:inline-block;background:#cc3300;color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:12px;margin-bottom:12px}
-    .container{max-width:960px;margin:0 auto;padding:40px 24px}
-    .guide-box{background:#141f2e;border:1px dashed #2a3a4a;border-radius:8px;padding:16px 20px;margin-bottom:32px;font-size:13px;color:#6a8aaa;line-height:1.8}
-    .guide-box strong{color:#90caf9}
-    .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-    .card{background:#1a2536;border:1px solid #243040;border-radius:12px;overflow:hidden;text-decoration:none;display:block;color:inherit;transition:border-color .2s,transform .2s}
-    .card:hover{border-color:#0077cc;transform:translateY(-3px)}
-    .card-img{width:100%;height:170px;object-fit:cover;display:block}
-    .card-body{padding:18px 20px}
-    .card-tags{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-    .tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:10px}
-    .tag-msc{background:#0d3a5a;color:#5bc8f5}
-    .tag-dest{background:#1a1a2a;color:#90caf9}
-    .card h3{font-size:15px;font-weight:800;color:#e8f0fe;margin-bottom:6px;line-height:1.4}
-    .card-meta{font-size:11px;color:#5a80a0;margin-bottom:14px}
-    .open-btn{display:inline-block;background:#0077cc;color:#fff;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;transition:background .2s}
+    body{font-family:'Noto Sans KR',sans-serif;background:#f5f6f8;color:#222;min-height:100vh}
+    header{background:#0a2540;padding:20px 32px;border-bottom:3px solid #0077cc}
+    header h1{font-size:18px;font-weight:900;color:#fff}
+    header p{font-size:12px;color:rgba(255,255,255,.5);margin-top:3px}
+    .lock-badge{display:inline-block;background:#cc3300;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;margin-bottom:8px}
+    .container{max-width:900px;margin:0 auto;padding:28px 20px}
+    .guide-box{background:#e8f0fe;border-left:4px solid #0077cc;padding:10px 16px;margin-bottom:24px;font-size:12.5px;color:#444;line-height:1.7;border-radius:0 6px 6px 0}
+
+    /* 섹션 제목 */
+    .section-title{font-size:13px;font-weight:800;color:#0a2540;padding:8px 14px;background:#dce8f5;border-left:4px solid #0077cc;margin-bottom:0;letter-spacing:.3px}
+
+    /* 게시판 테이블 */
+    .board{width:100%;border-collapse:collapse;margin-bottom:28px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .board thead tr{background:#1a3a6a;color:#fff}
+    .board th{padding:9px 12px;font-size:12px;font-weight:700;text-align:left;white-space:nowrap}
+    .board th.num{width:36px;text-align:center}
+    .board th.tag-col{width:100px}
+    .board th.date-col{width:110px}
+    .board th.action-col{width:80px;text-align:center}
+    .board tbody tr{border-bottom:1px solid #e8ecf0;transition:background .15s}
+    .board tbody tr:hover{background:#f0f5ff}
+    .board td{padding:9px 12px;font-size:13px;vertical-align:middle}
+    .board td.num{text-align:center;color:#aaa;font-size:12px}
+    .board td.title-col a{color:#1a3a6a;font-weight:700;text-decoration:none}
+    .board td.title-col a:hover{color:#0077cc;text-decoration:underline}
+    .board td.title-col .sub{font-size:11.5px;color:#888;font-weight:400;margin-top:2px}
+    .board td.date-col{font-size:12px;color:#888;white-space:nowrap}
+    .board td.action-col{text-align:center}
+    .open-btn{display:inline-block;background:#0077cc;color:#fff;padding:5px 12px;border-radius:5px;font-size:11.5px;font-weight:700;text-decoration:none;white-space:nowrap}
     .open-btn:hover{background:#005fa3}
+    .open-btn.insta{background:#E1306C}
+    .open-btn.insta:hover{background:#b0204e}
+
+    /* 태그 뱃지 */
+    .badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:8px;white-space:nowrap}
+    .badge-new{background:#ffd700;color:#333}
+    .badge-dest{background:#e8f0fe;color:#1a3a6a;border:1px solid #c0d4f0}
+    .badge-insta{background:#fce4ec;color:#c2185b;border:1px solid #f8bbd0}
   </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4PPLZNG"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager -->
 
 <header>
   <div class="lock-badge">🔒 내부용 — 검색엔진 차단</div>
   <h1>📝 크루즈링크 블로그 초안 목록</h1>
-  <p>네이버 블로그 포스팅 초안 보관함 · 복붙용 내부 페이지 · 외부 비공개</p>
+  <p>네이버 블로그 · 인스타그램 포스팅 초안 보관함</p>
 </header>
+
 <div class="container">
   <div class="guide-box">
-    💡 <strong>사용 방법:</strong> 카드의 "초안 열기" 클릭 → 섹션별 "복사" 또는 상단 "전체 복사" → 네이버 블로그 붙여넣기<br>
-    📌 <strong>새 초안 추가:</strong> 상세 페이지 URL을 김대리에게 주시면 추가해 드립니다.
+    💡 <strong>사용 방법:</strong> "열기" 클릭 → 섹션별 복사 또는 상단 전체 복사 → 네이버 블로그 / 인스타 붙여넣기
   </div>
 
   <!-- 네이버 블로그 -->
-  <div style="font-size:13px;font-weight:800;color:#90caf9;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #1e2d40;letter-spacing:.5px">📝 네이버 블로그 초안</div>
-  <div class="card-grid">
-    <a class="card" href="msc-bellissima-japan-taiwan-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC%20Cruises%2C%20MSC%20Bellissima%2C%20Exterior%2C%20Copyrights%20-%20MSC%20Rights.jpg" alt="">
-      <div class="card-body">
-        <div class="card-tags"><span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span><span style="background:#1e6fd4;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">일본·대만</span></div>
-        <div style="font-weight:800;font-size:1rem;color:#e0e6f0;margin-bottom:6px;line-height:1.4">MSC 벨리시마 일본·대만 4박 크루즈 — 2026년 6월 도쿄 출발</div>
-        <div style="font-size:.82rem;color:#6a8aaa">📅 2026-03-13 · 4박 5일 · $309~</div>
-      </div>
-    </a>
-    <a class="card" href="msc-orchestra-mediterranean-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2024/09/26/10/45/07/ad264e77-d95a-40f2-9131-456fd1c2d6e4/MSC%20Cruises%2C%20MSC%20Orchestra%2C%20New%20York%20Exterior%2C%20MSC%20Rights.jpg" alt="MSC 오케스트라">
-      <div class="card-body">
-        <div class="card-tags"><span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span><span style="background:#1e6fd4;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">지중해</span></div>
-        <h3>🚢 MSC 오케스트라 — 스페인·이탈리아·프랑스 7박<br>(Valencia 출발, 로마·피렌체·마르세유)</h3>
-        <div class="card-meta">📅 2026-05-09 출발 &nbsp;·&nbsp; 🌙 7박 8일 &nbsp;·&nbsp; $503~ &nbsp;·&nbsp; 작성일: 2026-03-15</div>
-        <span class="open-btn">초안 열기 →</span>
-      </div>
-    </a>
-    <a class="card" href="norwegian-epic-mediterranean-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2025/12/10/11/16/54/576e66cb-8a6d-4da4-9b6b-32dca14838d4/NCL%20Norwegian%20Epic%20Exterior%20-%20Credit%20-%20Kikor.jpeg" alt="Norwegian Epic">
-      <div class="card-body">
-        <div class="card-tags"><span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span><span style="background:#003580;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">지중해</span></div>
-        <h3>🚢 Norwegian Epic — 이탈리아·프랑스·스페인 7박<br>(로마 출발 → 바르셀로나 하선, 7개 항구)</h3>
-        <div class="card-meta">📅 2026-07-19 출발 &nbsp;·&nbsp; 🌙 7박 8일 &nbsp;·&nbsp; $715~ &nbsp;·&nbsp; 작성일: 2026-03-15</div>
-        <span class="open-btn">초안 열기 →</span>
-      </div>
-    </a>
-    <a class="card" href="norwegian-jewel-caribbean-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2024/12/19/09/13/37/8b65d198-df6d-4c35-b3c7-d53e1a1c4347/NCL%2C%20Norwegian%20Jewel%2C%20Aerial%20at%20Sea%20Exterior%202%20%C2%A9Michele%20Verdure.jpg" alt="Norwegian Jewel">
-      <div class="card-body">
-        <div class="card-tags"><span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span><span style="background:#003580;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">미국·버뮤다</span></div>
-        <h3>🚢 Norwegian Jewel — 미국·버뮤다 7박<br>(필라델피아 출발, 버뮤다 핑크해변 2일 기항)</h3>
-        <div class="card-meta">📅 2026-04-30 출발 &nbsp;·&nbsp; 🌙 7박 8일 &nbsp;·&nbsp; $530~ &nbsp;·&nbsp; 작성일: 2026-03-16</div>
-        <span class="open-btn">초안 열기 →</span>
-      </div>
-    </a>
-    <a class="card" href="spectrum-of-the-seas-asia-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI%20Spectrum%20of%20the%20Seas.jpg" alt="Spectrum of the Seas">
-      <div class="card-body">
-        <div class="card-tags"><span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span><span style="background:#004d9f;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">중국·한국</span></div>
-        <h3>🚢 Spectrum of the Seas — 중국·한국 4박<br>(상하이 출발, 부산 기항 — 로얄캐리비안)</h3>
-        <div class="card-meta">📅 2026-05-06 출발 &nbsp;·&nbsp; 🌙 4박 5일 &nbsp;·&nbsp; $438~ &nbsp;·&nbsp; 작성일: 2026-03-16</div>
-        <span class="open-btn">초안 열기 →</span>
-      </div>
-    </a>
-    <a class="card" href="msc-musica-mediterranean-2026.html" target="_blank">
-      <img class="card-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=70" alt="MSC 무지카 지중해">
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag tag-msc">MSC 크루즈</span>
-          <span class="tag tag-dest">지중해</span>
-        </div>
-        <h3>🚢 MSC 무지카 — 지중해 7박<br>(제노바·마르세유·이비자·로마)</h3>
-        <div class="card-meta">📅 2026-09-01 출발 &nbsp;·&nbsp; 🌙 7박 8일 &nbsp;·&nbsp; 작성일: 2026-03-10</div>
-        <span class="open-btn">초안 열기 →</span>
-      </div>
-    </a>
-    <a class="card" href="celebrity-millennium-korea-japan-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2025/02/05/10/02/21/762e4e18-c89e-4ccd-ac4c-59d143cbb87b/Celebrity%20Cruises%2C%20Celebrity%20Millenium%2C%20Exterior.jpg" alt="셀러브리티 밀레니엄">
-      <div class="card-body">
-        <div class="card-tags"><span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span><span style="background:#1e6fd4;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">한국·일본</span></div>
-        <h3>🚢 셀러브리티 밀레니엄 — 한국·일본 12박<br>(인천 출발 → 도쿄 하선, 7개 항구)</h3>
-        <div class="card-meta">📅 2026-05-26 출발 &nbsp;·&nbsp; 🌙 12박 13일 &nbsp;·&nbsp; 작성일: 2026-03-14</div>
-        <span class="open-btn">초안 열기 →</span>
-      </div>
-    </a>
-    <a class="card" href="msc-seascape-caribbean-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2025/09/19/11/38/30/6d47956b-d0ef-474d-8b59-069f6ca70109/MSC%20Seascape%20-%20Exterior%201.jpg" alt="MSC 씨스케이프">
-      <div class="card-body">
-        <div class="card-tags"><span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span><span style="background:#006064;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">카리브해</span></div>
-        <h3>🌊 MSC 씨스케이프 — 카리브해 7박<br>(코스타마야·로아탄·코수멜)</h3>
-        <div class="card-meta">📅 2026-05-31 출발 &nbsp;·&nbsp; 🌙 7박 8일 &nbsp;·&nbsp; 작성일: 2026-03-14</div>
-        <span class="open-btn">초안 열기 →</span>
-      </div>
-    </a>
-  </div>
+  <div class="section-title">📝 네이버 블로그 초안 (7건)</div>
+  <table class="board">
+    <thead>
+      <tr>
+        <th class="num">번호</th>
+        <th>제목</th>
+        <th class="tag-col">노선</th>
+        <th class="date-col">출발일</th>
+        <th class="date-col">작성일</th>
+        <th class="action-col">바로가기</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">7</td>
+        <td class="title-col">
+          <a href="msc-bellissima-japan-taiwan-2026.html" target="_blank">MSC 벨리시마 일본·대만 4박 크루즈</a>
+          <div class="sub">도쿄 출발 · 4박 5일 · $309~</div>
+        </td>
+        <td><span class="badge badge-dest">일본·대만</span></td>
+        <td class="date-col">2026-06-</td>
+        <td class="date-col">2026-03-13</td>
+        <td class="action-col"><a class="open-btn" href="msc-bellissima-japan-taiwan-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">6</td>
+        <td class="title-col">
+          <a href="msc-orchestra-mediterranean-2026.html" target="_blank">MSC 오케스트라 스페인·이탈리아·프랑스 7박</a>
+          <div class="sub">Valencia 출발 · 7박 8일 · $503~</div>
+        </td>
+        <td><span class="badge badge-dest">지중해</span></td>
+        <td class="date-col">2026-05-09</td>
+        <td class="date-col">2026-03-15</td>
+        <td class="action-col"><a class="open-btn" href="msc-orchestra-mediterranean-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td class="title-col">
+          <a href="norwegian-epic-mediterranean-2026.html" target="_blank">Norwegian Epic 이탈리아·프랑스·스페인 7박</a>
+          <div class="sub">로마 출발 · 7박 8일 · $715~</div>
+        </td>
+        <td><span class="badge badge-dest">지중해</span></td>
+        <td class="date-col">2026-07-19</td>
+        <td class="date-col">2026-03-15</td>
+        <td class="action-col"><a class="open-btn" href="norwegian-epic-mediterranean-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td class="title-col">
+          <a href="norwegian-jewel-caribbean-2026.html" target="_blank">Norwegian Jewel 미국·버뮤다 7박</a>
+          <div class="sub">필라델피아 출발 · 7박 8일 · $530~</div>
+        </td>
+        <td><span class="badge badge-dest">미국·버뮤다</span></td>
+        <td class="date-col">2026-04-30</td>
+        <td class="date-col">2026-03-16</td>
+        <td class="action-col"><a class="open-btn" href="norwegian-jewel-caribbean-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td class="title-col">
+          <a href="spectrum-of-the-seas-asia-2026.html" target="_blank">Spectrum of the Seas 중국·한국 4박</a>
+          <div class="sub">상하이 출발 · 4박 5일 · $438~</div>
+        </td>
+        <td><span class="badge badge-dest">중국·한국</span></td>
+        <td class="date-col">2026-05-06</td>
+        <td class="date-col">2026-03-16</td>
+        <td class="action-col"><a class="open-btn" href="spectrum-of-the-seas-asia-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td class="title-col">
+          <a href="celebrity-millennium-korea-japan-2026.html" target="_blank">셀러브리티 밀레니엄 한국·일본 12박</a>
+          <div class="sub">인천 출발 → 도쿄 하선 · 12박 13일</div>
+        </td>
+        <td><span class="badge badge-dest">한국·일본</span></td>
+        <td class="date-col">2026-05-26</td>
+        <td class="date-col">2026-03-14</td>
+        <td class="action-col"><a class="open-btn" href="celebrity-millennium-korea-japan-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">1</td>
+        <td class="title-col">
+          <a href="msc-seascape-caribbean-2026.html" target="_blank">MSC 씨스케이프 카리브해 7박</a>
+          <div class="sub">코스타마야·로아탄·코수멜 · 7박 8일</div>
+        </td>
+        <td><span class="badge badge-dest">카리브해</span></td>
+        <td class="date-col">2026-05-31</td>
+        <td class="date-col">2026-03-14</td>
+        <td class="action-col"><a class="open-btn" href="msc-seascape-caribbean-2026.html" target="_blank">열기</a></td>
+      </tr>
+    </tbody>
+  </table>
 
   <!-- 인스타그램 -->
-  <div style="font-size:13px;font-weight:800;color:#f48fb1;margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid #1e2d40;letter-spacing:.5px">📸 인스타그램 초안</div>
-  <div class="card-grid">
-    <a class="card" href="insta-msc-bellissima-japan-taiwan-2026.html" target="_blank" style="border:2px solid #E1306C">
-      <img class="card-img" src="https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC%20Cruises%2C%20MSC%20Bellissima%2C%20Exterior%2C%20Copyrights%20-%20MSC%20Rights.jpg" alt="">
-      <div class="card-body">
-        <div class="card-tags">
-          <span style="background:#E1306C;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">📸 인스타</span>
-          <span style="background:#1e6fd4;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">일본·대만</span>
-        </div>
-        <div style="font-weight:800;font-size:1rem;color:#e0e6f0;margin-bottom:6px;line-height:1.4">MSC 벨리시마 일본·대만 4박 — 캐러셀·릴스·스토리·해시태그</div>
-        <div style="font-size:.82rem;color:#6a8aaa">📅 2026-03-13 · 슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
-      </div>
-    </a>
-    <a class="card" href="insta-celebrity-millennium-korea-japan-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2025/02/05/10/02/21/762e4e18-c89e-4ccd-ac4c-59d143cbb87b/Celebrity%20Cruises%2C%20Celebrity%20Millenium%2C%20Exterior.jpg" alt="">
-      <div class="card-body">
-        <div class="card-tags">
-          <span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span>
-          <span style="background:#E1306C;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">📸 인스타</span>
-          <span style="background:#1e6fd4;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">한국·일본</span>
-        </div>
-        <div style="font-weight:800;font-size:1rem;color:#e0e6f0;margin-bottom:6px;line-height:1.4">셀러브리티 밀레니엄 한국·일본 12박 — 캐러셀·릴스·스토리·해시태그</div>
-        <div style="font-size:.82rem;color:#6a8aaa">📅 2026-05-26 · 슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
-      </div>
-    </a>
-    <a class="card" href="insta-msc-orchestra-mediterranean-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2024/09/26/10/45/07/ad264e77-d95a-40f2-9131-456fd1c2d6e4/MSC%20Cruises%2C%20MSC%20Orchestra%2C%20New%20York%20Exterior%2C%20MSC%20Rights.jpg" alt="">
-      <div class="card-body">
-        <div class="card-tags">
-          <span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span>
-          <span style="background:#E1306C;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">📸 인스타</span>
-          <span style="background:#1e6fd4;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">지중해</span>
-        </div>
-        <div style="font-weight:800;font-size:1rem;color:#e0e6f0;margin-bottom:6px;line-height:1.4">MSC 오케스트라 지중해 7박 — 캐러셀·릴스·스토리·해시태그</div>
-        <div style="font-size:.82rem;color:#6a8aaa">📅 2026-05-09 · 슬라이드 6장 · 릴스 자막 · 스토리 3장 · 작성일: 2026-03-15</div>
-      </div>
-    </a>
-    <a class="card" href="insta-norwegian-epic-mediterranean-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2025/12/10/11/16/54/576e66cb-8a6d-4da4-9b6b-32dca14838d4/NCL%20Norwegian%20Epic%20Exterior%20-%20Credit%20-%20Kikor.jpeg" alt="">
-      <div class="card-body">
-        <div class="card-tags">
-          <span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span>
-          <span style="background:#E1306C;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">📸 인스타</span>
-          <span style="background:#003580;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">지중해</span>
-        </div>
-        <div style="font-weight:800;font-size:1rem;color:#e0e6f0;margin-bottom:6px;line-height:1.4">Norwegian Epic 지중해 7박 — 캐러셀·릴스·스토리·해시태그</div>
-        <div style="font-size:.82rem;color:#6a8aaa">📅 2026-07-19 · 슬라이드 6장 · 릴스 자막 · 스토리 3장 · 작성일: 2026-03-15</div>
-      </div>
-    </a>
-    <a class="card" href="insta-msc-seascape-caribbean-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2025/09/19/11/38/30/6d47956b-d0ef-474d-8b59-069f6ca70109/MSC%20Seascape%20-%20Exterior%201.jpg" alt="">
-      <div class="card-body">
-        <div class="card-tags">
-          <span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span>
-          <span style="background:#E1306C;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">📸 인스타</span>
-          <span style="background:#006064;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">카리브해</span>
-        </div>
-        <div style="font-weight:800;font-size:1rem;color:#e0e6f0;margin-bottom:6px;line-height:1.4">MSC 씨스케이프 카리브해 7박 — 캐러셀·릴스·스토리·해시태그</div>
-        <div style="font-size:.82rem;color:#6a8aaa">📅 2026-05-31 · 슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
-      </div>
-    </a>
-    <a class="card" href="insta-norwegian-jewel-caribbean-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2024/12/19/09/13/37/8b65d198-df6d-4c35-b3c7-d53e1a1c4347/NCL%2C%20Norwegian%20Jewel%2C%20Aerial%20at%20Sea%20Exterior%202%20%C2%A9Michele%20Verdure.jpg" alt="">
-      <div class="card-body">
-        <div class="card-tags">
-          <span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span>
-          <span style="background:#E1306C;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">📸 인스타</span>
-          <span style="background:#003580;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">미국·버뮤다</span>
-        </div>
-        <div style="font-weight:800;font-size:1rem;color:#e0e6f0;margin-bottom:6px;line-height:1.4">Norwegian Jewel 미국·버뮤다 7박 — 캐러셀·릴스·스토리·해시태그</div>
-        <div style="font-size:.82rem;color:#6a8aaa">📅 2026-04-30 · 슬라이드 6장 · 릴스 자막 · 스토리 3장 · 작성일: 2026-03-16</div>
-      </div>
-    </a>
-    <a class="card" href="insta-spectrum-of-the-seas-asia-2026.html" target="_blank" style="border:2px solid #ffd700">
-      <img class="card-img" src="https://assets.widgety.co.uk/2024/10/24/09/34/14/5200f781-5ac2-4c0c-8b5c-acf5da11df88/RCI%20Spectrum%20of%20the%20Seas.jpg" alt="">
-      <div class="card-body">
-        <div class="card-tags">
-          <span style="background:#ffd700;color:#333;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">🆕 신규</span>
-          <span style="background:#E1306C;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:800">📸 인스타</span>
-          <span style="background:#004d9f;color:#fff;font-size:11px;padding:2px 8px;border-radius:8px">중국·한국</span>
-        </div>
-        <div style="font-weight:800;font-size:1rem;color:#e0e6f0;margin-bottom:6px;line-height:1.4">Spectrum of the Seas 중국·한국 4박 — 캐러셀·릴스·스토리·해시태그</div>
-        <div style="font-size:.82rem;color:#6a8aaa">📅 2026-05-06 · 슬라이드 6장 · 릴스 자막 · 스토리 3장 · 작성일: 2026-03-16</div>
-      </div>
-    </a>
-  </div>
-
+  <div class="section-title">📸 인스타그램 초안 (7건)</div>
+  <table class="board">
+    <thead>
+      <tr>
+        <th class="num">번호</th>
+        <th>제목</th>
+        <th class="tag-col">노선</th>
+        <th class="date-col">출발일</th>
+        <th class="date-col">작성일</th>
+        <th class="action-col">바로가기</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">7</td>
+        <td class="title-col">
+          <a href="insta-spectrum-of-the-seas-asia-2026.html" target="_blank">Spectrum of the Seas 중국·한국 4박 — 인스타</a>
+          <div class="sub">슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
+        </td>
+        <td><span class="badge badge-dest">중국·한국</span></td>
+        <td class="date-col">2026-05-06</td>
+        <td class="date-col">2026-03-16</td>
+        <td class="action-col"><a class="open-btn insta" href="insta-spectrum-of-the-seas-asia-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">6</td>
+        <td class="title-col">
+          <a href="insta-norwegian-jewel-caribbean-2026.html" target="_blank">Norwegian Jewel 미국·버뮤다 7박 — 인스타</a>
+          <div class="sub">슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
+        </td>
+        <td><span class="badge badge-dest">미국·버뮤다</span></td>
+        <td class="date-col">2026-04-30</td>
+        <td class="date-col">2026-03-16</td>
+        <td class="action-col"><a class="open-btn insta" href="insta-norwegian-jewel-caribbean-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td class="title-col">
+          <a href="insta-msc-seascape-caribbean-2026.html" target="_blank">MSC 씨스케이프 카리브해 7박 — 인스타</a>
+          <div class="sub">슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
+        </td>
+        <td><span class="badge badge-dest">카리브해</span></td>
+        <td class="date-col">2026-05-31</td>
+        <td class="date-col">2026-03-14</td>
+        <td class="action-col"><a class="open-btn insta" href="insta-msc-seascape-caribbean-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td class="title-col">
+          <a href="insta-norwegian-epic-mediterranean-2026.html" target="_blank">Norwegian Epic 지중해 7박 — 인스타</a>
+          <div class="sub">슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
+        </td>
+        <td><span class="badge badge-dest">지중해</span></td>
+        <td class="date-col">2026-07-19</td>
+        <td class="date-col">2026-03-15</td>
+        <td class="action-col"><a class="open-btn insta" href="insta-norwegian-epic-mediterranean-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td class="title-col">
+          <a href="insta-msc-orchestra-mediterranean-2026.html" target="_blank">MSC 오케스트라 지중해 7박 — 인스타</a>
+          <div class="sub">슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
+        </td>
+        <td><span class="badge badge-dest">지중해</span></td>
+        <td class="date-col">2026-05-09</td>
+        <td class="date-col">2026-03-15</td>
+        <td class="action-col"><a class="open-btn insta" href="insta-msc-orchestra-mediterranean-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td class="title-col">
+          <a href="insta-celebrity-millennium-korea-japan-2026.html" target="_blank">셀러브리티 밀레니엄 한국·일본 12박 — 인스타</a>
+          <div class="sub">슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
+        </td>
+        <td><span class="badge badge-dest">한국·일본</span></td>
+        <td class="date-col">2026-05-26</td>
+        <td class="date-col">2026-03-14</td>
+        <td class="action-col"><a class="open-btn insta" href="insta-celebrity-millennium-korea-japan-2026.html" target="_blank">열기</a></td>
+      </tr>
+      <tr>
+        <td class="num">1</td>
+        <td class="title-col">
+          <a href="insta-msc-bellissima-japan-taiwan-2026.html" target="_blank">MSC 벨리시마 일본·대만 4박 — 인스타</a>
+          <div class="sub">슬라이드 6장 · 릴스 자막 · 스토리 3장</div>
+        </td>
+        <td><span class="badge badge-dest">일본·대만</span></td>
+        <td class="date-col">2026-06-</td>
+        <td class="date-col">2026-03-13</td>
+        <td class="action-col"><a class="open-btn insta" href="insta-msc-bellissima-japan-taiwan-2026.html" target="_blank">열기</a></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 </body>
 </html>
