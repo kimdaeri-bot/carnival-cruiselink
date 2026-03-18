@@ -874,7 +874,7 @@
     "cruiseline": "MSC Cruises",
     "ship": "MSC 벨리시마",
     "dateFrom": "2027-06-10",
-    "ports": "",
+    "ports": "도쿄 → 가고시마 → 인천",
     "price": "문의",
     "ref": "MSCBE20270610TYOINC",
     "name": "김지나",
@@ -885,6 +885,22 @@
     "message": "KIM JI NA\nJO SUNG YEOL",
     "id": "1773787024037",
     "timestamp": "2026-03-17T22:37:04.037Z",
-    "status": "신규"
+    "status": "신규",
+    "fareHistory": [
+      {
+        "date": "2026. 03. 18. 오후 04:45",
+        "pax": 2,
+        "types": [
+          {
+            "name": "발코니",
+            "val": 579,
+            "raw": "579"
+          }
+        ],
+        "air": 0,
+        "etc": 0,
+        "remarks": "* 디럭스 발코니 BR1 기준, 8~10층 예약 가능\n* 포함 사항 : 크루즈 요금 + TAX\n* 불포함 사항 : 편도 항공권, 현지 호텔비, 기항지 관광, 여행자보험, 선상팁, 기타 선내 유료 서비스 등\n"
+      }
+    ]
   }
 ]
