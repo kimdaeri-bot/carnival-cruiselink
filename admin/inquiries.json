@@ -902,5 +902,23 @@
         "remarks": "* 디럭스 발코니 BR1 기준, 8~10층 예약 가능\n* 포함 사항 : 크루즈 요금 + TAX\n* 불포함 사항 : 편도 항공권, 현지 호텔비, 기항지 관광, 여행자보험, 선상팁, 기타 선내 유료 서비스 등\n"
       }
     ]
+  },
+  {
+    "product": "지중해 7박 크루즈",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC 디비나",
+    "dateFrom": "2026-06-29",
+    "ports": "",
+    "price": "문의",
+    "ref": "MSCDI20260629KUSKUS",
+    "name": "김윤아",
+    "email": "ssevi_44@naver.com",
+    "phone": "01040158374",
+    "pax": "2",
+    "cabin": "발코니",
+    "message": "없음",
+    "id": "1773928530446",
+    "timestamp": "2026-03-19T13:55:30.446Z",
+    "status": "신규"
   }
 ]
