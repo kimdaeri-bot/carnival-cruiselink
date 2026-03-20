@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>인스타 초안 | Norwegian Jade 일본·한국 11박 (2026.10.07)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: #f0f2f5; color: #333; }
+    .admin-bar { position: sticky; top: 0; z-index: 999; background: #1a1a2e; color: #fff; padding: 10px 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; }
+    .admin-bar strong { color: #ffd700; }
+    .copy-all-btn { margin-left: auto; background: #E1306C; color: #fff; border: none; padding: 7px 18px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .copy-all-btn:hover { background: #c1255a; }
+    .wrapper { max-width: 860px; margin: 30px auto; padding: 0 16px 60px; }
+    .block { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.07); position: relative; }
+    .block-label { font-size: 11px; font-weight: 800; color: #E1306C; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+    .block:hover .copy-btn { opacity: 1; }
+    .copy-btn { position: absolute; top: 14px; right: 16px; opacity: 0; transition: opacity .2s; background: #E1306C; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 700; }
+    .slides-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 8px; }
+    .slide { background: linear-gradient(145deg, #0a1628, #0077cc); color: #fff; border-radius: 10px; aspect-ratio: 1/1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; position: relative; cursor: pointer; transition: transform .15s; }
+    .slide:hover { transform: scale(1.02); }
+    .slide:hover .slide-copy { opacity: 1; }
+    .slide-copy { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,.2); border: none; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; opacity: 0; transition: opacity .2s; }
+    .slide-num { font-size: 11px; font-weight: 800; opacity: .5; margin-bottom: 10px; letter-spacing: 1px; }
+    .slide-title { font-size: 17px; font-weight: 900; line-height: 1.4; margin-bottom: 8px; }
+    .slide-sub { font-size: 12px; opacity: .8; line-height: 1.6; }
+    .slide-price { font-size: 22px; font-weight: 900; color: #FFD700; margin: 8px 0 4px; }
+    .caption-box { background: #fff8f0; border-left: 4px solid #E1306C; padding: 16px 20px; border-radius: 0 8px 8px 0; font-size: 15px; line-height: 2; white-space: pre-wrap; font-family: inherit; }
+    .hashtags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .ht { background: #f0f2ff; color: #3d5af1; font-size: 13px; padding: 4px 12px; border-radius: 20px; cursor: pointer; transition: background .15s; }
+    .ht:hover { background: #3d5af1; color: #fff; }
+    .story { background: linear-gradient(160deg, #833ab4, #fd1d1d, #fcb045); color: #fff; border-radius: 10px; aspect-ratio: 9/16; max-width: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px 14px; cursor: pointer; position: relative; }
+    .story:hover .slide-copy { opacity: 1; }
+    .story-title { font-size: 15px; font-weight: 900; line-height: 1.4; margin-bottom: 8px; }
+    .story-sub { font-size: 11px; opacity: .85; line-height: 1.6; }
+    .stories-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+    #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #E1306C; color: #fff; padding: 10px 24px; border-radius: 20px; font-size: 14px; display: none; z-index: 9999; }
+  </style>
+</head>
+<body>
+<div class="admin-bar">
+  <strong>📸 인스타그램 초안</strong>
+  <span>noindex — 외부 비공개</span>
+  <span>|</span>
+  <span>Norwegian Jade 일본·한국 11박 · 2026.10.07</span>
+  <button class="copy-all-btn" onclick="copyAll()">📋 전체 캡션 복사</button>
+</div>
+
+<div class="wrapper" id="insta-content">
+
+  <!-- 캐러셀 슬라이드 -->
+  <div class="block">
+    <div class="block-label">📱 피드 캐러셀 — 슬라이드 텍스트 (6장)</div>
+    <p style="font-size:13px;color:#888;margin-bottom:16px">각 슬라이드 클릭 → 텍스트 복사. 디자인 툴(미리캔버스·캔바 등)에 붙여넣기하세요.</p>
+    <div class="slides-grid">
+
+      <div class="slide" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 01</div>
+        <div class="slide-title">🚢 요코하마 출발<br>일본 9개 도시 경유<br>인천 도착!</div>
+        <div class="slide-sub">Norwegian Jade<br>2026년 10월 7일 출발</div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#4a0c0c,#7b1c1c)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 02</div>
+        <div class="slide-title">🍂 11박 12일 단풍 루트</div>
+        <div class="slide-sub">
+          요코하마 → 시미즈(후지산)<br>
+          교토 → 센다이 → 하코다테<br>
+          아오모리 → 아키타 → 가나자와<br>
+          사카이미나토 → 인천 ✈️
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#1a237e,#283593)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 03</div>
+        <div class="slide-title">🌟 이 루트만의 하이라이트</div>
+        <div class="slide-sub">
+          🗻 후지산 뷰 (시미즈)<br>
+          ⛩️ 교토 단풍 (후시미 이나리)<br>
+          🌃 하코다테 세계 3대 야경<br>
+          🥢 가나자와 겐로쿠엔 단풍
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#004d40,#00695c)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 04</div>
+        <div class="slide-title">🍽️ 미식 여행도 함께!</div>
+        <div class="slide-sub">
+          🍣 시미즈 참치 초밥<br>
+          🐄 센다이 규탄 소혀<br>
+          🦞 크리스티안산 게 요리<br>
+          🍺 아키타 사케(청주)<br>
+          🦀 사카이미나토 마쓰바게
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#b71c1c,#c62828)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 05</div>
+        <div class="slide-title">💰 요금 안내</div>
+        <div class="slide-sub">인사이드</div>
+        <div class="slide-price">$1,940~</div>
+        <div class="slide-sub">발코니 ⭐ $3,210~ / 스위트 $3,060~<br><small style="opacity:.7">1인 기준 · 도쿄 항공 편도만 필요</small></div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#e65100,#f57c00)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 06</div>
+        <div class="slide-title">📞 지금 바로 상담하세요!</div>
+        <div class="slide-sub">
+          크루즈링크<br>
+          9개 글로벌 선사 공식 판매사<br><br>
+          💬 카카오톡 @크루즈링크<br>
+          🌐 www.cruiselink.co.kr
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 피드 캡션 -->
+  <div class="block">
+    <div class="block-label">✍️ 피드 캡션 (메인 포스팅용)</div>
+    <button class="copy-btn" onclick="copyBlock(this)">복사</button>
+    <div class="caption-box" id="caption-feed">인스타그램 포스팅 — Norwegian Jade 일본 9개 도시 + 인천 귀항 11박
+
+🚢 도쿄에서 출발해 인천으로 돌아오는 크루즈?! 실화입니다.
+일본 9개 숨겨진 도시 + 10월 단풍 + 귀국 항공권 불필요
+Norwegian Jade 일본·한국 완전정복 11박 🍂
+
+📅 2026.10.07 ~ 10.18 (11박 12일)
+💰 1인 $1,940~ (인사이드 기준)
+—
+📍 DAY BY DAY 일정
+
+🇯🇵 DAY 1 | 요코하마 승선
+도쿄 관광 후 요코하마 탑승. 야경 보며 출항 🌃
+
+🗻 DAY 2 | 시미즈 기항
+후지산 뷰 포인트 + 녹차 다도 체험 🍵
+
+⛩️ DAY 3 | 교토 기항
+후시미 이나리 → 기요미즈데라 단풍 → 기온 게이샤 거리
+
+🍂 DAY 5 | 센다이 기항
+마쓰시마(일본 3경) + 규탄 소혀 구이 🐄
+
+🌃 DAY 6 | 하코다테 기항
+세계 3대 야경 + 오징어 아침 시장 🦑
+
+🍎 DAY 7 | 아오모리 기항
+히로사키성 단풍 + 네부타 축제 기념관
+
+🌾 DAY 8 | 아키타 기항
+아키타 사케 주조장 + 나마하게 체험 🎭
+
+🥢 DAY 9 | 가나자와 기항
+겐로쿠엔 단풍 정원 + 오미초 해산물 시장 카이센동
+
+🦀 DAY 10 | 사카이미나토 기항
+마쓰바게 대게 만찬 + 미즈키 시게루 캐릭터 로드
+
+🇰🇷 DAY 12 | 인천 하선 — 집으로! 귀국 항공권 불필요 🙌
+—
+✨ 이 루트만의 신선 하이라이트
+🍂 10월 단풍 시즌 최적 루트 — 교토·하코다테·가나자와 동시
+🗺️ 도쿄행 편도 항공권만 구매! 인천 직접 귀항
+🇯🇵 도쿄·오사카 이외 숨겨진 일본 도시 탐방
+🦀 10월 게 해금 시즌! 신선한 마쓰바게 현지 시식
+—
+🏷️ 객실별 요금
+🚪 인사이드 $1,940~ | 🪟 오션뷰 $2,325~
+🌅 발코니 $3,210~ ⭐추천 | 👑 스위트 $3,060~
+
+👉 지금 바로 문의하세요!
+📞 02-3788-9119
+💬 카카오톡: @크루즈링크
+🌐 cruiselink.co.kr
+.
+.
+.
+#일본크루즈 #한국귀항크루즈 #NCL크루즈 #NorwegianJade #요코하마크루즈 #인천귀항 #10월단풍크루즈 #하코다테야경 #교토단풍 #가나자와여행 #일본심층탐방 #크루즈링크 #2026크루즈 #허니문크루즈 #해외여행 #일본여행 #크루즈추천 #여행스타그램 #일본단풍 #일본미식여행 #cruiselife #NCLcruise</div>
+  </div>
+
+  <!-- 릴스 자막 -->
+  <div class="block">
+    <div class="block-label">🎬 릴스 / 숏폼 자막 (15초)</div>
+    <button class="copy-btn" onclick="copyBlock(this)">복사</button>
+    <div class="caption-box">⏱ 0~3초: "도쿄에서 출발해 인천으로 돌아오는 크루즈?"
+⏱ 3~6초: "일본 9개 도시 + 10월 단풍 + 귀국 항공권 불필요"
+⏱ 6~9초: "Norwegian Jade 11박 12일"
+⏱ 9~12초: "2026년 10월 7일 출발 · 인사이드 $1,940~"
+⏱ 12~15초: "크루즈링크에서 지금 바로 상담 → 링크 클릭"</div>
+  </div>
+
+  <!-- 스토리 슬라이드 -->
+  <div class="block">
+    <div class="block-label">📲 스토리 슬라이드 텍스트 (3장)</div>
+    <div class="stories-row">
+
+      <div class="story" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">🚢 이번 가을<br>일본 9개 도시<br>크루즈로!</div>
+        <div class="story-sub" style="margin-top:10px">Norwegian Jade<br>2026.10.07 출발<br>11박 12일<br>인천 귀항</div>
+      </div>
+
+      <div class="story" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">💰 얼마예요?</div>
+        <div style="font-size:26px;font-weight:900;color:#FFD700;margin:10px 0">$1,940~</div>
+        <div class="story-sub">인사이드 1인 기준<br>도쿄 편도 항공만 필요<br>발코니 $3,210~</div>
+      </div>
+
+      <div class="story" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">📩 지금 상담하세요</div>
+        <div class="story-sub" style="margin-top:10px">크루즈링크<br>9개 글로벌 선사<br>공식 판매사<br><br>💬 카카오톡<br>🌐 cruiselink.co.kr</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 해시태그 -->
+  <div class="block">
+    <div class="block-label">🏷️ 해시태그 (클릭하면 복사)</div>
+    <button class="copy-btn" onclick="copyHashtags()">전체 복사</button>
+    <div class="hashtags" id="hashtag-list">
+      <span class="ht" onclick="copyText('#일본크루즈')">#일본크루즈</span>
+      <span class="ht" onclick="copyText('#한국귀항크루즈')">#한국귀항크루즈</span>
+      <span class="ht" onclick="copyText('#NCL크루즈')">#NCL크루즈</span>
+      <span class="ht" onclick="copyText('#NorwegianJade')">#NorwegianJade</span>
+      <span class="ht" onclick="copyText('#요코하마크루즈')">#요코하마크루즈</span>
+      <span class="ht" onclick="copyText('#인천귀항')">#인천귀항</span>
+      <span class="ht" onclick="copyText('#10월단풍크루즈')">#10월단풍크루즈</span>
+      <span class="ht" onclick="copyText('#하코다테야경')">#하코다테야경</span>
+      <span class="ht" onclick="copyText('#교토단풍')">#교토단풍</span>
+      <span class="ht" onclick="copyText('#가나자와여행')">#가나자와여행</span>
+      <span class="ht" onclick="copyText('#일본심층탐방')">#일본심층탐방</span>
+      <span class="ht" onclick="copyText('#크루즈링크')">#크루즈링크</span>
+      <span class="ht" onclick="copyText('#2026크루즈')">#2026크루즈</span>
+      <span class="ht" onclick="copyText('#허니문크루즈')">#허니문크루즈</span>
+      <span class="ht" onclick="copyText('#해외여행')">#해외여행</span>
+      <span class="ht" onclick="copyText('#일본여행')">#일본여행</span>
+      <span class="ht" onclick="copyText('#일본단풍')">#일본단풍</span>
+      <span class="ht" onclick="copyText('#일본미식여행')">#일본미식여행</span>
+      <span class="ht" onclick="copyText('#cruiselife')">#cruiselife</span>
+      <span class="ht" onclick="copyText('#NCLcruise')">#NCLcruise</span>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast">✅ 복사 완료!</div>
+
+<script>
+function showToast() {
+  const t = document.getElementById('toast');
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => showToast());
+}
+function copySlide(el) {
+  const texts = [];
+  el.querySelectorAll('.slide-num,.slide-title,.slide-sub,.slide-price,.story-title,.story-sub').forEach(e => {
+    const t = e.innerText.trim();
+    if (t && !e.classList.contains('slide-copy')) texts.push(t);
+  });
+  navigator.clipboard.writeText(texts.join('\n')).then(() => showToast());
+}
+function copyBlock(btn) {
+  const block = btn.parentElement;
+  const box = block.querySelector('.caption-box');
+  const text = box ? box.innerText.trim() : '';
+  navigator.clipboard.writeText(text).then(() => showToast());
+}
+function copyHashtags() {
+  const tags = [...document.querySelectorAll('.ht')].map(e => e.innerText).join(' ');
+  navigator.clipboard.writeText(tags).then(() => showToast());
+}
+function copyAll() {
+  const caption = document.getElementById('caption-feed').innerText.trim();
+  const tags = [...document.querySelectorAll('.ht')].map(e => e.innerText).join(' ');
+  navigator.clipboard.writeText(caption + '\n\n' + tags).then(() => showToast());
+}
+</script>
+</body>
+</html>
