@@ -419,7 +419,11 @@ function initYrTable(){
       <td><input type="number" id="y25c${m}" value="${D25C[m]}" step="0.01"></td>
       <td><input type="number" id="y26c${m}" value="0" step="0.01"></td>`;
     tb.appendChild(tr);
-    tr.querySelectorAll('input').forEach(el=>el.addEventListener('input',render));
+    tr.querySelectorAll('input').forEach(el=>{
+      el.addEventListener('input',render);
+      // y26f, y26c 입력 시 자동 저장
+      if(el.id.startsWith('y26'))el.addEventListener('change',saveYr26Cache);
+    });
   }
 }
 
@@ -462,6 +466,8 @@ function saveReport(){
   const sel=document.getElementById('reportSelect');
   const newIdx=getReports().findIndex(r=>r.title===title);
   if(newIdx>=0)sel.value=newIdx;
+  // y26 캐시도 갱신
+  saveYr26Cache();
   // 클라우드에도 저장 (이미지 제외)
   const cloudData={...data}; delete cloudData.adImg; delete cloudData.salesImg;
   fetch('https://enttix-omega.vercel.app/api/cl-reports',{
@@ -742,11 +748,33 @@ function copyShareLink(){
   navigator.clipboard.writeText(url).then(()=>alert('✅ 공유 링크 복사됨!\n\n'+url)).catch(()=>{prompt('아래 링크를 복사하세요:',url);});
 }
 
+// y26 수기 입력값 자동 캐시 저장
+function saveYr26Cache(){
+  const cache={};
+  for(let m=1;m<=12;m++){
+    cache[m]={y26f:gn(`y26f${m}`),y26c:gn(`y26c${m}`)};
+  }
+  localStorage.setItem('cl_yr26_cache',JSON.stringify(cache));
+}
+
 // 마지막 저장 리포트에서 26 Fare/Comm 디폴트 로드
 function loadPrev26Data(){
+  // 1순위: 수기 입력 캐시 (저장 버튼 없이 입력한 값)
+  const cache=JSON.parse(localStorage.getItem('cl_yr26_cache')||'null');
+  if(cache){
+    let filled=false;
+    for(let m=1;m<=12;m++){
+      const d=cache[m]||{};
+      ['y26f','y26c'].forEach(k=>{
+        const e=document.getElementById(`${k}${m}`);
+        if(e&&Number(d[k])!==0){e.value=d[k];filled=true;}
+      });
+    }
+    if(filled){render();return;}
+  }
+  // 2순위: 마지막 저장된 리포트 yrData
   const list=getReports();
   if(!list.length)return;
-  // 가장 최근 저장된 리포트
   const last=list[list.length-1];
   try{
     const data=JSON.parse(localStorage.getItem(`cl_report_${last.id}`)||'{}');
@@ -759,24 +787,7 @@ function loadPrev26Data(){
         if(e&&d[k]!==undefined&&Number(d[k])!==0){e.value=d[k];filled=true;}
       });
     }
-    if(filled){
-      // 클라우드와도 동기화 시도
-      fetch('https://enttix-omega.vercel.app/api/cl-reports')
-        .then(r=>r.json()).then(cloudList=>{
-          if(!Array.isArray(cloudList)||!cloudList.length)return;
-          const newest=cloudList[0]; // 최신순 정렬됨
-          if(!newest.data||!newest.data.yrData)return;
-          for(let m=1;m<=12;m++){
-            const d=newest.data.yrData[m]||{};
-            ['y26f','y26c'].forEach(k=>{
-              const e=document.getElementById(`${k}${m}`);
-              if(e&&d[k]!==undefined&&Number(d[k])!==0)e.value=d[k];
-            });
-          }
-          render();
-        }).catch(()=>{});
-      render();
-    }
+    if(filled)render();
   }catch(e){console.warn('이전 26 데이터 로드 실패:',e);}
 }
 
