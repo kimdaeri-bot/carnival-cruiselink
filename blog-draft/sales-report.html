@@ -226,10 +226,11 @@ input[readonly]{color:#4da6ff;cursor:default;background:#081018}
   <!-- 콘텐츠 현황 -->
   <div class="sec">
     <h2>📝 콘텐츠 작업 현황</h2>
-    <button class="add-btn" id="findContentBtn" style="background:#1a1a3a;color:#c084fc;border-color:#3a2a6a;margin-bottom:6px" onclick="findContent()">🔍 이번 달 작업 자동 찾기</button>
-    <div id="postList"></div>
-    <button class="add-btn" onclick="addPost('blog')">+ 블로그 추가</button>
-    <button class="add-btn" style="margin-top:3px" onclick="addPost('insta')">+ 인스타그램 추가</button>
+    <div class="r2">
+      <div class="fr"><label>블로그 방문자 수</label><input type="number" id="cntBlogVisitor" placeholder="0"></div>
+      <div class="fr"><label>블로그 포스팅 발행 수</label><input type="number" id="cntBlogPosts" placeholder="0"></div>
+      <div class="fr"><label>인스타 포스팅 발행 수</label><input type="number" id="cntInstaPosts" placeholder="0"></div>
+    </div>
   </div>
 
   <button class="print-btn" onclick="window.print()">🖨️ PDF 저장 / 인쇄</button>
@@ -306,7 +307,8 @@ async function parseSales(){
       setbv(id,'fare',b.fare||0); setbv(id,'tax',b.tax||0); setbv(id,'others',b.others||0); setbv(id,'comm',b.comm||0);
       // 월별 집계
       if(b.sailDate){
-        const sd=new Date(b.sailDate+'T00:00:00');
+        const sd=new Date((b.date||b.sailDate||'')+'T00:00:00');
+        if(isNaN(sd.getTime()))return;
         const yr=sd.getFullYear(); const mo=sd.getMonth()+1;
         const key=`${yr}_${mo}`;
         if(!yrAcc[key])yrAcc[key]={fare:0,comm:0};
@@ -442,9 +444,10 @@ function saveReport(){
     repMonth:mo, repYear:yr, repAsOf:gv('repAsOf'),
     bookings:bData, yrData,
     inqWeb:gi('inqWeb'), inqCall:gi('inqCall'), inqKakao:gi('inqKakao'), inqQuote:gi('inqQuote'), inqBooking:gi('inqBooking'),
+    cntBlogVisitor:gi('cntBlogVisitor'), cntBlogPosts:gi('cntBlogPosts'), cntInstaPosts:gi('cntInstaPosts'),
     naverStart:gv('naverStart'), naverEnd:gv('naverEnd'), naverBudget:gn('naverBudget'), naverExposure:gn('naverExposure'), naverVisitor:gn('naverVisitor'), naverCTR:gn('naverCTR'), naverCPC:gn('naverCPC'),
     googlePaused:document.getElementById('googlePaused').checked, googleStart:gv('googleStart'), googleEnd:gv('googleEnd'), googleBudget:gn('googleBudget'), googleExposure:gn('googleExposure'), googleVisitor:gn('googleVisitor'), googleCTR:gn('googleCTR'), googleCPC:gn('googleCPC'),
-    posts:pData, adImg:adImg
+    adImg:adImg
   };
   const list=getReports();
   const existing=list.findIndex(r=>r.title===title);
@@ -473,7 +476,7 @@ function loadReport(){
   document.getElementById('repYear').value=data.repYear;
   document.getElementById('repAsOf').value=data.repAsOf||'';
   // 문의
-  ['inqWeb','inqCall','inqKakao','inqQuote','inqBooking'].forEach(f=>{const e=document.getElementById(f);if(e)e.value=data[f]||0;});
+  ['inqWeb','inqCall','inqKakao','inqQuote','inqBooking','cntBlogVisitor','cntBlogPosts','cntInstaPosts'].forEach(f=>{const e=document.getElementById(f);if(e)e.value=data[f]||0;});
   // 네이버/구글
   ['naverStart','naverEnd','naverBudget','naverExposure','naverVisitor','naverCTR','naverCPC',
    'googleStart','googleEnd','googleBudget','googleExposure','googleVisitor','googleCTR','googleCPC'].forEach(f=>{const e=document.getElementById(f);if(e)e.value=data[f]||'';});
@@ -492,7 +495,7 @@ function loadReport(){
     Object.entries(b).forEach(([k,v])=>setbv(id,k,v));
   });
   // 포스팅
-  posts=[]; pId=0; document.getElementById('postList').innerHTML='';
+  ['cntBlogVisitor','cntBlogPosts','cntInstaPosts'].forEach(f=>{const e=document.getElementById(f);if(e)e.value=0;});
   (data.posts||[]).forEach(p=>{
     const id=pId++; posts.push({id,type:p.type});
     const isi=p.type==='insta';
@@ -570,12 +573,13 @@ function render(){
 
   const adH=adImg?`<div class="rpt-img"><img src="${adImg}" alt="광고결과"></div>`:'';
 
-  // 포스팅
-  const bl=posts.filter(p=>p.type==='blog'), il=posts.filter(p=>p.type==='insta');
-  const postH=(bl.length||il.length)?`<div class="rs"><div class="rst">CONTENT ACTIVITY</div><div class="pg">
-    <div class="pc"><h5>📝 Blog (${bl.length})</h5>${bl.map(p=>`<div class="pr">· ${gv(`p${p.id}_title`)||'(제목없음)'} <span style="color:#888">${fmtD(gv(`p${p.id}_date`))}</span>${gv(`p${p.id}_url`)?` <a href="${gv(`p${p.id}_url`)}">링크</a>`:''}</div>`).join('')||'<div class="pr" style="color:#aaa">없음</div>'}</div>
-    <div class="pc"><h5>📸 Instagram (${il.length})</h5>${il.map(p=>`<div class="pr">· ${gv(`p${p.id}_title`)||'(제목없음)'} <span style="color:#888">${fmtD(gv(`p${p.id}_date`))}</span>${gv(`p${p.id}_url`)?` <a href="${gv(`p${p.id}_url`)}">링크</a>`:''}</div>`).join('')||'<div class="pr" style="color:#aaa">없음</div>'}</div>
-  </div></div>`:'';
+  // 콘텐츠 KPI
+  const cntBlogV=gi('cntBlogVisitor'), cntBlogP=gi('cntBlogPosts'), cntInstaP=gi('cntInstaPosts');
+  const contentH=`<div class="rs"><div class="rst">CONTENT ACTIVITY</div><div class="kpi-g">
+    <div class="kpi-b"><div class="kpi-l">블로그 방문자</div><div class="kpi-v">${fmtK(cntBlogV)}</div></div>
+    <div class="kpi-b"><div class="kpi-l">블로그 포스팅</div><div class="kpi-v">${cntBlogP}</div></div>
+    <div class="kpi-b" style="background:#e8f5e9;border-color:#a5d6a7"><div class="kpi-l">인스타 포스팅</div><div class="kpi-v" style="color:#1b5e20">${cntInstaP}</div></div>
+  </div></div>`;
 
   // rptTop 업데이트
   document.getElementById('rptTop').innerHTML=`
@@ -598,7 +602,7 @@ function render(){
   // rptBottom 업데이트
   document.getElementById('rptBottom').innerHTML=`
     <div class="rs"><div class="rst">MARKETING</div>${mktgH}${adH}</div>
-    ${postH}`;
+    ${contentH}`;
 }
 
 function updateCharts(){
@@ -647,7 +651,7 @@ function init(){
   document.getElementById('repMonth').value=MONTHS[now.getMonth()];
   document.getElementById('repYear').value=now.getFullYear();
   // 글로벌 이벤트
-  document.querySelectorAll('#repMonth,#repYear,#repAsOf,#inqWeb,#inqCall,#inqKakao,#inqQuote,#inqBooking,#naverStart,#naverEnd,#naverBudget,#naverExposure,#naverVisitor,#naverCTR,#naverCPC,#googleStart,#googleEnd,#googleBudget,#googleExposure,#googleVisitor,#googleCTR,#googleCPC,#googlePaused').forEach(el=>{
+  document.querySelectorAll('#repMonth,#repYear,#repAsOf,#inqWeb,#inqCall,#inqKakao,#inqQuote,#inqBooking,#cntBlogVisitor,#cntBlogPosts,#cntInstaPosts,#naverStart,#naverEnd,#naverBudget,#naverExposure,#naverVisitor,#naverCTR,#naverCPC,#googleStart,#googleEnd,#googleBudget,#googleExposure,#googleVisitor,#googleCTR,#googleCPC,#googlePaused').forEach(el=>{
     el.addEventListener('input',render); el.addEventListener('change',render);
   });
   // paste
