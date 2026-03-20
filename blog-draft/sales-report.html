@@ -234,6 +234,7 @@ input[readonly]{color:#4da6ff;cursor:default;background:#081018}
   </div>
 
   <button class="print-btn" onclick="window.print()">🖨️ PDF 저장 / 인쇄</button>
+  <button class="print-btn" style="background:#0d3a1a;color:#4ade80;border-color:#1a5a2a;margin-top:4px" onclick="copyShareLink()">🔗 공유 링크 복사</button>
   <button class="reset-btn" onclick="resetForm()">↺ 초기화</button>
 </div>
 
@@ -681,7 +682,37 @@ function init(){
   addBooking();
   render();
 }
+
+// URL ?id= 파라미터로 접근 시 자동 로드
+function loadFromUrlParam(){
+  const params=new URLSearchParams(location.search);
+  const id=params.get('id');
+  if(!id)return;
+  try{
+    const data=JSON.parse(localStorage.getItem(`cl_report_${id}`)||'{}');
+    if(!data.repMonth){alert('리포트를 찾을 수 없습니다.\n(같은 기기에서 저장된 리포트만 열 수 있습니다.)');return;}
+    const list=JSON.parse(localStorage.getItem('cl_reports')||'[]');
+    const idx=list.findIndex(r=>String(r.id)===String(id));
+    if(idx>=0){
+      const sel=document.getElementById('reportSelect');
+      if(sel){sel.value=idx; loadReport();}
+    }
+  }catch(e){console.warn('URL 자동 로드 실패:',e);}
+}
+
+function copyShareLink(){
+  const sel=document.getElementById('reportSelect');
+  const list=JSON.parse(localStorage.getItem('cl_reports')||'[]');
+  // 선택된 리포트가 없으면 현재 입력 중인 리포트의 저장 여부 확인
+  if(!sel||sel.value===''){alert('먼저 리포트를 저장한 뒤 목록에서 선택하세요.');return;}
+  const entry=list[parseInt(sel.value)];
+  if(!entry){alert('리포트를 찾을 수 없습니다.');return;}
+  const url=`${location.origin}${location.pathname}?id=${entry.id}`;
+  navigator.clipboard.writeText(url).then(()=>alert('✅ 공유 링크 복사됨!\n\n'+url)).catch(()=>{prompt('아래 링크를 복사하세요:',url);});
+}
+
 init();
+loadFromUrlParam();
 </script>
 </body>
 </html>
