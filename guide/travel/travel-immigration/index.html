@@ -91,9 +91,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </aside>
 </div>
 <div id="footer"></div>
+<script src="../../../assets/js/components.js"></script>
+<script src="../../../assets/js/api.js"></script>
 <script>
-  const h=document.getElementById('header'),f=document.getElementById('footer');
-  if(h)fetch('../../../components/header.html').then(r=>r.text()).then(t=>h.innerHTML=t);
-  if(f)fetch('../../../components/footer.html').then(r=>r.text()).then(t=>f.innerHTML=t);
+  document.getElementById('header').innerHTML = Components.header('guide', '../../../');
+  document.getElementById('footer').innerHTML = Components.footer('../../../');
 </script>
 </body></html>
