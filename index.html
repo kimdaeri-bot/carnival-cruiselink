@@ -1432,7 +1432,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           const title = c.name || c.title || `${nights}박 크루즈`;
           const ref = c.ref || c.id || '';
           const shipSlug = c.shipSlug || '';
-          const destUrl = ref ? `cruise-view.html?ref=${encodeURIComponent(ref)}${shipSlug ? '&ship=' + encodeURIComponent(shipSlug) : ''}` : '#';
+          const destUrl = ref ? `cruise-view/?ref=${encodeURIComponent(ref)}${shipSlug ? '&ship=' + encodeURIComponent(shipSlug) : ''}` : '#';
           const departPort = c.startsAt?.nameKo || (typeof Translations !== 'undefined' ? Translations.portName(c.startsAt?.name || '') : '') || c.startsAt?.name || '';
           const isWished = (() => { try { return JSON.parse(localStorage.getItem('cl_wishlist')||'[]').includes(ref); } catch { return false; } })();
           return `

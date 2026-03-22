@@ -1201,7 +1201,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           const title = c.titleJp || c.name || c.title || `${nights}泊クルーズ`;
           const ref = c.ref || c.id || '';
           const shipSlug = c.shipSlug || '';
-          const destUrl = ref ? `jp/cruise-view.html?ref=${encodeURIComponent(ref)}${shipSlug ? '&ship=' + encodeURIComponent(shipSlug) : ''}` : '#';
+          const destUrl = ref ? `jp/cruise-view/?ref=${encodeURIComponent(ref)}${shipSlug ? '&ship=' + encodeURIComponent(shipSlug) : ''}` : '#';
           // JP port name mapping
           const JP_PORT = {'Miami':'マイアミ','Barcelona':'バルセロナ','Southampton':'サウサンプトン','Civitavecchia':'チビタベッキア','Rome (Civitavecchia)':'チビタベッキア(ローマ)','Piraeus':'ピレウス','Marseille':'マルセイユ','Fort Lauderdale':'フォート・ローダーデール','Port Canaveral':'ポート・カナベラル','Seattle':'シアトル','Vancouver':'バンクーバー','Galveston':'ガルベストン','Hamburg':'ハンブルク','Buenos Aires':'ブエノスアイレス','Singapore':'シンガポール','Dubai':'ドバイ','Abu Dhabi':'アブダビ','Lisbon':'リスボン','Valletta':'バレッタ','Naples':'ナポリ','Genoa':'ジェノア','Venice':'ヴェネツィア','Athens':'アテネ','Istanbul':'イスタンブール','Copenhagen':'コペンハーゲン','Amsterdam':'アムステルダム','Oslo':'オスロ','Stockholm':'ストックホルム','Osaka':'大阪','Tokyo':'東京','Yokohama':'横浜','Nagasaki':'長崎','Okinawa':'沖縄','Busan':'釜山','Incheon':'仁川','Keelung':'基隆'};
           const departPort = JP_PORT[c.startsAt?.name] || c.startsAt?.nameKo || c.startsAt?.name || '';
@@ -1459,7 +1459,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     html = html.replace(/(\d+)박\s*(\d+)일/g, '$1泊$2日');
     html = html.replace(/(\d+)박 출발/g, '$1泊・出発');
     html = html.replace(/(\d+)박/g, '$1泊');
-    html = html.replace(/href="cruise-view\/\?/g, 'href="jp/cruise-view.html?');
+    html = html.replace(/href="cruise-view\/\?/g, 'href="jp/cruise-view/?');
     html = html.replace(/location\.href='cruise-view\/\?/g, "location.href='jp/cruise-view/?");
     return html;
   }
@@ -1493,9 +1493,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.querySelectorAll('.czn-card,.cruise-card,.tab-card').forEach(function(card) {
           card.innerHTML = patchHTML(card.innerHTML);
         });
-        document.querySelectorAll('a[href*="cruise-view.html"]').forEach(function(a) {
-          if (a.href.indexOf('/jp/cruise-view.html') === -1) {
-            a.href = a.href.replace('/cruise-view.html', '/jp/cruise-view.html');
+        document.querySelectorAll('a[href*="cruise-view/"]').forEach(function(a) {
+          if (a.href.indexOf('/jp/cruise-view/') === -1) {
+            a.href = a.href.replace('/cruise-view/', '/jp/cruise-view/');
           }
         });
       }, 500);
@@ -1511,9 +1511,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           n.querySelectorAll('.czn-card,.cruise-card,.tab-card').forEach(function(card) {
             card.innerHTML = patchHTML(card.innerHTML);
           });
-          n.querySelectorAll('a[href*="cruise-view.html"]').forEach(function(a) {
-            if (a.href.indexOf('/jp/cruise-view.html') === -1) {
-              a.href = a.href.replace('/cruise-view.html', '/jp/cruise-view.html');
+          n.querySelectorAll('a[href*="cruise-view/"]').forEach(function(a) {
+            if (a.href.indexOf('/jp/cruise-view/') === -1) {
+              a.href = a.href.replace('/cruise-view/', '/jp/cruise-view/');
             }
           });
         }
@@ -1540,9 +1540,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.querySelectorAll('.czn-card,.cruise-card,.tab-card').forEach(function(card) {
       card.innerHTML = patchHTML(card.innerHTML);
     });
-    document.querySelectorAll('a[href*="cruise-view.html"]').forEach(function(a) {
-      if (a.href.indexOf('/jp/cruise-view.html') === -1) {
-        a.href = a.href.replace('/cruise-view.html', '/jp/cruise-view.html');
+    document.querySelectorAll('a[href*="cruise-view/"]').forEach(function(a) {
+      if (a.href.indexOf('/jp/cruise-view/') === -1) {
+        a.href = a.href.replace('/cruise-view/', '/jp/cruise-view/');
       }
     });
   });

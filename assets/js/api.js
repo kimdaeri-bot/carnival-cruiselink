@@ -83,7 +83,7 @@ const API = {
     return this._allCruisesCache;
   },
 
-  // 레거시 호환 (cruise-view.html 등에서 사용)
+  // 레거시 호환 (cruise-view/ 등에서 사용)
   async loadLocalCruises() {
     return this.loadAllCruises();
   },

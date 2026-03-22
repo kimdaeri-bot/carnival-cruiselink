@@ -203,7 +203,7 @@ const Components = {
     </div>`;
   },
 
-  // Legacy: Live API cruise card (for cruise-view.html)
+  // Legacy: Live API cruise card (for cruise-view/)
   cruiseCard(holiday, shipInfo) {
     const price = holiday.headline_prices?.cruise?.double;
     const fromPrice = price?.from_balcony || price?.from_inside || price?.from_outside;

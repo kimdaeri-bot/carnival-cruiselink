@@ -732,7 +732,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     html = html.replace(/(\d+)박\s*(\d+)일/g, '$1泊$2日');
     html = html.replace(/(\d+)박 출발/g, '$1泊・出発');
     html = html.replace(/(\d+)박/g, '$1泊');
-    html = html.replace(/href="cruise-view\/\?/g, 'href="jp/cruise-view.html?');
+    html = html.replace(/href="cruise-view\/\?/g, 'href="jp/cruise-view/?');
     html = html.replace(/location\.href='cruise-view\/\?/g, "location.href='jp/cruise-view/?");
     return html;
   }
@@ -761,9 +761,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           n.querySelectorAll('.czn-card,.cruise-card').forEach(function(card) {
             card.innerHTML = patchHTML(card.innerHTML);
           });
-          n.querySelectorAll('a[href*="cruise-view.html"]').forEach(function(a) {
-            if (a.href.indexOf('/jp/cruise-view.html') === -1) {
-              a.href = a.href.replace('/cruise-view.html', '/jp/cruise-view.html');
+          n.querySelectorAll('a[href*="cruise-view/"]').forEach(function(a) {
+            if (a.href.indexOf('/jp/cruise-view/') === -1) {
+              a.href = a.href.replace('/cruise-view/', '/jp/cruise-view/');
             }
           });
         }
@@ -775,9 +775,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.querySelectorAll('.czn-card,.cruise-card').forEach(function(card) {
       card.innerHTML = patchHTML(card.innerHTML);
     });
-    document.querySelectorAll('a[href*="cruise-view.html"]').forEach(function(a) {
-      if (a.href.indexOf('/jp/cruise-view.html') === -1) {
-        a.href = a.href.replace('/cruise-view.html', '/jp/cruise-view.html');
+    document.querySelectorAll('a[href*="cruise-view/"]').forEach(function(a) {
+      if (a.href.indexOf('/jp/cruise-view/') === -1) {
+        a.href = a.href.replace('/cruise-view/', '/jp/cruise-view/');
       }
     });
     setTimeout(function() {
