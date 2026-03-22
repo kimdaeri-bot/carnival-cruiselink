@@ -120,7 +120,7 @@ textarea.fare-textarea {
   <div class="left-panel">
     <div class="panel-header">
       <span>📋 문의 상세</span>
-      <a href="dashboard.html">← 목록으로</a>
+      <a href="dashboard/">← 목록으로</a>
     </div>
     <div class="panel-body" id="leftBody">
       <p style="color:#aaa;padding:40px 0;text-align:center;">로딩 중...</p>
@@ -306,7 +306,7 @@ function updatePreview() {
       <tr><td>상품명</td><td>${esc(inq.product||'-')}</td></tr>
       <tr><td>선사/선박</td><td>${esc(inq.cruiseline||'-')} / ${esc(inq.ship||'-')}</td></tr>
       <tr><td>승선일</td><td>${esc(inq.dateFrom||'-')}</td></tr>
-      <tr><td>일정</td><td>${esc(inq.ports||'-')}${inq.ref ? ` <a href="https://www.cruiselink.co.kr/cruise-view.html?ref=${encodeURIComponent(inq.ref)}" target="_blank" style="color:#1a237e;font-weight:600;margin-left:8px;">🔗 링크보기</a>` : ''}</td></tr>
+      <tr><td>일정</td><td>${esc(inq.ports||'-')}${inq.ref ? ` <a href="https://www.cruiselink.co.kr/cruise-view/?ref=${encodeURIComponent(inq.ref)}" target="_blank" style="color:#1a237e;font-weight:600;margin-left:8px;">🔗 링크보기</a>` : ''}</td></tr>
     </table>
     ${types.length > 0 ? `
     <table style="table-layout:fixed;"><colgroup><col style="width:40%"><col style="width:30%"><col style="width:30%"></colgroup>
@@ -449,10 +449,10 @@ function renderLeft() {
         <div class="info-field"><label>선사</label><span>${esc(inq.cruiseline||'-')}</span></div>
         <div class="info-field"><label>선박</label><span>${esc(inq.ship||'-')}</span></div>
         <div class="info-field"><label>승선일</label><span>${esc(inq.dateFrom||'-')}</span></div>
-        <div class="info-field"><label>일정</label><span>${esc(inq.ports||'-')}${inq.ref ? ` <a href="https://www.cruiselink.co.kr/cruise-view.html?ref=${encodeURIComponent(inq.ref)}" target="_blank" style="color:#1a237e;font-weight:600;margin-left:8px;">🔗 링크보기</a>` : ''}</span></div>
+        <div class="info-field"><label>일정</label><span>${esc(inq.ports||'-')}${inq.ref ? ` <a href="https://www.cruiselink.co.kr/cruise-view/?ref=${encodeURIComponent(inq.ref)}" target="_blank" style="color:#1a237e;font-weight:600;margin-left:8px;">🔗 링크보기</a>` : ''}</span></div>
         <div class="info-field"><label>참고가격</label><span>${esc(inq.price||'-')}</span></div>
         <div class="info-field"><label>Ref</label><span>${esc(inq.ref||'-')}</span></div>
-        ${inq.ref ? `<div class="info-field"><label>상품 링크</label><span><a href="https://www.cruiselink.co.kr/cruise-view.html?ref=${encodeURIComponent(inq.ref)}" target="_blank" style="color:#1a237e;font-weight:600;">🔗 링크보기</a></span></div>` : ''}
+        ${inq.ref ? `<div class="info-field"><label>상품 링크</label><span><a href="https://www.cruiselink.co.kr/cruise-view/?ref=${encodeURIComponent(inq.ref)}" target="_blank" style="color:#1a237e;font-weight:600;">🔗 링크보기</a></span></div>` : ''}
       </div>
     </div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -11,14 +11,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="https://www.cruiselink.co.kr/">
-  <link rel="canonical" id="canonicalTag" href="https://www.cruiselink.co.kr/jp/cruise-view.html">
-  <meta property="og:site_name" content="クルーズリンク">
+  <link rel="canonical" id="canonicalTag" href="https://www.cruiselink.co.kr/en/cruise-view/">
+  <meta property="og:site_name" content="CruiseLink">
   <meta property="og:type" content="product">
-  <meta id="ogTitle" property="og:title" content="クルーズリンク - クルーズ商品詳細">
-  <meta id="ogDesc" property="og:description" content="クルーズリンクで最適なクルーズ旅行を見つけましょう。">
+  <meta id="ogTitle" property="og:title" content="CruiseLink - Cruise Product Details">
+  <meta id="ogDesc" property="og:description" content="Find the perfect cruise with CruiseLink.">
   <meta id="ogImage" property="og:image" content="https://www.cruiselink.co.kr/assets/images/og-image.jpg">
-  <meta id="ogUrl" property="og:url" content="https://www.cruiselink.co.kr/cruise-view.html">
-  <title>クルーズ詳細 - クルーズリンク</title>
+  <meta id="ogUrl" property="og:url" content="https://www.cruiselink.co.kr/cruise-view/">
+  <title>Cruise Details - CruiseLink</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="shortcut icon" href="favicon.ico">
@@ -33,9 +33,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div id="content">
     <div class="loading page-loading" style="padding:100px 20px">
       <div class="loading-spinner"></div>
-      <p class="loading-main-text">クルーズ情報を読み込み中...</p>
+      <p class="loading-main-text">Loading cruise details...</p>
       <div class="loading-progress-wrap"><div class="loading-progress-bar"></div></div>
-      <p class="loading-done-text">完了！</p>
+      <p class="loading-done-text">Done!</p>
     </div>
   </div>
   <div id="footer"></div>
@@ -163,7 +163,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         if (!holiday) {
-          content.innerHTML = '<div class="empty-state"><span class="emoji">⚠️</span><p>クルーズ情報が見つかりません</p></div>';
+          content.innerHTML = '<div class="empty-state"><span class="emoji">⚠️</span><p>Cruise information not found</p></div>';
           return;
         }
 
@@ -196,17 +196,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
       } catch (e) {
         console.error('API fetch failed:', e);
-        content.innerHTML = '<div class="empty-state"><span class="emoji">⚠️</span><p>データを読み込めません</p></div>';
+        content.innerHTML = '<div class="empty-state"><span class="emoji">⚠️</span><p>Unable to load data</p></div>';
       }
     }
 
     // 객실 카테고리 분류 (스위트→발코니→오션뷰→내측 순)
     function categorizeCabins(accommodations) {
       const CATS = [
-        { id: 'suite',     label: '👑 スイートルーム', test: n => /suite|penthouse|villa|loft|grand|sky suite|owner/i.test(n) },
-        { id: 'balcony',   label: '🌅 バルコニー客室', test: n => /balcony|veranda|terrace/i.test(n) },
-        { id: 'oceanview', label: '🪟 オーシャンビューキャビン', test: n => /ocean.?view|sea.?view|outside|window|ocean.?front/i.test(n) },
-        { id: 'inside',    label: '🚪 インサイドキャビン', test: () => true }, // デフォルト
+        { id: 'suite',     label: '👑 Suite',   test: n => /suite|penthouse|villa|loft|grand|sky suite|owner/i.test(n) },
+        { id: 'balcony',   label: '🌅 Balcony', test: n => /balcony|veranda|terrace/i.test(n) },
+        { id: 'oceanview', label: '🪟 Ocean View', test: n => /ocean.?view|sea.?view|outside|window|ocean.?front/i.test(n) },
+        { id: 'inside',    label: '🚪 Interior', test: () => true }, // default
       ];
       const buckets = Object.fromEntries(CATS.map(c => [c.id, []]));
       for (const a of accommodations) {
@@ -272,17 +272,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       window._cruiseData = c;
       const nights = c.nights;
       const fromPrice = c.priceBalcony || c.priceOutside || c.priceInside;
-      const priceStr = fromPrice ? API.formatPrice(fromPrice, c.currency) : 'お問い合わせ';
+      const priceStr = fromPrice ? API.formatPrice(fromPrice, c.currency) : 'Inquire';
       const countries = (c.countriesKo || []).join(', ') || (c.countries || []).join(', ');
 
-      document.title = `${c.title} - クルーズリンク`;
+      document.title = `${c.title} - CruiseLink`;
       // Dynamic OG tags for SEO
       const ref = new URLSearchParams(location.search).get('ref') || '';
       document.getElementById('ogTitle')?.setAttribute('content', `${c.title} - 크루즈링크`);
       document.getElementById('ogDesc')?.setAttribute('content', `${c.portRoute || ''} · ${c.nights || ''}박 · ${c.operator || ''} · $${c.priceInside || ''}~`);
       document.getElementById('ogImage')?.setAttribute('content', c.image || '');
-      document.getElementById('ogUrl')?.setAttribute('content', `https://www.cruiselink.co.kr/cruise-view.html?ref=${ref}`);
-      document.getElementById('canonicalTag')?.setAttribute('href', `https://www.cruiselink.co.kr/cruise-view.html?ref=${ref}`);
+      document.getElementById('ogUrl')?.setAttribute('content', `https://www.cruiselink.co.kr/cruise-view/?ref=${ref}`);
+      document.getElementById('canonicalTag')?.setAttribute('href', `https://www.cruiselink.co.kr/cruise-view/?ref=${ref}`);
 
       let html = '';
 
@@ -294,12 +294,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
             <h1 style="margin:0;">🚢 ${c.title}</h1>
             <button id="wishBtn" onclick="toggleWish('${c.ref||ref}')" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);color:#fff;border-radius:50px;padding:8px 18px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
-              <span id="wishIcon">♡</span> お気に入り
+              <span id="wishIcon">♡</span> Save
             </button>
           </div>
           <div class="meta">
             <span>📅 ${API.formatDateKo(c.dateFrom)} ~ ${API.formatDateKo(c.dateTo)}</span>
-            <span>🌙 ${nights}泊${nights+1}日</span>
+            <span>🌙 ${nights} nights / ${nights+1} days</span>
             <span>🚢 ${c.shipTitleKo || Translations.shipName(c.shipTitle)}</span>
             <span>🌏 ${countries}</span>
           </div>
@@ -316,10 +316,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               return `<span class="hero-tag">${t}</span>`;
             }).filter(Boolean).join('')}
           </div>
-          <div class="price-big">${priceStr} <small>/ お一人様</small></div>
+          <div class="price-big">${priceStr} <small>/ person</small></div>
           <div class="hero-ctas cta-two-center">
-            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 LINEで相談</a>
-            <button class="btn btn-white-solid" onclick="openInquiry()">📋 オンラインお問い合わせ</button>
+            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 KakaoTalk Chat</a>
+            <button class="btn btn-white-solid" onclick="openInquiry()">📋 Online Inquiry</button>
           </div>
         </div>
       </section>`;
@@ -333,10 +333,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       html += `
       <div class="container">
         <div class="info-bar">
-          <div class="info-bar-item"><div class="label">🚢 客船</div><div class="value">${c.shipTitleKo || Translations.shipName(c.shipTitle)}</div></div>
-          <div class="info-bar-item"><div class="label">🌙 期間</div><div class="value">${nights}泊${nights+1}日</div></div>
-          <div class="info-bar-item"><div class="label">🚪 出発/到着</div><div class="value">${Translations.portName(c.startsAt?.nameKo || c.startsAt?.name || '')} → ${Translations.portName(c.endsAt?.nameKo || c.endsAt?.name || '')}</div></div>
-          <div class="info-bar-item"><div class="label">💰 料金</div><div class="value" style="color:var(--orange)">${priceStr} <small style="font-size:.75em;font-weight:400;color:#888">/ お一人様</small></div></div>
+          <div class="info-bar-item"><div class="label">🚢 Ship</div><div class="value">${c.shipTitleKo || Translations.shipName(c.shipTitle)}</div></div>
+          <div class="info-bar-item"><div class="label">🌙 Duration</div><div class="value">${nights} nights / ${nights+1} days</div></div>
+          <div class="info-bar-item"><div class="label">🚪 Departure/Arrival</div><div class="value">${Translations.portName(c.startsAt?.nameKo || c.startsAt?.name || '')} → ${Translations.portName(c.endsAt?.nameKo || c.endsAt?.name || '')}</div></div>
+          <div class="info-bar-item"><div class="label">💰 Price</div><div class="value" style="color:var(--orange)">${priceStr} <small style="font-size:.75em;font-weight:400;color:#888">/ person</small></div></div>
         </div>
       </div>`;
 
@@ -344,10 +344,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       html += `
       <section class="section" id="itinerary-section">
         <div class="container">
-          <h2 class="section-title">🗓️ 詳細スケジュール</h2>
+          <h2 class="section-title">🗓️ Itinerary</h2>
           <p class="section-subtitle">${Translations.portRoute(c.portRouteKo || c.portRoute || '')}</p>
           <div id="day-cards-container">
-            <div class="loading"><div class="loading-spinner"></div><p>スケジュールデータを読み込み中...</p></div>
+            <div class="loading"><div class="loading-spinner"></div><p>Loading itinerary data...</p></div>
           </div>
         </div>
       </section>`;
@@ -362,31 +362,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       html += `
       <section class="section" style="background:var(--gray-50)">
         <div class="container">
-          <h2 class="section-title">📋 含まれるもの / 含まれないもの</h2>
+          <h2 class="section-title">📋 Included / Not Included</h2>
           <div class="checklist-grid" style="margin-top:24px;max-width:700px;margin-left:auto;margin-right:auto">
             <div>
-              <h3 style="color:var(--navy);margin-bottom:16px">✅ 含まれるもの</h3>
+              <h3 style="color:var(--navy);margin-bottom:16px">✅ Included</h3>
               <ul class="checklist included">
-                <li>客室宿泊</li>
-                <li>メインダイニング＆ビュッフェ（朝・昼・夕食）</li>
-                <li>船上エンターテインメント（ショー・公演・プール）</li>
-                <li>フィットネスセンター</li>
-                <li>キッズ＆ティーンズクラブ</li>
-                <li>ルームサービス（基本）</li>
-                <li>寄港地シャトルバス（一部）</li>
+                <li>Cabin accommodation</li>
+                <li>Main dining &amp; buffet (breakfast, lunch, dinner)</li>
+                <li>Onboard entertainment (shows, performances, pool)</li>
+                <li>Fitness center</li>
+                <li>Kids &amp; teens club programs</li>
+                <li>Room service (basic)</li>
+                <li>Port shuttle bus (selected ports)</li>
               </ul>
             </div>
             <div>
-              <h3 style="color:var(--navy);margin-bottom:16px">❌ 含まれないもの</h3>
+              <h3 style="color:var(--navy);margin-bottom:16px">❌ Not Included</h3>
               <ul class="checklist excluded">
-                <li>航空券</li>
-                <li>スペシャルティレストラン</li>
-                <li>アルコール・飲料パッケージ</li>
-                <li>寄港地観光（ shore excursion）</li>
-                <li>スパ＆ビューティートリートメント</li>
-                <li>Wi-Fiインターネットパッケージ</li>
-                <li>ランドリーサービス</li>
-                <li>旅行保険</li>
+                <li>Flights</li>
+                <li>Specialty restaurants</li>
+                <li>Alcoholic beverages &amp; drink packages</li>
+                <li>Shore excursions</li>
+                <li>Spa &amp; beauty treatments</li>
+                <li>Wi-Fi internet package</li>
+                <li>Laundry service</li>
+                <li>Travel insurance</li>
               </ul>
             </div>
           </div>
@@ -397,11 +397,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       html += `
       <section class="cta-section">
         <div class="container">
-          <h2>このクルーズにご興味はありますか？</h2>
-          <p>クルーズリンクのスペシャリストが最適な客室と価格をご案内します。</p>
+          <h2>Interested in this cruise?</h2>
+          <p>Our cruise specialists will help you find the best cabin and price.</p>
           <div class="cta-buttons cta-two">
-            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 LINEで相談</a>
-            <button class="btn btn-white-solid" onclick="openInquiry()">📋 オンラインお問い合わせ</button>
+            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 KakaoTalk Chat</a>
+            <button class="btn btn-white-solid" onclick="openInquiry()">📋 Online Inquiry</button>
           </div>
         </div>
       </section>`;
@@ -436,19 +436,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       let html = `
       <section class="section" id="ship-detail-section" style="background:var(--gray-50)">
         <div class="container">
-          <h2 class="section-title">🚢 ${shipName}について</h2>
+          <h2 class="section-title">🚢 About ${shipName}</h2>
           ${teaser ? `<p class="section-subtitle" style="max-width:800px;margin:0 auto 24px;text-align:center">${teaser}</p>` : ''}
           <div class="spec-grid">`;
 
       const specs = [
-        ['就航年', launchYear || '-'],
-        ['総トン数', grossTonnage ? Number(grossTonnage).toLocaleString() + 't' : '-'],
-        ['最大定員', capacity ? Number(capacity).toLocaleString() + '名' : '-'],
-        ['乗組員', crewCount ? Number(crewCount).toLocaleString() + '名' : '-'],
-        ['全長', length ? length + 'm' : '-'],
-        ['全幅', width ? width + 'm' : '-'],
-        ['デッキ', deckCount || '-'],
-        ['客室数', cabinCount ? Number(cabinCount).toLocaleString() : '-'],
+        ['Launch Year', launchYear || '-'],
+        ['Gross Tonnage', grossTonnage ? Number(grossTonnage).toLocaleString() + 't' : '-'],
+        ['Capacity', capacity ? Number(capacity).toLocaleString() : '-'],
+        ['Crew', crewCount ? Number(crewCount).toLocaleString() : '-'],
+        ['Length', length ? length + 'm' : '-'],
+        ['Beam', width ? width + 'm' : '-'],
+        ['Decks', deckCount || '-'],
+        ['Cabins', cabinCount ? Number(cabinCount).toLocaleString() : '-'],
       ];
       specs.forEach(([label, value]) => {
         html += `<div class="spec-item"><div class="spec-value">${value}</div><div class="spec-label">${label}</div></div>`;
@@ -458,11 +458,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // ── 시설 탭 (다이닝 / 엔터테인먼트 / 스파 / 키즈 / 덱플랜) ──
       if (facilityData) {
         const tabs = [];
-        if (facilityData.dining?.length)        tabs.push({id:'dining', label:`🍽️ ダイニング (${facilityData.dining.length})`,       items: facilityData.dining});
-        if (facilityData.entertainment?.length)  tabs.push({id:'ent',    label:`🎭 エンターテインメント (${facilityData.entertainment.length})`, items: facilityData.entertainment});
-        if (facilityData.health?.length)         tabs.push({id:'health', label:`💆 スパ・フィットネス (${facilityData.health.length})`,  items: facilityData.health});
-        if (facilityData.kids?.length)           tabs.push({id:'kids',   label:`👶 キッズ (${facilityData.kids.length})`,            items: facilityData.kids});
-        if (facilityData.deckplans?.length)      tabs.push({id:'decks',  label:`📐 デッキプラン (${facilityData.deckplans.length})`,     items: facilityData.deckplans});
+        if (facilityData.dining?.length)        tabs.push({id:'dining', label:`🍽️ Dining (${facilityData.dining.length})`,       items: facilityData.dining});
+        if (facilityData.entertainment?.length)  tabs.push({id:'ent',    label:`🎭 Entertainment (${facilityData.entertainment.length})`, items: facilityData.entertainment});
+        if (facilityData.health?.length)         tabs.push({id:'health', label:`💆 Spa & Fitness (${facilityData.health.length})`,  items: facilityData.health});
+        if (facilityData.kids?.length)           tabs.push({id:'kids',   label:`👶 Kids (${facilityData.kids.length})`,            items: facilityData.kids});
+        if (facilityData.deckplans?.length)      tabs.push({id:'decks',  label:`📐 Deck Plans (${facilityData.deckplans.length})`,     items: facilityData.deckplans});
 
         if (tabs.length) {
           html += `<div class="ship-tabs" style="margin-top:40px">`;
@@ -502,7 +502,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (facilityData.accommodations?.length) {
           const cabinCats = categorizeCabins(facilityData.accommodations);
           if (cabinCats.length) {
-            html += `<h3 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin:40px 0 8px">🛏️ 客室タイプ</h3>`;
+            html += `<h3 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin:40px 0 8px">🛏️ Cabin Types</h3>`;
             cabinCats.forEach(cat => {
               const rowId = 'cabin-row-' + cat.id;
               html += `<div style="margin-bottom:4px;padding:8px 0 4px;border-top:1px solid var(--gray-200)">`;
@@ -536,7 +536,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function renderItinerary(holiday) {
       const container = document.getElementById('day-cards-container');
       if (!container || !holiday.itinerary?.days) {
-        if (container) container.innerHTML = '<p style="text-align:center;color:#999">スケジュールデータがありません。</p>';
+        if (container) container.innerHTML = '<p style="text-align:center;color:#999">No itinerary data available.</p>';
         return;
       }
 
@@ -549,12 +549,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           html += `
           <div class="day-card sea-day">
             <div class="day-card-header">
-              <span class="day-num">${day.day}日目</span>
-              <span class="day-port">🌊 終日航海</span>
+              <span class="day-num">Day ${day.day}</span>
+              <span class="day-port">🌊 At Sea</span>
               <span class="day-time"></span>
             </div>
             <div class="day-card-body" style="text-align:center;color:var(--gray-500)">
-              <p>終日航海日です。プール、スパ、カジノ、レストランなど、船内の様々な施設とエンターテインメントをお楽しみください。</p>
+              <p>A full day at sea. Enjoy the ship's facilities and entertainment — pools, spa, casino, restaurants, and more.</p>
             </div>
           </div>`;
         } else {
@@ -562,13 +562,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           const countryName = Translations.countryName(loc.country);
           const arrTime = loc.arrival_time || '';
           const depTime = loc.departure_time || '';
-          const timeStr = arrTime && depTime ? `${arrTime}入港 〜 ${depTime}出港` : depTime ? `${depTime}出港` : arrTime ? `${arrTime}入港` : '';
+          const timeStr = arrTime && depTime ? `Arrive ${arrTime} ~ Depart ${depTime}` : depTime ? `Depart ${depTime}` : arrTime ? `Arrive ${arrTime}` : '';
           // 기항지 이미지: widgety_data만 사용 (operator_data는 선박이미지일 수 있어 제외)
           const portImages = (loc.widgety_data?.images || []).filter(i => i?.href);
           const descKo = Translations.portDesc(loc.name);
           // 영문 API 설명 정제 후 fallback
           const rawApiDesc = (loc.widgety_data?.description || '').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,200);
-          const desc = descKo || `美しい寄港地${portName}で特別なひとときをお過ごしください。`;
+          const desc = descKo || `Explore the beautiful port of ${portName}.`;
 
           // 이미지 슬라이더 (최대 3장)
           const imgHtml = portImages.length > 0 ? (() => {
@@ -594,7 +594,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           html += `
           <div class="day-card">
             <div class="day-card-header">
-              <span class="day-num">${day.day}日目</span>
+              <span class="day-num">Day ${day.day}</span>
               <span class="day-port">📍 ${portName}${countryName ? ', ' + countryName : ''}</span>
               <span class="day-time">${timeStr ? '⏰ ' + timeStr : ''}</span>
             </div>
@@ -738,27 +738,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       let html = `
       <div class="container">
-        <h2 class="section-title">💰 客室・料金</h2>
-        <p class="section-subtitle">お一人様料金（2名1室利用・税金/港湾税別途）</p>
+        <h2 class="section-title">💰 Cabins & Pricing</h2>
+        <p class="section-subtitle">Per person rate (double occupancy, excl. taxes &amp; port fees)</p>
         <table class="price-table">
-          <thead><tr><th>客室タイプ</th><th>料金 / お一人様</th></tr></thead>
+          <thead><tr><th>Cabin Type</th><th>Price / person</th></tr></thead>
           <tbody>`;
 
       const types = [
-        {key:'inside', label:'🚪 インサイドキャビン'},
-        {key:'outside', label:'🪟 オーシャンビューキャビン'},
-        {key:'balcony', label:'🌅 バルコニー客室'},
-        {key:'suite', label:'👑 スイートルーム'},
+        {key:'inside', label:'🚪 Inside Cabin'},
+        {key:'outside', label:'🪟 Ocean View Cabin'},
+        {key:'balcony', label:'🌅 Balcony Cabin'},
+        {key:'suite', label:'👑 Suite'},
       ];
       types.forEach(t => {
         const dp = double?.['from_' + t.key];
         if (dp) {
-          html += `<tr><td class="room-type">${t.label}</td><td style="color:var(--orange);font-weight:700">${fmtPrice(dp)} <small style="font-weight:400;font-size:.85em;color:#888">/ お一人様</small></td></tr>`;
+          html += `<tr><td class="room-type">${t.label}</td><td style="color:var(--orange);font-weight:700">${fmtPrice(dp)} <small style="font-weight:400;font-size:.85em;color:#888">/ person</small></td></tr>`;
         }
       });
 
       html += `</tbody></table>
-        <p style="margin-top:12px;font-size:0.85rem;color:var(--gray-500)">※ 料金は予告なく変更される場合があります。正確な料金はお問い合わせください。</p>
+        <p style="margin-top:12px;font-size:0.85rem;color:var(--gray-500)">※ Prices are subject to change without notice. Please contact us for exact pricing.</p>
       </div>`;
 
       section.innerHTML = html;
@@ -771,7 +771,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const shipName = Translations.shipName(holiday.ship_title || '');
       const price = holiday.headline_prices?.cruise?.double;
       const fromPrice = price?.from_balcony || price?.from_outside || price?.from_inside;
-      const priceStr = fromPrice ? API.formatPrice(fromPrice) : 'お問い合わせ';
+      const priceStr = fromPrice ? API.formatPrice(fromPrice) : 'Inquire';
       const countries = (holiday.countries || []).map(c => Translations.countryName(c)).join(', ');
       const route = holiday._portRouteKo || API.routeString(holiday.itinerary);
       const coverImg = shipLive?.cover_image_href || '';
@@ -780,9 +780,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const cruiseTitle = holiday._koreanTitle
         || (() => {
              const ctries = (holiday.countries||[]).map(c => Translations.countryName(c)).filter(Boolean);
-             return ctries.length ? `${ctries.slice(0,2).join('・')} ${nights}泊クルーズ` : null;
+             return ctries.length ? `${ctries.slice(0,2).join(' & ')} ${nights}-Night Cruise` : null;
            })()
-        || `${Translations.portName(holiday.starts_at?.name||'')} 発 ${nights}泊クルーズ`;
+        || `${Translations.portName(holiday.starts_at?.name||'')} ${nights}-Night Cruise`;
 
       window._cruiseData = {
         title: cruiseTitle,
@@ -793,7 +793,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         ref
       };
 
-      document.title = `${cruiseTitle} - クルーズリンク`;
+      document.title = `${cruiseTitle} - CruiseLink`;
 
       let html = `
       <section class="detail-hero">
@@ -802,14 +802,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <h1>🚢 ${cruiseTitle}</h1>
           <div class="meta">
             <span>📅 ${API.formatDateKo(holiday.date_from)} ~ ${API.formatDateKo(holiday.date_to)}</span>
-            <span>🌙 ${nights}泊${parseInt(nights)+1}日</span>
+            <span>🌙 ${nights} nights / ${parseInt(nights)+1} days</span>
             <span>🚢 ${shipName}</span>
             <span>🌏 ${countries}</span>
           </div>
-          <div class="price-big">${priceStr} <small>/ お一人様</small></div>
+          <div class="price-big">${priceStr} <small>/ person</small></div>
           <div class="hero-ctas cta-two-center">
-            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 LINEで相談</a>
-            <button class="btn btn-white-solid" onclick="openInquiry()">📋 オンラインお問い合わせ</button>
+            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 KakaoTalk Chat</a>
+            <button class="btn btn-white-solid" onclick="openInquiry()">📋 Online Inquiry</button>
           </div>
         </div>
       </section>`;
@@ -823,10 +823,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       html += `
       <div class="container">
         <div class="info-bar">
-          <div class="info-bar-item"><div class="label">🚢 客船</div><div class="value">${shipName}</div></div>
-          <div class="info-bar-item"><div class="label">🌙 期間</div><div class="value">${nights}박 ${parseInt(nights)+1}일</div></div>
-          <div class="info-bar-item"><div class="label">🚪 出発/到着</div><div class="value">${Translations.portName(holiday.starts_at?.name||'')} → ${Translations.portName(holiday.ends_at?.name||'')}</div></div>
-          <div class="info-bar-item"><div class="label">💰 料金</div><div class="value" style="color:var(--orange)">${priceStr} <small style="font-size:.75em;font-weight:400;color:#888">/ お一人様</small></div></div>
+          <div class="info-bar-item"><div class="label">🚢 Ship</div><div class="value">${shipName}</div></div>
+          <div class="info-bar-item"><div class="label">🌙 Duration</div><div class="value">${nights}박 ${parseInt(nights)+1}일</div></div>
+          <div class="info-bar-item"><div class="label">🚪 Departure/Arrival</div><div class="value">${Translations.portName(holiday.starts_at?.name||'')} → ${Translations.portName(holiday.ends_at?.name||'')}</div></div>
+          <div class="info-bar-item"><div class="label">💰 Price</div><div class="value" style="color:var(--orange)">${priceStr} <small style="font-size:.75em;font-weight:400;color:#888">/ person</small></div></div>
         </div>
       </div>`;
 
@@ -834,10 +834,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       html += `
       <section class="section" id="itinerary-section">
         <div class="container">
-          <h2 class="section-title">🗓️ 詳細スケジュール</h2>
+          <h2 class="section-title">🗓️ Itinerary</h2>
           <p class="section-subtitle">${route}</p>
           <div id="day-cards-container">
-            <div class="loading"><div class="loading-spinner"></div><p>スケジュールデータを読み込み中...</p></div>
+            <div class="loading"><div class="loading-spinner"></div><p>Loading itinerary data...</p></div>
           </div>
         </div>
       </section>`;
@@ -858,30 +858,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       html += `
       <section class="section" style="background:var(--gray-50)">
         <div class="container">
-          <h2 class="section-title">📋 含まれるもの / 含まれないもの</h2>
+          <h2 class="section-title">📋 Included / Not Included</h2>
           <div class="checklist-grid" style="margin-top:24px;max-width:700px;margin-left:auto;margin-right:auto">
             <div>
-              <h3 style="color:var(--navy);margin-bottom:16px">✅ 含まれるもの</h3>
+              <h3 style="color:var(--navy);margin-bottom:16px">✅ Included</h3>
               <ul class="checklist included">
-                <li>客室宿泊</li>
-                <li>メインダイニング＆ビュッフェ（朝・昼・夕食）</li>
-                <li>船上エンターテインメント（ショー・公演・プール）</li>
-                <li>フィットネスセンター</li>
-                <li>キッズ＆ティーンズクラブ</li>
-                <li>ルームサービス（基本）</li>
-                <li>寄港地シャトルバス（一部）</li>
+                <li>Cabin accommodation</li>
+                <li>Main dining &amp; buffet (breakfast, lunch, dinner)</li>
+                <li>Onboard entertainment (shows, performances, pool)</li>
+                <li>Fitness center</li>
+                <li>Kids &amp; teens club programs</li>
+                <li>Room service (basic)</li>
+                <li>Port shuttle bus (selected ports)</li>
               </ul>
             </div>
             <div>
-              <h3 style="color:var(--navy);margin-bottom:16px">❌ 含まれないもの</h3>
+              <h3 style="color:var(--navy);margin-bottom:16px">❌ Not Included</h3>
               <ul class="checklist excluded">
-                <li>航空券</li>
-                <li>スペシャルティレストラン</li>
-                <li>アルコール・飲料パッケージ</li>
-                <li>寄港地観光（ shore excursion）</li>
-                <li>スパ＆ビューティートリートメント</li>
-                <li>Wi-Fiインターネットパッケージ</li>
-                <li>旅行保険</li>
+                <li>Flights</li>
+                <li>Specialty restaurants</li>
+                <li>Alcoholic beverages &amp; drink packages</li>
+                <li>Shore excursions</li>
+                <li>Spa &amp; beauty treatments</li>
+                <li>Wi-Fi internet package</li>
+                <li>Travel insurance</li>
               </ul>
             </div>
           </div>
@@ -892,11 +892,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       html += `
       <section class="cta-section">
         <div class="container">
-          <h2>このクルーズにご興味はありますか？</h2>
-          <p>クルーズリンクのスペシャリストが最適な客室と価格をご案内します。</p>
+          <h2>Interested in this cruise?</h2>
+          <p>Our cruise specialists will help you find the best cabin and price.</p>
           <div class="cta-buttons cta-two">
-            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 LINEで相談</a>
-            <button class="btn btn-white-solid" onclick="openInquiry()">📋 オンラインお問い合わせ</button>
+            <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="btn btn-orange">💬 KakaoTalk Chat</a>
+            <button class="btn btn-white-solid" onclick="openInquiry()">📋 Online Inquiry</button>
           </div>
         </div>
       </section>`;
@@ -1555,10 +1555,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   </script>
 <script>
-// JP patch
+// EN patch
 (function(){
-  var M={'로딩 중...':'読み込み中...','크루즈 정보를 불러오는 중...':'クルーズ情報を読み込み中...','완료!':'完了！','일정 데이터를 불러오는 중...':'スケジュールを読み込み中...','💰 객실 & 요금':'💰 客室・料金','1인 기준 요금 (2인 1실, 세금/항만료 별도)':'お一人様料金（2名1室・税金/港湾税別途）','🚪 내측 캐빈':'🚪 インサイドキャビン','🪟 오션뷰 캐빈':'🪟 オーシャンビューキャビン','🌅 발코니 캐빈':'🌅 バルコニー客室','👑 스위트 캐빈':'👑 スイートルーム','🗓️ 상세 일정':'🗓️ 詳細スケジュール','소개':'船舶紹介','취항연도':'就航年','총톤수':'総トン数','최대정원':'最大定員','승무원':'乗組員','전장':'全長','전폭':'全幅','데크':'デッキ','🍽️ 다이닝':'🍽️ ダイニング','🎭 엔터테인먼트':'🎭 エンターテインメント','💆 스파·피트니스':'💆 スパ・フィットネス','👶 키즈':'👶 キッズ','📐 덱플랜':'📐 デッキプラン','✅ 포함 사항':'✅ 含まれるもの','❌ 불포함 사항':'❌ 含まれないもの','객실 숙박':'客室宿泊','메인 레스토랑 & 뷔페 식사 (조식·중식·석식)':'メインレストラン・ビュッフェ（朝昼夕）','선상 엔터테인먼트 (쇼, 공연, 수영장)':'船内エンターテインメント','피트니스 센터':'フィットネスセンター','키즈 & 틴즈 클럽 프로그램':'キッズ＆ティーンズクラブ','객실 룸서비스 (기본)':'ルームサービス（基本）','기항지 셔틀버스 (일부)':'寄港地シャトルバス（一部）','항공편':'航空券','스페셜티 레스토랑':'スペシャルティレストラン','주류 및 음료 패키지':'アルコール・飲み物パッケージ','기항지 관광 (Shore Excursion)':'寄港地観光','스파 & 뷰티 트리트먼트':'スパ・ビューティー','Wi-Fi 인터넷 패키지':'Wi-Fi','여행자 보험':'旅行保険','이 크루즈가 마음에 드셨나요?':'このクルーズにご興味はありますか？','전문 상담원이 최적의 객실과 가격을 안내해드립니다.':'専門スタッフが最適な客室と料金をご案内します。','💬 카카오톡 상담':'💬 LINEで相談','📋 온라인 문의':'📋 オンラインお問い合わせ','찜하기':'お気に入り','♡ 찜하기':'♡ お気に入り','🚢 크루즈 문의하기':'🚢 クルーズお問い合わせ','이름':'お名前','연락처':'お電話番号','이메일':'メールアドレス','인원':'人数','객실 타입':'客室タイプ','요청사항':'ご要望','선택':'選択','1명':'1名','2명':'2名','3명':'3名','4명':'4名','5명':'5名','6~10명':'6〜10名','11명 이상':'11名以上','인사이드':'インサイド','오션뷰':'オーシャンビュー','발코니':'バルコニー','스위트':'スイート','개인정보 수집·이용에 동의합니다. (필수)':'個人情報の収集・利用に同意します。（必須）','약관 보기':'約款を見る','문의 전송하기':'お問い合わせを送信','✅ 문의가 접수되었습니다.':'✅ お問い合わせを受け付けました。','입력하신 이메일로 견적서를 회신드리겠습니다.':'メールにて見積書をお送りします。','/ 1인':'/ お一人様','/1인':'/ お一人様','종일 항해':'終日航海','기항지':'寄港地','출항':'出港','입항':'入港'};
-  function patch(el){if(!el||!el.innerHTML)return;var h=el.innerHTML;for(var k in M)h=h.split(k).join(M[k]);h=h.replace(/(\d+)박\s*(\d+)일/g,'$1泊$2日');h=h.replace(/(\d+)박/g,'$1泊');h=h.replace(/(\d+)일차/g,'Day $1');el.innerHTML=h;}
+  var M={'로딩 중...':'Loading...','크루즈 정보를 불러오는 중...':'Loading cruise info...','완료!':'Done!','일정 데이터를 불러오는 중...':'Loading itinerary...','💰 객실 & 요금':'💰 Cabins & Pricing','1인 기준 요금 (2인 1실, 세금/항만료 별도)':'Per person (double occ., excl. taxes & port fees)','🚪 내측 캐빈':'🚪 Inside Cabin','🪟 오션뷰 캐빈':'🪟 Ocean View Cabin','🌅 발코니 캐빈':'🌅 Balcony Cabin','👑 스위트 캐빈':'👑 Suite','🗓️ 상세 일정':'🗓️ Itinerary','소개':'About','취항연도':'Launch Year','총톤수':'Gross Tonnage','최대정원':'Capacity','승무원':'Crew','전장':'Length','전폭':'Beam','데크':'Decks','🍽️ 다이닝':'🍽️ Dining','🎭 엔터테인먼트':'🎭 Entertainment','💆 스파·피트니스':'💆 Spa & Fitness','👶 키즈':'👶 Kids','📐 덱플랜':'📐 Deck Plans','✅ 포함 사항':'✅ Included','❌ 불포함 사항':'❌ Not Included','객실 숙박':'Cabin accommodation','메인 레스토랑 & 뷔페 식사 (조식·중식·석식)':'Main restaurant & buffet (B/L/D)','선상 엔터테인먼트 (쇼, 공연, 수영장)':'Onboard entertainment (shows, pool)','피트니스 센터':'Fitness center','키즈 & 틴즈 클럽 프로그램':'Kids & Teens club','객실 룸서비스 (기본)':'In-room service (basic)','기항지 셔틀버스 (일부)':'Port shuttle (select ports)','항공편':'Flights','스페셜티 레스토랑':'Specialty restaurants','주류 및 음료 패키지':'Beverages & drinks package','기항지 관광 (Shore Excursion)':'Shore excursions','스파 & 뷰티 트리트먼트':'Spa & beauty treatments','Wi-Fi 인터넷 패키지':'Wi-Fi internet','여행자 보험':'Travel insurance','이 크루즈가 마음에 드셨나요?':'Interested in this cruise?','전문 상담원이 최적의 객실과 가격을 안내해드립니다.':'Our cruise specialists will find the best option for you.','💬 카카오톡 상담':'💬 KakaoTalk Chat','📋 온라인 문의':'📋 Online Inquiry','찜하기':'Save','♡ 찜하기':'♡ Save','🚢 크루즈 문의하기':'🚢 Cruise Inquiry','이름':'Name','연락처':'Phone','이메일':'Email','인원':'Guests','객실 타입':'Cabin Type','요청사항':'Requests','선택':'Select','1명':'1 person','2명':'2 persons','3명':'3 persons','4명':'4 persons','5명':'5 persons','6~10명':'6-10 persons','11명 이상':'11+ persons','인사이드':'Inside','오션뷰':'Ocean View','발코니':'Balcony','스위트':'Suite','개인정보 수집·이용에 동의합니다. (필수)':'I agree to the privacy policy. (Required)','약관 보기':'View Terms','문의 전송하기':'Submit Inquiry','✅ 문의가 접수되었습니다.':'✅ Inquiry received.','입력하신 이메일로 견적서를 회신드리겠습니다.':'We will reply to your email with a quote.','/ 1인':'/ person','/1인':'/ person','종일 항해':'Full Day at Sea','기항지':'Port of Call','출항':'Departure','입항':'Arrival'};
+  function patch(el){if(!el||!el.innerHTML)return;var h=el.innerHTML;for(var k in M)h=h.split(k).join(M[k]);h=h.replace(/(\d+)박\s*(\d+)일/g,'$1 nights / $2 days');h=h.replace(/(\d+)박/g,'$1 nights');h=h.replace(/(\d+)일차/g,'Day $1');el.innerHTML=h;}
   var obs=new MutationObserver(function(muts){muts.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1)patch(n);});});});
   document.addEventListener('DOMContentLoaded',function(){obs.observe(document.body,{childList:true,subtree:true});setTimeout(function(){patch(document.body);},3000);});
 })();

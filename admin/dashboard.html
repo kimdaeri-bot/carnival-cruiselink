@@ -890,7 +890,7 @@
           <div class="detail-field"><label>일정</label><span>${esc(inq.ports||'-')}</span></div>
           <div class="detail-field"><label>참고가격</label><span>${esc(inq.price||'-')}</span></div>
           <div class="detail-field"><label>Ref</label><span>${esc(inq.ref||'-')}</span></div>
-          ${inq.ref ? `<div class="detail-field"><label>상품 링크</label><span><a href="https://www.cruiselink.co.kr/cruise-view.html?ref=${encodeURIComponent(inq.ref)}" target="_blank" style="color:#1a237e;text-decoration:none;font-weight:600;">🔗 링크보기</a></span></div>` : ''}
+          ${inq.ref ? `<div class="detail-field"><label>상품 링크</label><span><a href="https://www.cruiselink.co.kr/cruise-view/?ref=${encodeURIComponent(inq.ref)}" target="_blank" style="color:#1a237e;text-decoration:none;font-weight:600;">🔗 링크보기</a></span></div>` : ''}
         </div>
       </div>
       <div class="detail-section">
