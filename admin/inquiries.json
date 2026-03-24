@@ -972,5 +972,23 @@
     "id": "1774279627637",
     "timestamp": "2026-03-23T15:27:07.637Z",
     "status": "신규"
+  },
+  {
+    "product": "지중해 7박 크루즈",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC 신포니아",
+    "dateFrom": "2027-02-06",
+    "ports": "",
+    "price": "문의",
+    "ref": "MSCSX20270206VLCVLC",
+    "name": "김벽용",
+    "email": "azaaza9825@naver.com",
+    "phone": "01050459825",
+    "pax": "2",
+    "cabin": "오션뷰",
+    "message": "Kim byeok Yong\nChang Yeong a",
+    "id": "1774318594806",
+    "timestamp": "2026-03-24T02:16:34.806Z",
+    "status": "신규"
   }
 ]
