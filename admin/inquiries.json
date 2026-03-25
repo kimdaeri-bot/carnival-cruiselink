@@ -1132,5 +1132,23 @@
         "remarks": "* 스위트 : Premium Suite Aurea (SL1) 선실 기준 요금\n* 발코니 : Balcony Aurea (BA) 선실 기준 요금\n\n* 요금 세부 사항\n- 포함사항 : 크루즈 요금 + tax\n- 불포함사항 : 왕복 항공권, 현지 호텔비, 기항지관광, 선상팁, 기타 선내유료 서비스, 여행자보험 등\n"
       }
     ]
+  },
+  {
+    "product": "일본·대만 4박 크루즈",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC 벨리시마",
+    "dateFrom": "2026-06-09",
+    "ports": "",
+    "price": "문의",
+    "ref": "MSCBE20260609TYOKEE",
+    "name": "이재열",
+    "email": "leninternet@naver.com",
+    "phone": "01092139858",
+    "pax": "5",
+    "cabin": "스위트",
+    "message": "없음",
+    "id": "1774408493868",
+    "timestamp": "2026-03-25T03:14:53.868Z",
+    "status": "신규"
   }
 ]
