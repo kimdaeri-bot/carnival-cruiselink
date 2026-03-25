@@ -1080,7 +1080,7 @@
     "cruiseline": "MSC Cruises",
     "ship": "MSC 유리비아",
     "dateFrom": "2027-03-08",
-    "ports": "",
+    "ports": "제노바 → 나폴리 → 팔레르모 → La Goulette → 바르셀로나 → 마르세유",
     "price": "문의",
     "ref": "MSCER20270308GOAGOA",
     "name": "안유빈",
@@ -1091,6 +1091,27 @@
     "message": "없음",
     "id": "1774406662965",
     "timestamp": "2026-03-25T02:44:22.965Z",
-    "status": "신규"
+    "status": "신규",
+    "fareHistory": [
+      {
+        "date": "2026. 03. 25. 오전 11:47",
+        "pax": 2,
+        "types": [
+          {
+            "name": "발코니",
+            "val": 1389,
+            "raw": "1389"
+          },
+          {
+            "name": "스위트",
+            "val": 1849,
+            "raw": "1849"
+          }
+        ],
+        "air": 0,
+        "etc": 0,
+        "remarks": "* 스위트 : Premium Suite Aurea (SL1) 선실 기준 요금\n* 발코니 : Balcony Aurea (BA) 선실 기준 요금\n\n* 요금 세부 사항\n- 포함사항 : 크루즈 요금 + tax\n- 불포함사항 : 왕복 항공권, 현지 호텔비, 기항지관광, 선상팁, 기타 선내유료 서비스, 여행자보험 등\n"
+      }
+    ]
   }
 ]
