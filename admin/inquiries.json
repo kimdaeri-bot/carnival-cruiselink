@@ -1186,7 +1186,7 @@
     "cruiseline": "MSC Cruises",
     "ship": "MSC 월드 아시아",
     "dateFrom": "2026-12-18",
-    "ports": "",
+    "ports": "바르셀로나 → 마르세유 → 제노바 → 치비타베키아 → 메시나 → 발레타",
     "price": "문의",
     "ref": "MSCAS20261218BCNBCN",
     "name": "임왕미",
@@ -1197,6 +1197,6 @@
     "message": "없음",
     "id": "1774420619620",
     "timestamp": "2026-03-25T06:36:59.620Z",
-    "status": "신규"
+    "status": "인보이스 전달 완료"
   }
 ]
