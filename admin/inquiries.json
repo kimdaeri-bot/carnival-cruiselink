@@ -1074,5 +1074,23 @@
     "id": "1773353977418",
     "timestamp": "2026-03-12T22:19:37.418Z",
     "status": "상담완료"
+  },
+  {
+    "product": "지중해 7박 크루즈",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC 유리비아",
+    "dateFrom": "2027-03-08",
+    "ports": "",
+    "price": "문의",
+    "ref": "MSCER20270308GOAGOA",
+    "name": "안유빈",
+    "email": "compia9@naver.com",
+    "phone": "01094455869",
+    "pax": "2",
+    "cabin": "스위트",
+    "message": "없음",
+    "id": "1774406662965",
+    "timestamp": "2026-03-25T02:44:22.965Z",
+    "status": "신규"
   }
 ]
