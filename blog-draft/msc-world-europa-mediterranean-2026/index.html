@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <base href="/">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K4PPLZNG');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>블로그 초안 | MSC World Europa 지중해 7박 (2026.05.10)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: #f5f5f5; color: #333; }
+    .admin-bar { position: sticky; top: 0; z-index: 999; background: #1a1a2e; color: #fff; padding: 10px 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; }
+    .admin-bar strong { color: #ffd700; }
+    .copy-all-btn { margin-left: auto; background: #4caf50; color: #fff; border: none; padding: 7px 18px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .copy-all-btn:hover { background: #388e3c; }
+    .wrapper { max-width: 800px; margin: 30px auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.1); }
+    .section-wrap { position: relative; }
+    .section-wrap:hover .copy-section-btn { opacity: 1; }
+    .copy-section-btn { position: absolute; top: 10px; right: 10px; opacity: 0; transition: opacity .2s; background: #0077cc; color: #fff; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+    .post-title { font-size: 26px; font-weight: 900; line-height: 1.4; padding: 32px 32px 8px; color: #0a2540; }
+    .post-meta { padding: 0 32px 24px; font-size: 13px; color: #888; }
+    .post-meta span { margin-right: 12px; }
+    .hero-img { width: 100%; height: 380px; object-fit: cover; display: block; }
+    .section { padding: 28px 32px; border-bottom: 1px solid #eee; }
+    .section:last-child { border-bottom: none; }
+    h2 { font-size: 20px; font-weight: 800; color: #0077cc; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8f4fd; }
+    h3 { font-size: 16px; font-weight: 700; color: #1a1a2e; margin: 18px 0 8px; }
+    p { font-size: 15px; line-height: 1.9; margin-bottom: 12px; }
+    ul { padding-left: 20px; margin-bottom: 12px; }
+    li { font-size: 15px; line-height: 2; }
+    .img-row { display: flex; gap: 8px; margin: 16px 0; }
+    .img-row img { flex: 1; height: 200px; object-fit: cover; border-radius: 6px; }
+    .img-single { width: 100%; border-radius: 6px; margin: 16px 0; object-fit: cover; max-height: 340px; display: block; }
+    .info-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+    .info-table th { background: #0077cc; color: #fff; padding: 10px 14px; text-align: left; }
+    .info-table td { padding: 10px 14px; border-bottom: 1px solid #eee; }
+    .info-table tr:nth-child(even) td { background: #f8fbff; }
+    .price-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .price-table th { background: #0a2540; color: #fff; padding: 12px 16px; text-align: center; font-size: 14px; }
+    .price-table td { padding: 12px 16px; text-align: center; border-bottom: 1px solid #eee; font-size: 15px; }
+    .price-table tr.best td { background: #fff9e6; font-weight: 700; }
+    .price-table .price { color: #cc2200; font-weight: 800; font-size: 17px; }
+    .badge { background: #ffd700; color: #333; font-size: 11px; font-weight: 800; padding: 2px 6px; border-radius: 3px; margin-left: 6px; }
+    .tip-box { background: #fffbea; border-left: 4px solid #ffc107; padding: 14px 18px; border-radius: 0 6px 6px 0; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+    .tip-box strong { color: #e65100; }
+    .route-box { background: #f0f7ff; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+    .route-step { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 15px; }
+    .route-step .day-badge { background: #0077cc; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 12px; white-space: nowrap; }
+    .route-step .arrow { color: #0077cc; font-weight: 700; }
+    .tags { padding: 16px 32px 28px; }
+    .tags span { display: inline-block; background: #e8f4fd; color: #0077cc; font-size: 13px; padding: 4px 10px; border-radius: 12px; margin: 3px; }
+    #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px 24px; border-radius: 20px; font-size: 14px; display: none; z-index: 9999; }
+    .checklist { list-style: none; padding: 0; }
+    .checklist li { font-size: 15px; line-height: 2; padding: 4px 0; border-bottom: 1px dashed #eee; }
+    .checklist li:before { content: "☐ "; font-size: 16px; color: #0077cc; }
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4PPLZNG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="admin-bar">
+  <strong>🔒 내부용 블로그 초안</strong>
+  <span>검색엔진 차단(noindex) — 외부 비공개</span>
+  <span>|</span>
+  <span>MSC World Europa 지중해 7박 · 2026.05.10</span>
+  <button class="copy-all-btn" onclick="copyAll()">📋 전체 텍스트 복사</button>
+</div>
+
+<div class="wrapper" id="blog-content">
+
+  <!-- 제목 -->
+  <div class="section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h1 class="post-title">🚢 MSC 월드 에우로파와 떠나는 지중해 크루즈 7박!<br>제노바 출발 → 나폴리·몰타·바르셀로나 완전정복 🇮🇹🇲🇹🇪🇸🇫🇷</h1>
+    <p class="post-meta">
+      <span>📅 2026.05.10(일) 출발</span>
+      <span>🌙 7박 8일</span>
+      <span>🚢 MSC World Europa</span>
+      <span>🏁 출발·귀항: 제노바 (이탈리아)</span>
+    </p>
+  </div>
+
+  <!-- 출발일 강조 박스 -->
+  <div style="background:#fff3e0;border-left:5px solid #ff6f00;padding:14px 24px;margin:0 32px 0;border-radius:0 8px 8px 0;display:flex;align-items:center;gap:14px">
+    <span style="font-size:28px">📅</span>
+    <div>
+      <div style="font-size:13px;color:#bf360c;font-weight:700;margin-bottom:2px">출발일</div>
+      <div style="font-size:20px;font-weight:900;color:#e65100">2026년 5월 10일 (일) 출발 — 7박 8일</div>
+      <div style="font-size:13px;color:#bf360c;margin-top:2px">제노바(이탈리아) 탑승 → 2026년 5월 17일 제노바 귀항</div>
+    </div>
+  </div>
+
+  <!-- 히어로 이미지 -->
+  <img class="hero-img"
+    src="https://assets.widgety.co.uk/2024/09/05/09/53/08/d0f448b8-c6af-44fe-8470-e7dc6a99b04f/MSC%20Cruises%20MSC%20World%20Europa%20-%20MSC%20Rights%20cropped.jpg"
+    alt="MSC World Europa 선박 외관">
+
+  <!-- 도입부 -->
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🌊 지중해 4개국을 크루즈 한 번으로!</h2>
+    <p>안녕하세요! 크루즈 전문 여행사 <strong>크루즈링크</strong>입니다 🙋‍♀️</p>
+    <p>
+      이탈리아·몰타·스페인·프랑스 — 지중해 최고의 여행지들을<br>
+      <strong>MSC의 최신·최대 선박 World Europa</strong>와 함께 7박에 한 번에 경험하세요!
+    </p>
+    <p>
+      MSC 크루즈가 자랑하는 <strong>MSC World Europa</strong>는 2022년 취항한 최신 선박으로,<br>
+      세계 최초의 <strong>친환경 LNG 추진 크루즈</strong>입니다. 5월은 지중해의 날씨가 가장 좋은 황금 시즌이에요!
+    </p>
+    <p>
+      ✅ <strong>인사이드 객실 $1,133~</strong> (1인 기준, 세금 별도)<br>
+      ✅ <strong>5월 출발</strong> — 관광객 적고 기온 완벽한 지중해 황금 시즌<br>
+      ✅ 이탈리아 → 몰타 → 스페인 → 프랑스 → 이탈리아 루프 코스
+    </p>
+    <p>👉 <a href="https://www.cruiselink.co.kr/cruise-view/?ref=MSCEU20260510GOAGOA&ship=msc-world-europa" target="_blank" style="color:#0077cc;font-weight:700">지금 바로 크루즈링크에서 상담받으세요 →</a></p>
+  </div>
+
+  <!-- 일정 요약 -->
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🗺️ 7박 8일 항로 한눈에 보기</h2>
+    <div class="route-box">
+      <div class="route-step">
+        <span class="day-badge">DAY 1</span>
+        <span>🇮🇹 <strong>제노바(Genoa)</strong> — 탑승·출항</span>
+      </div>
+      <div class="route-step">
+        <span class="day-badge">DAY 2</span>
+        <span class="arrow">▸</span>
+        <span>🇮🇹 <strong>나폴리(Naples)</strong> — 폼페이·베수비오·카프리섬</span>
+      </div>
+      <div class="route-step">
+        <span class="day-badge">DAY 3</span>
+        <span class="arrow">▸</span>
+        <span>🇮🇹 <strong>메시나(Messina)</strong> — 시칠리아 섬 탐험</span>
+      </div>
+      <div class="route-step">
+        <span class="day-badge">DAY 4</span>
+        <span class="arrow">▸</span>
+        <span>🇲🇹 <strong>발레타(Valletta)</strong> — 몰타 수도, 세계문화유산</span>
+      </div>
+      <div class="route-step">
+        <span class="day-badge">DAY 5</span>
+        <span class="arrow">▸</span>
+        <span>🇪🇸 <strong>바르셀로나(Barcelona)</strong> — 가우디의 도시</span>
+      </div>
+      <div class="route-step">
+        <span class="day-badge">DAY 6</span>
+        <span class="arrow">▸</span>
+        <span>🇫🇷 <strong>마르세유(Marseille)</strong> — 남프랑스 항구 도시</span>
+      </div>
+      <div class="route-step">
+        <span class="day-badge">DAY 7</span>
+        <span class="arrow">▸</span>
+        <span>🌊 <strong>항해</strong> — 선내 마지막 여유</span>
+      </div>
+      <div class="route-step">
+        <span class="day-badge">DAY 8</span>
+        <span class="arrow">▸</span>
+        <span>🇮🇹 <strong>제노바 귀항·하선</strong></span>
+      </div>
+    </div>
+    <div class="tip-box">
+      <strong>💡 이 노선의 매력</strong> — 이탈리아(2개 기항지)·몰타·스페인·프랑스 5개 항구를 한 번에! 각 기항지에서 8~10시간씩 자유 시간이 주어집니다. 비자 없이 셍겐 지역 전체를 커버합니다.
+    </div>
+  </div>
+
+  <!-- 선박 소개 -->
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🚢 MSC World Europa — 어떤 선박인가요?</h2>
+    <div class="img-row">
+      <img src="https://assets.widgety.co.uk/2024/09/05/09/53/08/d0f448b8-c6af-44fe-8470-e7dc6a99b04f/MSC%20Cruises%20MSC%20World%20Europa%20-%20MSC%20Rights%20cropped.jpg" alt="MSC World Europa 외관">
+      <img src="https://images.unsplash.com/photo-1555990793-da11153b2473?w=800&q=80" alt="지중해 풍경">
+    </div>
+    <table class="info-table">
+      <tr><th>선박명</th><td>MSC World Europa</td></tr>
+      <tr><th>취항</th><td>2022년 11월 — MSC 최신·최대 플래그십</td></tr>
+      <tr><th>총 톤수</th><td>215,863 GT (세계 최대급)</td></tr>
+      <tr><th>전체 길이</th><td>331m</td></tr>
+      <tr><th>승객 정원</th><td>최대 6,762명</td></tr>
+      <tr><th>연료</th><td>세계 최초 LNG(액화천연가스) 추진 메가크루즈</td></tr>
+      <tr><th>특징</th><td>World Class 갑판 엔터테인먼트 구역 · 수중익선(Hydrofoil) 워터슬라이드 · 카지노 · 60개+ 음식·음료 시설</td></tr>
+    </table>
+    <p>
+      <strong>MSC World Europa</strong>는 2022년 카타르 월드컵 기간 플로팅 호텔로 데뷔한 바로 그 선박입니다!<br>
+      MSC의 'World Class' 새 시리즈 첫 번째 선박으로, <strong>현존하는 크루즈 선 중 최고 수준의 환경 친화 설계</strong>를 자랑합니다.
+    </p>
+    <p>
+      갑판에는 <strong>4개 구역으로 나뷔 '월드 클래스 구역'</strong>이 조성되어 있으며, 각 구역마다 테마 레스토랑·바·풀·엔터테인먼트가 집중되어 있습니다. 선내 이동만으로도 세계 일주를 하는 느낌!
+    </p>
+    <div class="tip-box">
+      <strong>💡 World Europa 독점 시설</strong> — 갑판 위 <strong>수중익선(로보코스터) 워터슬라이드</strong>는 선박 측면 밖으로 튀어나와 공중에서 바다를 바라보며 내려오는 세계 유일 체험입니다. 탑승 첫날 바로 예약하세요!
+    </div>
+  </div>
+
+  <!-- DAY별 일정 -->
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>📅 DAY 1 | 제노바 탑승 — 이탈리아에서 출항!</h2>
+    <img class="img-single" src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80" alt="제노바 항구" style="height:280px">
+    <ul>
+      <li>✈️ 인천 → 밀라노 말펜사 또는 제노바 공항 이동</li>
+      <li>🚢 오후 제노바 크루즈 터미널 탑승 수속</li>
+      <li>🏙️ 탑승 전 여유 있으면 제노바 구시가(세계문화유산) 산책</li>
+      <li>🥂 Welcome Dinner & 출항 파티</li>
+      <li>🌅 제노바 만의 석양을 뒤로 하고 남쪽으로 출항</li>
+    </ul>
+    <div class="tip-box">
+      <strong>💡 TIP</strong> — 밀라노는 제노바에서 기차로 1.5시간. 한국~밀라노 직항 후 제노바로 이동하는 루트가 가장 편리합니다. 탑승 전날 밀라노에서 1박하면 두오모·밀라노 명품 쇼핑도 가능!
+    </div>
+  </div>
+
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🌋 DAY 2 | 나폴리(Naples) 기항 — 폼페이·베수비오·카프리</h2>
+    <div class="img-row">
+      <img src="https://images.unsplash.com/photo-1533606688076-b6683a5f59f1?w=800&q=80" alt="나폴리 항구">
+      <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80" alt="폼페이">
+    </div>
+    <p><strong>나폴리(Naples)</strong>는 역사·음식·풍경 모든 면에서 이탈리아 최고의 도시 중 하나입니다. 기항 시간이 넉넉하니 한 가지에 집중하는 것을 추천합니다.</p>
+    <h3>🏛️ 나폴리 추천 코스 (택 1)</h3>
+    <ul>
+      <li>🌋 <strong>폼페이 유적 + 에르콜라노</strong> — 화산 폭발로 봉인된 2,000년 전 도시. 기차로 30분 (약 4~5시간 소요)</li>
+      <li>🚢 <strong>카프리 섬</strong> — 푸른 동굴(Grotta Azzurra), 이탈리아 최고의 뷰포인트. 페리 약 50분</li>
+      <li>🍕 <strong>나폴리 원조 피자</strong> — Da Michele, Di Matteo 등 원조 맛집. 피자 나폴레타나 발상지!</li>
+    </ul>
+    <div class="tip-box">
+      <strong>⚠️ 귀선 시간 엄수!</strong> 나폴리는 관광 포인트가 분산돼 있습니다. 폼페이 or 카프리 중 하나만 선택하고, 나머지 시간은 나폴리 구시가 피자 투어로!
+    </div>
+  </div>
+
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🌋 DAY 3 | 메시나(Messina) 기항 — 시칠리아 섬 탐험</h2>
+    <img class="img-single" src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80" alt="시칠리아" style="height:260px">
+    <p><strong>메시나(Messina)</strong>는 시칠리아 섬 북동부의 관문 도시입니다. 세계 최대 활화산 <strong>에트나(Etna)</strong>가 여기에 있습니다!</p>
+    <h3>🏖️ 메시나 추천 액티비티</h3>
+    <ul>
+      <li>🌋 <strong>에트나 화산 투어</strong> — 유럽 최대 활화산 등반(1,900m 기준). 크루즈 선사 옵션 투어 or 택시 투어</li>
+      <li>🏖️ <strong>타오르미나(Taormina)</strong> — 시칠리아 최고의 리조트 마을. 그리스 극장에서 에트나+바다 파노라마</li>
+      <li>🍊 <strong>시칠리아 혈귤 아란치니</strong> — 시칠리아 대표 길거리 음식 라이스볼. 현지 마켓에서 꼭 먹어보세요!</li>
+    </ul>
+  </div>
+
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🇲🇹 DAY 4 | 발레타(Valletta) 기항 — 지중해 보석 몰타</h2>
+    <div class="img-row">
+      <img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=800&q=80" alt="몰타 발레타">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="몰타 해안">
+    </div>
+    <p><strong>발레타(Valletta)</strong>는 유럽에서 가장 작은 수도이자 <strong>유네스코 세계문화유산 도시</strong>입니다. 구시가 전체가 박물관 수준!</p>
+    <ul>
+      <li>🏛️ <strong>세인트 존스 대성당</strong> — 카라바조의 작품이 실제로 걸려있는 바로크 걸작</li>
+      <li>🌊 <strong>블루 라군(Blue Lagoon)</strong> — 코미노 섬의 청록색 바다. 페리 투어 권장</li>
+      <li>🍺 <strong>구시가 카페 문화</strong> — 지중해의 섬나라 특유의 느긋한 카페 라이프스타일</li>
+      <li>🪖 <strong>어퍼 바라카 가든</strong> — 그랜드 하버를 내려보는 최고의 전망 포인트</li>
+    </ul>
+    <div class="tip-box">
+      <strong>💡 몰타 TIP</strong> — 몰타는 매일 낮 12시 정각 <strong>대포 세레모니(Saluting Battery)</strong>가 진행됩니다. 발레타 구시가 성벽에서 대포 발사 — 꼭 보세요!
+    </div>
+  </div>
+
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🇪🇸 DAY 5 | 바르셀로나(Barcelona) 기항 — 가우디의 도시</h2>
+    <img class="img-single" src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&q=80" alt="바르셀로나" style="height:260px">
+    <p><strong>바르셀로나</strong>는 설명이 필요 없는 유럽 최고의 도시! 크루즈 기항 시간에 맞춰 가우디 핵심만 빠르게 돌아봅니다.</p>
+    <h3>🏛️ 바르셀로나 추천 코스 (가우디 집중)</h3>
+    <ul>
+      <li>⛪ <strong>사그라다 파밀리아</strong> — 가우디의 일생 역작, 144년째 공사 중 (입장권 사전 예약 필수!)</li>
+      <li>🌳 <strong>구엘 공원</strong> — 가우디가 설계한 모자이크 공원, 도시 전망</li>
+      <li>🛍️ <strong>람블라스 거리</strong> — 바르셀로나 중심 보행자 거리, 보케리아 시장</li>
+      <li>🍷 <strong>바르셀로네타 해변</strong> — 항구 바로 앞! 맥주·타파스 한 잔으로 마무리</li>
+    </ul>
+    <div class="tip-box">
+      <strong>💡 사그라다 파밀리아 TIP</strong> — 인기 명소라 현장 구매 시 수시간 대기. 크루즈 출발 전 온라인 사전 예약(sagradafamilia.org)으로 시간 지정 입장하세요. 9~10시 타워 입장권 추천!
+    </div>
+  </div>
+
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🇫🇷 DAY 6 | 마르세유(Marseille) 기항 — 남프랑스 항구</h2>
+    <ul>
+      <li>⛪ <strong>노트르담 드 라 가르드</strong> — 마르세유 언덕 위 성당, 360도 파노라마</li>
+      <li>🏖️ <strong>칼랑크 국립공원(Calanques)</strong> — 남프랑스 피오르드 절경. 보트 투어 or 하이킹</li>
+      <li>🍲 <strong>부야베스(Bouillabaisse)</strong> — 마르세유 전통 생선탕. 현지 레스토랑에서 꼭!  </li>
+      <li>🏛️ <strong>구항(Vieux-Port)</strong> — 2,600년 역사의 마르세유 발상지 항구</li>
+    </ul>
+    <div class="tip-box">
+      <strong>💡 마르세유 TIP</strong> — 아를(Arles, 반 고흐 마을), 아비뇽(Avignon), 엑상프로방스(Aix-en-Provence) 등 프로방스 내륙으로의 당일 투어도 인기입니다. 렌터카 or 기차 활용.
+    </div>
+  </div>
+
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🌊 DAY 7 | 항해의 날 — 아쉬운 마지막 하루</h2>
+    <ul>
+      <li>🌅 이탈리아 해안선을 배경으로 마지막 갑판 일출</li>
+      <li>🛍️ 면세 쇼핑 마지막 찬스 (선내 갤러리아)</li>
+      <li>🍝 이탈리아·지중해 테마 갈라 디너</li>
+      <li>🎭 마지막 밤 메인 공연 & 파티</li>
+      <li>🧳 하선 전날 짐 정리 & 객실 문 앞 탁송</li>
+    </ul>
+  </div>
+
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🎉 DAY 8 | 제노바 귀항·하선</h2>
+    <ul>
+      <li>🌅 이른 아침 제노바 귀항 & 하선 수속</li>
+      <li>✈️ 제노바 → 밀라노 기차 이동 후 인천 귀국 항공편</li>
+    </ul>
+    <div class="tip-box">
+      <strong>💡 귀국 항공편 TIP</strong> — 제노바에서 밀라노 말펜사 공항까지 기차 약 1.5시간. 당일 귀국편 이용 시 <strong>오후 5시 이후 항공편</strong>으로 여유 있게 예약하세요.
+    </div>
+  </div>
+
+  <!-- 요금 -->
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>💰 2026년 5월 출발 요금 안내</h2>
+    <table class="price-table">
+      <thead>
+        <tr><th>객실 타입</th><th>1인 요금</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr class="best">
+          <td>인사이드 <span class="badge">가성비</span></td>
+          <td class="price">$1,133~</td>
+          <td>약 164만원~ ⭐</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>※ 1인 기준 / 세금·항만세 별도 / 항공료 미포함 / 환율 약 1,450원 기준 환산<br>
+    ※ 발코니·스위트 등 상위 객실 문의 시 크루즈링크로 별도 확인해 주세요</p>
+    <div class="tip-box">
+      <strong>💡 포함 사항</strong> — 객실 + 기본 식사(메인 레스토랑·뷔페) + 선내 엔터테인먼트<br><br>
+      <strong>💡 불포함 사항</strong> — 항공권 + 기항지 투어 + 음료 패키지 + 스파 + 팁(1인 1일 약 $16)
+    </div>
+  </div>
+
+  <!-- 준비물 체크리스트 -->
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>🎒 지중해 크루즈 준비물 체크리스트</h2>
+    <ul class="checklist">
+      <li>여권 (유효기간 6개월 이상)</li>
+      <li>편한 워킹화 & 샌들 (기항지 관광은 많이 걷습니다)</li>
+      <li>자외선차단제 SPF50+ (5월 지중해 자외선 강함)</li>
+      <li>선글라스 & 모자</li>
+      <li>가벼운 카디건 (선내 에어컨 강함)</li>
+      <li>포멀 나이트용 정장 (남성 재킷/여성 드레스)</li>
+      <li>수영복 & 수영 모자</li>
+      <li>각 기항지 투어 예약 확인서 (사그라다 파밀리아 등 사전예약 필수)</li>
+      <li>유럽 여행 보험 증서</li>
+      <li>소액 유로 현금 (기항지 시장·길거리 음식 대비)</li>
+    </ul>
+  </div>
+
+  <!-- 추천 대상 -->
+  <div class="section section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <h2>✅ 이런 분께 강력 추천합니다!</h2>
+    <ul>
+      <li>✅ 이탈리아·스페인·프랑스 여러 나라를 한 번 여행으로 끝내고 싶은 분</li>
+      <li>✅ 몰타를 처음 방문해 보고 싶은 분 (몰타 크루즈가 가장 효율적!</li>
+      <li>✅ MSC 최신·최대 선박을 체험하고 싶은 분</li>
+      <li>✅ 가우디·폼페이·지중해 맛집을 한 번에 묶고 싶은 분</li>
+      <li>✅ 커플·신혼·가족·친구 모임 여행 모두 OK!</li>
+      <li>✅ 5월 유럽 여행 계획 중인 분 — 관광객 없고 날씨 완벽</li>
+    </ul>
+  </div>
+
+  <!-- CTA 신뢰 이미지 -->
+  <div class="section" style="background:#f8f9fa;text-align:center;padding:28px 32px">
+    <img src="https://kimdaeri-bot.github.io/cruiselink-v2/assets/images/cta-trust.png"
+         alt="크루즈링크 — 9개 글로벌 선사 공식 판매사"
+         style="max-width:100%;border-radius:12px;display:inline-block">
+  </div>
+
+  <!-- CTA 배너 3개 -->
+  <div class="section" style="background:#f8f9fa;">
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0">
+      <a href="tel:02-3788-9119" style="display:block;text-decoration:none">
+        <img src="https://kimdaeri-bot.github.io/cruiselink-v2/assets/images/cta-phone.png" alt="전화 문의 02-3788-9119" style="height:100px;border-radius:12px;display:block">
+      </a>
+      <a href="https://pf.kakao.com/_xgYbJG" target="_blank" style="display:block;text-decoration:none">
+        <img src="https://kimdaeri-bot.github.io/cruiselink-v2/assets/images/cta-kakao.png" alt="카카오톡 상담" style="height:100px;border-radius:12px;display:block">
+      </a>
+      <a href="https://www.cruiselink.co.kr" target="_blank" style="display:block;text-decoration:none">
+        <img src="https://kimdaeri-bot.github.io/cruiselink-v2/assets/images/cta-web.png" alt="홈페이지 바로가기" style="height:100px;border-radius:12px;display:block">
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:16px;line-height:2.2;font-size:15px">
+      💬 카카오: <a href="https://pf.kakao.com/_xgYbJG" target="_blank" style="color:#0077cc;font-weight:700">https://pf.kakao.com/_xgYbJG</a><br>
+      🌐 홈페이지: <a href="https://www.cruiselink.co.kr" target="_blank" style="color:#0077cc;font-weight:700">https://www.cruiselink.co.kr</a>
+    </div>
+  </div>
+
+  <!-- 태그 -->
+  <div class="tags section-wrap">
+    <button class="copy-section-btn" onclick="copySection(this)">복사</button>
+    <span>#지중해크루즈</span>
+    <span>#MSCWorldEuropa</span>
+    <span>#MSC크루즈</span>
+    <span>#나폴리여행</span>
+    <span>#몰타여행</span>
+    <span>#바르셀로나여행</span>
+    <span>#마르세유여행</span>
+    <span>#이탈리아크루즈</span>
+    <span>#크루즈여행</span>
+    <span>#2026크루즈</span>
+    <span>#크루즈링크</span>
+    <span>#유럽여행</span>
+    <span>#5월여행</span>
+    <span>#해외여행</span>
+    <span>#가우디</span>
+    <span>#폼페이</span>
+  </div>
+
+</div>
+
+<div id="toast">✅ 복사 완료!</div>
+
+<script>
+function showToast() {
+  const t = document.getElementById('toast');
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+function copyAll() {
+  const el = document.getElementById('blog-content');
+  let text = '';
+  el.querySelectorAll('h1, h2, h3, p, li, .route-step, .tags').forEach(s => {
+    if (s.classList.contains('copy-section-btn')) return;
+    const txt = s.innerText.trim();
+    if (txt) text += txt + '\n\n';
+  });
+  navigator.clipboard.writeText(text).then(() => showToast()).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta); showToast();
+  });
+}
+function copySection(btn) {
+  const section = btn.parentElement;
+  let text = '';
+  section.querySelectorAll('h1,h2,h3,p,li,.route-step').forEach(el => {
+    if (el.classList.contains('copy-section-btn')) return;
+    const txt = el.innerText.trim();
+    if (txt) text += txt + '\n\n';
+  });
+  navigator.clipboard.writeText(text).then(() => showToast());
+}
+</script>
+</body>
+</html>
