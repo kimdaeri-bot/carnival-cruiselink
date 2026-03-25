@@ -61,6 +61,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .exp-card h3{font-size:1rem;font-weight:900;color:#1a237e;margin:0 0 8px}
   .exp-card p{color:#424242;font-size:.92rem;line-height:1.8;margin:0}
 </style>
+<script src="../../assets/data/translations.js"></script>
+<script src="../../assets/js/api.js"></script>
+<script src="../../assets/js/components.js"></script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -176,5 +179,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div id="footer"></div>
 <script src="../../../assets/js/main.js"></script>
+
+<script>
+document.getElementById('header').innerHTML = Components.header();
+document.getElementById('footer').innerHTML = Components.footer();
+</script>
 </body>
 </html>

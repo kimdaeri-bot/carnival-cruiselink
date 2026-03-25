@@ -63,6 +63,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .ship-table tr:last-child td{border-bottom:none}
   .ship-table tr:nth-child(even) td{background:#f5f5f5}
 </style>
+<script src="../../assets/data/translations.js"></script>
+<script src="../../assets/js/api.js"></script>
+<script src="../../assets/js/components.js"></script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -197,6 +200,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
   fetch('../../components/header.html').then(r=>r.text()).then(h=>{document.getElementById('header').innerHTML=h});
+</script>
+<div id="footer"></div>
+
+<script>
+document.getElementById('header').innerHTML = Components.header();
+document.getElementById('footer').innerHTML = Components.footer();
 </script>
 </body>
 </html>
