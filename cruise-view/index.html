@@ -568,10 +568,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         return;
       }
 
+      // Widgety API가 해상일을 생략하는 경우 gap을 채워서 완전한 day 배열 생성
+      const rawDays = holiday.itinerary.days;
+      const filledDays = [];
+      for (let i = 0; i < rawDays.length; i++) {
+        const cur = rawDays[i];
+        const prevDay = filledDays.length > 0 ? filledDays[filledDays.length - 1].day : 0;
+        // 현재 day 번호와 직전 day 번호 사이의 gap 채우기
+        for (let d = prevDay + 1; d < cur.day; d++) {
+          filledDays.push({ day: d, day_type: ['SEA'], day_name: '해상', locations: [] });
+        }
+        filledDays.push(cur);
+      }
+      // 마지막 day 이후에도 nights+1 총 일수에 맞게 해상일 추가
+      const totalDaysExpected = (holiday.cruise_nights || holiday.duration || 0) + 1;
+      if (totalDaysExpected > 1) {
+        const lastDay = filledDays.length > 0 ? filledDays[filledDays.length - 1].day : 0;
+        for (let d = lastDay + 1; d <= totalDaysExpected; d++) {
+          filledDays.push({ day: d, day_type: ['SEA'], day_name: '해상', locations: [] });
+        }
+      }
+
       let html = '<div class="day-cards">';
-      for (const day of holiday.itinerary.days) {
+      for (const day of filledDays) {
         const loc = day.locations?.[0];
-        const isSeaDay = !loc || day.day_type?.includes('SEA') || day.day_name?.toLowerCase().includes('at sea');
+        const isSeaDay = !loc || (Array.isArray(day.day_type) ? day.day_type.includes('SEA') : day.day_type?.includes('SEA')) || day.day_name?.toLowerCase().includes('at sea') || day.day_name === '해상';
 
         if (isSeaDay) {
           html += `
