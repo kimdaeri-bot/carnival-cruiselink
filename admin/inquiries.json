@@ -1198,5 +1198,23 @@
     "id": "1774420619620",
     "timestamp": "2026-03-25T06:36:59.620Z",
     "status": "인보이스 전달 완료"
+  },
+  {
+    "id": "1774424481206",
+    "timestamp": "2026-03-25T07:40:00.000Z",
+    "status": "신규",
+    "product": "북유럽 7박 크루즈",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC 유리비아",
+    "dateFrom": "2026-07-05",
+    "ports": "",
+    "price": "문의",
+    "ref": "MSCER20260705CPHCPH",
+    "name": "박명훈",
+    "email": "myhoon1006@gmail.com",
+    "phone": "01033194000",
+    "pax": "2",
+    "cabin": "발코니",
+    "message": ""
   }
 ]
