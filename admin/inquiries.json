@@ -1448,5 +1448,23 @@
     "id": "1774526660737",
     "timestamp": "2026-03-26T12:04:20.737Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "Norwegian Cruise Line",
+    "ship": "Pride of America",
+    "dateFrom": "2026-03-28",
+    "price": "",
+    "message": "[고객] 하와이 크루즈 7월달꺼 추천\n[AI] 안녕하세요. 크루즈링크 AI 상담 어시스턴트입니다.\n\n현재 제 목록에는 7월 하와이 크루즈 상품이 없습니다. \n\n보유 중인 하와이 상품은 2026년 3월~4월 출발입니다:\n\n- Pride of America (3월 28일, 4월 4일, 4월 11일, 4월 18일 출발)\n7박 | 호놀룰루 → 마우이 → 힐로 → 코나 → 나윌리윌리\n\n- Celebrity Solstice (4월 24일 출발)\n9박 | 호놀룰루 → 코나 → 힐로 → 밴쿠버\n\n7월 상품은 카카오톡으로 문의하시면 추가 일정을 안내드릴 수 있습니다.",
+    "source": "kring-ai",
+    "id": "1774527235799",
+    "timestamp": "2026-03-26T12:13:55.799Z",
+    "status": "신규"
   }
 ]
