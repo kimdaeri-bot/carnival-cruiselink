@@ -1520,5 +1520,23 @@
     "id": "1774527325934",
     "timestamp": "2026-03-26T12:15:25.934Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "",
+    "ship": "",
+    "dateFrom": "",
+    "price": "",
+    "message": "[고객] 왜 3월꺼야? 8월꺼라고\n[AI] 죄송합니다. 현재 제 목록에는 2026년 8월 카리브해 상품이 없습니다.\n\n더 많은 상품 정보는 카카오톡으로 문의해 주시면 확인 후 안내드릴 수 있습니다.\n\nhttps://pf.kakao.com/_xgYbJG",
+    "source": "kring-ai",
+    "id": "1774527340388",
+    "timestamp": "2026-03-26T12:15:40.388Z",
+    "status": "신규"
   }
 ]
