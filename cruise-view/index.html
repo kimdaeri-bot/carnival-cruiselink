@@ -589,61 +589,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
       }
 
-      // 날짜별 타임라인 카드 생성
-      const startDate = holiday.departure_date ? new Date(holiday.departure_date) : null;
-      let tableHtml = `<div class="itin-wrap"><h3>🗓️ 상세 일정</h3><div class="itin-list">`;
+      // 날짜별 테이블 생성
+      const rawStart = holiday.date_from || holiday.departure_date || holiday.start_date || '';
+      const startDate = rawStart ? new Date(rawStart) : null;
+      const DAYS_KO = ['일','월','화','수','목','금','토'];
+      const DAYS_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+      let tableHtml = `<div class="itin-wrap">
+        <table class="itin-table">
+          <thead><tr><th>Day</th><th>Date</th><th>Port</th><th>Arrival</th><th>Departure</th></tr></thead>
+          <tbody>`;
+
       for (const day of filledDays) {
         const loc = day.locations?.[0];
         const isSeaDay = !loc || (Array.isArray(day.day_type) ? day.day_type.includes('SEA') : day.day_type?.includes('SEA')) || day.day_name?.toLowerCase().includes('at sea') || day.day_name === '해상';
         const isFirst = day.day === 1;
         const isLast = day.day === filledDays.length;
-        const dateStr = startDate ? (() => {
+
+        let dayLabel = '';
+        let dateLabel = '';
+        if (startDate) {
           const d = new Date(startDate);
           d.setDate(d.getDate() + day.day - 1);
-          return (d.getMonth()+1) + '/' + d.getDate() + ' (' + ['일','월','화','수','목','금','토'][d.getDay()] + ')';
-        })() : '';
+          dayLabel = DAYS_EN[d.getDay()];
+          dateLabel = `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`;
+        } else {
+          dayLabel = `Day ${day.day}`;
+        }
+
+        let portCell = '';
+        let arrCell = '-';
+        let depCell = '-';
+        let rowClass = '';
 
         if (isSeaDay) {
-          tableHtml += `
-          <div class="itin-row">
-            <div class="itin-left">
-              <div class="itin-dot sea">🌊</div>
-              <div class="itin-daynum">${day.day}일차</div>
-              ${dateStr ? `<div class="itin-date">${dateStr}</div>` : ''}
-            </div>
-            <div class="itin-card sea-card">
-              <div class="itin-port sea-port">해상일 (At Sea)</div>
-              <div class="itin-country">선내에서 자유롭게 즐기세요</div>
-            </div>
-          </div>`;
+          portCell = `<span class="itin-sea-label">🌊 In the sea</span>`;
+          rowClass = 'itin-tr-sea';
         } else {
           const portName = Translations.portName(loc.name);
-          const countryKo = Translations.countryName(loc.country) || loc.country || '';
-          const arr = loc.arrival_time || '';
-          const dep = loc.departure_time || '';
-          const dotClass = isFirst ? 'embark' : isLast ? 'disembark' : 'port';
-          const cardClass = isFirst ? 'embark-card' : isLast ? 'disembark-card' : '';
+          const country = Translations.countryName(loc.country) || loc.country || '';
           const badge = isFirst ? '<span class="itin-badge e">승선</span>' : isLast ? '<span class="itin-badge d">하선</span>' : '';
-          const timesHtml = (arr || dep) ? `<div class="itin-times">
-            ${arr ? `<div class="itin-time-item"><span class="itin-time-label">입항</span><span class="itin-time-val">${arr}</span></div>` : ''}
-            ${dep ? `<div class="itin-time-item"><span class="itin-time-label">출항</span><span class="itin-time-val">${dep}</span></div>` : ''}
-          </div>` : '';
-          tableHtml += `
-          <div class="itin-row">
-            <div class="itin-left">
-              <div class="itin-dot ${dotClass}">${day.day}</div>
-              <div class="itin-daynum">${day.day}일차</div>
-              ${dateStr ? `<div class="itin-date">${dateStr}</div>` : ''}
-            </div>
-            <div class="itin-card ${cardClass}">
-              <div class="itin-port">${portName}${badge}</div>
-              ${countryKo ? `<div class="itin-country">${countryKo}</div>` : ''}
-              ${timesHtml}
-            </div>
-          </div>`;
+          portCell = `${portName}${country ? ', '+country : ''}${badge}`;
+          arrCell = loc.arrival_time || '-';
+          depCell = loc.departure_time || '-';
+          if (isFirst) rowClass = 'itin-tr-embark';
+          else if (isLast) rowClass = 'itin-tr-disembark';
         }
+
+        tableHtml += `<tr class="${rowClass}">
+          <td class="itin-td-day"><strong>${dayLabel}</strong></td>
+          <td class="itin-td-date">${dateLabel}</td>
+          <td class="itin-td-port">${portCell}</td>
+          <td class="itin-td-time">${arrCell}</td>
+          <td class="itin-td-time">${depCell}</td>
+        </tr>`;
       }
-      tableHtml += '</div></div>';
+      tableHtml += `</tbody></table></div>`;
 
       let html = tableHtml + '<div class="day-cards">';
       for (const day of filledDays) {

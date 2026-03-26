@@ -785,38 +785,28 @@ img { max-width: 100%; height: auto; }
 .czn-btn{background:#00338D;color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .2s;}
 .czn-btn:hover{background:#001f6b;}
 
-/* ── 일정 타임라인 (itin) ──────────────────────────────────── */
-.itin-wrap{margin:0 0 32px}
-.itin-wrap h3{font-size:1.1rem;font-weight:800;color:var(--navy);margin:0 0 16px}
-.itin-list{display:flex;flex-direction:column;gap:0;position:relative}
-.itin-list::before{content:'';position:absolute;left:19px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--navy),#e0e0e0);z-index:0}
-.itin-row{display:flex;align-items:flex-start;gap:12px;position:relative;padding-bottom:6px}
-.itin-left{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:40px;z-index:1}
-.itin-dot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;color:#fff;flex-shrink:0;border:3px solid #fff;box-shadow:0 0 0 2px var(--navy)}
-.itin-dot.port{background:var(--navy)}
-.itin-dot.embark{background:#1b5e20;box-shadow:0 0 0 2px #1b5e20}
-.itin-dot.disembark{background:#b71c1c;box-shadow:0 0 0 2px #b71c1c}
-.itin-dot.sea{background:#1565c0;font-size:1rem;box-shadow:0 0 0 2px #1565c0}
-.itin-daynum{font-size:.7rem;font-weight:700;color:var(--gray-500);white-space:nowrap}
-.itin-date{font-size:.68rem;color:var(--gray-400);white-space:nowrap}
-.itin-card{flex:1;background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:12px 16px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.05);transition:box-shadow .2s}
-.itin-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.1)}
-.itin-card.embark-card{border-left:4px solid #1b5e20;background:#f1f8e9}
-.itin-card.disembark-card{border-left:4px solid #b71c1c;background:#fff3f3}
-.itin-card.sea-card{border-left:4px solid #1565c0;background:#f0f4ff}
-.itin-port{font-size:.95rem;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.itin-port.sea-port{color:#1565c0}
-.itin-country{font-size:.78rem;color:var(--gray-500);margin-top:2px}
-.itin-badge{display:inline-block;font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:10px;vertical-align:middle}
+/* ── 일정 테이블 (itin) ──────────────────────────────────── */
+.itin-wrap{margin:0 0 28px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.itin-table{width:100%;border-collapse:collapse;font-size:.88rem;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.07)}
+.itin-table thead tr{background:var(--navy);color:#fff}
+.itin-table thead th{padding:11px 14px;font-weight:700;text-align:left;white-space:nowrap;letter-spacing:.3px}
+.itin-table tbody tr{border-bottom:1px solid #f0f0f0;transition:background .15s}
+.itin-table tbody tr:last-child{border-bottom:none}
+.itin-table tbody tr:hover{background:#f8f9ff}
+.itin-table td{padding:11px 14px;vertical-align:middle;color:#333}
+.itin-td-day{font-weight:800;color:var(--navy);width:52px}
+.itin-td-date{color:var(--gray-500);white-space:nowrap;width:100px}
+.itin-td-port{font-weight:500}
+.itin-td-time{text-align:center;color:#444;width:72px;white-space:nowrap}
+.itin-sea-label{color:#1565c0;font-weight:600}
+.itin-tr-sea td{background:#f0f4ff;color:#1565c0}
+.itin-tr-sea .itin-td-day{color:#1565c0}
+.itin-tr-embark td{background:#f1f8e9}
+.itin-tr-disembark td{background:#fff3f3}
+.itin-badge{display:inline-block;font-size:.67rem;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle}
 .itin-badge.e{background:#e8f5e9;color:#1b5e20}
 .itin-badge.d{background:#ffebee;color:#b71c1c}
-.itin-times{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
-.itin-time-item{display:flex;align-items:center;gap:5px}
-.itin-time-label{font-size:.72rem;color:var(--gray-500);background:var(--gray-100);padding:2px 6px;border-radius:4px}
-.itin-time-val{font-size:.85rem;font-weight:700;color:var(--navy)}
 @media(max-width:600px){
-  .itin-list::before{left:17px}
-  .itin-dot{width:34px;height:34px;font-size:.75rem}
-  .itin-card{padding:10px 12px}
-  .itin-port{font-size:.88rem}
+  .itin-table{font-size:.8rem;min-width:420px}
+  .itin-table td,.itin-table th{padding:9px 10px}
 }
