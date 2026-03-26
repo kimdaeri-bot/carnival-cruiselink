@@ -2045,29 +2045,26 @@ async function kringAISendText(text) {
   // 검색 의도가 있을 때만 상품 검색
   const products = (rule?.noProducts || !hasSearchIntent) ? [] : kringSearchCruises(searchCriteria);
 
-  // 검색 의도 있는데 결과 0건 → 추가 정보 요청 (API 호출 없이 바로 안내)
+  // 검색 결과 상태를 AI에게 시스템 컨텍스트로 전달
+  let systemHint = '';
   if (hasSearchIntent && products.length === 0) {
-    kringHideTyping();
-    // 어떤 조건이 부족한지 파악해서 안내
-    let askMsg = '조건에 맞는 상품을 찾지 못했어요 😅<br>';
-    if (!parsed.yearMonth && !parsed.year && !barFilters.dateFrom) {
-      askMsg += '출발 <strong>연도</strong>를 알려주시면 더 정확하게 찾아드릴게요!<br><small style="color:#888">예) 2026년 8월, 2027년 카리브해</small>';
-    } else if (!parsed.destination && !barFilters.destination) {
-      askMsg += '원하시는 <strong>여행 지역</strong>을 알려주시면 찾아드릴게요!<br><small style="color:#888">예) 지중해, 카리브해, 알래스카, 일본</small>';
-    } else {
-      askMsg += '조건을 조금 바꿔서 다시 시도해보세요.<br><small style="color:#888">날짜·지역·선사·박수를 조합해서 말씀해 주세요</small>';
-    }
-    kringHistory.push({role:'assistant', content: askMsg.replace(/<[^>]+>/g,'')});
-    kringAddMsg(askMsg, true, [], true);
-    kringSetQuick('init');
-    return;
+    const missingParts = [];
+    if (!parsed.yearMonth && !parsed.year && !barFilters.dateFrom) missingParts.push('출발 연도/월');
+    if (!parsed.destination && !searchCriteria.destination) missingParts.push('여행 지역');
+    systemHint = `[검색 결과: 0건. 부족한 정보: ${missingParts.join(', ') || '조건이 너무 좁음'}. 사용자에게 자연스럽게 추가 정보를 물어보세요. 절대 상품을 지어내지 마세요.]`;
+  } else if (products.length > 0) {
+    systemHint = `[검색 결과: ${products.length}건 찾음. 상품 카드는 별도 표시되므로 AI는 간단한 한두 줄 코멘트만 해주세요.]`;
   }
+
+  const messagesWithHint = systemHint
+    ? [...kringHistory, {role:'user', content: systemHint}]
+    : kringHistory;
 
   let reply = '';
   try {
     const res = await fetch('https://cruiselink-v2.vercel.app/api/ai-chat', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ messages: kringHistory, cruiseContext: products })
+      body: JSON.stringify({ messages: messagesWithHint, cruiseContext: products })
     });
     const data = await res.json();
     reply = data.reply || '죄송합니다. 잠시 후 다시 시도해 주세요.';
@@ -2079,10 +2076,9 @@ async function kringAISendText(text) {
   kringHistory.push({role:'assistant',content:reply});
 
   if (products.length > 0) {
-    // 상품 카드만 표시
-    const shortMents = ['조건에 맞는 상품을 찾았습니다 🚢','이런 일정은 어떠세요?','딱 맞는 상품을 추려봤어요.','아래 상품들을 확인해보세요!'];
-    const ment = shortMents[Math.floor(Math.random() * shortMents.length)];
-    const productCardsHtml = `<div style="font-size:.83rem;color:#555;margin-bottom:4px">${ment}</div>` + products.slice(0,5).map(p => {
+    // AI 코멘트 + 상품 카드
+    const aiComment = reply.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/https?:\/\/[^\s<]+/g,'').replace(/\n/g,'<br>');
+    const productCardsHtml = `<div style="font-size:.85rem;color:#333;margin-bottom:6px;line-height:1.6">${aiComment}</div>` + products.slice(0,5).map(p => {
       const nights = p.nights || p.cruise_nights || '';
       const date = p.dateFrom || p.date_from || '';
       const starts = p.startsAt?.name || '';
