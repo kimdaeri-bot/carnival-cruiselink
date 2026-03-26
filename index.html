@@ -1883,7 +1883,7 @@ async function kringAISendText(text) {
   kringSetQuick(rule?.quickSet || null);
 }
 
-function kringAISend() { kringAISendText(document.getElementById('kringInput').value.trim()); }
+function kringAISend() { kringAISendText(document.getElementById('kringInputBox').value.trim()); }
 
 async function kringInit() {
   kringInitialized = true;
@@ -2031,13 +2031,12 @@ function kringTogglePopup() {
     popup.style.animation = 'none';
     popup.offsetHeight; // reflow
     popup.style.animation = 'kringSlideUp .28s ease';
-    document.getElementById('kringFabIcon').textContent = '✕';
-    document.getElementById('kringFabLabel').style.display = 'none';
+    document.getElementById('kringFabIcon').innerHTML = '<span style="font-size:.75rem;font-weight:800">닫기</span>';
     document.getElementById('kringBadge').style.display = 'none';
     kringBadgeCount = 0;
     if (!kringInitialized) kringInit();
   } else {
-    document.getElementById('kringFabIcon').textContent = '🤖';
+    document.getElementById('kringFabIcon').innerHTML = '<span style="font-size:.78rem;font-weight:800;line-height:1.2;text-align:center;color:#fff">크링<br>AI</span>';
 
   }
 }
