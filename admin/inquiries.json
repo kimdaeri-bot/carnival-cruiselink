@@ -1556,5 +1556,23 @@
     "id": "1774527382792",
     "timestamp": "2026-03-26T12:16:22.792Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "",
+    "ship": "",
+    "dateFrom": "",
+    "price": "",
+    "message": "[고객] 8월꺼 없냐고\n[AI] 현재 제 목록에는 8월 상품이 없습니다.\n\n더 많은 상품을 확인하시려면 카카오톡으로 문의해 주세요.",
+    "source": "kring-ai",
+    "id": "1774527392129",
+    "timestamp": "2026-03-26T12:16:32.129Z",
+    "status": "신규"
   }
 ]
