@@ -1646,5 +1646,23 @@
     "id": "1774527706017",
     "timestamp": "2026-03-26T12:21:46.017Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "Carnival Cruise Line",
+    "ship": "Carnival Venezia",
+    "dateFrom": "2026-07-01",
+    "price": "",
+    "message": "[고객] 카리브해 7월꺼 추천해봐\n[AI] 7월 카리브해 크루즈 상품을 안내드립니다.\n\n**Norwegian Jewel (7월 2일 출발, 7박)**\n필라델피아 출발로 버뮤다를 거쳐 찰스턴까지 운항하는 상품입니다.\n\n**Carnival Venezia (7월 1일 출발, 8박)**\n뉴욕 출발로 배하마 지역(Celebration Key, 나소, Half Moon Cay)을 도는 상품입니다.\n\n**Royal Caribbean 상품들**\n- Freedom of the Seas (7월 2일, 4박) - 마이애미 출발 바하마 숏크루즈\n- Independence of the Seas (7월 2일, 9박) - 뉴저지 출발 카리브해 풀코스(산후안, 푸에르토플라타 등)\n- Mariner of the Seas (7월 2일, 4박) - 갤버스턴 출발 코수멜 숏크루즈\n\n일정과 출발지에 따라 선택하시면 됩니다. 더 자세한 정보는 상품 카드를 참고해 주세요.",
+    "source": "kring-ai",
+    "id": "1774528435290",
+    "timestamp": "2026-03-26T12:33:55.290Z",
+    "status": "신규"
   }
 ]
