@@ -589,35 +589,61 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
       }
 
-      // 날짜별 요약 테이블 생성
+      // 날짜별 타임라인 카드 생성
       const startDate = holiday.departure_date ? new Date(holiday.departure_date) : null;
-      let tableHtml = `<table class="itinerary-summary-table">
-        <thead><tr><th>일차</th><th>날짜</th><th>항구 / 도시</th><th>국가</th><th>입항</th><th>출항</th></tr></thead>
-        <tbody>`;
+      let tableHtml = `<div class="itin-wrap"><h3>🗓️ 상세 일정</h3><div class="itin-list">`;
       for (const day of filledDays) {
         const loc = day.locations?.[0];
         const isSeaDay = !loc || (Array.isArray(day.day_type) ? day.day_type.includes('SEA') : day.day_type?.includes('SEA')) || day.day_name?.toLowerCase().includes('at sea') || day.day_name === '해상';
+        const isFirst = day.day === 1;
+        const isLast = day.day === filledDays.length;
         const dateStr = startDate ? (() => {
           const d = new Date(startDate);
           d.setDate(d.getDate() + day.day - 1);
           return (d.getMonth()+1) + '/' + d.getDate() + ' (' + ['일','월','화','수','목','금','토'][d.getDay()] + ')';
-        })() : day.day + '일차';
+        })() : '';
 
         if (isSeaDay) {
-          tableHtml += `<tr><td>${day.day}일차</td><td>${dateStr}</td><td class="it-sea">🌊 해상 (At Sea)</td><td>-</td><td>-</td><td>-</td></tr>`;
+          tableHtml += `
+          <div class="itin-row">
+            <div class="itin-left">
+              <div class="itin-dot sea">🌊</div>
+              <div class="itin-daynum">${day.day}일차</div>
+              ${dateStr ? `<div class="itin-date">${dateStr}</div>` : ''}
+            </div>
+            <div class="itin-card sea-card">
+              <div class="itin-port sea-port">해상일 (At Sea)</div>
+              <div class="itin-country">선내에서 자유롭게 즐기세요</div>
+            </div>
+          </div>`;
         } else {
           const portName = Translations.portName(loc.name);
-          const arr = loc.arrival_time || '-';
-          const dep = loc.departure_time || '-';
-          const isFirst = day.day === 1;
-          const isLast = day.day === filledDays.length;
-          const rowClass = isFirst ? 'it-embark' : isLast ? 'it-disembark' : '';
           const countryKo = Translations.countryName(loc.country) || loc.country || '';
-          const portLabel = portName + (isFirst ? ' ⚓승선' : isLast ? ' ⚓하선' : '');
-          tableHtml += `<tr><td>${day.day}일차</td><td>${dateStr}</td><td class="${rowClass}">${portLabel}</td><td>${countryKo}</td><td>${arr}</td><td>${dep}</td></tr>`;
+          const arr = loc.arrival_time || '';
+          const dep = loc.departure_time || '';
+          const dotClass = isFirst ? 'embark' : isLast ? 'disembark' : 'port';
+          const cardClass = isFirst ? 'embark-card' : isLast ? 'disembark-card' : '';
+          const badge = isFirst ? '<span class="itin-badge e">승선</span>' : isLast ? '<span class="itin-badge d">하선</span>' : '';
+          const timesHtml = (arr || dep) ? `<div class="itin-times">
+            ${arr ? `<div class="itin-time-item"><span class="itin-time-label">입항</span><span class="itin-time-val">${arr}</span></div>` : ''}
+            ${dep ? `<div class="itin-time-item"><span class="itin-time-label">출항</span><span class="itin-time-val">${dep}</span></div>` : ''}
+          </div>` : '';
+          tableHtml += `
+          <div class="itin-row">
+            <div class="itin-left">
+              <div class="itin-dot ${dotClass}">${day.day}</div>
+              <div class="itin-daynum">${day.day}일차</div>
+              ${dateStr ? `<div class="itin-date">${dateStr}</div>` : ''}
+            </div>
+            <div class="itin-card ${cardClass}">
+              <div class="itin-port">${portName}${badge}</div>
+              ${countryKo ? `<div class="itin-country">${countryKo}</div>` : ''}
+              ${timesHtml}
+            </div>
+          </div>`;
         }
       }
-      tableHtml += '</tbody></table>';
+      tableHtml += '</div></div>';
 
       let html = tableHtml + '<div class="day-cards">';
       for (const day of filledDays) {
