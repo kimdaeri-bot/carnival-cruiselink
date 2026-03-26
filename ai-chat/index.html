@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 크루즈 상담 | 크루즈링크</title>
+  <meta name="description" content="AI가 나에게 맞는 크루즈를 찾아드립니다. 출발 시기, 인원, 선호 스타일을 알려주세요.">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K4PPLZNG');</script>
+  <!-- End Google Tag Manager -->
+  <base href="/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1a237e; --navy-light: #283593;
+      --orange: #ff6f00;
+      --white: #ffffff; --gray-50: #fafafa; --gray-100: #f5f5f5;
+      --gray-200: #eeeeee; --gray-300: #e0e0e0; --gray-500: #9e9e9e;
+      --gray-700: #616161; --gray-900: #212121;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1); --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: var(--gray-50); color: var(--gray-900); }
+
+    /* HEADER */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white); box-shadow: var(--shadow);
+      height: 64px; display: flex; align-items: center; padding: 0 24px;
+      justify-content: space-between;
+    }
+    .logo { font-size: 1.4rem; font-weight: 900; color: var(--navy); text-decoration: none; }
+    .logo span { color: var(--orange); }
+    .header-nav { display: flex; gap: 16px; align-items: center; }
+    .header-nav a { font-size: 0.9rem; color: var(--gray-700); font-weight: 500; text-decoration: none; }
+    .header-nav a:hover { color: var(--navy); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1565c0 100%);
+      color: #fff; text-align: center; padding: 60px 24px 48px;
+    }
+    .hero-badge {
+      display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px; padding: 6px 16px; font-size: 0.82rem; font-weight: 700; margin-bottom: 18px;
+      letter-spacing: 0.5px;
+    }
+    .hero h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.35; margin-bottom: 14px; }
+    .hero p { font-size: 1rem; opacity: 0.85; max-width: 500px; margin: 0 auto 28px; line-height: 1.7; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff; padding: 14px 28px; border-radius: 50px;
+      font-weight: 700; font-size: 1rem; cursor: pointer; border: none;
+      box-shadow: 0 4px 16px rgba(255,111,0,0.4); transition: all 0.2s;
+    }
+    .hero-cta:hover { background: #e65100; transform: translateY(-2px); }
+
+    /* MAIN LAYOUT */
+    .main { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    /* CHAT CONTAINER */
+    .chat-container {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); overflow: hidden; margin-bottom: 32px;
+    }
+    .chat-header {
+      background: var(--navy); color: #fff; padding: 16px 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .chat-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .chat-header-info h3 { font-size: 0.95rem; font-weight: 700; }
+    .chat-header-info p { font-size: 0.78rem; opacity: 0.75; }
+    .chat-status { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; margin-left: auto; }
+
+    .chat-messages {
+      height: 460px; overflow-y: auto; padding: 20px;
+      display: flex; flex-direction: column; gap: 16px;
+      scroll-behavior: smooth;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 4px; }
+
+    /* MESSAGE BUBBLES */
+    .msg { display: flex; gap: 10px; max-width: 80%; }
+    .msg.bot { align-self: flex-start; }
+    .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+
+    .msg-avatar {
+      width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+      background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700;
+    }
+    .msg.user .msg-avatar { background: var(--orange); }
+
+    .msg-bubble {
+      padding: 12px 16px; border-radius: 18px; font-size: 0.9rem; line-height: 1.6;
+    }
+    .msg.bot .msg-bubble {
+      background: var(--gray-100); color: var(--gray-900);
+      border-bottom-left-radius: 4px;
+    }
+    .msg.user .msg-bubble {
+      background: var(--navy); color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .msg-time { font-size: 0.72rem; color: var(--gray-500); margin-top: 4px; text-align: right; }
+    .msg.bot .msg-time { text-align: left; }
+
+    /* QUICK REPLIES */
+    .quick-replies {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; padding: 0 20px 16px;
+    }
+    .quick-reply {
+      padding: 8px 14px; border: 1.5px solid var(--navy); border-radius: 20px;
+      font-size: 0.84rem; font-weight: 600; color: var(--navy); cursor: pointer;
+      background: var(--white); transition: all 0.15s; white-space: nowrap;
+    }
+    .quick-reply:hover { background: var(--navy); color: #fff; }
+
+    /* PRODUCT CARDS IN CHAT */
+    .chat-product-card {
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px;
+      overflow: hidden; margin-top: 8px; cursor: pointer; transition: box-shadow 0.2s;
+    }
+    .chat-product-card:hover { box-shadow: var(--shadow-lg); }
+    .chat-product-card img { width: 100%; height: 120px; object-fit: cover; }
+    .chat-product-card-body { padding: 10px 12px; }
+    .chat-product-card-body h4 { font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .chat-product-card-body p { font-size: 0.78rem; color: var(--gray-700); }
+    .chat-product-card-btn {
+      display: block; text-align: center; padding: 8px; background: var(--navy); color: #fff;
+      font-size: 0.82rem; font-weight: 700; text-decoration: none;
+    }
+
+    /* TYPING INDICATOR */
+    .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
+    .typing-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--gray-500);
+      animation: typing 1.2s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%,80%,100% { transform: scale(0.7); opacity: 0.5; } 40% { transform: scale(1); opacity: 1; } }
+
+    /* INPUT AREA */
+    .chat-input-area {
+      border-top: 1px solid var(--gray-200); padding: 14px 16px;
+      display: flex; gap: 10px; align-items: flex-end;
+    }
+    .chat-input {
+      flex: 1; border: 1.5px solid var(--gray-200); border-radius: 24px;
+      padding: 10px 16px; font-size: 0.9rem; outline: none; resize: none;
+      font-family: inherit; line-height: 1.5; max-height: 120px;
+      transition: border-color 0.2s;
+    }
+    .chat-input:focus { border-color: var(--navy); }
+    .chat-send-btn {
+      width: 44px; height: 44px; border-radius: 50%; background: var(--navy); border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s;
+    }
+    .chat-send-btn:hover { background: var(--navy-light); }
+    .chat-send-btn svg { width: 20px; height: 20px; fill: #fff; }
+
+    /* INFO CARDS */
+    .info-section { margin-bottom: 32px; }
+    .info-section h2 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 16px; }
+    .info-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    @media(max-width:640px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-card {
+      background: var(--white); border-radius: 10px; padding: 18px;
+      box-shadow: var(--shadow); text-align: center;
+    }
+    .info-card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .info-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .info-card p { font-size: 0.8rem; color: var(--gray-700); line-height: 1.5; }
+
+    /* KAKAO CTA */
+    .kakao-cta {
+      background: var(--white); border-radius: var(--radius); padding: 28px; text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .kakao-cta h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .kakao-cta p { font-size: 0.88rem; color: var(--gray-700); margin-bottom: 18px; }
+    .kakao-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #FAE300; color: #3A1D1D; padding: 12px 24px;
+      border-radius: 50px; font-weight: 900; font-size: 0.95rem; text-decoration: none;
+    }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.7); text-align: center; padding: 24px; font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4PPLZNG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="/" class="logo">Cruise<span>Link</span></a>
+  <nav class="header-nav">
+    <a href="/search/">상품 검색</a>
+    <a href="/guide/">가이드</a>
+    <a href="/promotions/">프로모션</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">AI 크루즈 상담 서비스</div>
+  <h1>AI가 나에게 딱 맞는<br>크루즈를 찾아드립니다</h1>
+  <p>출발 시기, 인원, 원하는 스타일을 알려주시면<br>최적의 크루즈 상품을 추천해 드릴게요.</p>
+  <button class="hero-cta" onclick="document.querySelector('.chat-messages').scrollIntoView({behavior:'smooth'})">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    AI 상담 시작하기
+  </button>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- CHAT -->
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info">
+        <h3>크루즈링크 AI 어시스턴트</h3>
+        <p>크루즈 전문 AI 상담사</p>
+      </div>
+      <div class="chat-status"></div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <!-- 초기 메시지는 JS로 삽입 -->
+    </div>
+
+    <div class="quick-replies" id="quickReplies"></div>
+
+    <div class="chat-input-area">
+      <textarea class="chat-input" id="chatInput" placeholder="궁금한 점을 물어보세요..." rows="1"
+        onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="chat-send-btn" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- INFO CARDS -->
+  <section class="info-section">
+    <h2>AI 상담으로 이런 것들을 물어볼 수 있어요</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon">🗓️</div>
+        <h3>일정 추천</h3>
+        <p>출발 시기와 기간을 알려주시면 딱 맞는 일정을 찾아드려요.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🚢</div>
+        <h3>선사 & 선박 안내</h3>
+        <p>MSC, NCL, 로열캐리비안 등 선사별 특징을 쉽게 비교해 드려요.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🛏️</div>
+        <h3>객실 선택 도움</h3>
+        <p>내측/외측/발코니/스위트 차이와 추천을 안내해 드려요.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🗺️</div>
+        <h3>기항지 정보</h3>
+        <p>각 기항지에서 즐길 수 있는 것들을 소개해 드려요.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">💡</div>
+        <h3>크루즈 팁</h3>
+        <p>처음 탑승하시는 분들을 위한 실전 꿀팁을 알려드려요.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📋</div>
+        <h3>상품 검색</h3>
+        <p>조건을 말씀해 주시면 맞는 상품 링크를 바로 찾아드려요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KAKAO CTA -->
+  <div class="kakao-cta">
+    <h3>요금 안내나 예약은 전문 상담원이 도와드려요</h3>
+    <p>AI 상담 후 견적이나 예약을 원하시면 카카오톡으로 연결해 드립니다.</p>
+    <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="kakao-btn">
+      💬 카카오톡 1:1 상담
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2025 크루즈링크 | 아남항공 주식회사
+</footer>
+
+<script>
+// ===== AI 상태 & 대화 흐름 =====
+const ANTHROPIC_KEY = ''; // 서버사이드 프록시 사용 예정
+let conversationHistory = [];
+let currentStep = 'init';
+
+// 크루즈 데이터 (간략 버전)
+const CRUISE_DATA_URL = '/assets/data/cruises.json';
+let cruiseData = [];
+
+// 빠른 답변 세트
+const QUICK_SETS = {
+  init: ['지중해 크루즈 추천', '일본 크루즈 보여줘', '크루즈 처음인데요', '객실 종류 알려줘'],
+  region: ['지중해/유럽', '일본/아시아', '카리브해', '알래스카/북유럽'],
+  period: ['3~5박 단기', '7박', '10박 이상'],
+  cabin: ['내측 (경제적)', '외측 (바다 뷰)', '발코니', '스위트'],
+  pax: ['2명', '3~4명', '5명 이상'],
+};
+
+// 봇 응답 규칙 (Anthropic API 없이 로컬 처리)
+const BOT_RULES = [
+  {
+    keywords: ['안녕','처음','시작','도움'],
+    reply: '안녕하세요! 저는 크루즈링크 AI 상담사입니다 🚢\n어떤 크루즈 여행을 계획하고 계신가요? 지역, 일정, 인원을 알려주시면 맞춤 상품을 추천해 드릴게요.',
+    quickSet: 'init'
+  },
+  {
+    keywords: ['지중해','유럽','이탈리아','그리스','스페인','바르셀로나','산토리니'],
+    reply: '지중해 크루즈를 찾고 계시는군요! 지중해는 MSC 크루즈가 특히 인기입니다.\n\n출발 시기가 언제쯤이신가요?',
+    quickSet: 'period',
+    search: { region: '지중해', operator: 'MSC' }
+  },
+  {
+    keywords: ['일본','아시아','도쿄','오사카','후쿠오카','한국출발','인천'],
+    reply: '일본/아시아 크루즈를 원하시는군요! 인천 출발 상품이 많아 편리합니다.\n\n여행 기간은 어떻게 생각하고 계세요?',
+    quickSet: 'period',
+    search: { region: '아시아' }
+  },
+  {
+    keywords: ['카리브','카리브해','바하마','멕시코'],
+    reply: '카리브해 크루즈를 찾으시는군요! 에메랄드빛 바다와 비치가 매력적인 노선입니다.\n\n출발 인원이 어떻게 되시나요?',
+    quickSet: 'pax'
+  },
+  {
+    keywords: ['객실','방','내측','외측','발코니','스위트','차이'],
+    reply: '객실 타입에 대해 안내해 드릴게요!\n\n내측 객실 - 창문 없음, 가장 경제적\n외측 객실 - 고정 유리창으로 바다 조망\n발코니 객실 - 전용 발코니, 가장 인기\n스위트 객실 - 넓은 공간과 프리미엄 서비스\n\n어떤 타입이 마음에 드세요?',
+    quickSet: 'cabin'
+  },
+  {
+    keywords: ['처음','입문','초보','첫','모르','beginners'],
+    reply: '크루즈 처음이시군요! 걱정 마세요, 크루즈는 생각보다 훨씬 편하고 즐거운 여행입니다 😊\n\n우선 어떤 지역으로 떠나고 싶으세요?',
+    quickSet: 'region'
+  },
+  {
+    keywords: ['식사','음식','밥','다이닝','레스토랑'],
+    reply: '크루즈 식사는 기본 메인 다이닝룸의 조식·중식·석식이 모두 요금에 포함되어 있습니다.\n\n스페셔티 레스토랑(이탈리안, 스테이크하우스 등)은 별도 유료이며 약 30~50달러 수준입니다.\n\n(금액은 대략적인 참고값이며 시기에 따라 달라질 수 있습니다.)',
+    quickSet: 'init'
+  },
+  {
+    keywords: ['비용','요금','가격','얼마','견적'],
+    reply: '크루즈 요금은 노선, 선박, 객실 타입에 따라 크게 다릅니다. 정확한 요금은 전문 상담원이 확인 후 안내해 드릴게요.\n\n카카오톡으로 문의해 주시면 빠르게 견적을 받으실 수 있습니다!',
+    quickSet: 'init',
+    showKakao: true
+  },
+  {
+    keywords: ['예약','신청','어떻게','방법'],
+    reply: '예약은 크루즈링크 카카오톡 채널을 통해 진행하시면 됩니다. 전문 상담원이 최적의 상품과 요금을 안내해 드려요.',
+    quickSet: 'init',
+    showKakao: true
+  },
+  {
+    keywords: ['3박','4박','단기','짧'],
+    reply: '단기 크루즈를 원하시는군요! 3~5박은 일본 주요 항구나 한국 인근 노선이 인기입니다.\n\n인원이 어떻게 되시나요?',
+    quickSet: 'pax'
+  },
+  {
+    keywords: ['7박','일주일'],
+    reply: '7박 크루즈는 지중해나 알래스카 노선이 가장 인기있습니다. 여러 기항지를 충분히 즐기기에 딱 좋은 기간이에요!\n\n몇 분이 함께 가시나요?',
+    quickSet: 'pax'
+  },
+  {
+    keywords: ['2명','커플','부부','둘이'],
+    reply: '2인 여행이시군요! 커플·부부 여행에는 발코니 객실이 특히 인기입니다. 함께 바다를 바라보는 낭만이 있거든요 😊\n\n어떤 지역으로 떠나고 싶으세요?',
+    quickSet: 'region'
+  },
+  {
+    keywords: ['가족','아이','어린이','아동','자녀'],
+    reply: '가족 여행이시군요! 크루즈는 가족 여행에 정말 최적입니다. 아이들을 위한 키즈 클럽과 다양한 액티비티가 있거든요.\n\n아이들 연령대가 어떻게 되시나요? (영아/유아/어린이/청소년)',
+    quickSet: 'init'
+  },
+];
+
+const DEFAULT_REPLY = '네, 말씀해 주신 내용 잘 이해했습니다. 더 자세한 상담을 위해 아래 버튼을 눌러 카카오톡으로 연결해 드릴게요!';
+
+function matchRule(text) {
+  const lower = text.toLowerCase();
+  return BOT_RULES.find(r => r.keywords.some(k => lower.includes(k)));
+}
+
+// ===== UI 함수 =====
+function addMessage(text, isBot, products = []) {
+  const container = document.getElementById('chatMessages');
+  const now = new Date().toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'});
+  const div = document.createElement('div');
+  div.className = 'msg ' + (isBot ? 'bot' : 'user');
+
+  let productHTML = '';
+  if (products.length > 0) {
+    productHTML = products.map(p => `
+      <a href="/cruise-view/?ref=${p.ref}" target="_blank" class="chat-product-card">
+        <img src="${p.image}" alt="${p.shipTitle}" onerror="this.src='https://images.unsplash.com/photo-1548574505-5e239809ee19?w=400&q=60'">
+        <div class="chat-product-card-body">
+          <h4>${p.shipTitle} ${p.nights}박</h4>
+          <p>${p.portRoute || p.destination || ''}</p>
+          <p style="color:#1a237e;font-weight:700;font-size:0.75rem;margin-top:4px">${p.dateFrom} 출발</p>
+        </div>
+        <div class="chat-product-card-btn">상세 보기 →</div>
+      </a>
+    `).join('');
+  }
+
+  div.innerHTML = `
+    <div class="msg-avatar">${isBot ? 'AI' : '나'}</div>
+    <div>
+      <div class="msg-bubble">${text.replace(/\n/g,'<br>')}${productHTML}</div>
+      <div class="msg-time">${now}</div>
+    </div>
+  `;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTyping() {
+  const container = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg bot'; div.id = 'typing';
+  div.innerHTML = `<div class="msg-avatar">AI</div><div class="msg-bubble" style="padding:10px 14px"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function hideTyping() {
+  const el = document.getElementById('typing');
+  if (el) el.remove();
+}
+
+function setQuickReplies(set) {
+  const container = document.getElementById('quickReplies');
+  container.innerHTML = '';
+  if (!set || !QUICK_SETS[set]) return;
+  QUICK_SETS[set].forEach(label => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-reply';
+    btn.textContent = label;
+    btn.onclick = () => { sendUserMessage(label); };
+    container.appendChild(btn);
+  });
+}
+
+function searchCruises(criteria) {
+  if (!cruiseData.length) return [];
+  let results = cruiseData;
+  if (criteria.operator) results = results.filter(c => c.operator?.includes(criteria.operator));
+  if (criteria.region) results = results.filter(c => {
+    const r = (c.destination || '') + (c.portRoute || '') + (c.regions?.join('') || '');
+    return r.toLowerCase().includes(criteria.region.toLowerCase()) ||
+      (criteria.region === '지중해' && ['Mediterranean','Mediter'].some(k => r.includes(k)));
+  });
+  // 날짜 필터: 오늘 이후
+  const today = new Date().toISOString().substring(0,10);
+  results = results.filter(c => c.dateFrom >= today);
+  return results.slice(0,3);
+}
+
+async function botReply(userText) {
+  showTyping();
+  await new Promise(r => setTimeout(r, 800 + Math.random()*600));
+  hideTyping();
+
+  const rule = matchRule(userText);
+  if (rule) {
+    const products = rule.search ? searchCruises(rule.search) : [];
+    addMessage(rule.reply, true, products);
+    setQuickReplies(rule.quickSet || 'init');
+    if (rule.showKakao) {
+      setTimeout(() => {
+        document.querySelector('.kakao-cta').scrollIntoView({behavior:'smooth'});
+      }, 500);
+    }
+    // 백오피스 저장 (비동기)
+    saveInquiry(userText, rule.reply);
+  } else {
+    addMessage(DEFAULT_REPLY, true);
+    setQuickReplies('init');
+    saveInquiry(userText, DEFAULT_REPLY);
+  }
+}
+
+function saveInquiry(userMsg, botReply) {
+  try {
+    fetch('/api/inquiry', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        product: 'AI 채팅 문의',
+        cruiseline: '',
+        ship: '',
+        dateFrom: '',
+        ports: '',
+        price: '',
+        ref: 'AI_CHAT',
+        name: 'AI 채팅 고객',
+        email: '',
+        phone: '',
+        pax: '',
+        cabin: '',
+        message: `[고객] ${userMsg}\n[AI] ${botReply}`,
+        source: 'ai-chat'
+      })
+    }).catch(() => {});
+  } catch(e) {}
+}
+
+function sendUserMessage(text) {
+  if (!text.trim()) return;
+  addMessage(text, false);
+  document.getElementById('chatInput').value = '';
+  document.getElementById('quickReplies').innerHTML = '';
+  botReply(text);
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  sendUserMessage(input.value.trim());
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+// ===== 초기화 =====
+async function init() {
+  // 크루즈 데이터 로드
+  try {
+    const res = await fetch('/assets/data/cruises.json');
+    cruiseData = await res.json();
+  } catch(e) { cruiseData = []; }
+
+  // 첫 메시지
+  setTimeout(() => {
+    addMessage('안녕하세요! 저는 크루즈링크 AI 상담사입니다 🚢\n어떤 크루즈 여행을 찾고 계신가요? 아래 버튼을 클릭하거나 직접 입력해 주세요!', true);
+    setQuickReplies('init');
+  }, 400);
+}
+
+init();
+</script>
+</body>
+</html>
