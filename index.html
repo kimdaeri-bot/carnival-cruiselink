@@ -1753,45 +1753,149 @@ const KRING_RULES = [
 
 function kringParseCriteria(text) {
   const c = {};
-  // 연도+월 파싱
-  const ymMatch = text.match(/(\d{4})[\s년]?\s*(\d{1,2})월/);
+  const t = text;
+
+  // ── 날짜 파싱 ──
+  const ymMatch = t.match(/(\d{4})[\s년]?\s*(\d{1,2})월/);
   if (ymMatch) c.yearMonth = `${ymMatch[1]}-${ymMatch[2].padStart(2,'0')}`;
-  // 연도만 파싱 (월 없이 "2027년" 등)
-  const yOnly = text.match(/(\d{4})년/);
+  const yOnly = t.match(/(\d{4})년/);
   if (yOnly && !ymMatch) c.year = yOnly[1];
-  // 선박명 파싱
-  if (/벨리시마|Bellissima/i.test(text)) c.ship = 'Bellissima';
-  else if (/오케스트라|Orchestra/i.test(text)) c.ship = 'Orchestra';
-  else if (/판타지아|Fantasia/i.test(text)) c.ship = 'Fantasia';
-  else if (/스플렌디다|Splendida/i.test(text)) c.ship = 'Splendida';
-  else if (/마그니피카|Magnifica/i.test(text)) c.ship = 'Magnifica';
-  else if (/세아시아|Seashore/i.test(text)) c.ship = 'Seashore';
-  else if (/심포니|Symphony/i.test(text)) c.ship = 'Symphony';
-  else if (/오아시스|Oasis/i.test(text)) c.ship = 'Oasis';
-  else if (/원더|Wonder/i.test(text)) c.ship = 'Wonder';
-  else if (/어드벤처|Adventure/i.test(text)) c.ship = 'Adventure';
-  else if (/익스플로러|Explorer/i.test(text)) c.ship = 'Explorer';
-  if (/인천출발|인천 출발|한국출발/.test(text)) c.startPort = ['Incheon','Busan'];
-  else if (/인천도착|인천 도착/.test(text)) c.endPort = ['Incheon'];
-  else if (/인천/.test(text)) c.anyPort = ['Incheon'];
-  if (/로마|치비타베키아/.test(text)) c.startPort = ['Civitavecchia','Rome'];
-  if (/도쿄|요코하마/.test(text)) c.startPort = ['Tokyo','Yokohama'];
-  const nightMatch = text.match(/(\d+)박/);
+
+  // ── 선박명 파싱 (실제 DB 선박명 기준) ──
+  const shipMap = [
+    [/벨리시마|Bellissima/i, 'Bellissima'],
+    [/오케스트라|Orchestra/i, 'Orchestra'],
+    [/판타지아|Fantasia/i, 'Fantasia'],
+    [/스플렌디다|Splendida/i, 'Splendida'],
+    [/마그니피카|Magnifica/i, 'Magnifica'],
+    [/시사이드|씨사이드|Seaside/i, 'Seaside'],
+    [/시쇼어|씨쇼어|Seashore/i, 'Seashore'],
+    [/씨뷰|시뷰|Seaview/i, 'Seaview'],
+    [/시스케이프|씨스케이프|Seascape/i, 'Seascape'],
+    [/그란디오사|Grandiosa/i, 'Grandiosa'],
+    [/메라비글리아|Meraviglia/i, 'Meraviglia'],
+    [/버추오사|Virtuosa/i, 'Virtuosa'],
+    [/오페라|Opera/i, 'Opera'],
+    [/리리카|Lirica/i, 'Lirica'],
+    [/프레지오사|Preziosa/i, 'Preziosa'],
+    [/디비나|Divina/i, 'Divina'],
+    [/아르모니아|Armonia/i, 'Armonia'],
+    [/뮤지카|Musica/i, 'Musica'],
+    [/포에지아|Poesia/i, 'Poesia'],
+    [/신포니아|Sinfonia/i, 'Sinfonia'],
+    [/유리비아|Euribia/i, 'Euribia'],
+    [/월드 유로파|World Europa/i, 'World Europa'],
+    [/월드 아시아|World Asia/i, 'World Asia'],
+    [/월드 아메리카|World America/i, 'World America'],
+    [/오아시스|Oasis of the Seas/i, 'Oasis of the Seas'],
+    [/어드벤처|Adventure of the Seas/i, 'Adventure of the Seas'],
+    [/원더|Wonder of the Seas/i, 'Wonder of the Seas'],
+    [/심포니|Symphony of the Seas/i, 'Symphony of the Seas'],
+    [/하모니|Harmony of the Seas/i, 'Harmony of the Seas'],
+    [/앨루어|Allure of the Seas/i, 'Allure of the Seas'],
+    [/아이콘|Icon of the Seas/i, 'Icon of the Seas'],
+    [/유토피아|Utopia of the Seas/i, 'Utopia of the Seas'],
+    [/스타 오브 더 씨즈|Star of the Seas/i, 'Star of the Seas'],
+    [/오베이션|Ovation of the Seas/i, 'Ovation of the Seas'],
+    [/오디세이|Odyssey of the Seas/i, 'Odyssey of the Seas'],
+    [/퀀텀|Quantum of the Seas/i, 'Quantum of the Seas'],
+    [/쥬얼|Jewel of the Seas/i, 'Jewel of the Seas'],
+    [/래디언스|Radiance of the Seas/i, 'Radiance of the Seas'],
+    [/인디펜던스|Independence/i, 'Independence'],
+    [/익스플로러|Explorer of the Seas/i, 'Explorer of the Seas'],
+    [/마리너|Mariner of the Seas/i, 'Mariner of the Seas'],
+    [/네비게이터|Navigator of the Seas/i, 'Navigator of the Seas'],
+    [/리버티|Liberty of the Seas/i, 'Liberty of the Seas'],
+    [/프리덤|Freedom of the Seas/i, 'Freedom of the Seas'],
+    [/그랜져|Grandeur of the Seas/i, 'Grandeur of the Seas'],
+    [/선 프린세스|Sun Princess/i, 'Sun Princess'],
+    [/로열 프린세스|Royal Princess/i, 'Royal Princess'],
+    [/크라운 프린세스|Crown Princess/i, 'Crown Princess'],
+    [/리갈 프린세스|Regal Princess/i, 'Regal Princess'],
+    [/인챈티드 프린세스|Enchanted Princess/i, 'Enchanted Princess'],
+    [/디스커버리 프린세스|Discovery Princess/i, 'Discovery Princess'],
+    [/에메랄드 프린세스|Emerald Princess/i, 'Emerald Princess'],
+    [/스타 프린세스|Star Princess/i, 'Star Princess'],
+    [/그랜드 프린세스|Grand Princess/i, 'Grand Princess'],
+    [/다이아몬드 프린세스|Diamond Princess/i, 'Diamond Princess'],
+    [/사파이어 프린세스|Sapphire Princess/i, 'Sapphire Princess'],
+    [/코랄 프린세스|Coral Princess/i, 'Coral Princess'],
+    [/스카이 프린세스|Sky Princess/i, 'Sky Princess'],
+    [/캐리비안 프린세스|Caribbean Princess/i, 'Caribbean Princess'],
+    [/노르웨지안 조이|Norwegian Joy/i, 'Norwegian Joy'],
+    [/노르웨지안 블리스|Norwegian Bliss/i, 'Norwegian Bliss'],
+    [/노르웨지안 앙코르|Norwegian Encore/i, 'Norwegian Encore'],
+    [/노르웨지안 에픽|Norwegian Epic/i, 'Norwegian Epic'],
+    [/노르웨지안 게이트웨이|Norwegian Getaway/i, 'Norwegian Getaway'],
+    [/노르웨지안 브레이크어웨이|Norwegian Breakaway/i, 'Norwegian Breakaway'],
+    [/노르웨지안 프리마|Norwegian Prima/i, 'Norwegian Prima'],
+    [/노르웨지안 아쿠아|Norwegian Aqua/i, 'Norwegian Aqua'],
+    [/노르웨지안 루나|Norwegian Luna/i, 'Norwegian Luna'],
+    [/노르웨지안 에스케이프|Norwegian Escape/i, 'Norwegian Escape'],
+    [/노르웨지안 던|Norwegian Dawn/i, 'Norwegian Dawn'],
+    [/셀레브리티 비욘드|Celebrity Beyond/i, 'Celebrity Beyond'],
+    [/셀레브리티 엑셀|Celebrity Xcel/i, 'Celebrity Xcel'],
+    [/셀레브리티 어펙스|Celebrity Apex/i, 'Celebrity Apex'],
+    [/셀레브리티 리플렉션|Celebrity Reflection/i, 'Celebrity Reflection'],
+    [/셀레브리티 실루엣|Celebrity Silhouette/i, 'Celebrity Silhouette'],
+    [/셀레브리티 플로라|Celebrity Flora/i, 'Celebrity Flora'],
+    [/익스플로라 1|EXPLORA I/i, 'EXPLORA I'],
+    [/익스플로라 2|EXPLORA II/i, 'EXPLORA II'],
+    [/익스플로라 3|EXPLORA III/i, 'EXPLORA III'],
+    [/디즈니 위시|Disney Wish/i, 'Disney Wish'],
+    [/디즈니 드림|Disney Dream/i, 'Disney Dream'],
+    [/디즈니 판타지|Disney Fantasy/i, 'Disney Fantasy'],
+    [/디즈니 원더|Disney Wonder/i, 'Disney Wonder'],
+    [/디즈니 매직|Disney Magic/i, 'Disney Magic'],
+    [/디즈니 어드벤처|Disney Adventure/i, 'Disney Adventure'],
+    [/디즈니 데스티니|Disney Destiny/i, 'Disney Destiny'],
+    [/오세아니아 마리나|Oceania Marina/i, 'Oceania Marina'],
+    [/오세아니아 알루라|Oceania Allura/i, 'Oceania Allura'],
+    [/카니발 마디 그라|Carnival Mardi Gras/i, 'Carnival Mardi Gras'],
+    [/카니발 셀러브레이션|Carnival Celebration/i, 'Carnival Celebration'],
+  ];
+  for (const [re, name] of shipMap) {
+    if (re.test(t)) { c.ship = name; break; }
+  }
+
+  // ── 출발지 파싱 ──
+  if (/인천출발|인천 출발|한국출발|한국에서/.test(t)) c.startPort = ['Incheon','Busan'];
+  else if (/인천도착|인천 도착/.test(t)) c.endPort = ['Incheon'];
+  else if (/인천/.test(t)) c.anyPort = ['Incheon','Busan'];
+  if (/로마출발|치비타베키아/.test(t)) c.startPort = ['Civitavecchia','Rome'];
+  if (/도쿄출발|요코하마출발/.test(t)) c.startPort = ['Tokyo','Yokohama'];
+  if (/바르셀로나출발/.test(t)) c.startPort = ['Barcelona'];
+  if (/마이애미출발/.test(t)) c.startPort = ['Miami'];
+  if (/싱가포르출발/.test(t)) c.startPort = ['Singapore'];
+
+  // ── 박수 파싱 ──
+  const nightMatch = t.match(/(\d+)박/);
   if (nightMatch) c.nights = parseInt(nightMatch[1]);
-  // 목적지 파싱 (destination 필드 기준)
-  if (/지중해|이탈리아|그리스|스페인|바르셀로나|산토리니|크로아티아|프랑스/i.test(text)) c.destination = 'mediterranean';
-  else if (/알래스카|빙하|케치칸|주노|스캐그웨이/i.test(text)) c.destination = 'alaska';
-  else if (/북유럽|노르웨이|피오르|코펜하겐|암스테르담|발트해|스톡홀름/i.test(text)) c.destination = 'northern-europe';
-  else if (/카리브|바하마|멕시코|자메이카|쿠바|나소|코코케이/i.test(text)) c.destination = 'caribbean';
-  else if (/한국|일본|인천|도쿄|오사카|후쿠오카|나가사키|가고시마|부산/i.test(text)) c.destination = 'korea';
-  else if (/동남아|베트남|싱가포르|태국|말레이시아|인도네시아|필리핀|다낭/i.test(text)) c.destination = 'southeast-asia';
-  else if (/아시아|중동|두바이|아부다비/i.test(text)) c.destination = 'asia';
-  else if (/하와이/i.test(text)) c.destination = 'hawaii';
-  else if (/남미|브라질|아르헨티나|페루|칠레|파타고니아|우루과이/i.test(text)) c.destination = 'south-america';
-  else if (/오세아니아|호주|뉴질랜드|시드니|멜버른|오클랜드/i.test(text)) c.destination = 'oceania';
-  if (/MSC|엠에스씨/i.test(text)) c.operator = 'MSC';
-  if (/NCL|노르웨지안/i.test(text)) c.operator = 'Norwegian';
-  if (/로열|로얄|royal/i.test(text)) c.operator = 'Royal Caribbean';
+
+  // ── 선사 파싱 ──
+  if (/MSC|엠에스씨/i.test(t)) c.operator = 'MSC';
+  if (/NCL|노르웨지안|Norwegian/i.test(t)) c.operator = 'Norwegian';
+  if (/로열|로얄|Royal Caribbean|RCI/i.test(t)) c.operator = 'Royal Caribbean';
+  if (/셀레브리티|Celebrity/i.test(t)) c.operator = 'Celebrity';
+  if (/프린세스|Princess/i.test(t)) c.operator = 'Princess';
+  if (/카니발|Carnival/i.test(t)) c.operator = 'Carnival';
+  if (/디즈니|Disney/i.test(t)) c.operator = 'Disney';
+  if (/오세아니아|Oceania/i.test(t)) c.operator = 'Oceania';
+  if (/익스플로라|Explora/i.test(t)) c.operator = 'Explora';
+  if (/리젠트|Regent/i.test(t)) c.operator = 'Regent';
+
+  // ── destination 파싱 ──
+  if (/지중해|이탈리아|그리스|스페인|바르셀로나|산토리니|크로아티아|프랑스|마르세유|제노아|나폴리|베니스|코르푸|두브로브니크/i.test(t)) c.destination = 'mediterranean';
+  else if (/알래스카|빙하|케치칸|주노|스캐그웨이|앵커리지/i.test(t)) c.destination = 'alaska';
+  else if (/북유럽|노르웨이|피오르|코펜하겐|암스테르담|발트해|스톡홀름|헬싱키|탈린|리가|오슬로|베르겐/i.test(t)) c.destination = 'northern-europe';
+  else if (/카리브|바하마|멕시코|자메이카|쿠바|나소|코코케이|코스타리카|벨리즈|케이맨|세인트마틴|바베이도스/i.test(t)) c.destination = 'caribbean';
+  else if (/한국|일본|인천|도쿄|오사카|후쿠오카|나가사키|가고시마|부산|고베|기타큐슈|요코하마|삿포로/i.test(t)) c.destination = 'korea';
+  else if (/동남아|베트남|싱가포르|태국|말레이시아|인도네시아|필리핀|다낭|하노이|방콕|푸켓|코타키나발루|발리/i.test(t)) c.destination = 'southeast-asia';
+  else if (/중동|두바이|아부다비|오만|카타르/i.test(t)) c.destination = 'asia';
+  else if (/하와이|호놀룰루|마우이/i.test(t)) c.destination = 'hawaii';
+  else if (/남미|브라질|아르헨티나|페루|칠레|파타고니아|우루과이|부에노스아이레스|리우|산티아고/i.test(t)) c.destination = 'south-america';
+  else if (/오세아니아|호주|뉴질랜드|시드니|멜버른|오클랜드|브리즈번/i.test(t)) c.destination = 'oceania';
+
   return c;
 }
 
