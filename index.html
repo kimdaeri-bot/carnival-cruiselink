@@ -2045,8 +2045,23 @@ async function kringAISendText(text) {
 
   kringHideTyping();
   kringHistory.push({role:'assistant',content:reply});
-  const htmlReply = reply.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/https?:\/\/[^\s<]+/g,'').replace(/\n/g,'<br>');
-  kringAddMsg(htmlReply.replace(/<br>/g,'\n'), true, products.slice(0,3));
+
+  // AI 텍스트에서 상품명 언급 시 해당 줄 끝에 바로 버튼 삽입
+  let htmlReply = reply
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/https?:\/\/[^\s<]+/g,'');
+
+  // 각 상품의 선박명이 텍스트에 언급되면 해당 줄 끝에 버튼 인라인 삽입
+  products.forEach(p => {
+    const shipEscaped = p.shipTitle.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    const btnHtml = ` <a href="/cruise-view/?ref=${p.ref}" target="_blank" style="display:inline-block;padding:3px 10px;background:var(--navy);color:#fff;font-size:.72rem;font-weight:700;border-radius:12px;text-decoration:none;white-space:nowrap;vertical-align:middle">상세보기 →</a>`;
+    // 선박명 뒤 첫 번째 줄바꿈 전에 버튼 삽입 (중복 방지: 첫 번째 매칭만)
+    htmlReply = htmlReply.replace(new RegExp(`(${shipEscaped}[^\\n]*)`), `$1${btnHtml}`);
+  });
+
+  htmlReply = htmlReply.replace(/\n/g,'<br>');
+  // 버튼 이미 인라인 삽입했으므로 하단 카드는 표시 안 함
+  kringAddMsg(htmlReply.replace(/<br>/g,'\n'), true, []);
   kringSetQuick(rule?.quickSet || null);
 }
 
