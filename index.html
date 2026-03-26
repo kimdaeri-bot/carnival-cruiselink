@@ -1738,6 +1738,8 @@ const KRING_RULES = [
   { keywords: ['북유럽','노르웨이','피오르','발트'], reply: '북유럽 크루즈를 원하시는군요! 피오르와 오로라가 매력적인 노선입니다.\n\n출발 시기가 언제쯤이신가요?', quickSet: 'period', search: { destination: 'northern-europe' } },
   { keywords: ['동남아','베트남','싱가포르','태국'], reply: '동남아 크루즈를 찾고 계시는군요! 이국적인 항구들이 기다리고 있습니다.\n\n여행 기간은 어떻게 생각하고 계세요?', quickSet: 'period', search: { destination: 'southeast-asia' } },
   { keywords: ['하와이'], reply: '하와이 크루즈를 원하시는군요! 환상적인 섬들을 선박으로 순항하는 특별한 경험입니다.', quickSet: 'period', search: { destination: 'hawaii' } },
+  { keywords: ['남미','브라질','아르헨티나','파타고니아','페루','부에노스아이레스'], reply: '남미 크루즈를 찾고 계시는군요! 파타고니아 빙하부터 아마존까지 절경입니다.\n\n출발 시기가 언제쯤이신가요?', quickSet: 'period', search: { destination: 'south-america' } },
+  { keywords: ['오세아니아','호주','뉴질랜드','시드니','멜버른'], reply: '오세아니아 크루즈를 원하시는군요! 호주·뉴질랜드·남태평양 섬들을 즐기세요.\n\n여행 기간은 어떻게 생각하고 계세요?', quickSet: 'period', search: { destination: 'oceania' } },
   { keywords: ['객실','방','내측','외측','발코니','스위트','차이'], reply: '객실 타입 안내드릴게요!\n\n🚪 내측 - 창문 없음, 가장 경제적\n🪟 외측 - 고정 유리창으로 바다 조망\n🌅 발코니 - 전용 발코니, 가장 인기\n👑 스위트 - 넓은 공간과 프리미엄 서비스', quickSet: 'cabin' },
   { keywords: ['식사','음식','다이닝','레스토랑'], reply: '크루즈 식사는 기본 메인 다이닝룸의 조식·중식·석식이 요금에 포함됩니다.\n스페셜티 레스토랑은 별도 유료입니다.', quickSet: 'init' },
   { keywords: ['비용','요금','가격','얼마','견적'], reply: '정확한 요금은 전문 상담원이 확인 후 안내해 드릴게요.\n카카오톡으로 문의해 주시면 빠르게 견적을 받으실 수 있습니다!', quickSet: 'init', showKakao: true },
@@ -1767,6 +1769,8 @@ function kringParseCriteria(text) {
   else if (/동남아|베트남|싱가포르|태국|말레이시아|인도네시아|필리핀|다낭/i.test(text)) c.destination = 'southeast-asia';
   else if (/아시아|중동|두바이|아부다비/i.test(text)) c.destination = 'asia';
   else if (/하와이/i.test(text)) c.destination = 'hawaii';
+  else if (/남미|브라질|아르헨티나|페루|칠레|파타고니아|우루과이/i.test(text)) c.destination = 'south-america';
+  else if (/오세아니아|호주|뉴질랜드|시드니|멜버른|오클랜드/i.test(text)) c.destination = 'oceania';
   if (/MSC|엠에스씨/i.test(text)) c.operator = 'MSC';
   if (/NCL|노르웨지안/i.test(text)) c.operator = 'Norwegian';
   if (/로열|로얄|royal/i.test(text)) c.operator = 'Royal Caribbean';
