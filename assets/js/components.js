@@ -138,7 +138,7 @@ const Components = {
     else {badge='인기';badgeColor='#1565C0';}
     const priceStr = fromPrice ? '$'+parseFloat(fromPrice).toLocaleString('en-US',{maximumFractionDigits:0}) : '문의';
     return `
-    <div class="czn-card" onclick="location.href='cruise-view/?ref=${c.ref}'" style="cursor:pointer">
+    <div class="czn-card" onclick="${c.operator==='Princess Cruises'?'':"location.href='cruise-view/?ref="+c.ref+"'"}" style="cursor:${c.operator==='Princess Cruises'?'default':'pointer'};${c.operator==='Princess Cruises'?'opacity:.75;filter:grayscale(.2)':''}">
       <div class="czn-card-img-wrap">
         <img src="${c.image}" alt="${c.title||''}" loading="lazy" onerror="this.parentElement.style.background='#cfe8fc'">
         <span class="czn-badge" style="background:${badgeColor}">${badge}</span>
@@ -158,7 +158,9 @@ const Components = {
             <span class="czn-price" style="color:#E65100">${priceStr} ~</span>
             <span class="czn-unit">/ 1인</span>
           </div>
-          <a href="cruise-view/?ref=${c.ref}" class="czn-btn" onclick="event.stopPropagation()">자세히 보기</a>
+          ${c.operator==='Princess Cruises'
+            ? '<span class="czn-btn" style="background:#9e9e9e;cursor:not-allowed;pointer-events:none;color:#fff">준비중</span>'
+            : '<a href="cruise-view/?ref='+c.ref+'" class="czn-btn" onclick="event.stopPropagation()">자세히 보기</a>'}
         </div>
       </div>
     </div>`;
