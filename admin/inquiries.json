@@ -1574,5 +1574,23 @@
     "id": "1774527392129",
     "timestamp": "2026-03-26T12:16:32.129Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "",
+    "ship": "",
+    "dateFrom": "",
+    "price": "",
+    "message": "[고객] https://www.cruiselink.co.kr/search/?dest=caribbean&dateFrom=2026-08-01&dateTo=2026-08-31 이건뭔데?\n[AI] 죄송합니다. 제 목록 업데이트가 완료되지 않아 8월 상품을 놓쳤습니다.\n\n카리브해 8월 상품에 대해 정확한 정보를 확인하시려면 카카오톡으로 문의해 주세요.",
+    "source": "kring-ai",
+    "id": "1774527400143",
+    "timestamp": "2026-03-26T12:16:40.143Z",
+    "status": "신규"
   }
 ]
