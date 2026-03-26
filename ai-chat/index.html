@@ -525,7 +525,9 @@ async function botReply(userText) {
   const rule = matchRule(userText);
   const parsedCriteria = parseUserCriteria(userText);
   const searchCriteria = Object.keys(parsedCriteria).length ? parsedCriteria : (rule?.search || {});
-  const products = (rule?.noProducts) ? [] : searchCruises(searchCriteria);
+  // 조건 파싱된 경우에만 상품 카드 표시 (파싱된 조건 없으면 카드 없음)
+  const hasCriteria = Object.keys(parsedCriteria).length > 0 || rule?.search;
+  const products = (rule?.noProducts || !hasCriteria) ? [] : searchCruises(searchCriteria);
 
   // Claude API 호출
   let reply = '';
