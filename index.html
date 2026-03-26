@@ -1753,8 +1753,24 @@ const KRING_RULES = [
 
 function kringParseCriteria(text) {
   const c = {};
+  // 연도+월 파싱
   const ymMatch = text.match(/(\d{4})[\s년]?\s*(\d{1,2})월/);
   if (ymMatch) c.yearMonth = `${ymMatch[1]}-${ymMatch[2].padStart(2,'0')}`;
+  // 연도만 파싱 (월 없이 "2027년" 등)
+  const yOnly = text.match(/(\d{4})년/);
+  if (yOnly && !ymMatch) c.year = yOnly[1];
+  // 선박명 파싱
+  if (/벨리시마|Bellissima/i.test(text)) c.ship = 'Bellissima';
+  else if (/오케스트라|Orchestra/i.test(text)) c.ship = 'Orchestra';
+  else if (/판타지아|Fantasia/i.test(text)) c.ship = 'Fantasia';
+  else if (/스플렌디다|Splendida/i.test(text)) c.ship = 'Splendida';
+  else if (/마그니피카|Magnifica/i.test(text)) c.ship = 'Magnifica';
+  else if (/세아시아|Seashore/i.test(text)) c.ship = 'Seashore';
+  else if (/심포니|Symphony/i.test(text)) c.ship = 'Symphony';
+  else if (/오아시스|Oasis/i.test(text)) c.ship = 'Oasis';
+  else if (/원더|Wonder/i.test(text)) c.ship = 'Wonder';
+  else if (/어드벤처|Adventure/i.test(text)) c.ship = 'Adventure';
+  else if (/익스플로러|Explorer/i.test(text)) c.ship = 'Explorer';
   if (/인천출발|인천 출발|한국출발/.test(text)) c.startPort = ['Incheon','Busan'];
   else if (/인천도착|인천 도착/.test(text)) c.endPort = ['Incheon'];
   else if (/인천/.test(text)) c.anyPort = ['Incheon'];
@@ -1795,7 +1811,9 @@ function kringSearchCruises(criteria) {
     const s = (c.destination||'')+(c.portRoute||'')+JSON.stringify(c.regions||'');
     return s.toLowerCase().includes(criteria.region.toLowerCase());
   });
+  if (criteria.ship) r = r.filter(c => (c.shipTitle||'').toLowerCase().includes(criteria.ship.toLowerCase()));
   if (criteria.yearMonth) r = r.filter(c => c.dateFrom?.startsWith(criteria.yearMonth));
+  else if (criteria.year) r = r.filter(c => c.dateFrom?.startsWith(criteria.year));
   if (criteria.nights) r = r.filter(c => Math.abs((c.nights||0)-criteria.nights)<=1);
   return r.slice(0,5);
 }
