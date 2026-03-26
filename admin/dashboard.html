@@ -828,7 +828,7 @@
       const bytes = new Uint8Array(binary.length);
       for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
       const data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
-      const aiData = data.filter(d => d.ref === 'AI_CHAT' || d.source === 'ai-chat').sort((a,b) => new Date(b.timestamp||0) - new Date(a.timestamp||0));
+      const aiData = data.filter(d => d.ref === 'AI_CHAT' || d.ref === 'KRING_AI' || d.source === 'ai-chat' || d.source === 'kring-ai').sort((a,b) => new Date(b.timestamp||0) - new Date(a.timestamp||0));
       if (!aiData.length) {
         tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:40px;color:#aaa">AI 채팅 이용 데이터가 없습니다</td></tr>';
         return;
@@ -862,8 +862,10 @@
       const bytes = new Uint8Array(binary.length);
       for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
       const data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
-      currentInquiries = data;
-      renderInquiries(data);
+      // AI 채팅 항목은 문의 목록에서 제외
+      const filteredData = data.filter(d => d.ref !== 'AI_CHAT' && d.ref !== 'KRING_AI' && d.source !== 'ai-chat' && d.source !== 'kring-ai');
+      currentInquiries = filteredData;
+      renderInquiries(filteredData);
     } catch (e) {
       tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:32px;color:#e53935">오류: ${e.message}</td></tr>`;
     }
