@@ -1260,5 +1260,23 @@
         "remarks": "* 디럭스 발코니 기준 요금\n\n* 요금 세부 사항\n- 포함사항 : 크루즈 요금 + tax\n- 불포함사항 : 왕복 항공권, 현지 호텔비, 기항지 관광, 선상팁, 여행자보험, 기타 선내 유료서비스 등"
       }
     ]
+  },
+  {
+    "product": "일본·한국 4박 크루즈",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC 벨리시마",
+    "dateFrom": "2027-06-10",
+    "ports": "",
+    "price": "문의",
+    "ref": "MSCBE20270610TYOINC",
+    "name": "이종윤",
+    "email": "info@cruiselink.co.kr",
+    "phone": "0237889119",
+    "pax": "2",
+    "cabin": "발코니",
+    "message": "없음",
+    "id": "1774503118421",
+    "timestamp": "2026-03-26T05:31:58.421Z",
+    "status": "신규"
   }
 ]
