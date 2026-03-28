@@ -336,9 +336,165 @@ def main():
     
     if created_slugs:
         add_to_sitemap(created_slugs)
-        print(f"\n✅ {len(created_slugs)}개 생성 완료 → sitemap 업데이트")
+        rebuild_index()
+        print(f"\n✅ {len(created_slugs)}개 생성 완료 → sitemap + 인덱스 업데이트")
     else:
         print("새로 생성할 페이지 없음 (모두 기존)")
+
+def rebuild_index():
+    """guide/cruises/index.html 전체 재생성"""
+    import re as _re
+    items = []
+    for d in sorted(os.listdir(OUT_DIR)):
+        if d == 'index.html':
+            continue
+        p = os.path.join(OUT_DIR, d, 'index.html')
+        if not os.path.exists(p):
+            continue
+        with open(p) as f:
+            html = f.read()
+        title_m = _re.search(r'<title>([^<]+)</title>', html)
+        title = title_m.group(1).replace(' | 크루즈링크', '').strip() if title_m else d
+        og_img_m = _re.search(r'property="og:image" content="([^"]+)"', html)
+        img = og_img_m.group(1) if og_img_m else ''
+        nights_m = _re.search(r'🌙 (\d+)박', html)
+        nights = nights_m.group(1) if nights_m else ''
+        items.append({'slug': d, 'title': title, 'img': img, 'nights': nights})
+
+    cards = ''
+    for it in items:
+        hero = it['img'] or 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70'
+        nights_str = f"🌙 {it['nights']}박" if it['nights'] else '🚢 크루즈'
+        cards += f'''
+    <a class="cruise-idx-card" href="{it['slug']}/" data-slug="{it['slug']}">
+      <div class="cruise-idx-img-wrap">
+        <img src="{hero}" alt="{it['title']}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70'">
+      </div>
+      <div class="cruise-idx-body">
+        <div class="cruise-idx-badge">{nights_str}</div>
+        <h2>{it['title'][:60]}</h2>
+        <span class="cruise-idx-btn">자세히 보기 →</span>
+      </div>
+    </a>'''
+
+    total = len(items)
+    index_html = f'''<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
+new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+}})(window,document,'script','dataLayer','GTM-K4PPLZNG');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>크루즈 일정 소개 — 노선별 상세 가이드 | 크루즈링크</title>
+  <meta name="description" content="지중해·알래스카·카리브해·동아시아 등 크루즈 노선별 상세 일정 소개. MSC·NCL·로열캐리비안·카니발·셀레브리티 실제 상품 기반 완벽 가이드.">
+  <link rel="canonical" href="https://www.cruiselink.co.kr/guide/cruises/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="크루즈링크">
+  <meta property="og:title" content="크루즈 일정 소개 — 노선별 상세 가이드 | 크루즈링크">
+  <meta property="og:description" content="지중해·알래스카·카리브해·동아시아 크루즈 노선별 상세 일정 소개.">
+  <meta property="og:url" content="https://www.cruiselink.co.kr/guide/cruises/">
+  <meta property="og:image" content="https://www.cruiselink.co.kr/assets/images/cta-web.png">
+  <script type="application/ld+json">
+  {{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {{"@type":"ListItem","position":1,"name":"홈","item":"https://www.cruiselink.co.kr/"}},
+    {{"@type":"ListItem","position":2,"name":"크루즈 가이드","item":"https://www.cruiselink.co.kr/guide/"}},
+    {{"@type":"ListItem","position":3,"name":"크루즈 일정 소개","item":"https://www.cruiselink.co.kr/guide/cruises/"}}
+  ]}}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+  <link rel="shortcut icon" href="../../favicon.ico">
+  <style>
+    .cruises-hero{{background:linear-gradient(135deg,#0a2540,#1565c0);color:#fff;padding:48px 0 36px;text-align:center}}
+    .cruises-hero h1{{font-size:1.9rem;font-weight:900;margin-bottom:10px}}
+    .cruises-hero p{{opacity:.85;font-size:.97rem;max-width:600px;margin:0 auto}}
+    .cruises-wrap{{padding:32px 20px 80px}}
+    .filter-tabs{{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}}
+    .filter-tab{{padding:7px 16px;border:1.5px solid #e0e4ee;border-radius:20px;background:#fff;cursor:pointer;font-size:.83rem;font-weight:600;color:#555;transition:all .15s}}
+    .filter-tab.active,.filter-tab:hover{{background:#1a237e;color:#fff;border-color:#1a237e}}
+    .result-count{{font-size:.85rem;color:#9e9e9e;margin-bottom:16px}}
+    .cruise-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}}
+    .cruise-idx-card{{background:#fff;border:1px solid #e8eaed;border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}}
+    .cruise-idx-card:hover{{box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-2px)}}
+    .cruise-idx-img-wrap{{height:160px;overflow:hidden}}
+    .cruise-idx-img-wrap img{{width:100%;height:100%;object-fit:cover;transition:transform .3s}}
+    .cruise-idx-card:hover .cruise-idx-img-wrap img{{transform:scale(1.05)}}
+    .cruise-idx-body{{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column}}
+    .cruise-idx-badge{{background:#e8f0fe;color:#1a237e;font-size:.73rem;font-weight:700;padding:2px 8px;border-radius:8px;display:inline-block;margin-bottom:6px}}
+    .cruise-idx-body h2{{font-size:.88rem;font-weight:700;color:#1a237e;line-height:1.5;margin-bottom:auto;padding-bottom:10px}}
+    .cruise-idx-btn{{display:inline-block;background:#ff6f00;color:#fff;padding:6px 14px;border-radius:7px;font-size:.78rem;font-weight:700;margin-top:10px;transition:background .2s}}
+    .cruise-idx-card:hover .cruise-idx-btn{{background:#e65100}}
+    @media(max-width:600px){{.cruise-grid{{grid-template-columns:1fr 1fr;gap:10px}}.cruise-idx-img-wrap{{height:120px}}}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4PPLZNG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div id="header"></div>
+<section class="cruises-hero">
+  <div class="container">
+    <div style="font-size:.8rem;opacity:.7;margin-bottom:10px">
+      <a href="/" style="color:rgba(255,255,255,.75);text-decoration:none">홈</a> › 
+      <a href="/guide/" style="color:rgba(255,255,255,.75);text-decoration:none">크루즈 가이드</a> › 
+      크루즈 일정 소개
+    </div>
+    <h1>🚢 크루즈 일정 소개</h1>
+    <p>실제 출발 크루즈 상품의 상세 일정, 기항지, 선박 정보를 한눈에 확인하세요.</p>
+  </div>
+</section>
+<div class="cruises-wrap">
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterCards('all',this)">전체 ({total})</button>
+    <button class="filter-tab" onclick="filterCards('msc',this)">MSC</button>
+    <button class="filter-tab" onclick="filterCards('ncl',this)">NCL</button>
+    <button class="filter-tab" onclick="filterCards('celebrity',this)">셀레브리티</button>
+    <button class="filter-tab" onclick="filterCards('carnival',this)">카니발</button>
+    <button class="filter-tab" onclick="filterCards('rci',this)">로열캐리비안</button>
+    <button class="filter-tab" onclick="filterCards('oceania',this)">오세아니아</button>
+    <button class="filter-tab" onclick="filterCards('alaska',this)">알래스카</button>
+    <button class="filter-tab" onclick="filterCards('mediterranean',this)">지중해</button>
+    <button class="filter-tab" onclick="filterCards('caribbean',this)">카리브해</button>
+    <button class="filter-tab" onclick="filterCards('korea',this)">동아시아</button>
+  </div>
+  <div class="result-count" id="resultCount">총 {total}개</div>
+  <div class="cruise-grid" id="cruiseGrid">{cards}
+  </div>
+</div>
+<div id="footer"></div>
+<script src="../../assets/data/translations.js"></script>
+<script src="../../assets/js/api.js"></script>
+<script src="../../assets/js/components.js"></script>
+<script>
+  document.getElementById('header').innerHTML = Components.header('guide', '../../');
+  document.getElementById('footer').innerHTML = Components.footer('../../');
+  function filterCards(keyword, btn) {{
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    let visible = 0;
+    document.querySelectorAll('.cruise-idx-card').forEach(card => {{
+      if (keyword === 'all') {{ card.style.display = ''; visible++; }}
+      else {{
+        const slug = card.dataset.slug || '';
+        const title = card.querySelector('h2')?.textContent.toLowerCase() || '';
+        const match = slug.includes(keyword) || title.includes(keyword);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      }}
+    }});
+    document.getElementById('resultCount').textContent = '총 ' + visible + '개';
+  }}
+</script>
+</body></html>'''
+
+    with open(os.path.join(OUT_DIR, 'index.html'), 'w') as f:
+        f.write(index_html)
+    print(f"  📋 index.html 재생성 완료 ({total}개)")
 
 if __name__ == '__main__':
     main()
