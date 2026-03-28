@@ -1508,5 +1508,23 @@
     "id": "1774694766417",
     "timestamp": "2026-03-28T10:46:06.417Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "Royal Caribbean International",
+    "ship": "Allure of the Seas",
+    "dateFrom": "2027-02-01",
+    "price": "",
+    "message": "[고객] 2027년 2월 출발\n[AI] 2027년 2월 출발 상품을 확인했습니다.\n\n다만 현재 제 목록에는 인천 출발 상품이 없습니다. 미국 출발 상품(플로리다, 텍사스, 캘리포니아)이 있으니 참고 부탁드립니다.\n\n인천 출발 상품을 원하시면 출발지를 \"인천\"으로 명시해서 다시 문의해 주시거나, 카카오톡으로 전문 상담원에게 문의해 주세요.",
+    "source": "kring-ai",
+    "id": "1774694784703",
+    "timestamp": "2026-03-28T10:46:24.703Z",
+    "status": "신규"
   }
 ]
