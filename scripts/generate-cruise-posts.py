@@ -359,19 +359,29 @@ def rebuild_index():
         img = og_img_m.group(1) if og_img_m else ''
         nights_m = _re.search(r'🌙 (\d+)박', html)
         nights = nights_m.group(1) if nights_m else ''
-        items.append({'slug': d, 'title': title, 'img': img, 'nights': nights})
+        dep_m = _re.search(r'📅\s*([^<"]+출발)', html)
+        dep_date = dep_m.group(1).strip() if dep_m else ''
+        if dep_date:
+            short_m = _re.search(r'(\d+)년\s*(\d+)월\s*(\d+)일', dep_date)
+            if short_m:
+                dep_date = f"{short_m.group(2)}/{short_m.group(3)}"
+        items.append({'slug': d, 'title': title, 'img': img, 'nights': nights, 'dep': dep_date})
 
     cards = ''
     for it in items:
         hero = it['img'] or 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70'
         nights_str = f"🌙 {it['nights']}박" if it['nights'] else '🚢 크루즈'
+        dep_badge = f'<span class="cruise-dep-badge">📅 {it["dep"]} 출발</span>' if it.get('dep') else ''
         cards += f'''
     <a class="cruise-idx-card" href="{it['slug']}/" data-slug="{it['slug']}">
       <div class="cruise-idx-img-wrap">
         <img src="{hero}" alt="{it['title']}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70'">
       </div>
       <div class="cruise-idx-body">
-        <div class="cruise-idx-badge">{nights_str}</div>
+        <div class="cruise-idx-badges">
+          <span class="cruise-idx-badge">{nights_str}</span>
+          {dep_badge}
+        </div>
         <h2>{it['title'][:60]}</h2>
         <span class="cruise-idx-btn">자세히 보기 →</span>
       </div>
@@ -427,7 +437,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .cruise-idx-img-wrap img{{width:100%;height:100%;object-fit:cover;transition:transform .3s}}
     .cruise-idx-card:hover .cruise-idx-img-wrap img{{transform:scale(1.05)}}
     .cruise-idx-body{{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column}}
-    .cruise-idx-badge{{background:#e8f0fe;color:#1a237e;font-size:.73rem;font-weight:700;padding:2px 8px;border-radius:8px;display:inline-block;margin-bottom:6px}}
+    .cruise-idx-badges{{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}}
+    .cruise-idx-badge{{background:#e8f0fe;color:#1a237e;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:8px;white-space:nowrap}}
+    .cruise-dep-badge{{background:#fff3e0;color:#e65100;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:8px;white-space:nowrap}}
     .cruise-idx-body h2{{font-size:.88rem;font-weight:700;color:#1a237e;line-height:1.5;margin-bottom:auto;padding-bottom:10px}}
     .cruise-idx-btn{{display:inline-block;background:#ff6f00;color:#fff;padding:6px 14px;border-radius:7px;font-size:.78rem;font-weight:700;margin-top:10px;transition:background .2s}}
     .cruise-idx-card:hover .cruise-idx-btn{{background:#e65100}}
