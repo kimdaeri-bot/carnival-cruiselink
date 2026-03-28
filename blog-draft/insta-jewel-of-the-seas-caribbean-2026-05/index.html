@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>인스타 초안 | 로얄캐리비안 쥬얼 카리브해 4박 (2026.05.11)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: #f0f2f5; color: #333; }
+    .admin-bar { position: sticky; top: 0; z-index: 999; background: #1a1a2e; color: #fff; padding: 10px 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; }
+    .admin-bar strong { color: #ffd700; }
+    .copy-all-btn { margin-left: auto; background: #E1306C; color: #fff; border: none; padding: 7px 18px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .copy-all-btn:hover { background: #c1255a; }
+    .wrapper { max-width: 860px; margin: 30px auto; padding: 0 16px 60px; }
+    .block { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.07); position: relative; }
+    .block-label { font-size: 11px; font-weight: 800; color: #E1306C; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+    .block:hover .copy-btn { opacity: 1; }
+    .copy-btn { position: absolute; top: 14px; right: 16px; opacity: 0; transition: opacity .2s; background: #E1306C; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 700; }
+    .slides-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 8px; }
+    .slide { background: linear-gradient(145deg, #003580, #0077cc); color: #fff; border-radius: 10px; aspect-ratio: 1/1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; position: relative; cursor: pointer; transition: transform .15s; }
+    .slide:hover { transform: scale(1.02); }
+    .slide:hover .slide-copy { opacity: 1; }
+    .slide-copy { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,.2); border: none; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; opacity: 0; transition: opacity .2s; }
+    .slide-num { font-size: 11px; font-weight: 800; opacity: .5; margin-bottom: 10px; letter-spacing: 1px; }
+    .slide-title { font-size: 17px; font-weight: 900; line-height: 1.4; margin-bottom: 8px; }
+    .slide-sub { font-size: 12px; opacity: .8; line-height: 1.6; }
+    .slide-price { font-size: 22px; font-weight: 900; color: #FFD700; margin: 8px 0 4px; }
+    .caption-box { background: #fff8f0; border-left: 4px solid #E1306C; padding: 16px 20px; border-radius: 0 8px 8px 0; font-size: 15px; line-height: 2; white-space: pre-wrap; font-family: inherit; }
+    .hashtags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .ht { background: #f0f2ff; color: #3d5af1; font-size: 13px; padding: 4px 12px; border-radius: 20px; cursor: pointer; transition: background .15s; }
+    .ht:hover { background: #3d5af1; color: #fff; }
+    .story { background: linear-gradient(160deg, #003580, #0077cc, #00c6ff); color: #fff; border-radius: 10px; aspect-ratio: 9/16; max-width: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px 14px; cursor: pointer; position: relative; }
+    .story:hover .slide-copy { opacity: 1; }
+    .story-title { font-size: 15px; font-weight: 900; line-height: 1.4; margin-bottom: 8px; }
+    .story-sub { font-size: 11px; opacity: .85; line-height: 1.6; }
+    .stories-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+    #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #E1306C; color: #fff; padding: 10px 24px; border-radius: 20px; font-size: 14px; display: none; z-index: 9999; }
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4PPLZNG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="admin-bar">
+  <strong>📸 인스타그램 초안</strong>
+  <span>noindex — 외부 비공개</span>
+  <span>|</span>
+  <span>로얄캐리비안 쥬얼 카리브해 4박 · 2026.05.11</span>
+  <button class="copy-all-btn" onclick="copyAll()">📋 전체 캡션 복사</button>
+</div>
+
+<div class="wrapper" id="insta-content">
+
+  <!-- 캐러셀 슬라이드 -->
+  <div class="block">
+    <div class="block-label">📱 피드 캐러셀 — 슬라이드 텍스트 (6장)</div>
+    <p style="font-size:13px;color:#888;margin-bottom:16px">각 슬라이드 클릭 → 텍스트 복사. 디자인 툴에 붙여넣기하세요.</p>
+    <div class="slides-grid">
+
+      <div class="slide" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 01</div>
+        <div class="slide-title">🏝️ 마이애미 출발<br>바하마 프라이빗 아일랜드<br>크루즈 4박!</div>
+        <div class="slide-sub">로얄캐리비안 쥬얼 오브 더 씨즈<br>2026년 5월 11일 출발</div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#004d1f,#006428)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 02</div>
+        <div class="slide-title">🗺️ 4박 5일 루트</div>
+        <div class="slide-sub">
+          📍 마이애미 출항 (5/11)<br>
+          🇧🇸 나소(Nassau) 기항<br>
+          🏝️ CocoCay 프라이빗 아일랜드<br>
+          🌊 항해의 날<br>
+          📍 마이애미 귀항 (5/15)
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#1a237e,#283593)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 03</div>
+        <div class="slide-title">🚢 쥬얼 오브 더 씨즈란?</div>
+        <div class="slide-sub">
+          2004년 취항 Radiance Class<br>
+          90,090 GT · 2,501명 승객<br>
+          클라이밍 월 · 미니골프<br>
+          아이스 스케이팅 링크 🧊
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#004d40,#00695c)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 04</div>
+        <div class="slide-title">🏝️ CocoCay<br>로얄캐리비안 독점<br>프라이빗 아일랜드!</div>
+        <div class="slide-sub">
+          Oasis Lagoon 수영장 (무료)<br>
+          Thrill Waterpark 워터슬라이드<br>
+          업캐스트 기구 150ft 조망<br>
+          스노클링 & 카약 🤿
+        </div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#b71c1c,#c62828)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 05</div>
+        <div class="slide-title">💰 요금 안내</div>
+        <div class="slide-sub">인사이드</div>
+        <div class="slide-price">$342~</div>
+        <div class="slide-sub">발코니 ⭐ $493~ <br><small style="opacity:.7">1인 기준 · 항공 별도</small></div>
+      </div>
+
+      <div class="slide" onclick="copySlide(this)" style="background:linear-gradient(145deg,#e65100,#f57c00)">
+        <button class="slide-copy">복사</button>
+        <div class="slide-num">SLIDE 06</div>
+        <div class="slide-title">📞 지금 바로 상담하세요!</div>
+        <div class="slide-sub">
+          크루즈링크<br>
+          9개 글로벌 선사 공식 판매사<br><br>
+          💬 카카오톡 @크루즈링크<br>
+          🌐 www.cruiselink.co.kr
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 피드 캡션 (메인) -->
+  <div class="block">
+    <div class="block-label">✍️ 피드 캡션 (메인 포스팅용)</div>
+    <button class="copy-btn" onclick="copyBlock(this)">복사</button>
+    <div class="caption-box" id="caption-feed">인스타그램 포스팅 — 로얄캐리비안 쥬얼 카리브해 4박 크루즈
+
+🏝️ 마이애미 출발 바하마 프라이빗 아일랜드?!
+이 가격에 CocoCay까지 간다고요?! 🌊
+
+📅 2026.05.11 ~ 05.15 (4박 5일)
+💰 1인 $342~ (인사이드 기준)
+—
+📍 DAY BY DAY 일정
+
+🇺🇸 DAY 1 | 마이애미 승선
+마이애미 PortMiami에서 탑승! 스카이라인 야경 보며 출항 🌃
+
+🇧🇸 DAY 2 | 나소(Nassau) 기항
+바하마 수도 입성! 파라다이스 아일랜드 Atlantis 리조트 🌊
+케이블 비치 수영 + 베이 스트리트 면세 쇼핑 🛍️
+바하마식 랍스터 요리는 필수 🦞
+
+🏝️ DAY 3 | CocoCay — 로얄캐리비안 프라이빗 아일랜드
+일반 여행자는 절대 못 가는 독점 아일랜드!
+Oasis Lagoon 수영 + Thrill Waterpark 워터슬라이드 🌊
+업캐스트(기구) 타고 150피트 하늘에서 섬 조망 🎈
+
+🌊 DAY 4 | 항해의 날
+선상 암벽 등반 + 미니 골프 🧗
+Vitality Spa 마사지 💆
+포멀 나이트 — 드레스업 & 정찬 코스 다이닝 🥂
+
+🇺🇸 DAY 5 | 마이애미 귀항
+아쉬운 하선, 4박의 추억을 안고 귀국 ✈️
+—
+✨ 쥬얼 오브 더 씨즈 하이라이트
+🧗 암벽 등반 클라이밍 월
+🧊 아이스 스케이팅 링크 (선내!)
+🎭 메인 극장 뮤지컬 쇼 (무료)
+🎰 카지노 & 면세 쇼핑
+💆 Vitality Spa 프리미엄 웰니스
+—
+🏷️ 객실별 요금
+🚪 인사이드 $342~ | 🪟 오션뷰 $386~
+🌅 발코니 $493~ ⭐추천
+
+👉 지금 바로 문의하세요!
+📞 02-3788-9119
+💬 카카오톡: @크루즈링크
+🌐 cruiselink.co.kr
+.
+.
+.
+#카리브해크루즈 #바하마크루즈 #로얄캐리비안 #쥬얼오브더씨즈 #마이애미크루즈 #나소 #CocoCay #프라이빗아일랜드 #크루즈여행 #MSC크루즈 #크루즈링크 #2026크루즈 #단기크루즈 #허니문크루즈 #신혼여행 #가족여행 #여름휴가 #크루즈추천 #해외여행 #크루즈할인 #바하마여행 #마이애미여행 #RoyalCaribbean #cruiselife</div>
+  </div>
+
+  <!-- 릴스 자막 -->
+  <div class="block">
+    <div class="block-label">🎬 릴스 / 숏폼 자막 (15초)</div>
+    <button class="copy-btn" onclick="copyBlock(this)">복사</button>
+    <div class="caption-box">⏱ 0~3초: "마이애미에서 출발해 프라이빗 아일랜드까지?"
+⏱ 3~6초: "로얄캐리비안 CocoCay — 크루즈 승객만 입장 가능!"
+⏱ 6~9초: "쥬얼 오브 더 씨즈 4박 5일"
+⏱ 9~12초: "2026년 5월 11일 출발 · 인사이드 $342~"
+⏱ 12~15초: "크루즈링크에서 지금 바로 상담 → 링크 클릭"</div>
+  </div>
+
+  <!-- 스토리 슬라이드 -->
+  <div class="block">
+    <div class="block-label">📲 스토리 슬라이드 텍스트 (3장)</div>
+    <div class="stories-row">
+
+      <div class="story" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">🏝️ 마이애미 출발<br>바하마 크루즈<br>4박으로 끝낸다!</div>
+        <div class="story-sub" style="margin-top:10px">로얄캐리비안<br>2026.05.11 출발<br>4박 5일</div>
+      </div>
+
+      <div class="story" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">💰 얼마예요?</div>
+        <div style="font-size:26px;font-weight:900;color:#FFD700;margin:10px 0">$342~</div>
+        <div class="story-sub">인사이드 1인 기준<br>항공 별도<br>발코니 $493~</div>
+      </div>
+
+      <div class="story" onclick="copySlide(this)">
+        <button class="slide-copy">복사</button>
+        <div class="story-title">📩 지금 상담하세요</div>
+        <div class="story-sub" style="margin-top:10px">크루즈링크<br>9개 글로벌 선사<br>공식 판매사<br><br>💬 카카오톡<br>🌐 cruiselink.co.kr</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 해시태그 -->
+  <div class="block">
+    <div class="block-label">🏷️ 해시태그 (클릭하면 복사)</div>
+    <button class="copy-btn" onclick="copyHashtags()">전체 복사</button>
+    <div class="hashtags" id="hashtag-list">
+      <span class="ht" onclick="copyText('#카리브해크루즈')">#카리브해크루즈</span>
+      <span class="ht" onclick="copyText('#바하마크루즈')">#바하마크루즈</span>
+      <span class="ht" onclick="copyText('#로얄캐리비안')">#로얄캐리비안</span>
+      <span class="ht" onclick="copyText('#쥬얼오브더씨즈')">#쥬얼오브더씨즈</span>
+      <span class="ht" onclick="copyText('#마이애미크루즈')">#마이애미크루즈</span>
+      <span class="ht" onclick="copyText('#CocoCay')">#CocoCay</span>
+      <span class="ht" onclick="copyText('#프라이빗아일랜드')">#프라이빗아일랜드</span>
+      <span class="ht" onclick="copyText('#나소')">#나소</span>
+      <span class="ht" onclick="copyText('#크루즈여행')">#크루즈여행</span>
+      <span class="ht" onclick="copyText('#크루즈링크')">#크루즈링크</span>
+      <span class="ht" onclick="copyText('#2026크루즈')">#2026크루즈</span>
+      <span class="ht" onclick="copyText('#단기크루즈')">#단기크루즈</span>
+      <span class="ht" onclick="copyText('#해외여행')">#해외여행</span>
+      <span class="ht" onclick="copyText('#여름휴가')">#여름휴가</span>
+      <span class="ht" onclick="copyText('#허니문')">#허니문</span>
+      <span class="ht" onclick="copyText('#RoyalCaribbean')">#RoyalCaribbean</span>
+      <span class="ht" onclick="copyText('#cruiselife')">#cruiselife</span>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast">✅ 복사 완료!</div>
+
+<script>
+function showToast() {
+  const t = document.getElementById('toast');
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => showToast());
+}
+function copySlide(el) {
+  const texts = [];
+  el.querySelectorAll('.slide-num,.slide-title,.slide-sub,.slide-price,.story-title,.story-sub').forEach(e => {
+    const t = e.innerText.trim();
+    if (t && !e.classList.contains('slide-copy')) texts.push(t);
+  });
+  navigator.clipboard.writeText(texts.join('\n')).then(() => showToast());
+}
+function copyBlock(btn) {
+  const block = btn.parentElement;
+  const box = block.querySelector('.caption-box');
+  const text = box ? box.innerText.trim() : '';
+  navigator.clipboard.writeText(text).then(() => showToast());
+}
+function copyHashtags() {
+  const tags = [...document.querySelectorAll('.ht')].map(e => e.innerText).join(' ');
+  navigator.clipboard.writeText(tags).then(() => showToast());
+}
+function copyAll() {
+  const caption = document.getElementById('caption-feed').innerText.trim();
+  const tags = [...document.querySelectorAll('.ht')].map(e => e.innerText).join(' ');
+  navigator.clipboard.writeText(caption + '\n\n' + tags).then(() => showToast());
+}
+</script>
+</body>
+</html>
