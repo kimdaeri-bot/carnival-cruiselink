@@ -120,6 +120,21 @@ PORT_KO = {
     'Naha': '나하(오키나와)', 'Kagoshima': '가고시마',
     'Bergen': '베르겐', 'Oslo': '오슬로', 'Stockholm': '스톡홀름',
     'Flam': '플롬', 'Geiranger': '게이랑에르',
+    'Celebration Key': '셀레브레이션 키', 'Perfect Day': '퍼펙트 데이',
+}
+DEST_EMOJI = {
+    '지중해': '🌊', '카리브해': '🏖️', '알래스카': '🧊', '북유럽': '🌃',
+    '아시아': '🌏', '일본·한국': '🗾', '남미': '🌿', '하와이': '🌺',
+    '호주·뉴질랜드': '🦘', '중동': '🕌', '발틱해': '⚓', '버뮤다': '💎',
+}
+COUNTRY_FLAGS = {
+    '스페인': '🇪🇸', '이탈리아': '🇮🇹', '프랑스': '🇫🇷', '그리스': '🇬🇷',
+    '포르투갈': '🇵🇹', '터키': '🇹🇷', '크로아티아': '🇭🇷', '몰타': '🇲🇹',
+    '노르웨이': '🇳🇴', '덴마크': '🇩🇰', '스웨덴': '🇸🇪', '핀란드': '🇫🇮',
+    '영국': '🇬🇧', '독일': '🇩🇪', '네덜란드': '🇳🇱', '미국': '🇺🇸', '캐나다': '🇨🇦',
+    '멕시코': '🇲🇽', '자메이카': '🇯🇲', '바하마': '🇧🇸', '일본': '🇯🇵', '한국': '🇰🇷',
+    '중국': '🇨🇳', '대만': '🇹🇼', '싱가포르': '🇸🇬', '오만': '🇴🇲',
+    '아랍에미리트': '🇦🇪', '호주': '🇦🇺', '뉴질랜드': '🇳🇿',
 }
 
 _title_counter = {}
@@ -136,7 +151,7 @@ def _get_start(route):
     raw = route.split('→')[0].strip().split(',')[0].strip()
     return CITY_KO.get(raw, raw)
 
-def _get_mid_ports(route, n=2):
+def _get_mid_ports(route, n=3):
     parts = [p.strip() for p in route.split('→')]
     mids = parts[1:-1] if len(parts)>2 else parts
     result = []
@@ -146,20 +161,21 @@ def _get_mid_ports(route, n=2):
     return result
 
 def make_seo_title(cruise):
-    """10가지 패턴으로 선사명·선박명·기항지·출발일·시즌 조합한 유니크 SEO 제목 생성"""
+    """블로그 스타일 10가지 패턴 — 이모지·선사·선박·기항지·시즌·출발일 조합"""
     global _title_counter
     ship     = cruise.get('shipTitle', '')
     nights   = cruise.get('nights', '')
     route    = cruise.get('portRoute', '') or ''
     cko      = cruise.get('countriesKo', []) or []
     dest     = DEST_KO.get(cruise.get('destination', ''), cruise.get('destination', '')) or '크루즈'
+    dest_em  = DEST_EMOJI.get(dest, '🚢')
     op_raw   = cruise.get('operatorShort', '') or cruise.get('operator', '')
     operator = OPERATOR_KO.get(op_raw, op_raw)
-    codes    = ''.join([COUNTRY_CODES.get(c, '') for c in cko[:5]])
+    flags    = ''.join([COUNTRY_FLAGS.get(c, '') for c in cko[:5]])
     start    = _get_start(route)
-    ports    = _get_mid_ports(route, 2)
+    ports    = _get_mid_ports(route, 3)
     port_str = '·'.join(ports) if ports else '·'.join(cko[:2])
-    countries_str = '·'.join(cko[:3]) if cko else dest
+    countries_str = '·'.join(cko[:4]) if cko else dest
 
     date_from = cruise.get('dateFrom', '') or ''
     mo = str(int(date_from[5:7])) if len(date_from) >= 7 else ''
@@ -168,32 +184,31 @@ def make_seo_title(cruise):
     season = _get_season(mo)
     month_str = f"{mo}월 {dy}일" if mo and dy else (f"{mo}월" if mo else '')
 
-    # 고유 카운터로 패턴 순환
     key = f"{start}_{dest}_{nights}"
     cnt = _title_counter.get(key, 0)
     _title_counter[key] = cnt + 1
     p = cnt % 10
 
     if p == 0:
-        t = f"[{operator}] {start}에서 출발하는 {dest} {nights}박 — {ship}으로 {port_str} 완전정복 {codes}"
+        t = f"{dest_em} {start}에서 출발하는 {dest} {nights}박!\n{ship}으로 {countries_str} 완전정복 {flags}"
     elif p == 1:
-        t = f"{ship} 타고 떠나는 {dest} {nights}박 여행 — {operator} {start} {month_str} 출발"
+        t = f"🛳️ {operator} {ship} 타고 떠나는\n{dest} {nights}박 여행 — {start} {month_str} 출발 {flags}"
     elif p == 2:
-        t = f"{operator} {nights}박 {dest} 크루즈 예약 | {start}발 {port_str} | {ship}"
+        t = f"{dest_em} {nights}박 {dest} 크루즈 예약 완전 가이드\n{operator} {ship} | {start} 출발 | {port_str} 기항"
     elif p == 3:
-        t = f"{season} {dest} 크루즈 {month_str} 특가! {operator} {ship} {nights}박 {start} 출발"
+        t = f"✨ {season} {dest} 크루즈 특가 {month_str}!\n{operator} {ship} {nights}박 — {start} 출발 {flags}"
     elif p == 4:
-        t = f"{ship}으로 떠나는 {nights}박 {dest} 크루즈 — {port_str} 기항지 완벽 가이드 | {operator}"
+        t = f"🌟 {ship}과 함께하는 {nights}박 {dest} 크루즈\n{port_str} 기항지 완벽 여행 가이드 | {operator}"
     elif p == 5:
-        t = f"{yr}년 {season} {start} 출발 {nights}박 | {operator} {ship} {dest} 크루즈 {codes}"
+        t = f"🗓️ {yr}년 {season} 크루즈 추천!\n{operator} {ship} {start}→{port_str} {nights}박 {dest} {flags}"
     elif p == 6:
-        t = f"{operator} 크루즈 {month_str} 특가 — {ship} {start} 출발 {nights}박 {dest} 일정"
+        t = f"💙 {operator} {month_str} {dest} 특가\n{ship} {start} 출발 {nights}박 일정 총정리"
     elif p == 7:
-        t = f"{countries_str} {nights}박 크루즈 예약 | {operator} {ship} {start} {month_str} 출항"
+        t = f"🌈 {countries_str} {nights}박 크루즈 한 번에!\n{operator} {ship} {start} {month_str} 출항 {flags}"
     elif p == 8:
-        t = f"{start}→{port_str} {nights}박 {dest} 크루즈 | {operator} {ship} {yr}년 {month_str}"
+        t = f"⚓ {start}에서 {port_str}까지 {nights}박 {dest} 크루즈\n{operator} {ship} {yr}년 {month_str} 출발"
     else:
-        t = f"{dest} {nights}박 {countries_str} 크루즈 — {operator} {ship} {month_str} 출발 {codes}"
+        t = f"🎯 {dest} {nights}박 {countries_str} 크루즈 완벽 가이드\n{operator} {ship} | {month_str} 출발 {flags}"
 
     return t.strip()
 
@@ -297,9 +312,11 @@ def build_cruise_page(cruise):
 <div class="route-box"><p>{route_display}</p></div>
 </div>'''
     
-    desc = f"{title_ko[:80]} — {nights}박 크루즈 일정, 기항지, 가격 총정리."
-    hero_html = f'<img class="cruise-hero-img" src="{image}" alt="{title_ko}" loading="eager">' if image else ''
-    clean_title = re.sub(r'[\U0001F300-\U0001FFFF]', '', title_ko).strip()
+    title_plain = title_ko.replace('\n', ' ')  # meta/title용 (줄바꿈 없이)
+    title_br = title_ko.replace('\n', '<br>')  # h1용 (줄바꿈 <br>)
+    desc = f"{title_plain[:100]} — 기항지, 일정, 요금, 준비물 총정리."
+    hero_html = f'<img class="cruise-hero-img" src="{image}" alt="{title_plain}" loading="eager">' if image else ''
+    clean_title = re.sub(r'[\U0001F300-\U0001FFFF\U00002600-\U000027BF]', '', title_plain).strip()
     
     html = f'''<!DOCTYPE html>
 <html lang="ko">
@@ -395,7 +412,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {clean_title[:30]}
   </div>
 
-  <h1 class="cruise-title">{title_ko}</h1>
+  <h1 class="cruise-title">{title_br}</h1>
   <div class="cruise-meta">
     {"<span>🌙 " + str(nights) + "박 " + str(int(nights)+1) + "일</span>" if nights else ""}
     {"<span>📅 " + dep_str + " 출발</span>" if dep_str else ""}
