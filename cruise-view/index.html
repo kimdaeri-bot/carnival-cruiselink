@@ -45,9 +45,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div id="footer"></div>
 
-  <script src="/assets/data/translations.js?v=20260328"></script>
-  <script src="/assets/js/api.js?v=20260328"></script>
-  <script src="/assets/js/components.js?v=20260328"></script>
+  <script src="/assets/data/translations.js?v=20260328b"></script>
+  <script src="/assets/js/api.js?v=20260328b"></script>
+  <script src="/assets/js/components.js?v=20260328b"></script>
+  <!-- Widgety API 포맷 호환 패치 (구 포맷: holiday.{} / 신 포맷: 최상위 date_ref) -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof API !== 'undefined') {
+      const _origFetch = API.fetch.bind(API);
+      API.getHoliday = async function(ref) {
+        const data = await _origFetch(`holidays/dates/${ref}.json`);
+        if (!data) return null;
+        if (data.holiday) return data.holiday;
+        if (data.date_ref || data.ship_title || data.operator_title) return data;
+        return null;
+      };
+    }
+  });
+  </script>
   <script>
     document.getElementById('header').innerHTML = Components.header();
     document.getElementById('footer').innerHTML = Components.footer();
