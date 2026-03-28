@@ -160,17 +160,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         ]);
         const shipLivePromise = urlShip ? API.getShipLive(urlShip) : null;
 
-        // ② Widgety 신 포맷 정규화 (최상위 date_ref, date_from, starts_at 등)
+        // ② Widgety 신/구 포맷 정규화 (인라인 패치 여부와 무관하게 항상 적용)
         let holiday = holidayRaw;
-        if (holiday && !holiday.start_date && holiday.date_from) {
-          holiday.start_date = holiday.date_from?.slice(0,10) || '';
-          holiday.end_date   = holiday.date_to?.slice(0,10) || '';
-          holiday.duration   = holiday.cruise_nights || holiday.duration_days || 7;
-          holiday.start_port = holiday.starts_at || {};
-          holiday.end_port   = holiday.ends_at || {};
-          // itinerary 정규화 (신 포맷: itinerary.days 또는 배열)
-          if (holiday.itinerary && !holiday.itinerary.days) {
-            holiday.itinerary = { days: Array.isArray(holiday.itinerary) ? holiday.itinerary : [] };
+        if (holiday) {
+          // 구 포맷은 이미 holiday 키 안에 정규화된 필드 있음
+          // 신 포맷: date_from, starts_at, cruise_nights 등
+          if (!holiday.start_date) {
+            holiday.start_date = (holiday.date_from || '').slice(0,10);
+          }
+          if (!holiday.end_date) {
+            holiday.end_date = (holiday.date_to || '').slice(0,10);
+          }
+          if (!holiday.duration) {
+            holiday.duration = holiday.cruise_nights || holiday.duration_days || 7;
+          }
+          if (!holiday.start_port && holiday.starts_at) {
+            holiday.start_port = holiday.starts_at;
+          }
+          if (!holiday.end_port && holiday.ends_at) {
+            holiday.end_port = holiday.ends_at;
+          }
+          // itinerary: 신 포맷은 { itinerary_code, days: [...] } 구조 — 그대로 사용 가능
+          if (!holiday.itinerary) {
+            holiday.itinerary = { days: [] };
           }
           // headline_prices 정규화
           if (!holiday.headline_prices && holiday.pricing) {
