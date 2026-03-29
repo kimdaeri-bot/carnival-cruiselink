@@ -1778,5 +1778,23 @@
     "id": "1774786927156",
     "timestamp": "2026-03-29T12:22:07.156Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "Royal Caribbean International",
+    "ship": "Allure of the Seas",
+    "dateFrom": "2026-03-29",
+    "price": "",
+    "message": "[고객] 7박\n[AI] 인천 출발 7박 MSC 크루즈 상품을 조회했습니다.\n\n현재 AI가 일정을 찾지 못했어요. 조금 더 자세히 질문해 주시거나 직접 검색 또는 카카오톡으로 문의 주시면 빠르게 도와드리겠습니다.",
+    "source": "kring-ai",
+    "id": "1774786935688",
+    "timestamp": "2026-03-29T12:22:15.688Z",
+    "status": "신규"
   }
 ]
