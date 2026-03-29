@@ -1814,5 +1814,23 @@
     "id": "1774786980754",
     "timestamp": "2026-03-29T12:23:00.754Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC Opera",
+    "dateFrom": "2027-01-01",
+    "price": "",
+    "message": "[고객] 27년 1월 크루즈 있나?\n[AI] 2027년 1월 출발 크루즈 상품이 5개 있습니다.\n\nMSC 선사의 카리브해, 스페인/포르투갈, 북유럽, 오키나와, 지중해 크루즈가 준비되어 있습니다. 어느 지역에 관심이 있으신가요?",
+    "source": "kring-ai",
+    "id": "1774787523758",
+    "timestamp": "2026-03-29T12:32:03.758Z",
+    "status": "신규"
   }
 ]
