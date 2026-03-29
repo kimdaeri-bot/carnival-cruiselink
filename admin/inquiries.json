@@ -1904,5 +1904,23 @@
     "id": "1774788327167",
     "timestamp": "2026-03-29T12:45:27.167Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "Carnival Cruise Line",
+    "ship": "Carnival Sunshine",
+    "dateFrom": "2026-03-29",
+    "price": "",
+    "message": "[고객] 3~5박 단기\n[AI] 7월 출발, 3~5박 단기 크루즈 5건을 찾았습니다.\n\nMSC Bellissima의 일본 기항 3박 일정과 Celebrity Millennium의 12박 일정이 포함되어 있습니다.\n\n자세한 상품 정보는 상품 카드를 확인해 주시기 바랍니다.",
+    "source": "kring-ai",
+    "id": "1774788341125",
+    "timestamp": "2026-03-29T12:45:41.125Z",
+    "status": "신규"
   }
 ]
