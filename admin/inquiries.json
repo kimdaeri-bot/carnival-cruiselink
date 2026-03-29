@@ -1832,5 +1832,23 @@
     "id": "1774787523758",
     "timestamp": "2026-03-29T12:32:03.758Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC Bellissima",
+    "dateFrom": "2027-01-03",
+    "price": "",
+    "message": "[고객] 부산에서 출발 하는 27년 1월 크루즈\n[AI] 부산 출발 27년 1월 크루즈는 현재 제 목록에 없습니다.\n\n인천이나 도쿄 출발 상품은 있으니, 다른 출발지도 고려해 보실 수 있을까요?",
+    "source": "kring-ai",
+    "id": "1774787592110",
+    "timestamp": "2026-03-29T12:33:12.110Z",
+    "status": "신규"
   }
 ]
