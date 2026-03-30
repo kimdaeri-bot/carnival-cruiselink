@@ -988,7 +988,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       types.forEach(t => {
         const dp = double?.['from_' + t.key];
         if (dp) {
-          html += `<tr><td class="room-type">${t.label}</td><td style="color:var(--orange);font-weight:700">${fmtPrice(dp)} <small style="font-weight:400;font-size:.85em;color:#888">/1인</small></td></tr>`;
+          html += `<tr><td class="room-type">${t.label}</td><td style="color:var(--orange);font-weight:700">${fmtPrice(dp)} ~ <small style="font-weight:400;font-size:.85em;color:#888">/1인</small></td></tr>`;
         }
       });
 
