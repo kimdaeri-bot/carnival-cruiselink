@@ -7,7 +7,7 @@
     "cruiseline": "Royal Caribbean International",
     "ship": "스펙트럼 오브 더 시즈",
     "dateFrom": "2026-09-06",
-    "ports": "",
+    "ports": "Baoshan Pt → 인천 → Seogwipo",
     "price": "문의",
     "ref": "RCISC05J030-060926",
     "name": "윤승주",
@@ -16,7 +16,23 @@
     "pax": "2",
     "cabin": "발코니",
     "message": "없음",
-    "source": "online-inquiry"
+    "source": "online-inquiry",
+    "fareHistory": [
+      {
+        "date": "2026. 03. 30. 오후 01:20",
+        "pax": 2,
+        "types": [
+          {
+            "name": "발코니",
+            "val": 928,
+            "raw": "928"
+          }
+        ],
+        "air": 0,
+        "etc": 0,
+        "remarks": "* 오션뷰 발코니 (4D), 시야가림 없는 선실 요금 기준입니다.\n\n* 요금 세부 사항\n- 포함사항 : 크루즈요금 + TAX\n- 불포함사항 : 왕복항공권, 현지 호텔비, 기항지관광, 선상팁, 여행자보험, 기타 선내유료 서비스 등"
+      }
+    ]
   },
   {
     "id": "1774100000001",
