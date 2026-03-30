@@ -1618,14 +1618,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       };
       const data = new FormData();
       Object.entries(fd).forEach(([k,v]) => data.append(k,v));
+      const inquiryPayload = {
+        product: document.getElementById('f_product').value,
+        cruiseline: document.getElementById('f_cruiseline').value,
+        ship: document.getElementById('f_ship').value,
+        dateFrom: document.getElementById('f_date').value,
+        price: document.getElementById('f_price').value,
+        ref: document.getElementById('f_ref').value,
+        name: document.getElementById('f_name').value,
+        email: document.getElementById('f_email').value,
+        phone: document.getElementById('f_phone').value,
+        pax: document.getElementById('f_pax').value,
+        cabin: document.getElementById('f_cabin').value,
+        message: document.getElementById('f_message').value || '없음',
+        ports: document.getElementById('f_ports') ? document.getElementById('f_ports').value : '',
+        source: 'online-inquiry'
+      };
+      const showSuccess = () => {
+        document.getElementById('formStatus').innerHTML = '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
+        document.getElementById('inquiryForm').style.display = 'none'; btn.style.display = 'none';
+      };
+      // 백오피스 저장
+      fetch('https://cruiselink-v2.vercel.app/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(inquiryPayload)
+      }).catch(() => {});
+      // 이메일 발송
       fetch('https://formsubmit.co/ajax/info@cruiselink.co.kr', { method:'POST', body:data })
-      .then(() => {
-        document.getElementById('formStatus').innerHTML = '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
-        document.getElementById('inquiryForm').style.display = 'none'; btn.style.display = 'none';
-      }).catch(() => {
-        document.getElementById('formStatus').innerHTML = '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
-        document.getElementById('inquiryForm').style.display = 'none'; btn.style.display = 'none';
-      });
+      .then(showSuccess).catch(showSuccess);
     }
   </script>
   <div class="modal-overlay" id="inquiryModal">
