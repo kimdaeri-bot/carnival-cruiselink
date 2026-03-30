@@ -641,15 +641,17 @@
   <div class="panel active" id="panelInquiry">
     <div class="inquiry-toolbar">
       <h2 class="panel-title" style="margin-bottom:0">📋 문의 목록</h2>
-      <div style="display:flex;gap:8px;align-items:center;">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
         <input type="text" id="inquirySearch" placeholder="🔍 이름 · 이메일 · 연락처 검색" oninput="filterInquiries()" style="padding:7px 12px;border:1px solid #c5cae9;border-radius:6px;font-size:13px;width:240px;outline:none;">
         <button class="btn-refresh" onclick="loadInquiries()">🔄 새로고침</button>
+        <button id="btnDeleteSelected" onclick="deleteSelectedInquiries()" style="display:none;background:#e53935;color:#fff;border:none;border-radius:6px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:inherit">🗑 선택 삭제</button>
       </div>
     </div>
     <div class="inquiry-table-wrap">
       <table class="inquiry-table">
         <thead>
           <tr>
+            <th style="width:32px"><input type="checkbox" id="chkAll" onchange="toggleAllCheck(this)"></th>
             <th>접수일</th>
             <th>고객명</th>
             <th>이메일</th>
@@ -661,10 +663,11 @@
           </tr>
         </thead>
         <tbody id="inquiryTableBody">
-          <tr><td colspan="8" style="text-align:center;padding:40px;color:#aaa">로딩 중...</td></tr>
+          <tr><td colspan="9" style="text-align:center;padding:40px;color:#aaa">로딩 중...</td></tr>
         </tbody>
       </table>
     </div>
+    <div id="inquiryPagination" style="display:flex;justify-content:center;align-items:center;gap:6px;padding:16px 0;flex-wrap:wrap"></div>
   </div>
 
   <!-- PANEL 2: 파트너 링크 -->
@@ -935,33 +938,114 @@
     }
   }
 
+  const INQUIRY_PAGE_SIZE = 30;
+  let _inquiryCurrentPage = 1;
+  let _inquiryDisplayData = [];
+
   function renderInquiries(data) {
+    _inquiryDisplayData = [...data].sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+    _inquiryCurrentPage = 1;
+    _renderInquiryPage();
+  }
+
+  function _renderInquiryPage() {
     const tbody = document.getElementById('inquiryTableBody');
-    if (!data || data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:40px;color:#aaa">문의 내역이 없습니다</td></tr>';
+    const pagination = document.getElementById('inquiryPagination');
+    document.getElementById('chkAll').checked = false;
+    document.getElementById('btnDeleteSelected').style.display = 'none';
+
+    if (!_inquiryDisplayData || _inquiryDisplayData.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:40px;color:#aaa">문의 내역이 없습니다</td></tr>';
+      pagination.innerHTML = '';
       return;
     }
-    const sorted = [...data].sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
-    tbody.innerHTML = sorted.map((inq, i) => {
+
+    const total = _inquiryDisplayData.length;
+    const totalPages = Math.ceil(total / INQUIRY_PAGE_SIZE);
+    const start = (_inquiryCurrentPage - 1) * INQUIRY_PAGE_SIZE;
+    const pageData = _inquiryDisplayData.slice(start, start + INQUIRY_PAGE_SIZE);
+
+    tbody.innerHTML = pageData.map((inq) => {
       const badgeClass = inq.status === '신규' ? 'badge-new' : inq.status === '처리중' ? 'badge-processing' : 'badge-done';
       const date = inq.timestamp ? new Date(inq.timestamp).toLocaleString('ko-KR', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}) : '-';
-      return `<tr onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')" style="cursor:pointer;">
-        <td>${date}</td>
-        <td>${esc(inq.name || '-')}</td>
-        <td style="font-size:12px;">${esc(inq.email || '-')}</td>
-        <td>${esc(inq.phone || '-')}</td>
-        <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis">${esc(inq.product || '-')}</td>
-        <td>${esc(inq.dateFrom || '-')}</td>
-        <td>${esc(inq.pax || '-')}명</td>
-        <td><span class="badge ${badgeClass}">${esc(inq.status || '신규')}</span></td>
+      return `<tr>
+        <td style="text-align:center" onclick="event.stopPropagation()"><input type="checkbox" class="inq-chk" data-id="${esc(inq.id||'')}" onchange="onCheckChange()"></td>
+        <td style="cursor:pointer" onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')">${date}</td>
+        <td style="cursor:pointer" onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')">${esc(inq.name || '-')}</td>
+        <td style="font-size:12px;cursor:pointer" onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')">${esc(inq.email || '-')}</td>
+        <td style="cursor:pointer" onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')">${esc(inq.phone || '-')}</td>
+        <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;cursor:pointer" onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')">${esc(inq.product || '-')}</td>
+        <td style="cursor:pointer" onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')">${esc(inq.dateFrom || '-')}</td>
+        <td style="cursor:pointer" onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')">${esc(inq.pax || '-')}명</td>
+        <td style="cursor:pointer" onclick="window.open('inquiry-detail.html?id=${inq.id}&auth=1','_blank')"><span class="badge ${badgeClass}">${esc(inq.status || '신규')}</span></td>
       </tr>`;
     }).join('');
+
+    // 페이지네이션
+    let pgHtml = `<span style="font-size:13px;color:#666;margin-right:8px">총 ${total}건</span>`;
+    if (totalPages > 1) {
+      pgHtml += `<button onclick="goInquiryPage(1)" ${_inquiryCurrentPage===1?'disabled':''} style="padding:4px 8px;border:1px solid #c5cae9;border-radius:4px;background:#fff;cursor:pointer;font-size:12px">◀◀</button>`;
+      pgHtml += `<button onclick="goInquiryPage(${_inquiryCurrentPage-1})" ${_inquiryCurrentPage===1?'disabled':''} style="padding:4px 8px;border:1px solid #c5cae9;border-radius:4px;background:#fff;cursor:pointer;font-size:12px">◀</button>`;
+      const range = 3;
+      for (let p = Math.max(1, _inquiryCurrentPage-range); p <= Math.min(totalPages, _inquiryCurrentPage+range); p++) {
+        pgHtml += `<button onclick="goInquiryPage(${p})" style="padding:4px 10px;border:1px solid ${p===_inquiryCurrentPage?'#1a237e':'#c5cae9'};border-radius:4px;background:${p===_inquiryCurrentPage?'#1a237e':'#fff'};color:${p===_inquiryCurrentPage?'#fff':'#333'};cursor:pointer;font-size:12px;font-weight:${p===_inquiryCurrentPage?'700':'400'}">${p}</button>`;
+      }
+      pgHtml += `<button onclick="goInquiryPage(${_inquiryCurrentPage+1})" ${_inquiryCurrentPage===totalPages?'disabled':''} style="padding:4px 8px;border:1px solid #c5cae9;border-radius:4px;background:#fff;cursor:pointer;font-size:12px">▶</button>`;
+      pgHtml += `<button onclick="goInquiryPage(${totalPages})" ${_inquiryCurrentPage===totalPages?'disabled':''} style="padding:4px 8px;border:1px solid #c5cae9;border-radius:4px;background:#fff;cursor:pointer;font-size:12px">▶▶</button>`;
+    }
+    pagination.innerHTML = pgHtml;
+  }
+
+  function goInquiryPage(p) {
+    const totalPages = Math.ceil(_inquiryDisplayData.length / INQUIRY_PAGE_SIZE);
+    _inquiryCurrentPage = Math.max(1, Math.min(p, totalPages));
+    _renderInquiryPage();
+    document.querySelector('.inquiry-table-wrap').scrollTop = 0;
+  }
+
+  function toggleAllCheck(chk) {
+    document.querySelectorAll('.inq-chk').forEach(c => c.checked = chk.checked);
+    onCheckChange();
+  }
+
+  function onCheckChange() {
+    const checked = document.querySelectorAll('.inq-chk:checked').length;
+    document.getElementById('btnDeleteSelected').style.display = checked > 0 ? 'inline-block' : 'none';
+    document.getElementById('chkAll').indeterminate = checked > 0 && checked < document.querySelectorAll('.inq-chk').length;
+    document.getElementById('chkAll').checked = checked === document.querySelectorAll('.inq-chk').length && checked > 0;
+  }
+
+  async function deleteSelectedInquiries() {
+    const checked = [...document.querySelectorAll('.inq-chk:checked')];
+    if (!checked.length) return;
+    const ids = checked.map(c => c.dataset.id).filter(Boolean);
+    if (!confirm(`선택한 ${ids.length}건을 삭제하시겠습니까?\n⚠️ 삭제 후 복구할 수 없습니다.`)) return;
+    try {
+      const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/admin/inquiries.json`, {
+        headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      const file = await res.json();
+      const b64 = file.content.replace(/\n/g,'');
+      const data = JSON.parse(new TextDecoder('utf-8').decode(Uint8Array.from(atob(b64), c=>c.charCodeAt(0))));
+      const newData = data.filter(d => !ids.includes(d.id));
+      const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(newData, null, 2))));
+      await fetch(`https://api.github.com/repos/${GH_REPO}/contents/admin/inquiries.json`, {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+        body: JSON.stringify({ message: `feat: 문의 ${ids.length}건 선택 삭제`, content: newContent, sha: file.sha })
+      });
+      alert(`${ids.length}건이 삭제되었습니다.`);
+      loadInquiries();
+    } catch(e) {
+      alert('삭제 중 오류: ' + e.message);
+    }
   }
 
   function filterInquiries() {
     const q = (document.getElementById('inquirySearch').value || '').toLowerCase().trim();
-    if (!q) { renderInquiries(currentInquiries); return; }
-    const filtered = currentInquiries.filter(inq =>
+    const base = currentInquiries;
+    if (!q) { renderInquiries(base); return; }
+    const filtered = base.filter(inq =>
       (inq.name||'').toLowerCase().includes(q) ||
       (inq.email||'').toLowerCase().includes(q) ||
       (inq.phone||'').toLowerCase().includes(q)
