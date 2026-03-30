@@ -2259,5 +2259,23 @@
     "id": "1774909229949",
     "timestamp": "2026-03-30T22:20:29.949Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC Bellissima",
+    "dateFrom": "2026-04-02",
+    "price": "",
+    "message": "[고객] 일본 크루즈 보여줘\n[AI] 일본 출발 또는 일본 기항 크루즈 상품을 보여드립니다.\n\nMSC, Oceania, Celebrity 선사의 다양한 일정이 준비되어 있습니다. 원하시는 출발일, 박수, 또는 특정 기항지가 있으신가요?",
+    "source": "kring-ai",
+    "id": "1774909261837",
+    "timestamp": "2026-03-30T22:21:01.837Z",
+    "status": "신규"
   }
 ]
