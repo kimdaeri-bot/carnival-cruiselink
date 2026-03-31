@@ -2565,5 +2565,23 @@
     "id": "1774928838257",
     "timestamp": "2026-03-31T03:47:18.257Z",
     "status": "신규"
+  },
+  {
+    "product": "크링AI 채팅 문의",
+    "ref": "KRING_AI",
+    "name": "크링AI 고객",
+    "email": "",
+    "phone": "",
+    "pax": "",
+    "cabin": "",
+    "cruiseline": "MSC Cruises",
+    "ship": "MSC Opera",
+    "dateFrom": "2026-11-01",
+    "price": "",
+    "message": "[고객] 2026년 11월 바르셀로나 출발 크루즈\n[AI] 2026년 11월 바르셀로나 출발 크루즈는 MSC Opera 상품 1개가 있습니다.\n\nMSC Opera (2026년 11월 1일 출발)\n15박 또는 19박 선택 가능\n지중해 → 카리브해 크루즈로 유럽과 카리브 해의 매력을 모두 경험하실 수 있습니다.\n\n상세 정보는 상품 카드를 확인해 주세요.",
+    "source": "kring-ai",
+    "id": "1774928861465",
+    "timestamp": "2026-03-31T03:47:41.465Z",
+    "status": "신규"
   }
 ]
