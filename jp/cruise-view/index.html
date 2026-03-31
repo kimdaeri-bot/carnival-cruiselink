@@ -36,7 +36,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="loading-spinner"></div>
       <p class="loading-main-text">クルーズ情報を読み込み中...</p>
       <div class="loading-progress-wrap"><div class="loading-progress-bar"></div></div>
-      <p class="loading-done-text">完了！</p>
+      <p class="loading-done-text">読み込み完了！</p>
     </div>
   </div>
   <div id="footer"></div>
@@ -130,7 +130,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           const toPort = n => ({ name: n?.nameKo || n?.name || n || '' });
           holiday = {
             _fromLocal: true,
-            _koreanTitle: lc.title || lc.shipTitleKo || lc.shipTitle || '',
+            _japaneseTitle: lc.titleJp || lc.title || lc.shipTitleKo || lc.shipTitle || '',
+            _koreanTitle: lc.titleJp || lc.title || lc.shipTitleKo || lc.shipTitle || '',
             _portRouteKo: lc.portRoute || '',
             ship_title: lc.shipTitle || '',
             operator_title: lc.operator || '',
@@ -163,14 +164,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 for (let pi = 0; pi < remainPorts.length; pi++) {
                   const seaForThis = (pi === remainPorts.length - 1) ? seaDayCount - seaInserted : Math.floor(seaDayCount / remainPorts.length);
                   for (let s = 0; s < seaForThis; s++) {
-                    days.push({ day: dayNum++, day_name: '해상', day_type: 'SEA', locations: [] });
+                    days.push({ day: dayNum++, day_name: '海上', day_type: 'SEA', locations: [] });
                     seaInserted++;
                   }
                   const p = remainPorts[pi];
                   days.push({ day: dayNum++, day_name: p.nameKo || p.name || '', locations: [{ name: p.name || '', country: p.country || '', arrival_time: '', departure_time: '', widgety_data: { images: [], description: '' } }] });
                 }
                 while (dayNum <= totalDays) {
-                  days.push({ day: dayNum++, day_name: '해상', day_type: 'SEA', locations: [] });
+                  days.push({ day: dayNum++, day_name: '海上', day_type: 'SEA', locations: [] });
                 }
                 return days;
               })()
@@ -294,8 +295,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.title = `${c.title} - クルーズリンク`;
       // Dynamic OG tags for SEO
       const ref = new URLSearchParams(location.search).get('ref') || '';
-      document.getElementById('ogTitle')?.setAttribute('content', `${c.title} - 크루즈링크`);
-      document.getElementById('ogDesc')?.setAttribute('content', `${c.portRoute || ''} · ${c.nights || ''}박 · ${c.operator || ''} · $${c.priceInside || ''}~`);
+      document.getElementById('ogTitle')?.setAttribute('content', `${c.title} - クルーズリンク`);
+      document.getElementById('ogDesc')?.setAttribute('content', `${c.portRoute || ''} · ${c.nights || ''}泊 · ${c.operator || ''} · $${c.priceInside || ''}~`);
       document.getElementById('ogImage')?.setAttribute('content', c.image || '');
       document.getElementById('ogUrl')?.setAttribute('content', `https://www.cruiselink.co.kr/cruise-view/?ref=${ref}`);
       document.getElementById('canonicalTag')?.setAttribute('href', `https://www.cruiselink.co.kr/cruise-view/?ref=${ref}`);
@@ -563,7 +564,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const cur = rawDays[i];
         const prevDay = filledDays.length > 0 ? filledDays[filledDays.length - 1].day : 0;
         for (let d = prevDay + 1; d < cur.day; d++) {
-          filledDays.push({ day: d, day_type: ['SEA'], day_name: '해상', locations: [] });
+          filledDays.push({ day: d, day_type: ['SEA'], 
         }
         filledDays.push(cur);
       }
@@ -571,7 +572,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (totalDaysExpected > 1) {
         const lastDay = filledDays.length > 0 ? filledDays[filledDays.length - 1].day : 0;
         for (let d = lastDay + 1; d <= totalDaysExpected; d++) {
-          filledDays.push({ day: d, day_type: ['SEA'], day_name: '해상', locations: [] });
+          filledDays.push({ day: d, day_type: ['SEA'], 
         }
       }
 
@@ -582,15 +583,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <tbody>`;
       for (const day of filledDays) {
         const loc = day.locations?.[0];
-        const isSeaDay = !loc || (Array.isArray(day.day_type) ? day.day_type.includes('SEA') : day.day_type?.includes('SEA')) || day.day_name?.toLowerCase().includes('at sea') || day.day_name === '해상';
+        const isSeaDay = !loc || (Array.isArray(day.day_type) ? day.day_type.includes('SEA') : day.day_type?.includes('SEA')) || day.day_name?.toLowerCase().includes('at sea') || day.day_name === '海上' || day.day_name === '해상';
         const dateStr = startDate ? (() => {
           const d = new Date(startDate);
           d.setDate(d.getDate() + day.day - 1);
-          return (d.getMonth()+1) + '/' + d.getDate() + ' (' + ['일','월','화','수','목','금','토'][d.getDay()] + ')';
-        })() : day.day + '일차';
+          return (d.getMonth()+1) + '/' + d.getDate() + ' (' + ['日','月','火','水','木','金','土'][d.getDay()] + ')';
+        })() : 'Day ' + day.day;
 
         if (isSeaDay) {
-          tableHtml += `<tr><td>${day.day}일차</td><td>${dateStr}</td><td class="it-sea">🌊 해상 (At Sea)</td><td>-</td><td>-</td><td>-</td></tr>`;
+          tableHtml += `<tr><td>Day ${day.day}</td><td>${dateStr}</td><td class="it-sea">🌊 海上 (At Sea)</td><td>-</td><td>-</td><td>-</td></tr>`;
         } else {
           const portName = Translations.portName(loc.name);
           const arr = loc.arrival_time || '-';
@@ -599,8 +600,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           const isLast = day.day === filledDays.length;
           const rowClass = isFirst ? 'it-embark' : isLast ? 'it-disembark' : '';
           const countryKo = Translations.countryName(loc.country) || loc.country || '';
-          const portLabel = portName + (isFirst ? ' ⚓승선' : isLast ? ' ⚓하선' : '');
-          tableHtml += `<tr><td>${day.day}일차</td><td>${dateStr}</td><td class="${rowClass}">${portLabel}</td><td>${countryKo}</td><td>${arr}</td><td>${dep}</td></tr>`;
+          const portLabel = portName + (isFirst ? ' ⚓乗船' : isLast ? ' ⚓下船' : '');
+          tableHtml += `<tr><td>Day ${day.day}</td><td>${dateStr}</td><td class="${rowClass}">${portLabel}</td><td>${countryKo}</td><td>${arr}</td><td>${dep}</td></tr>`;
         }
       }
       tableHtml += '</tbody></table>';
@@ -608,7 +609,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       let html = tableHtml + '<div class="day-cards">';
       for (const day of filledDays) {
         const loc = day.locations?.[0];
-        const isSeaDay = !loc || (Array.isArray(day.day_type) ? day.day_type.includes('SEA') : day.day_type?.includes('SEA')) || day.day_name?.toLowerCase().includes('at sea') || day.day_name === '해상';
+        const isSeaDay = !loc || (Array.isArray(day.day_type) ? day.day_type.includes('SEA') : day.day_type?.includes('SEA')) || day.day_name?.toLowerCase().includes('at sea') || day.day_name === '海上' || day.day_name === '해상';
 
         if (isSeaDay) {
           const seaImages = [
@@ -905,7 +906,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="container">
         <div class="info-bar">
           <div class="info-bar-item"><div class="label">🚢 客船</div><div class="value">${shipName}</div></div>
-          <div class="info-bar-item"><div class="label">🌙 期間</div><div class="value">${nights}박 ${parseInt(nights)+1}일</div></div>
+          <div class="info-bar-item"><div class="label">🌙 期間</div><div class="value">${nights}泊${parseInt(nights)+1}日</div></div>
           <div class="info-bar-item"><div class="label">🚪 出発/到着</div><div class="value">${Translations.portName(holiday.starts_at?.name||'')} → ${Translations.portName(holiday.ends_at?.name||'')}</div></div>
           <div class="info-bar-item"><div class="label">💰 料金</div><div class="value" style="color:var(--orange)">${priceStr} <small style="font-size:.75em;font-weight:400;color:#888">/ お一人様</small></div></div>
         </div>
@@ -1056,7 +1057,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const route = Translations.portRoute(c.portRouteKo || c.portRoute || '');
         document.getElementById('modalProductName').textContent = title;
         document.getElementById('modalProductDetail').innerHTML =
-          `${op} · ${ship}<br>출발: ${(c.dateFrom || c.departureDate || '').substring(0,10)} / ${c.nights || ''}박${price ? ' / $'+price+'~' : ''}`;
+          `${op} · ${ship}<br>出発: ${(c.dateFrom || c.departureDate || '').substring(0,10)} / ${c.nights || ''}泊${price ? ' / $'+price+'~' : ''}`;
         document.getElementById('f_product').value = title;
         document.getElementById('f_cruiseline').value = c.operator || '';
         document.getElementById('f_ship').value = ship;
@@ -1078,27 +1079,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function submitInquiry(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
-      btn.disabled = true; btn.textContent = '전송 중...';
+      btn.disabled = true; btn.textContent = '送信中...';
 
       const form = document.createElement('form');
       form.method = 'POST';
       form.action = 'https://formsubmit.co/ajax/info@cruiselink.co.kr';
 
       const fd = {
-        _subject: `[크루즈링크] ${document.getElementById('f_product').value} - ${document.getElementById('f_name').value}님`,
-        '크루즈 상품': document.getElementById('f_product').value,
-        '선사': document.getElementById('f_cruiseline').value,
-        '선박': document.getElementById('f_ship').value,
-        '출발일': document.getElementById('f_date').value,
-        '일정': document.getElementById('f_ports').value,
-        '참고가격': document.getElementById('f_price').value,
+        _subject: `[クルーズリンク] ${document.getElementById('f_product').value} - ${document.getElementById('f_name').value}様`,
+        'クルーズ商品': document.getElementById('f_product').value,
+        '船会社': document.getElementById('f_cruiseline').value,
+        '客船': document.getElementById('f_ship').value,
+        '出発日': document.getElementById('f_date').value,
+        '日程': document.getElementById('f_ports').value,
+        '参考料金': document.getElementById('f_price').value,
         'Ref': document.getElementById('f_ref').value,
-        '고객 이름': document.getElementById('f_name').value,
-        '고객 이메일': document.getElementById('f_email').value,
-        '고객 연락처': document.getElementById('f_phone').value,
-        '인원': document.getElementById('f_pax').value,
-        '희망 객실': document.getElementById('f_cabin').value,
-        '요청사항': document.getElementById('f_message').value || '없음',
+        'お名前': document.getElementById('f_name').value,
+        'メール': document.getElementById('f_email').value,
+        '電話番号': document.getElementById('f_phone').value,
+        '人数': document.getElementById('f_pax').value,
+        '客室タイプ': document.getElementById('f_cabin').value,
+        'ご要望': document.getElementById('f_message').value || 'なし',
       };
 
       fetch('https://formsubmit.co/ajax/info@cruiselink.co.kr', {
@@ -1109,32 +1110,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       .then(r => r.json())
       .then(data => {
         document.getElementById('formStatus').innerHTML =
-          '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
+          '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ お問い合わせを受け付けました。<br>ご入力のメールアドレスに見積書をお送りします。</div>';
         document.getElementById('inquiryForm').style.display = 'none';
         btn.style.display = 'none';
       })
       .catch(() => {
         document.getElementById('formStatus').innerHTML =
-          '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
+          '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ お問い合わせを受け付けました。<br>ご入力のメールアドレスに見積書をお送りします。</div>';
         document.getElementById('inquiryForm').style.display = 'none';
         btn.style.display = 'none';
       });
 
-      // 백오피스 저장
+      // バックオフィス保存
       const inquiryPayload = {
-        product: fd["크루즈 상품"],
-        cruiseline: fd["선사"],
-        ship: fd["선박"],
-        dateFrom: fd["출발일"],
-        ports: fd["일정"],
-        price: fd["참고가격"],
+        product: fd["クルーズ商品"],
+        cruiseline: fd["船会社"],
+        ship: fd["客船"],
+        dateFrom: fd["出発日"],
+        ports: fd["日程"],
+        price: fd["参考料金"],
         ref: fd["Ref"],
-        name: fd["고객 이름"],
-        email: fd["고객 이메일"],
-        phone: fd["고객 연락처"],
-        pax: fd["인원"],
-        cabin: fd["희망 객실"],
-        message: fd["요청사항"],
+        name: fd["お名前"],
+        email: fd["メール"],
+        phone: fd["電話番号"],
+        pax: fd["人数"],
+        cabin: fd["客室タイプ"],
+        message: fd["ご要望"],
       };
       fetch("https://cruiselink-v2.vercel.app/api/inquiry", {
         method: "POST",
@@ -1148,7 +1149,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="modal-overlay" id="inquiryModal">
     <div class="modal" style="max-width:460px">
       <div class="modal-header" style="padding:14px 20px">
-        <h2 style="font-size:1.05rem">🚢 크루즈 문의하기</h2>
+        <h2 style="font-size:1.05rem">🚢 クルーズお問い合わせ</h2>
         <button class="modal-close" onclick="closeInquiry()">&times;</button>
       </div>
       <div class="modal-body" style="padding:16px 20px">
@@ -1167,64 +1168,64 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="hidden" id="f_ref" name="cruise_ref">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
             <div class="form-group" style="margin-bottom:8px">
-              <label style="font-size:0.8rem;margin-bottom:3px">이름 <span class="req">*</span></label>
-              <input type="text" id="f_name" name="customer_name" required placeholder="홍길동" style="padding:8px 10px;font-size:0.9rem">
+              <label style="font-size:0.8rem;margin-bottom:3px">お名前 <span class="req">*</span></label>
+              <input type="text" id="f_name" name="customer_name" required placeholder="山田 太郎" style="padding:8px 10px;font-size:0.9rem">
             </div>
             <div class="form-group" style="margin-bottom:8px">
-              <label style="font-size:0.8rem;margin-bottom:3px">연락처 <span class="req">*</span></label>
-              <input type="tel" id="f_phone" name="customer_phone" required placeholder="010-1234-5678" style="padding:8px 10px;font-size:0.9rem">
+              <label style="font-size:0.8rem;margin-bottom:3px">お電話番号 <span class="req">*</span></label>
+              <input type="tel" id="f_phone" name="customer_phone" required placeholder="080-1234-5678" style="padding:8px 10px;font-size:0.9rem">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:8px">
-            <label style="font-size:0.8rem;margin-bottom:3px">이메일 <span class="req">*</span></label>
+            <label style="font-size:0.8rem;margin-bottom:3px">メールアドレス <span class="req">*</span></label>
             <input type="email" id="f_email" name="customer_email" required placeholder="example@email.com" style="padding:8px 10px;font-size:0.9rem">
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
             <div class="form-group" style="margin-bottom:8px">
-              <label style="font-size:0.8rem;margin-bottom:3px">인원 <span class="req">*</span></label>
+              <label style="font-size:0.8rem;margin-bottom:3px">人数 <span class="req">*</span></label>
               <select id="f_pax" name="pax" required style="padding:8px 10px;font-size:0.9rem">
-                <option value="">선택</option>
-                <option value="1">1명</option><option value="2">2명</option><option value="3">3명</option>
-                <option value="4">4명</option><option value="5">5명</option><option value="6~10">6~10명</option>
-                <option value="11+">11명 이상</option>
+                <option value="">選択</option>
+                <option value="1">1名</option><option value="2">2名</option><option value="3">3名</option>
+                <option value="4">4名</option><option value="5">5名</option><option value="6~10">6〜10名</option>
+                <option value="11+">11名以上</option>
               </select>
             </div>
             <div class="form-group" style="margin-bottom:8px">
-              <label style="font-size:0.8rem;margin-bottom:3px">객실 타입 <span class="req">*</span></label>
+              <label style="font-size:0.8rem;margin-bottom:3px">客室タイプ <span class="req">*</span></label>
               <select id="f_cabin" name="cabin_type" required style="padding:8px 10px;font-size:0.9rem">
-                <option value="">선택</option>
-                <option value="내측">내측</option>
-                <option value="오션뷰">오션뷰</option>
-                <option value="발코니">발코니</option>
-                <option value="스위트">스위트</option>
+                <option value="">選択</option>
+                <option value="インサイド">インサイドキャビン</option>
+                <option value="オーシャンビュー">オーシャンビューキャビン</option>
+                <option value="バルコニー">バルコニー客室</option>
+                <option value="スイート">スイートルーム</option>
               </select>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:8px">
-            <label style="font-size:0.8rem;margin-bottom:3px">요청사항</label>
-            <textarea id="f_message" name="message" rows="2" placeholder="탑승자 영문 이름을 입력해주세요" style="padding:8px 10px;font-size:0.9rem"></textarea>
+            <label style="font-size:0.8rem;margin-bottom:3px">ご要望</label>
+            <textarea id="f_message" name="message" rows="2" placeholder="搭乗者のパスポート表記氏名をご記入ください" style="padding:8px 10px;font-size:0.9rem"></textarea>
           </div>
           <div class="privacy-section" style="margin-top:8px;padding-top:8px">
             <div class="privacy-check" style="margin-bottom:4px">
               <input type="checkbox" id="privacyAgree" required style="width:16px;height:16px">
-              <label for="privacyAgree" style="font-size:0.8rem">개인정보 수집·이용에 동의합니다. (필수)</label>
+              <label for="privacyAgree" style="font-size:0.8rem">プライバシーポリシーに同意します。（必須）</label>
             </div>
-            <button type="button" class="privacy-toggle" style="font-size:0.78rem" onclick="document.getElementById('privacyDetail').classList.toggle('open')">약관 보기 ▼</button>
+            <button type="button" class="privacy-toggle" style="font-size:0.78rem" onclick="document.getElementById('privacyDetail').classList.toggle('open')">規約を見る ▼</button>
             <div class="privacy-detail" id="privacyDetail">
-              <strong>수집항목:</strong> 이름, 이메일, 연락처<br>
-              <strong>수집목적:</strong> 크루즈 상담 및 예약 안내<br>
-              <strong>보유기간:</strong> 상담 완료 후 1년<br>
-              ※ 동의를 거부할 수 있으나, 거부 시 상담 서비스 이용이 제한됩니다.
+              <strong>収集項目:</strong> 氏名、メール、電話番号<br>
+              <strong>収集目的:</strong> クルーズ相談・予約案内<br>
+              <strong>保有期間:</strong> 相談完了後1年<br>
+              ※ 同意を拒否することができますが、拒否の場合は相談サービスのご利用が制限されます。
             </div>
           </div>
-          <button type="submit" class="btn btn-orange" id="submitBtn" style="width:100%;margin-top:10px;padding:12px;font-size:1rem">문의하기 전송</button>
+          <button type="submit" class="btn btn-orange" id="submitBtn" style="width:100%;margin-top:10px;padding:12px;font-size:1rem">お問い合わせを送信</button>
         </form>
       </div>
     </div>
   </div>
   <!-- PC Fixed Share Button -->
-  <button id="pcShareBtn" onclick="mibShareUrl()" title="공유하기">
-    🔗<span>공유하기</span>
+  <button id="pcShareBtn" onclick="mibShareUrl()" title="シェアする">
+    🔗<span>シェアする</span>
   </button>
   <style>
     #pcShareBtn {
@@ -1267,18 +1268,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="mib-handle" id="mibHandle">
       <div class="mib-peek">
         <span class="mib-peek-icon">🚢</span>
-        <span class="mib-peek-title" id="mibPeekTitle">이 크루즈 상품 문의하기</span>
-        <button class="mib-share-mini" onclick="mibShareUrl()">공유하기</button>
+        <span class="mib-peek-title" id="mibPeekTitle">このクルーズについてお問い合わせ</span>
+        <button class="mib-share-mini" onclick="mibShareUrl()">シェアする</button>
         <span class="mib-peek-arrow" id="mibArrow" onclick="toggleMIB()" style="padding:8px 12px;cursor:pointer;font-size:18px;">▲</span>
       </div>
     </div>
     <div class="mib-panel" id="mibPanel">
       <div class="mib-btns">
         <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="mib-btn mib-kakao">
-          💬 카카오톡 상담
+          💬 LINEで相談
         </a>
         <button class="mib-btn mib-form" onclick="openInquiry(); closeMIB()">
-          📋 온라인 문의
+          📋 オンラインお問い合わせ
         </button>
       </div>
     </div>
@@ -1490,13 +1491,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
       // fallback: URL 복사
       navigator.clipboard.writeText(url).then(() => {
-        showMibToast('🔗 링크가 복사됐습니다!');
+        showMibToast('🔗 リンクをコピーしました！');
       }).catch(() => {
         const ta = document.createElement('textarea');
         ta.value = url; document.body.appendChild(ta);
         ta.select(); document.execCommand('copy');
         document.body.removeChild(ta);
-        showMibToast('🔗 링크가 복사됐습니다!');
+        showMibToast('🔗 リンクをコピーしました！');
       });
     }
 

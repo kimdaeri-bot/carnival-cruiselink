@@ -217,7 +217,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       'Explora': 'Explora Journeys'
     };
     operators.forEach(o => tagsEl.innerHTML += `<span class="search-tag">⚓ ${Translations.operatorName(_opFullName[o] || o)}</span>`);
-    if (month) tagsEl.innerHTML += `<span class="search-tag">📅 ${month.replace('-','년 ')}월</span>`;
+    if (month) tagsEl.innerHTML += `<span class="search-tag">📅 ${month.replace('-','年 ')}月</span>`;
     if (dateFrom || dateTo) tagsEl.innerHTML += `<span class="search-tag">📅 ${dateFrom||'~'} ~ ${dateTo||'~'}</span>`;
     if (ship) tagsEl.innerHTML += `<span class="search-tag">🛳️ ${ship}</span>`;
     if (duration) tagsEl.innerHTML += `<span class="search-tag">⏱️ ${durNames[duration]||duration}</span>`;
@@ -550,7 +550,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="modal-body">
         <div class="form-status" id="formStatus"></div>
         <form id="inquiryForm" onsubmit="submitInquiry(event)">
-          <input type="hidden" name="_subject" value="[크루즈링크] 새 문의가 접수되었습니다">
+          <input type="hidden" name="_subject" value="[クルーズリンク] 新規お問い合わせが届きました">
           <input type="hidden" name="_template" value="table">
           <input type="text" name="_honey" style="display:none">
           <div class="form-group"><label>お名前 (パスポート記載) <span class="req">*</span></label><input type="text" name="customer_name" required placeholder="YAMADA TARO"></div>
@@ -571,7 +571,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function openInquiryWith(title, operator, ship, dateFrom, nights, price, ref, currency) {
       document.getElementById('modalProductName').textContent = title;
       document.getElementById('modalProductDetail').innerHTML =
-        `${operator} · ${ship}<br>출발: ${dateFrom} / ${nights}박${price ? (currency==='EUR'?' / €':' / $')+price+'~' : ''}`;
+        `${operator} · ${ship}<br>出発: ${dateFrom} / ${nights}泊${price ? (currency==='EUR'?' / €':' / $')+price+'~' : ''}`;
       document.getElementById('f_product').value = title;
       document.getElementById('f_cruiseline').value = operator;
       document.getElementById('f_ship').value = ship;
@@ -605,29 +605,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const btn = document.getElementById('submitBtn');
       btn.disabled = true; btn.textContent = '送信中...';
       const fd = {
-        _subject: `[크루즈링크] ${document.getElementById('f_product').value} - ${document.getElementById('f_name').value}님`,
+        _subject: `[クルーズリンク] ${document.getElementById('f_product').value} - ${document.getElementById('f_name').value}様`,
         _template: 'table',
-        '크루즈 상품': document.getElementById('f_product').value,
-        '선사': document.getElementById('f_cruiseline').value,
-        '선박': document.getElementById('f_ship').value,
-        '출발일': document.getElementById('f_date').value,
+        'クルーズ商品': document.getElementById('f_product').value,
+        '船会社': document.getElementById('f_cruiseline').value,
+        '客船': document.getElementById('f_ship').value,
+        '出発日': document.getElementById('f_date').value,
         '참고가격': document.getElementById('f_price').value,
         'Ref': document.getElementById('f_ref').value,
-        '고객 이름': document.getElementById('f_name').value,
-        '고객 이메일': document.getElementById('f_email').value,
-        '고객 연락처': document.getElementById('f_phone').value,
-        '인원': document.getElementById('f_pax').value,
-        '희망 객실': document.getElementById('f_cabin').value,
-        '요청사항': document.getElementById('f_message').value || '없음',
+        'お名前': document.getElementById('f_name').value,
+        'メール': document.getElementById('f_email').value,
+        '電話番号': document.getElementById('f_phone').value,
+        '人数': document.getElementById('f_pax').value,
+        '客室タイプ': document.getElementById('f_cabin').value,
+        'ご要望': document.getElementById('f_message').value || 'なし',
       };
       const data = new FormData();
       Object.entries(fd).forEach(([k,v]) => data.append(k,v));
       fetch('https://formsubmit.co/ajax/info@cruiselink.co.kr', { method:'POST', body:data })
       .then(() => {
-        document.getElementById('formStatus').innerHTML = '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
+        document.getElementById('formStatus').innerHTML = '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ お問い合わせを受け付けました。<br>ご入力のメールアドレスに見積書をお送りします。</div>';
         document.getElementById('inquiryForm').style.display = 'none'; btn.style.display = 'none';
       }).catch(() => {
-        document.getElementById('formStatus').innerHTML = '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ 문의가 접수되었습니다.<br>입력하신 이메일로 견적서를 회신드리겠습니다.</div>';
+        document.getElementById('formStatus').innerHTML = '<div style="background:#e8f5e9;padding:12px;border-radius:8px;color:#2e7d32;font-size:0.9rem">✅ お問い合わせを受け付けました。<br>ご入力のメールアドレスに見積書をお送りします。</div>';
         document.getElementById('inquiryForm').style.display = 'none'; btn.style.display = 'none';
       });
     }
@@ -681,10 +681,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <label style="font-size:0.8rem;margin-bottom:3px">客室タイプ <span class="req">*</span></label>
               <select id="f_cabin" name="cabin_type" required style="padding:8px 10px;font-size:0.9rem">
                 <option value="">選択</option>
-                <option value="내측">インサイド</option>
-                <option value="오션뷰">オーシャンビュー</option>
-                <option value="발코니">バルコニー</option>
-                <option value="스위트">スイート</option>
+                <option value="インサイド">インサイド</option>
+                <option value="オーシャンビュー">オーシャンビュー</option>
+                <option value="バルコニー">バルコニー</option>
+                <option value="スイート">スイート</option>
               </select>
             </div>
           </div>
