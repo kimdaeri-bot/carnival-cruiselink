@@ -2643,7 +2643,7 @@
     "cruiseline": "MSC Cruises",
     "ship": "MSC 스플렌디다",
     "dateFrom": "2026-04-25",
-    "ports": "",
+    "ports": "바르셀로나 → 마르세유 → Livorno → 칼리아리 → 팔레르모 → 발레타",
     "price": "문의",
     "ref": "MSCSP20260425BCNBCN",
     "name": "장선이",
@@ -2654,6 +2654,6 @@
     "message": "없음",
     "id": "1774937420458",
     "timestamp": "2026-03-31T06:10:20.458Z",
-    "status": "신규"
+    "status": "인보이스 전달 완료"
   }
 ]
