@@ -368,9 +368,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         @media(max-width:700px){.dr-popup{width:calc(100vw - 32px);left:0}.dr-months{flex-direction:column}}
       </style>
       <nav class="cruise-tabs-nav" id="cruiseTabsNav">
-        <button class="cruise-tab-btn active cruise-tab-featured" onclick="switchTab(this,'caribbean')">카리브해</button>
+        <button class="cruise-tab-btn active cruise-tab-featured" onclick="switchTab(this,'alaska')">알래스카</button>
+        <button class="cruise-tab-btn" onclick="switchTab(this,'caribbean')">카리브해</button>
         <button class="cruise-tab-btn" onclick="switchTab(this,'mediterranean')">지중해</button>
-        <button class="cruise-tab-btn" onclick="switchTab(this,'alaska')">알래스카</button>
         <button class="cruise-tab-btn" onclick="switchTab(this,'northern-europe')">북유럽</button>
         <button class="cruise-tab-btn" onclick="switchTab(this,'asia')">아시아·중동</button>
       </nav>
@@ -1603,7 +1603,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     window.addEventListener('resize', updateTabArrows);
 
     // 첫 탭 자동 로드
-    switchTab(document.querySelector('.cruise-tab-btn'), 'caribbean');
+    switchTab(document.querySelector('.cruise-tab-btn'), 'alaska');
 
     loadRecommended();
     loadRecommended2();
