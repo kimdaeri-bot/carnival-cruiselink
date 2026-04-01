@@ -33,7 +33,7 @@ const API = {
   async loadLocalShips() {
     if (this._localShips) return this._localShips;
     try {
-      const res = await fetch('https://kimdaeri-bot.github.io/msc-cruiselink/assets/data/ships.json');
+      const res = await fetch('https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/ships.json');
       this._localShips = await res.json();
     } catch { this._localShips = []; }
     return this._localShips;
@@ -45,10 +45,10 @@ const API = {
   async getMiniCruises(dest, limit = 5) {
     if (!this._miniCache) {
       try {
-        const res = await fetch('https://kimdaeri-bot.github.io/msc-cruiselink/assets/data/cruises-mini.json');
+        const res = await fetch('https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/cruises-mini.json');
         const all = res.ok ? await res.json() : [];
         // MSC 전용 사이트 — MSC만 필터
-        this._miniCache = all.filter(c => (c.operator || '').toLowerCase().includes('msc'));
+        this._miniCache = all.filter(c => (c.operator || '').toLowerCase().includes('carnival'));
       } catch { this._miniCache = []; }
     }
     const cutoff = (() => { const d = new Date(); d.setMonth(d.getMonth() + 2); return d.toISOString().slice(0, 10); })();
@@ -60,7 +60,7 @@ const API = {
   async loadCruisesByDest(dest) {
     if (this._destCache[dest]) return this._destCache[dest];
     try {
-      const res = await fetch(`https://kimdaeri-bot.github.io/msc-cruiselink/assets/data/cruises-${dest}.json`);
+      const res = await fetch(`https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/cruises-${dest}.json`);
       if (!res.ok) throw new Error('no split file');
       const data = await res.json();
       this._destCache[dest] = data;
@@ -79,10 +79,10 @@ const API = {
   async loadAllCruises() {
     if (this._allCruisesCache) return this._allCruisesCache;
     try {
-      const res = await fetch('https://kimdaeri-bot.github.io/msc-cruiselink/assets/data/cruises.json');
+      const res = await fetch('https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/cruises.json');
       const all = await res.json();
       // MSC 전용 사이트 — MSC Cruises만 필터링
-      this._allCruisesCache = all.filter(c => (c.operator || '').toLowerCase().includes('msc'));
+      this._allCruisesCache = all.filter(c => (c.operator || '').toLowerCase().includes('carnival'));
     } catch { this._allCruisesCache = []; }
     return this._allCruisesCache;
   },
@@ -132,7 +132,7 @@ const API = {
   async getRecommendedCruises(count = 9) {
     if (!this._featuredCache) {
       try {
-        const res = await fetch('https://kimdaeri-bot.github.io/msc-cruiselink/assets/data/featured.json');
+        const res = await fetch('https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/featured.json');
         if (res.ok) {
           this._featuredCache = await res.json();
         } else {
@@ -159,7 +159,7 @@ const API = {
   async getRecommendedCruises2(count = 12) {
     if (!this._featured2Cache) {
       try {
-        const res = await fetch('https://kimdaeri-bot.github.io/msc-cruiselink/assets/data/featured2.json');
+        const res = await fetch('https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/featured2.json');
         if (res.ok) {
           this._featured2Cache = await res.json();
         } else { throw new Error('no featured2.json'); }
@@ -192,7 +192,7 @@ const API = {
   async loadShipDetails() {
     if (this._localShipDetails) return this._localShipDetails;
     try {
-      const res = await fetch('https://kimdaeri-bot.github.io/msc-cruiselink/assets/data/ships-detail.json');
+      const res = await fetch('https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/ships-detail.json');
       const arr = await res.json();
       this._localShipDetails = {};
       arr.forEach(s => { this._localShipDetails[s.slug] = s; });

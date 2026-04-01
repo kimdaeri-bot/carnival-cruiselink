@@ -12,19 +12,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>크루즈 검색 - 지중해·알래스카·일본 크루즈 상품 찾기 | 크루즈링크</title>
   <meta name="description" content="MSC 크루즈 전 상품 검색. 지중해·알래스카·일본·카리브해 MSC 크루즈를 목적지·출발일·가격으로 필터링.">
-  <link rel="canonical" href="https://msc.cruiselink.co.kr/search/">
+  <link rel="canonical" href="https://carnival.cruiselink.co.kr/search/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="크루즈링크">
   <meta property="og:title" content="크루즈 검색 | 크루즈링크">
   <meta property="og:description" content="원하는 크루즈 상품을 빠르게 검색하세요. 목적지·선사·출발일·가격으로 필터링.">
-  <meta property="og:url" content="https://msc.cruiselink.co.kr/search/">
-  <meta property="og:image" content="https://msc.cruiselink.co.kr/assets/images/cta-web.png">
+  <meta property="og:url" content="https://carnival.cruiselink.co.kr/search/">
+  <meta property="og:image" content="https://carnival.cruiselink.co.kr/assets/images/cta-web.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="크루즈 검색 | 크루즈링크">
   <meta name="twitter:description" content="원하는 크루즈 상품을 빠르게 검색하세요. 목적지·선사·출발일·가격으로 필터링.">
-  <meta name="twitter:image" content="https://msc.cruiselink.co.kr/assets/images/cta-web.png">
-  <link rel="stylesheet" href="https://kimdaeri-bot.github.io/msc-cruiselink/assets/css/style.css">
-  <link rel="icon" type="image/png" href="https://kimdaeri-bot.github.io/msc-cruiselink/assets/images/favicon.png">
+  <meta name="twitter:image" content="https://carnival.cruiselink.co.kr/assets/images/cta-web.png">
+  <link rel="stylesheet" href="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/css/style.css">
+  <link rel="icon" type="image/png" href="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/images/favicon.png">
   <link rel="shortcut icon" href="favicon.ico">
   <style>
     .search-hero { background: var(--navy); color: #fff; padding: 32px 0; text-align: center; }
@@ -137,7 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 (function() {
   var params = new URLSearchParams(window.location.search);
   if (!params.get('operator') && !params.get('ref')) {
-    params.set('operator', 'MSC Cruises');
+    params.set('operator', 'Carnival Cruise Line');
     window.history.replaceState({}, '', '?' + params.toString());
   }
 })();
@@ -246,9 +246,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div id="ctaSection"></div>
   <div id="footer"></div>
 
-  <script src="https://kimdaeri-bot.github.io/msc-cruiselink/assets/data/translations.js"></script>
-  <script src="https://kimdaeri-bot.github.io/msc-cruiselink/assets/js/api.js"></script>
-  <script src="https://kimdaeri-bot.github.io/msc-cruiselink/assets/js/components.js"></script>
+  <script src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/translations.js"></script>
+  <script src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/js/api.js"></script>
+  <script src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/js/components.js"></script>
   <script>
     document.getElementById('header').innerHTML = Components.header();
     document.getElementById('footer').innerHTML = Components.footer();
@@ -256,7 +256,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     const params = new URLSearchParams(location.search);
     const dest = params.get('dest') || '';
-    const operators = params.get('operators') ? params.get('operators').split(',') : ['MSC']; // MSC 전용
+    const operators = params.get('operators') ? params.get('operators').split(',') : ['Carnival Cruise Line']; // MSC 전용
     const ports = params.get('ports') ? params.get('ports').split(',') : [];
     const month = params.get('month') || '';
     const dateFrom = params.get('dateFrom') || '';
@@ -363,7 +363,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const priceStr = fromPrice ? '$' + parseFloat(fromPrice).toLocaleString('en-US', {maximumFractionDigits:0}) : '문의';
       const img = c.image || '';
       const ref = c.ref || '';
-      return `<div class="czn-card" onclick="location.href='https://kimdaeri-bot.github.io/msc-cruiselink/cruise-view/?ref=${ref}'">
+      return `<div class="czn-card" onclick="location.href='https://kimdaeri-bot.github.io/carnival-cruiselink/cruise-view/?ref=${ref}'">
         <div class="czn-card-img-wrap">
           <img src="${img}" alt="${c.title||''}" loading="lazy" onerror="this.parentElement.style.background='#cfe8fc'">
           <span class="czn-badge" style="background:${badgeColor}">${badge}</span>
@@ -383,7 +383,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="czn-price" style="color:#E65100">${priceStr} ~</span>
               <span class="czn-unit">/ 1인</span>
             </div>
-            <a href="https://kimdaeri-bot.github.io/msc-cruiselink/cruise-view/?ref=${ref}" class="czn-btn" onclick="event.stopPropagation()">자세히 보기</a>
+            <a href="https://kimdaeri-bot.github.io/carnival-cruiselink/cruise-view/?ref=${ref}" class="czn-btn" onclick="event.stopPropagation()">자세히 보기</a>
           </div>
         </div>
       </div>`;

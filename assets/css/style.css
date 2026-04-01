@@ -45,7 +45,7 @@ img { max-width: 100%; height: auto; }
 
 /* ===== HERO ===== */
 .hero {
-  background: url('https://assets.widgety.co.uk/2024/09/04/16/07/48/5bd29234-9b6c-4c86-b249-691473c4d907/MSC%20Cruises%2C%20MSC%20Bellissima%2C%20Exterior%2C%20Copyrights%20-%20MSC%20Rights.jpg') center/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1600&q=80') center/cover no-repeat;
   color: var(--white); padding: 100px 0 120px; text-align: center; position: relative; overflow: hidden;
 }
 .hero-overlay {

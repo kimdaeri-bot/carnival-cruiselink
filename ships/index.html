@@ -117,19 +117,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // ── 선사 메타데이터 ──
     const OPERATORS = [
       {
-        short: 'MSC', name: 'MSC Cruises', nameKo: 'MSC 크루즈',
-        logo: 'assets/images/logos/msc.png',
-        desc: 'MSC 크루즈는 세계 최대의 개인 소유 크루즈 선사로, 총 25척의 선박을 보유하고 있습니다. 지중해, 아시아, 카리브해 등 전 세계 150개 이상의 항구를 운항하며, 이탈리아 장인 정신과 현대적인 럭셔리를 결합한 독특한 크루즈 경험을 제공합니다.',
-      },
-      {
-        short: 'Explora Journeys', name: 'Explora Journeys', nameKo: '익스플로라 저니',
-        logo: '',
-        desc: '익스플로라 저니는 MSC 그룹의 럭셔리 크루즈 브랜드로 2023년 출범했습니다. 5척의 소형 럭셔리 선박을 통해 세계 각지의 독보적인 여행 경험을 제공하며, 개방형 갑판, 고급 레스토랑, 프라이빗 풀을 갖춘 현대적인 디자인이 특징입니다.',
+        short: 'Carnival Cruise Line', name: 'Carnival Cruise Line', nameKo: '카니발 크루즈',
+        logo: 'assets/images/logos/carnival.svg',
+        desc: '카니발 크루즈는 미국 최대의 크루즈 브랜드로 "Fun Ship"이라는 슬로건 아래 31척의 선박을 운영합니다. 활기차고 즐거운 분위기, 합리적인 가격, 다양한 엔터테인먼트로 가족 여행객과 젊은 층에게 인기 있습니다.',
       },
     ];
 
     let allShips = [];
-    let currentFilter = 'MSC';
+    let currentFilter = 'Carnival Cruise Line';
 
     async function loadShips() {
       const grid = document.getElementById('shipGrid');
