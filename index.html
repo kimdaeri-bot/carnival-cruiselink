@@ -1525,13 +1525,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (dest === 'incheon') {
           // 인천 출발 상품
           const departIncheon = (await API.filterCruises({ ports: ['인천'] }) || []).slice(0, 20);
-          // 일본·한국 4박 (도쿄→인천, 특별 고정 상품) 별도 추가
-          const pin2Ref = 'MSCBE20270610TYOINC';
+          // 한국 연관 MSC 상품 전체 추가 (한국/일본 기항 상품)
           const allKorea = (await API.filterCruises({ dest: 'korea' }) || []);
-          const pin2Item = allKorea.find(c => c.ref === pin2Ref);
+          const mscKorea = allKorea.filter(c => (c.operator||'').toLowerCase().includes('msc'));
           const refSet = new Set(departIncheon.map(c => c.ref));
-          if (pin2Item && !refSet.has(pin2Item.ref)) departIncheon.push(pin2Item);
+          mscKorea.forEach(c => { if (!refSet.has(c.ref)) { departIncheon.push(c); refSet.add(c.ref); } });
           cruisesRaw = departIncheon;
+        } else if (dest === 'alaska') {
+          // 알래스카: MSC만 필터링하여 최대 10개
+          const allAlaska = (await API.filterCruises({ dest: 'alaska' }) || []);
+          cruisesRaw = allAlaska.filter(c => (c.operator||'').toLowerCase().includes('msc'));
         } else {
           cruisesRaw = (await API.getMiniCruises(dest, 30)).filter(c => (c.operator||'').toLowerCase().includes('msc')).slice(0,10);
         }
@@ -1613,10 +1616,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
               <div class="tab-card-body">
                 <div class="tab-card-title">${title}</div>
-                ${dest === 'incheon' && i === 0
-                  ? `<div class="tab-card-depart">🚢 인천출발 → 대만도착</div>`
-                  : dest === 'incheon' && i === 1
-                  ? `<div class="tab-card-depart">🚢 도쿄출발 → 인천도착</div>`
+                ${dest === 'incheon'
+                  ? (() => {
+                      const startKo = c.startsAt?.nameKo || c.startsAt?.name || '';
+                      const endKo = c.endsAt?.nameKo || c.endsAt?.name || '';
+                      const startLabel = startKo.includes('인천') || startKo.toLowerCase().includes('incheon') ? '인천' : startKo;
+                      const endLabel = endKo.includes('인천') || endKo.toLowerCase().includes('incheon') ? '인천' : endKo;
+                      return `<div class="tab-card-depart">🚢 ${startLabel} → ${endLabel}</div>`;
+                    })()
                   : departPort ? `<div class="tab-card-depart">📍 ${departPort} 출발</div>` : ''}
                 <div class="tab-card-from">최저가 (1인 기준)</div>
                 <div class="tab-card-price">${priceStr} ~</div>
