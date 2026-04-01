@@ -182,15 +182,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="filter-group">
         <label>선사</label>
-        <div class="multi-select" id="msOperator" onclick="toggleMulti(this)">
-          <div class="multi-select-display">전체</div>
-          <div class="multi-select-dropdown" style="min-width:180px;max-height:none;overflow:visible" onclick="event.stopPropagation()">
+        <div class="multi-select" id="msOperator" style="pointer-events:none;opacity:1;cursor:default">
+          <div class="multi-select-display" style="background:#f0f4ff;border-color:#c5d4f5;color:var(--navy);font-weight:700">MSC 크루즈</div>
+          <div class="multi-select-dropdown" style="display:none" onclick="event.stopPropagation()">
             <div style="display:flex;flex-direction:column">
-              <div class="ms-option selected" data-value="MSC" onclick="toggleOption(event, this)">MSC 크루즈</div>
-              <div class="ms-option" data-value="Disney" onclick="toggleOption(event, this)">디즈니 크루즈</div>
-            </div>
-            <div style="padding:8px;text-align:right;border-top:1px solid #eee">
-              <button class="dr-btn-ok" onclick="onOperatorConfirm();event.stopPropagation()" type="button">확인</button>
+              <div class="ms-option selected" data-value="MSC">MSC 크루즈</div>
             </div>
           </div>
         </div>
