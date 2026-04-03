@@ -23,8 +23,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="twitter:title" content="크루즈 검색 | 크루즈링크">
   <meta name="twitter:description" content="원하는 크루즈 상품을 빠르게 검색하세요. 목적지·선사·출발일·가격으로 필터링.">
   <meta name="twitter:image" content="https://carnival.cruiselink.co.kr/assets/images/cta-web.png">
-  <link rel="stylesheet" href="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/css/style.css">
-  <link rel="icon" type="image/png" href="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/images/favicon.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
   <link rel="shortcut icon" href="favicon.ico">
   <style>
     .search-hero { background: var(--navy); color: #fff; padding: 32px 0; text-align: center; }
@@ -246,9 +246,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div id="ctaSection"></div>
   <div id="footer"></div>
 
-  <script src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/translations.js"></script>
-  <script src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/js/api.js"></script>
-  <script src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/js/components.js"></script>
+  <script src="../assets/data/translations.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/components.js"></script>
   <script>
     document.getElementById('header').innerHTML = Components.header();
     document.getElementById('footer').innerHTML = Components.footer();
@@ -363,7 +363,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const priceStr = fromPrice ? '$' + parseFloat(fromPrice).toLocaleString('en-US', {maximumFractionDigits:0}) : '문의';
       const img = c.image || '';
       const ref = c.ref || '';
-      return `<div class="czn-card" onclick="location.href='https://kimdaeri-bot.github.io/carnival-cruiselink/cruise-view/?ref=${ref}'">
+      return `<div class="czn-card" onclick="location.href='../cruise-view/?ref=${ref}'">
         <div class="czn-card-img-wrap">
           <img src="${img}" alt="${c.title||''}" loading="lazy" onerror="this.parentElement.style.background='#cfe8fc'">
           <span class="czn-badge" style="background:${badgeColor}">${badge}</span>
@@ -383,7 +383,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="czn-price" style="color:#E65100">${priceStr} ~</span>
               <span class="czn-unit">/ 1인</span>
             </div>
-            <a href="https://kimdaeri-bot.github.io/carnival-cruiselink/cruise-view/?ref=${ref}" class="czn-btn" onclick="event.stopPropagation()">자세히 보기</a>
+            <a href="../cruise-view/?ref=${ref}" class="czn-btn" onclick="event.stopPropagation()">자세히 보기</a>
           </div>
         </div>
       </div>`;

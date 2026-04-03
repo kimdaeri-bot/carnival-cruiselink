@@ -117,8 +117,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   </script>
 
-  <link rel="stylesheet" href="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/css/style.css">
-  <link rel="icon" type="image/png" href="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
   <link rel="shortcut icon" href="favicon.ico">
 
 <style>
@@ -527,9 +527,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div id="ctaSection"></div>
   <div id="footer"></div>
 
-  <script src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/translations.js"></script>
-  <script src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/js/api.js"></script>
-  <script src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/js/components.js"></script>
+  <script src="/assets/data/translations.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/components.js"></script>
   <script>
     document.getElementById('header').innerHTML = Components.header('home');
     document.getElementById('footer').innerHTML = Components.footer();
@@ -537,14 +537,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // === 전체 출발항 데이터 (ports.json 로드) ===
     window._allPorts = [];
-    fetch('https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/ports.json').then(r=>r.json()).then(data=>{
+    fetch('/assets/data/ports.json').then(r=>r.json()).then(data=>{
       window._allPorts = data; // [{ko, en, dests, count}]
     }).catch(()=>{});
 
     // === 선박명 자동완성 (ships.json 로드) ===
     window._allShips = [];
     window._selectedShipSlug = '';
-    fetch('https://kimdaeri-bot.github.io/carnival-cruiselink/assets/data/ships.json').then(r=>r.json()).then(data=>{
+    fetch('/assets/data/ships.json').then(r=>r.json()).then(data=>{
       window._allShips = data;
     }).catch(()=>{});
 
