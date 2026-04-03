@@ -5,17 +5,17 @@ const Components = {
     return `
     <header class="header">
       <div class="container">
-        <a href="https://kimdaeri-bot.github.io/carnival-cruiselink/" class="logo" style="display:flex;align-items:center;gap:8px;text-decoration:none">
-          <img src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/images/logos/carnival.svg" alt="Carnival Cruise" style="height:32px;object-fit:contain" onerror="this.style.display='none'">
+        <a href="/" class="logo" style="display:flex;align-items:center;gap:8px;text-decoration:none">
+          <img src="/assets/images/logos/carnival.svg" alt="Carnival" style="height:32px;object-fit:contain" onerror="this.style.display='none'">
           <span style="color:#bbb;font-size:1rem;font-weight:300;line-height:1">×</span>
-          <img src="https://kimdaeri-bot.github.io/carnival-cruiselink/assets/images/logo.png" alt="크루즈링크" style="height:26px">
+          <img src="/assets/images/logo.png" alt="크루즈링크" style="height:26px">
         </a>
         <nav class="nav" id="mainNav">
-          <a href="${base}" class="${active === 'home' ? 'active' : ''}">홈</a>
-          <a href="https://kimdaeri-bot.github.io/carnival-cruiselink/destinations/" class="${active === 'dest' ? 'active' : ''}">목적지</a>
-          <a href="https://kimdaeri-bot.github.io/carnival-cruiselink/ships/" class="${active === 'ships' ? 'active' : ''}">선사소개</a>
-          <a href="https://kimdaeri-bot.github.io/carnival-cruiselink/promotions/" class="${active === 'promo' ? 'active' : ''}">프로모션</a>
-          <a href="https://kimdaeri-bot.github.io/carnival-cruiselink/guide/" class="${active === 'guide' ? 'active' : ''}">크루즈 가이드</a>
+          <a href="/" class="${active === 'home' ? 'active' : ''}">홈</a>
+          <a href="/destinations/" class="${active === 'dest' ? 'active' : ''}">목적지</a>
+          <a href="/ships/" class="${active === 'ships' ? 'active' : ''}">선사소개</a>
+          <a href="/promotions/" class="${active === 'promo' ? 'active' : ''}">프로모션</a>
+          <a href="/guide/" class="${active === 'guide' ? 'active' : ''}">크루즈 가이드</a>
           <a href="https://pf.kakao.com/_xgYbJG" target="_blank" class="${active === 'contact' ? 'active' : ''}">문의</a>
         </nav>
         <div class="header-right">
