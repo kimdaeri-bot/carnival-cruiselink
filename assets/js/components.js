@@ -6,7 +6,7 @@ const Components = {
     <header class="header">
       <div class="container">
         <a href="/" class="logo" style="display:flex;align-items:center;gap:8px;text-decoration:none">
-          <img src="/assets/images/logos/carnival.svg" alt="Carnival" style="height:32px;object-fit:contain" onerror="this.style.display='none'">
+          <img src="/assets/images/logos/carnival.svg" alt="Carnival" style="height:24px;object-fit:contain;margin-bottom:4px" onerror="this.style.display='none'">
           <span style="color:#bbb;font-size:1rem;font-weight:300;line-height:1">×</span>
           <img src="/assets/images/logo.png" alt="크루즈링크" style="height:26px">
         </a>
