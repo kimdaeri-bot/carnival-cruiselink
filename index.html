@@ -917,14 +917,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var drViewYear, drViewMonth;
     (function() { var d=new Date(); drViewYear=d.getFullYear(); drViewMonth=d.getMonth(); })();
 
+    function _setKringFabVisibility(visible) {
+      if (window.innerWidth > 700) return;
+      var fab = document.getElementById('kringFab');
+      var kpopup = document.getElementById('kringPopup');
+      if (fab) fab.style.display = visible ? '' : 'none';
+      if (kpopup && !visible) kpopup.style.display = 'none';
+    }
     function toggleDR(e) {
       e && e.stopPropagation();
       var popup = document.getElementById('drPopup');
-      if (popup.classList.contains('open')) { popup.classList.remove('open'); return; }
+      if (popup.classList.contains('open')) {
+        popup.classList.remove('open');
+        _setKringFabVisibility(true);
+        return;
+      }
       renderDR();
       popup.classList.add('open');
+      _setKringFabVisibility(false);
     }
-    function closeDR() { document.getElementById('drPopup').classList.remove('open'); updateDRDisplay(); }
+    function closeDR() { document.getElementById('drPopup').classList.remove('open'); _setKringFabVisibility(true); updateDRDisplay(); }
     function clearDR() { _drSuppressClose=true; drFrom=null; drTo=null; drSelecting=false; renderDR(); updateDRDisplay(); }
 
     function updateDRDisplay() {
